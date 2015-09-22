@@ -41,3 +41,13 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+GL3DStereoTool/GL3DStereoTool/Debug
+GL3DStereoTool/GL3DStereoTool/Release
+GL3DStereoTool/Debug
+GL3DStereoTool/Release
+GL3DStereoTool/Launcher/Debug
+GL3DStereoTool/Launcher/Release
+*.opensdf
+*.sdf
+*.user
