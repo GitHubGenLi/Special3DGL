@@ -1,3 +1,6 @@
+#ifndef OpenGLProc_H
+#define OpenGLProc_H
+
 #include <Windows.h>
 #include <windef.h>
 #include <minwindef.h>
@@ -5,13 +8,13 @@
 
 using namespace std;
 
-HMODULE _libGlHandle = NULL;
+extern HMODULE _libGlHandle;
 
-HDC currentOpenGLContext;
+extern HDC currentOpenGLContext;
 
-bool g_stereoDetect = false;    ///< have we detected incoming stereo frames?
-unsigned g_clearsPerEye = 0;    ///< number of glClear calls per eye
-unsigned g_clearCount = 0;    ///< used to count number of glClear calls
+extern bool g_stereoDetect;    ///< have we detected incoming stereo frames?
+extern unsigned g_clearsPerEye;    ///< number of glClear calls per eye
+extern unsigned g_clearCount;    ///< used to count number of glClear calls
 
 void * _getPublicProcAddress(const char *procName);
 void * _getPrivateProcAddress(const char *procName);
@@ -22,13 +25,13 @@ extern PFN_WGLGETPROCADDRESS _wglGetProcAddress;
 /*************************************************************/
 // define real opengl functions
 /// define function type for glClear
-typedef void (APIENTRY * PFN_GLCLEAR)(GLbitfield mask);
+typedef void (WINAPI * PFN_GLCLEAR)(GLbitfield mask);
 extern PFN_GLCLEAR _glClear;
 
-typedef void (APIENTRY * PFN_GLCLEARCOLOR)(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
+typedef void (WINAPI * PFN_GLCLEARCOLOR)(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
 extern PFN_GLCLEARCOLOR _glClearColor;
 
-typedef void (APIENTRY * PFN_GLCLEARDEPTH)(GLdouble depth);
+typedef void (WINAPI * PFN_GLCLEARDEPTH)(GLdouble depth);
 extern PFN_GLCLEARDEPTH _glClearDepth;
 
 typedef BOOL(__stdcall * PFN_WGLSWAPBUFFERS)(HDC hdc);
@@ -52,6 +55,8 @@ extern PFN_WGLDESCRIBEPIXELFORMAT _wglDescribePixelFormat;
 /*************************************************************/
 //define intercepted necessary opengl functions
 BOOL APIENTRY interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd);
-
 BOOL APIENTRY interceptedglClear(GLbitfield mask);
+BOOL APIENTRY interceptedwglSwapBuffers(HDC hdc);
 /*************************************************************/
+
+#endif

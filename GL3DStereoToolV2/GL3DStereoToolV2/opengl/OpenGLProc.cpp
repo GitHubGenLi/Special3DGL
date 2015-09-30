@@ -1,5 +1,12 @@
 #include "OpenGLProc.h"
 
+bool g_stereoDetect = false;
+unsigned g_clearsPerEye = 0;
+unsigned g_clearCount = 0;
+HMODULE _libGlHandle = NULL;
+HDC currentOpenGLContext;
+
+/************************************************************************************/
 void * _getPublicProcAddress(const char *procName)
 {
 	if (!_libGlHandle) {
@@ -24,7 +31,7 @@ void * _getPublicProcAddress(const char *procName)
 void * _getPrivateProcAddress(const char *procName) {
 	return (void *)_wglGetProcAddress(procName);
 }
-
+/************************************************************************************/
 static PROC __stdcall _fail_wglGetProcAddress(const char * lpszProc) {
 	const char *_name = "wglGetProcAddress";
 	//os::log("error: unavailable function %s\n", _name);
@@ -43,7 +50,7 @@ static PROC __stdcall _get_wglGetProcAddress(const char * lpszProc) {
 }
 
 PFN_WGLGETPROCADDRESS _wglGetProcAddress = &_get_wglGetProcAddress;
-
+/************************************************************************************/
 static BOOL __stdcall _fail_wglChoosePixelFormatARB(HDC hdc, const int * piAttribIList, const FLOAT * pfAttribFList, UINT nMaxFormats, int * piFormats, UINT * nNumFormats) {
 	const char *_name = "wglChoosePixelFormatARB";
 	/*os::log("error: unavailable function %s\n", _name);
@@ -62,7 +69,7 @@ static BOOL __stdcall _get_wglChoosePixelFormatARB(HDC hdc, const int * piAttrib
 }
 
 PFN_WGLCHOOSEPIXELFORMATARB _wglChoosePixelFormatARB = &_get_wglChoosePixelFormatARB;
-
+/************************************************************************************/
 static BOOL __stdcall _fail_wglSwapBuffers(HDC hdc) {
 	const char *_name = "wglSwapBuffers";
 	//os::log("error: unavailable function %s\n", _name);
@@ -81,7 +88,7 @@ static BOOL __stdcall _get_wglSwapBuffers(HDC hdc) {
 }
 
 PFN_WGLSWAPBUFFERS _wglSwapBuffers = &_get_wglSwapBuffers;
-
+/************************************************************************************/
 static int __stdcall _fail_wglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd) {
 	const char *_name = "wglChoosePixelFormat";
 	//os::log("error: unavailable function %s\n", _name);
@@ -100,7 +107,7 @@ static int __stdcall _get_wglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIP
 }
 
 PFN_WGLCHOOSEPIXELFORMAT _wglChoosePixelFormat = &_get_wglChoosePixelFormat;
-
+/************************************************************************************/
 static BOOL __stdcall _fail_wglSetPixelFormat(HDC hdc, int iPixelFormat, const PIXELFORMATDESCRIPTOR * ppfd) {
 	const char *_name = "wglSetPixelFormat";
 	/*os::log("error: unavailable function %s\n", _name);
@@ -119,14 +126,14 @@ static BOOL __stdcall _get_wglSetPixelFormat(HDC hdc, int iPixelFormat, const PI
 }
 
 PFN_WGLSETPIXELFORMAT _wglSetPixelFormat = &_get_wglSetPixelFormat;
-
-static void APIENTRY _fail_glClear(GLbitfield mask) {
+/************************************************************************************/
+static void WINAPI _fail_glClear(GLbitfield mask) {
 	const char *_name = "glClear";
 	//os::log("warning: ignoring call to unavailable function %s\n", _name);
 	return;
 }
 
-static void APIENTRY _get_glClear(GLbitfield mask) {
+static void WINAPI _get_glClear(GLbitfield mask) {
 	PFN_GLCLEAR _ptr;
 	_ptr = (PFN_GLCLEAR)_getPublicProcAddress("glClear");
 	if (!_ptr) {
@@ -137,14 +144,14 @@ static void APIENTRY _get_glClear(GLbitfield mask) {
 }
 
 PFN_GLCLEAR _glClear = &_get_glClear;
-
-static void APIENTRY _fail_glClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) {
+/************************************************************************************/
+static void WINAPI _fail_glClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) {
 	const char *_name = "glClearColor";
 	//os::log("warning: ignoring call to unavailable function %s\n", _name);
 	return;
 }
 
-static void APIENTRY _get_glClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) {
+static void WINAPI _get_glClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) {
 	PFN_GLCLEARCOLOR _ptr;
 	_ptr = (PFN_GLCLEARCOLOR)_getPublicProcAddress("glClearColor");
 	if (!_ptr) {
@@ -155,14 +162,14 @@ static void APIENTRY _get_glClearColor(GLfloat red, GLfloat green, GLfloat blue,
 }
 
 PFN_GLCLEARCOLOR _glClearColor = &_get_glClearColor;
-
-static void APIENTRY _fail_glClearDepth(GLdouble depth) {
+/************************************************************************************/
+static void WINAPI _fail_glClearDepth(GLdouble depth) {
 	const char *_name = "glClearDepth";
 	//os::log("warning: ignoring call to unavailable function %s\n", _name);
 	return;
 }
 
-static void APIENTRY _get_glClearDepth(GLdouble depth) {
+static void WINAPI _get_glClearDepth(GLdouble depth) {
 	PFN_GLCLEARDEPTH _ptr;
 	_ptr = (PFN_GLCLEARDEPTH)_getPublicProcAddress("glClearDepth");
 	if (!_ptr) {
@@ -173,7 +180,7 @@ static void APIENTRY _get_glClearDepth(GLdouble depth) {
 }
 
 PFN_GLCLEARDEPTH _glClearDepth = &_get_glClearDepth;
-
+/************************************************************************************/
 static int __stdcall _fail_wglGetPixelFormat(HDC hdc) {
 	const char *_name = "wglGetPixelFormat";
 	//os::log("error: unavailable function %s\n", _name);
@@ -192,7 +199,7 @@ static int __stdcall _get_wglGetPixelFormat(HDC hdc) {
 }
 
 PFN_WGLGETPIXELFORMAT _wglGetPixelFormat = &_get_wglGetPixelFormat;
-
+/************************************************************************************/
 static int __stdcall _fail_wglDescribePixelFormat(HDC hdc, int iPixelFormat, UINT nBytes, PIXELFORMATDESCRIPTOR * ppfd) {
 	const char *_name = "wglDescribePixelFormat";
 	//os::log("error: unavailable function %s\n", _name);
@@ -211,8 +218,8 @@ static int __stdcall _get_wglDescribePixelFormat(HDC hdc, int iPixelFormat, UINT
 }
 
 PFN_WGLDESCRIBEPIXELFORMAT _wglDescribePixelFormat = &_get_wglDescribePixelFormat;
-
-BOOL APIENTRY interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd)
+/************************************************************************************/
+BOOL WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd)
 {
 	currentOpenGLContext = hdc; //store the current context
 
@@ -265,7 +272,7 @@ BOOL APIENTRY interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPT
 	return 1;
 }
 
-BOOL APIENTRY interceptedglClear(GLbitfield mask)
+BOOL WINAPI interceptedglClear(GLbitfield mask)
 {
 	if (!_glClear)
 	{
@@ -289,7 +296,7 @@ BOOL APIENTRY interceptedglClear(GLbitfield mask)
 	return 1;
 }
 
-BOOL APIENTRY interceptedwglSwapBuffers(HDC hdc)
+BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 {
 	if (!_wglSwapBuffers)
 	{
@@ -320,3 +327,4 @@ BOOL APIENTRY interceptedwglSwapBuffers(HDC hdc)
 
 	return 1;
 }
+/************************************************************************************/
