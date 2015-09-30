@@ -48,6 +48,14 @@ GL3DStereoTool/Debug
 GL3DStereoTool/Release
 GL3DStereoTool/Launcher/Debug
 GL3DStereoTool/Launcher/Release
+
+GL3DStereoToolV2/GL3DStereoToolV2/Debug
+GL3DStereoToolV2/GL3DStereoToolV2/Release
+GL3DStereoToolV2/Debug
+GL3DStereoToolV2/Release
+GL3DStereoToolV2/Launcher/Debug
+GL3DStereoToolV2/Launcher/Release
+
 MyTestOpenGL/MyTestOpenGL/Debug
 MyTestOpenGL/Debug
 *.opensdf

@@ -46150,22 +46150,22 @@ static void APIENTRY _get_glDebugMessageInsert(GLenum source, GLenum type, GLuin
     _glDebugMessageInsert(source, type, id, severity, length, buf);
 }
 
-//PFN_GLDEBUGMESSAGEINSERT _glDebugMessageInsert = &_get_glDebugMessageInsert;
+PFN_GLDEBUGMESSAGEINSERT _glDebugMessageInsert = &_get_glDebugMessageInsert;
 
-//static void APIENTRY _fail_glDebugMessageCallback(GLDEBUGPROC callback, const void * userParam) {
-//}
+static void APIENTRY _fail_glDebugMessageCallback(GLDEBUGPROC callback, const void * userParam) {
+}
 
-//static void APIENTRY _get_glDebugMessageCallback(GLDEBUGPROC callback, const void * userParam) {
-//    PFN_GLDEBUGMESSAGECALLBACK _ptr;
-//    _ptr = (PFN_GLDEBUGMESSAGECALLBACK)_getPrivateProcAddress("glDebugMessageCallback");
-//    if (!_ptr) {
-//        _ptr = &_fail_glDebugMessageCallback;
-//    }
-//    _glDebugMessageCallback = _ptr;
-//    _glDebugMessageCallback(callback, userParam);
-//}
+static void APIENTRY _get_glDebugMessageCallback(GLDEBUGPROC callback, const void * userParam) {
+    PFN_GLDEBUGMESSAGECALLBACK _ptr;
+    _ptr = (PFN_GLDEBUGMESSAGECALLBACK)_getPrivateProcAddress("glDebugMessageCallback");
+    if (!_ptr) {
+        _ptr = &_fail_glDebugMessageCallback;
+    }
+    _glDebugMessageCallback = _ptr;
+    _glDebugMessageCallback(callback, userParam);
+}
 
-//PFN_GLDEBUGMESSAGECALLBACK _glDebugMessageCallback = &_get_glDebugMessageCallback;
+PFN_GLDEBUGMESSAGECALLBACK _glDebugMessageCallback = &_get_glDebugMessageCallback;
 
 static GLuint APIENTRY _fail_glGetDebugMessageLog(GLuint count, GLsizei bufsize, GLenum * sources, GLenum * types, GLuint * ids, GLenum * severities, GLsizei * lengths, GLchar * messageLog) {
     if (sources != 0) *sources = 0;

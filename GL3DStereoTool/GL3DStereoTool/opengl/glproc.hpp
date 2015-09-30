@@ -8113,8 +8113,8 @@ extern PFN_GLDEBUGMESSAGECONTROL _glDebugMessageControl;
 typedef void (APIENTRY * PFN_GLDEBUGMESSAGEINSERT)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar * buf);
 extern PFN_GLDEBUGMESSAGEINSERT _glDebugMessageInsert;
 
-//typedef void (APIENTRY * PFN_GLDEBUGMESSAGECALLBACK)(GLDEBUGPROC callback, const void * userParam);
-//extern PFN_GLDEBUGMESSAGECALLBACK _glDebugMessageCallback;
+typedef void (APIENTRY * PFN_GLDEBUGMESSAGECALLBACK)(GLDEBUGPROC callback, const void * userParam);
+extern PFN_GLDEBUGMESSAGECALLBACK _glDebugMessageCallback;
 
 typedef GLuint (APIENTRY * PFN_GLGETDEBUGMESSAGELOG)(GLuint count, GLsizei bufsize, GLenum * sources, GLenum * types, GLuint * ids, GLenum * severities, GLsizei * lengths, GLchar * messageLog);
 extern PFN_GLGETDEBUGMESSAGELOG _glGetDebugMessageLog;

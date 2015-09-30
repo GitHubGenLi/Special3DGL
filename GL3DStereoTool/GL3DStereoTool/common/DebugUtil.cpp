@@ -48,7 +48,7 @@ std::string formatErrorMessage( DWORD error )
         0,
         error,
         MAKELANGID( LANG_NEUTRAL, SUBLANG_DEFAULT ),
-        (LPWSTR)&lpMsgBuf,
+        /*(LPWSTR)*/(LPSTR)&lpMsgBuf,
         0, 0
     ) ) {
         // format message failed: output error code instead

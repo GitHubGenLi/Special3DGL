@@ -326,7 +326,9 @@ readConfigFile(const char *filename)
     os::log("apitrace: attempting to read configuration file: %s\n", filename);
 #endif
 
-    FILE *f = fopen(filename, "r");
+	FILE *f;
+	fopen_s(&f, filename, "r");
+
     if (!f)
         return NULL;
 
@@ -365,7 +367,12 @@ getConfig(void)
 
     if (!configured) {
         os::String configPath;
-        const char *envConfigPath = getenv("GLTRACE_CONF");
+        //const char *envConfigPath = getenv("GLTRACE_CONF");
+		char *envConfigPath;
+		size_t len;
+
+		_dupenv_s(&envConfigPath, &len, "GLTRACE_CONF");
+
         if (envConfigPath) {
             configPath = envConfigPath;
         } else {

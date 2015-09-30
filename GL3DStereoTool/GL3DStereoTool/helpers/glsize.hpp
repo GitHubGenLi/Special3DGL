@@ -33,6 +33,7 @@
 
 #pragma once
 
+#define NOMINMAX
 
 #include <string.h>
 #include <assert.h>
@@ -41,6 +42,7 @@
 
 #include "os.hpp"
 #include "glimports.hpp"
+
 
 
 // Vertex/element formats
@@ -68,9 +70,9 @@ _gl_type_size(GLenum type, GLint size = 1)
     case GL_DOUBLE:
         return size * 8;
     case GL_INT_2_10_10_10_REV:
-    case GL_INT_10_10_10_2_OES:
+    //case GL_INT_10_10_10_2_OES:
     case GL_UNSIGNED_INT_2_10_10_10_REV:
-    case GL_UNSIGNED_INT_10_10_10_2_OES:
+    //case GL_UNSIGNED_INT_10_10_10_2_OES:
     case GL_UNSIGNED_INT_10F_11F_11F_REV:
         // packed
         return 4;
@@ -523,7 +525,8 @@ _glMultiDrawArrays_count(const GLint *first, const GLsizei *count, GLsizei drawc
     GLuint _count = 0;
     for (GLsizei draw = 0; draw < drawcount; ++draw) {
         GLuint _count_draw = _glDrawArrays_count(first[draw], count[draw]);
-        _count = std::max(_count, _count_draw);
+        //_count = std::max(_count, _count_draw);
+		_count = max(_count, _count_draw);
     }
     return _count;
 }
@@ -533,7 +536,8 @@ _glMultiDrawElements_count(const GLsizei *count, GLenum type, const GLvoid* cons
     GLuint _count = 0;
     for (GLsizei draw = 0; draw < drawcount; ++draw) {
         GLuint _count_draw = _glDrawElements_count(count[draw], type, indices[draw]);
-        _count = std::max(_count, _count_draw);
+		//_count = std::max(_count, _count_draw);
+		_count = max(_count, _count_draw);
     }
     return _count;
 }
@@ -543,7 +547,8 @@ _glMultiDrawElementsBaseVertex_count(const GLsizei *count, GLenum type, const GL
     GLuint _count = 0;
     for (GLsizei draw = 0; draw < drawcount; ++draw) {
         GLuint _count_draw = _glDrawElementsBaseVertex_count(count[draw], type, indices[draw], basevertex[draw]);
-        _count = std::max(_count, _count_draw);
+		//_count = std::max(_count, _count_draw);
+		_count = max(_count, _count_draw);
     }
     return _count;
 }
