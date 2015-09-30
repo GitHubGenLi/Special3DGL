@@ -1,5 +1,7 @@
 #include "OpenGLProc.h"
 
+#include <stdio.h>
+
 bool g_stereoDetect = false;
 unsigned g_clearsPerEye = 0;
 unsigned g_clearCount = 0;
@@ -222,6 +224,8 @@ PFN_WGLDESCRIBEPIXELFORMAT _wglDescribePixelFormat = &_get_wglDescribePixelForma
 BOOL WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd)
 {
 	currentOpenGLContext = hdc; //store the current context
+		
+	printf("interceptedwglChoosePixelFormat\n");
 
 	if (!_wglChoosePixelFormat)
 	{

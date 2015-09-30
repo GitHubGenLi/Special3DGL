@@ -39,6 +39,21 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="extern\mhook-2.3\mhook-lib\mhook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="extern\mhook-2.3\disasm-lib\cpu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="extern\mhook-2.3\disasm-lib\disasm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="extern\mhook-2.3\disasm-lib\disasm_x86.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="extern\mhook-2.3\disasm-lib\misc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\DebugUtil.h">
@@ -60,6 +75,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="common\NtCreateThreadEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extern\mhook-2.3\mhook-lib\mhook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extern\mhook-2.3\disasm-lib\cpu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extern\mhook-2.3\disasm-lib\disasm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extern\mhook-2.3\disasm-lib\disasm_x86.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extern\mhook-2.3\disasm-lib\disasm_x86_tables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extern\mhook-2.3\disasm-lib\misc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

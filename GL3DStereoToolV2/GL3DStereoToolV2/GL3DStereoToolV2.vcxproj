@@ -86,6 +86,11 @@
     <ClCompile Include="common\NtCreateThreadEx.cpp" />
     <ClCompile Include="common\StereoUtil.cpp" />
     <ClCompile Include="common\WinMessage.cpp" />
+    <ClCompile Include="extern\mhook-2.3\disasm-lib\cpu.c" />
+    <ClCompile Include="extern\mhook-2.3\disasm-lib\disasm.c" />
+    <ClCompile Include="extern\mhook-2.3\disasm-lib\disasm_x86.c" />
+    <ClCompile Include="extern\mhook-2.3\disasm-lib\misc.c" />
+    <ClCompile Include="extern\mhook-2.3\mhook-lib\mhook.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="opengl\OpenGLProc.cpp" />
   </ItemGroup>
@@ -96,6 +101,12 @@
     <ClInclude Include="common\NtCreateThreadEx.h" />
     <ClInclude Include="common\StereoUtil.h" />
     <ClInclude Include="common\WinMessage.h" />
+    <ClInclude Include="extern\mhook-2.3\disasm-lib\cpu.h" />
+    <ClInclude Include="extern\mhook-2.3\disasm-lib\disasm.h" />
+    <ClInclude Include="extern\mhook-2.3\disasm-lib\disasm_x86.h" />
+    <ClInclude Include="extern\mhook-2.3\disasm-lib\disasm_x86_tables.h" />
+    <ClInclude Include="extern\mhook-2.3\disasm-lib\misc.h" />
+    <ClInclude Include="extern\mhook-2.3\mhook-lib\mhook.h" />
     <ClInclude Include="opengl\OpenGLProc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
