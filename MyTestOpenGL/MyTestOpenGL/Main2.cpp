@@ -378,7 +378,8 @@ int main(int argc, char **argv) {
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(640, 480);
 	int openW = glutCreateWindow("My OpenGL");
-	
+	glutFullScreen();           // making the window full screen
+
 	//glMatrixMode(GL_PROJECTION);
 	//glLoadIdentity();
 	//glOrtho(-10, 10, -10, 10, -10, 10);
