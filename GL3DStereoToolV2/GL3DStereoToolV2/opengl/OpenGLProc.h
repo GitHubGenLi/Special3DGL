@@ -6,7 +6,10 @@
 #include <minwindef.h>
 #include <GL/gl.h>
 
+#include <Log.h>
+
 using namespace std;
+using namespace hive;
 
 extern HMODULE _libGlHandle;
 
@@ -18,6 +21,8 @@ extern unsigned g_clearCount;    ///< used to count number of glClear calls
 
 void * _getPublicProcAddress(const char *procName);
 void * _getPrivateProcAddress(const char *procName);
+
+void *_getAnyGLFuncAddress(const char *name);
 
 typedef PROC(__stdcall * PFN_WGLGETPROCADDRESS)(const char * lpszProc);
 extern PFN_WGLGETPROCADDRESS _wglGetProcAddress;
@@ -54,9 +59,9 @@ extern PFN_WGLDESCRIBEPIXELFORMAT _wglDescribePixelFormat;
 
 /*************************************************************/
 //define intercepted necessary opengl functions
-BOOL APIENTRY interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd);
-BOOL APIENTRY interceptedglClear(GLbitfield mask);
-BOOL APIENTRY interceptedwglSwapBuffers(HDC hdc);
+int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd);
+void WINAPI interceptedglClear(GLbitfield mask);
+BOOL WINAPI interceptedwglSwapBuffers(HDC hdc);
 /*************************************************************/
 
 #endif

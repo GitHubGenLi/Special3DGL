@@ -54,6 +54,9 @@
     <ClCompile Include="extern\mhook-2.3\disasm-lib\misc.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="opengl\Extensions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\DebugUtil.h">
@@ -93,6 +96,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="extern\mhook-2.3\disasm-lib\misc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\Extensions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

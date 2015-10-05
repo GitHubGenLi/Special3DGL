@@ -53,7 +53,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;GL3DSTEREOTOOLV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>common;opengl;helpers;wrappers;extern\mhook-2.3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\txn\Documents\MyProject\workspace\Special3DGL\Special3DGL\GL3DStereoToolV2\GL3DStereoToolV2\common;opengl;helpers;wrappers;extern\mhook-2.3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -92,6 +92,7 @@
     <ClCompile Include="extern\mhook-2.3\disasm-lib\misc.c" />
     <ClCompile Include="extern\mhook-2.3\mhook-lib\mhook.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="opengl\Extensions.cpp" />
     <ClCompile Include="opengl\OpenGLProc.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +108,7 @@
     <ClInclude Include="extern\mhook-2.3\disasm-lib\disasm_x86_tables.h" />
     <ClInclude Include="extern\mhook-2.3\disasm-lib\misc.h" />
     <ClInclude Include="extern\mhook-2.3\mhook-lib\mhook.h" />
+    <ClInclude Include="opengl\Extensions.h" />
     <ClInclude Include="opengl\OpenGLProc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

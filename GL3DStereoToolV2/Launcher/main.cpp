@@ -7,22 +7,47 @@
 using namespace std;
 
 //This project has been modified from Quadifier
+//-----------------------------------------------------------------------------
+//
+// Copyright (C) 2012-14 James Ward, University of Hull
+//
+// This software is provided 'as-is', without any express or implied
+// warranty. In no event will the authors be held liable for any damages
+// arising from the use of this software.
+//
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+//
+//    1. The origin of this software must not be misrepresented; you must not
+//    claim that you wrote the original software.
+//
+//    2. If you use this software in a product, an acknowledgment in the
+//    product documentation is required.
+//
+//    3. Altered source versions must be plainly marked as such, and must not
+//    be misrepresented as being the original software.
+//
+//    4. This notice may not be removed or altered from any source
+//    distribution.
+//
+//-----------------------------------------------------------------------------
 
 // workaround for issue seen on Windows 7 with NVIDIA 
 void triggerStereo()
 {
     // attributes for an OpenGL stereo window
-    //GLWindow::Attributes attributes;
-    //attributes[WGL_STEREO_ARB] = GL_TRUE;
+    GLWindow::Attributes attributes;
+    attributes[WGL_STEREO_ARB] = GL_TRUE;
 
     // create and destroy a small stereo window: this is here to work around
     // an issue with windows failing to switch to quad-buffer mode (although
     // the window is successfully created and reports a stereo pixel format)
     // note: the window is invisible (not shown) but typically causes the
     // windows desktop to flash briefly (first run only) as stereo activates
-    //GLWindow window;
-    //window.create( 0, "", 0, 0, 0, 8, 8, 0, 0, DefWindowProc, 0, attributes );
-    //window.destroy();
+    GLWindow window;
+    window.create( 0, "", 0, 0, 0, 8, 8, 0, 0, DefWindowProc, 0, attributes );
+    window.destroy();
 }
 
 //-----------------------------------------------------------------------------
@@ -34,6 +59,8 @@ int main ( int argc, char **argv )
 
     // the name of our DLL to be injected
     static const string moduleName( "GL3DStereoToolV2.dll" );
+	//argc = 2;
+	//argv[1] = "C:\\Users\\txn\\Documents\\MyProject\\workspace\\Special3DGL\\Special3DGL\\GL3DStereoToolV2\\Debug\\MyTestOpenGL.exe";
 
     // have we got an application filename?
     if ( argc > 1 ) {
