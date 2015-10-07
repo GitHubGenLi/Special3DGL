@@ -56,7 +56,8 @@ bool Log::open( const std::string & fileName )
     close();
 
     // open stream for writing
-    get().m_stream.open( fileName.c_str() );
+	get().m_stream.open(fileName.c_str());
+	//get().m_stream.open(fileName.c_str(), std::ofstream::out | std::ofstream::app);
     if ( !get().m_stream ) return false;
 
     return true;

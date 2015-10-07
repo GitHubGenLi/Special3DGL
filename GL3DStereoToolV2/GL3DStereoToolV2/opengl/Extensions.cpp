@@ -3,14 +3,14 @@
 //-----------------------------------------------------------------------------
 
 Extensions::Extensions() :
-    wglDXSetResourceShareHandleNV(0),
+   /* wglDXSetResourceShareHandleNV(0),
     wglDXOpenDeviceNV(0),
     wglDXCloseDeviceNV(0),
     wglDXRegisterObjectNV(0),
     wglDXUnregisterObjectNV(0),
     wglDXObjectAccessNV(0),
     wglDXLockObjectsNV(0),
-    wglDXUnlockObjectsNV(0),
+    wglDXUnlockObjectsNV(0),*/
     glGenFramebuffers(0),
     glBindFramebuffer(0),
     glFramebufferTexture2D(0),
@@ -28,11 +28,12 @@ Extensions::Extensions() :
 
 bool Extensions::load()
 {
-    wglDXSetResourceShareHandleNV =
+	bool success;
+    /*wglDXSetResourceShareHandleNV =
         reinterpret_cast<PFNWGLDXSETRESOURCESHAREHANDLENVPROC>
             ( wglGetProcAddress( "wglDXSetResourceShareHandleNV" ) );
 
-    bool success = ( wglDXSetResourceShareHandleNV != 0 );
+    success = ( wglDXSetResourceShareHandleNV != 0 );
 
     wglDXOpenDeviceNV = reinterpret_cast<PFNWGLDXOPENDEVICENVPROC>
         ( wglGetProcAddress( "wglDXOpenDeviceNV" ) );
@@ -68,13 +69,19 @@ bool Extensions::load()
         reinterpret_cast<PFNWGLDXUNLOCKOBJECTSNVPROC>
             ( wglGetProcAddress( "wglDXUnlockObjectsNV" ) );
 
-    success = success && ( wglDXUnlockObjectsNV != 0 );
+    success = success && ( wglDXUnlockObjectsNV != 0 );*/
 
-    glGenFramebuffers =
-        reinterpret_cast<PFNGLGENFRAMEBUFFERSPROC>
-            ( wglGetProcAddress( "glGenFramebuffers" ) );
+    //glGenFramebuffers =
+    //    reinterpret_cast<PFNGLGENFRAMEBUFFERSPROC>
+     //       ( wglGetProcAddress( "glGenFramebuffers" ) );
 
-    success = success && ( glGenFramebuffers != 0 );
+	glGenFramebuffers = (PFNGLGENFRAMEBUFFERSPROC)(wglGetProcAddress("glGenFramebuffers"));
+
+	printf("OK: get glGenFramebuffers function: ");
+	printf("%d", glGenFramebuffers);
+
+    //success = success && ( glGenFramebuffers != 0 );
+	success = (glGenFramebuffers != 0);
 
     glBindFramebuffer =
         reinterpret_cast<PFNGLBINDFRAMEBUFFERPROC>

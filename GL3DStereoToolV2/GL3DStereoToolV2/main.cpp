@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 
+
 using namespace hive;
 using namespace std;
 
@@ -37,56 +38,28 @@ using namespace std;
 //
 //-----------------------------------------------------------------------------
 
+void initialiseRealOpenGLFunctions()
+{
+	_wglChoosePixelFormat = (PFN_WGLCHOOSEPIXELFORMAT)_getAnyGLFuncAddress("wglChoosePixelFormat");
+	_glClear = (PFN_GLCLEAR)_getAnyGLFuncAddress("glClear");
+	_wglSwapBuffers = (PFN_WGLSWAPBUFFERS)_getAnyGLFuncAddress("wglSwapBuffers");
+
+	//_wglChoosePixelFormat = &_get_wglChoosePixelFormat; //not working with styles
+	//_glClear = &_get_glClear;
+	//_wglSwapBuffers = &_get_wglSwapBuffers;
+}
+
 void processAttach()
 {
 	/*bool isOpened = Log::open("intercept.log");*/
 	Log::print("DLL_PROCESS_ATTACH\n");
 
 	printf("processAttach\n");
-
-	/*if (isOpened)
-	{
-		printf("Opened\n");
-	}*/
-
-	//typedef FARPROC(WINAPI *PFNGetProcAddress)(HMODULE hModule, LPCSTR lpProcName);
-
-	//PFNGetProcAddress real_GetProcAddress = reinterpret_cast<PFNGetProcAddress>(
-	//	GetProcAddress(GetModuleHandle("kernel32"), "GetProcAddress"));
-
-	/*if (_getPublicProcAddress("glClearColor") != 0)
-	{
-		Log::print("glClearColor OK\n");
-	}
-	else
-	{
-		Log::print("glClearColor Fail\n");
-	}
-
-	if (_wglGetProcAddress != 0)
-	{
-		Log::print("_wglGetProcAddress OK\n");
-	}
-	else
-	{
-		Log::print("_wglGetProcAddress Fail\n");
-	}
-
-	if (_getAnyGLFuncAddress("glClear") != 0)
-	{
-		Log::print("glClear 2 OK\n");
-		printf("%d", _getAnyGLFuncAddress("glClear"));
-	}
-	else
-	{
-		Log::print("glClear 2 Fail\n");
-	}
+	
+	
 
 
-	*/
-	_wglChoosePixelFormat = (PFN_WGLCHOOSEPIXELFORMAT)_getAnyGLFuncAddress("wglChoosePixelFormat");
-	_glClear = (PFN_GLCLEAR)_getAnyGLFuncAddress("glClear");
-	_wglSwapBuffers = (PFN_WGLSWAPBUFFERS)_getAnyGLFuncAddress("wglSwapBuffers");
+	initialiseRealOpenGLFunctions(); 
 
 	if ((_wglChoosePixelFormat == 0) || !Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglChoosePixelFormat), interceptedwglChoosePixelFormat))
 	{

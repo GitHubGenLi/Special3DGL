@@ -53,7 +53,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;GL3DSTEREOTOOLV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\txn\Documents\MyProject\workspace\Special3DGL\Special3DGL\GL3DStereoToolV2\GL3DStereoToolV2\common;opengl;helpers;wrappers;extern\mhook-2.3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\txn\Documents\MyProject\workspace\Special3DGL\Special3DGL\GL3DStereoToolV2\GL3DStereoToolV2\common;opengl;helpers;wrappers;extern\mhook-2.3;C:\Users\txn\Documents\MyProject\workspace\Special3DGL\Special3DGL\GL3DStereoToolV2\system;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -80,6 +80,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\system\Event.cpp" />
     <ClCompile Include="common\DebugUtil.cpp" />
     <ClCompile Include="common\GLWindow.cpp" />
     <ClCompile Include="common\Log.cpp" />
@@ -96,6 +97,7 @@
     <ClCompile Include="opengl\OpenGLProc.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\system\Event.h" />
     <ClInclude Include="common\DebugUtil.h" />
     <ClInclude Include="common\GLWindow.h" />
     <ClInclude Include="common\Log.h" />
@@ -110,6 +112,7 @@
     <ClInclude Include="extern\mhook-2.3\mhook-lib\mhook.h" />
     <ClInclude Include="opengl\Extensions.h" />
     <ClInclude Include="opengl\OpenGLProc.h" />
+    <ClInclude Include="opengl\Target.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

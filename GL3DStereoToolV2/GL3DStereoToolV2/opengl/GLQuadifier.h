@@ -1,11 +1,12 @@
-#include <GL/gl.h>
-#include <GL/glext.h>
-#include <GL/wglext.h>
+#ifndef hive_Quadifier_h
+#define hive_Quadifier_h
 
 #include <array>
 #include <set>
 
-#include "OpenGLProc.h"
+//#include "OpenGLProc.h"
+#include "Event.h"
+#include "Extensions.h"
 
 class GLQuadifier {
 public:
@@ -17,59 +18,10 @@ public:
 
 
 private:
-	/// Create D3D resources (render targets)
-	void createResources();
-
-	/// Start OpenGL rendering thread
-	void startRenderThread();
-
-	/// Called when OpenGL window is created
-	bool onCreate();
-
-	/// Called when OpenGL window is destroyed
-	void onDestroy();
-
-	/// Called when OpenGL window is painted
-	void onPaint();
-
-	/// Called when OpenGL window is resized
-	void onResize(UINT type, int w, int h);
-
-	/// Called to perform idle processing
-	void onIdle();
-
-	/// Request a redraw
-	void redraw();
+	
 
 public:
-	/// The WIN32 WindowProc for the OpenGL window
-	LRESULT CALLBACK windowProc(
-		HWND hWnd,      // handle to window
-		UINT uMsg,      // message identifier
-		WPARAM wParam,  // first message parameter
-		LPARAM lParam   // second message parameter
-		);
-
-	/// OpenGL rendering thread function
-	static unsigned __stdcall threadFunc(void *context);
-
-private:
-
-	/// Return the wall clock time in seconds
-	double getTime() const;
-
-	/**
-	* Send the last rendered frame from DX to GL and swap the render
-	* targets ready for next frame.
-	*/
-	void sendFrame(GLuint drawBuffer);
-
-	/**
-	* Returns true if the current render target has ever been presented
-	* (which we use to detect render targets that are actually displayed,
-	* rather than the various off screen render targets).
-	*/
-	bool isPresentedRenderTarget() const;
+	
 
 private:
 	
@@ -131,14 +83,15 @@ private:
 
 	uintptr_t m_thread;             ///< Handle of the rendering thread
 
-	HWND m_sourceWindow;            ///< Window handle of source (Direct3D)
+	//HWND m_sourceWindow;            ///< Window handle of source (Direct3D)
 
-	HANDLE m_interopGLDX;           ///< Handle for the OpenGL/DX interop
+	//HANDLE m_interopGLDX;           ///< Handle for the OpenGL/DX interop
 
-	//Event m_frameDone;              ///< Signals when frame is rendered out
+	Event m_frameDone;              ///< Signals when frame is rendered out
 
-	//Extensions glx;                 ///< Stores the OpenGL extension functions
+	Extensions glx;                 ///< Stores the OpenGL extension functions
 
 	//GLWindow m_window;              ///< The OpenGL output window
 };
 
+#endif//hive_Quadifier_h

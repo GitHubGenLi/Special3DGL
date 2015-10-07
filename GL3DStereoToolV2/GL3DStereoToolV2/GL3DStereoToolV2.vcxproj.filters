@@ -57,6 +57,9 @@
     <ClCompile Include="opengl\Extensions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\system\Event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\DebugUtil.h">
@@ -99,6 +102,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="opengl\Extensions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\Target.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\system\Event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

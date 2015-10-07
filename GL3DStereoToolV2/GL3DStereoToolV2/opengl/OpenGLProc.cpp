@@ -8,6 +8,43 @@ unsigned g_clearCount = 0;
 HMODULE _libGlHandle = NULL;
 HDC currentOpenGLContext;
 
+unsigned m_framesGL;    ///< OpenGL frame count
+
+unsigned m_samplesGL;   ///< OpenGL multisamples (or 0)
+
+unsigned m_drawBuffer;  ///< buffer to draw to
+unsigned m_readBuffer;  ///< buffer to read from
+
+unsigned m_width;       ///< display width in pixels
+unsigned m_height;      ///< display height in pixels
+
+bool m_initialised;     ///< has initialisation completed?
+
+/// Set of all render targets that have been presented
+std::set< unsigned > m_presentedTargets;
+
+std::tr1::array<Target, 3> m_target; ///< DX/GL targets for rendering
+
+bool     m_verbose;             ///< Verbose logging
+
+bool     m_stereoMode;          ///< Stereo mode enable/disable
+bool     m_stereoAvailable;     ///< Is quad-buffer stereo available?
+//unsigned m_clearCount;          ///< Number of clears per frame
+unsigned m_clearCountPersist;   ///< Persistent number of clears
+
+double   m_firstFrameTimeGL;    ///< time-stamp of first GL frame
+double   m_lastFrameTimeGL;     ///< time-stamp of last GL frame
+
+GLuint   m_quadListGL;          ///< GL display list for textured quad
+
+uintptr_t m_thread;             ///< Handle of the rendering thread
+
+Event m_frameDone;              ///< Signals when frame is rendered out
+
+Extensions glx;                 ///< Stores the OpenGL extension functions
+
+bool useTexture;
+bool mustUseBlit;
 /************************************************************************************/
 void * _getPublicProcAddress(const char *procName)
 {
@@ -270,8 +307,12 @@ int __stdcall _get_wglDescribePixelFormat(HDC hdc, int iPixelFormat, UINT nBytes
 
 PFN_WGLDESCRIBEPIXELFORMAT _wglDescribePixelFormat = &_get_wglDescribePixelFormat;
 /************************************************************************************/
+
+/************************************************************************************/
 int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd)
 {
+	initialiseVariables();
+
 	currentOpenGLContext = hdc; //store the current context
 	//Log::open("intercept.log");
 	Log::print("OK: get interceptedwglChoosePixelFormat function \n");
@@ -324,6 +365,138 @@ int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR 
 		return false;
 	}
 
+	GLint textureSize = 0;
+	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &textureSize);
+	
+	bool success = false;
+
+	// use textures or renderbuffers?
+	useTexture = true;
+
+	if (!glx.load())
+		Log::print("error: failed to load GL extensions\n");
+	else do {
+		Log::print("loaded GL extensions\n");
+
+		// select standard or multisampled GL texture mode
+		GLenum textureMode = (m_samplesGL > 1) ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D;
+
+		Log::print("generating render buffers\n");
+		unsigned i = 0;
+		for (i = 0; i<m_target.size(); ++i) {
+			// are we using textures or renderbuffers?
+			if (useTexture) {
+				// using GL_TEXTURE_2D
+				glGenTextures(1, &m_target[i].texture);
+
+				if (m_target[i].texture == 0) {
+					Log::print("error: failed to generate texture ID\n");
+					break;
+				}
+			}
+			else {
+				// using GL_RENDERBUFFER
+				glx.glGenRenderbuffers(1, &m_target[i].renderBuffer);
+
+				if (m_target[i].renderBuffer == 0) {
+					Log::print("error: failed to generate render buffer ID\n");
+					break;
+				}
+			}
+
+			
+			if (m_target[i].object == 0) {
+				DWORD error = GetLastError();
+				Log::print("error: wglDXRegisterObjectNV failed for render target: ");
+					
+				break;
+			}
+
+			glx.glGenFramebuffers(1, &m_target[i].frameBuffer);
+
+			if (m_target[i].frameBuffer == 0) {
+				Log::print("error: glGenFramebuffers failed\n");
+				break;
+			}
+
+			glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[i].frameBuffer);
+			
+
+			if (useTexture) {
+				// using GL_TEXTURE_2D
+
+				// important to lock before using glFramebufferTexture2D
+				
+					// attach colour buffer texture
+					glx.glFramebufferTexture2D(
+						GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+						textureMode, m_target[i].texture, 0
+						);
+
+			}
+			else {
+				// using GL_RENDERBUFFER
+
+				// important to lock before using glFramebufferRenderbuffer
+				
+					// attach colour renderbuffer
+					glx.glFramebufferRenderbuffer(
+						GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+						GL_RENDERBUFFER, m_target[i].renderBuffer
+						);
+
+				
+				// this table defines the renderbuffer parameters to be listed
+				struct {
+					GLenum name;
+					const char *text;
+				} table[] = {
+						{ GL_RENDERBUFFER_WIDTH, "width" },
+						{ GL_RENDERBUFFER_HEIGHT, "height" },
+						{ GL_RENDERBUFFER_INTERNAL_FORMAT, "format" },
+						{ GL_RENDERBUFFER_RED_SIZE, "red" },
+						{ GL_RENDERBUFFER_GREEN_SIZE, "green" },
+						{ GL_RENDERBUFFER_BLUE_SIZE, "blue" },
+						{ GL_RENDERBUFFER_ALPHA_SIZE, "alpha" },
+						{ GL_RENDERBUFFER_DEPTH_SIZE, "depth" },
+						{ GL_RENDERBUFFER_STENCIL_SIZE, "stencil" },
+						{ 0, 0 }
+				};
+
+				glx.glBindRenderbuffer(GL_RENDERBUFFER, m_target[i].renderBuffer);
+
+				// query and log all the renderbuffer parameters
+				for (int p = 0; table[p].name != 0; ++p) {
+					GLint value = 0;
+					glx.glGetRenderbufferParameteriv(GL_RENDERBUFFER, table[p].name, &value);
+					Log::print("renderBuffer.") << table[p].text << " = " << value << endl;
+				}
+
+				glx.glBindRenderbuffer(GL_RENDERBUFFER, 0);
+			}
+
+			// log the framebuffer status (should be GL_FRAMEBUFFER_COMPLETE)
+			GLenum status = glx.glCheckFramebufferStatus(GL_FRAMEBUFFER);
+			Log::print() << "glCheckFramebufferStatus = " << GLFRAMEBUFFERSTATUStoString(status) << endl;
+		}
+
+		// successful only if all render buffers were created and initialised
+		success = (i == m_target.size());
+	} while (0);
+
+	// default OpenGL settings
+	glEnable(GL_COLOR_MATERIAL);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_DEPTH_TEST);
+
+	// default viewing system
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	
+
 	return 1;
 }
 
@@ -332,6 +505,7 @@ void WINAPI interceptedglClear(GLbitfield mask)
 	//Log::open("intercept.log");
 	Log::print("interceptedglClear\n");
 
+	
 
 	if (!_glClear)
 	{
@@ -361,17 +535,135 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 	//Log::open("intercept.log");
 	Log::print("OK: get interceptedwglSwapBuffers function \n");
 
+	// was stereo detected previously?
+	bool wasStereo = g_stereoDetect;
+	
 	if (!_wglSwapBuffers)
 	{
 		MessageBox(NULL, "_wglSwapBuffers not supported", "Error! (interceptedwglSwapBuffers)", MB_OK);
 		return false;
 	}
 
+
+	// draw to default framebuffer
+	glx.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+
+	// are we using textures?
+	
+
+	// are we forced to use blit?
+	mustUseBlit = true;
+
+	// save OpenGL state
+	glPushAttrib(GL_ENABLE_BIT | GL_CURRENT_BIT);
+
+	// enable texturing if required
+	if (useTexture) {
+		glEnable(GL_TEXTURE_2D);
+		glColor3f(1, 1, 1);
+	}
+
+	// for each eye
+	for (int eye = 0; eye<2; ++eye) {
+		// get the GL draw buffer identifier for the last rendered frame
+		// (i.e. the DX surface we are reading from)
+		GLuint drawBuffer = m_target[m_readBuffer].drawBuffer;
+
+		// select the GL draw buffer (GL_BACK or GL_BACK_LEFT or GL_BACK_RIGHT)
+		glDrawBuffer(drawBuffer);
+
+		// lock the shared DX/GL render target
+		if (m_target[m_readBuffer].object != 0)  {
+
+			// are we rendering using textures or framebuffer blitting?
+			if (!useTexture || mustUseBlit) {
+				//-- render using framebuffer blitting        
+				glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[m_readBuffer].frameBuffer);
+
+				// blit from the read framebuffer to the display framebuffer
+				glx.glBlitFramebuffer(
+					0, 0, m_width, m_height,        // source rectangle
+					0, m_height, m_width, 0,        // destination: flip the image vertically
+					GL_COLOR_BUFFER_BIT,
+					GL_LINEAR
+					);
+			}
+			else {
+				//-- render using texture
+
+				// bind the texture
+				glBindTexture(GL_TEXTURE_2D, m_target[m_readBuffer].texture);
+
+				// build our display list if it doesn't exist already
+				if (m_quadListGL == 0) {
+					// generate display list
+					m_quadListGL = glGenLists(1);
+
+					// draw a quad into the display list
+					glNewList(m_quadListGL, GL_COMPILE);
+					glBegin(GL_QUADS);
+					glTexCoord2i(0, 0);
+					glVertex3f(-1.0f, +1.0f, 0.0f);
+
+					glTexCoord2i(1, 0);
+					glVertex3f(+1.0f, +1.0f, 0.0f);
+
+					glTexCoord2i(1, 1);
+					glVertex3f(+1.0f, -1.0f, 0.0f);
+
+					glTexCoord2i(0, 1);
+					glVertex3f(-1.0f, -1.0f, 0.0f);
+					glEnd();
+					glEndList();
+				}
+
+				// draw a large textured quad
+				if (m_quadListGL != 0)
+					glCallList(m_quadListGL);
+			}
+
+			// unlock the shared DX/GL target
+		
+		}
+		else
+			Log::print() << "unable to lock DX target on paint\n";
+
+		// pick next read buffer
+		m_readBuffer = (m_readBuffer + 1) % m_target.size();
+
+		// we are only rendering stereo if we have just rendered the left eye,
+		// otherwise this must be a 2D frame and we can just exit the loop
+		if (drawBuffer != GL_BACK_LEFT) break;
+	}
+
+	// restore OpenGL state
+	glPopAttrib();
+
+	// swap the buffers
+	//m_window.swapBuffers();
 	// call the original function
 	_wglSwapBuffers(hdc);
 
-	// was stereo detected previously?
-	bool wasStereo = g_stereoDetect;
+
+	// signal that we've processed one complete frame
+	m_frameDone.signal();
+
+	// in verbose mode, log the point at which GL swap occurs
+	if (m_verbose) Log::print("GLSWAP\n");
+
+	// performance statistics are collected in stereo mode
+	//if (m_stereoMode) {
+	//	// record time-stamp of first/last frame
+	//	if (m_framesGL == 0)
+	//		m_firstFrameTimeGL = getTime();
+	//	else
+	//		m_lastFrameTimeGL = getTime();
+
+	//	// count GL frames
+	//	++m_framesGL;
+	//}
+
+	
 
 	// detected stereo if there is more than one glClear per frame, and the
 	// number of glClear per frame is exactly divisible by two
@@ -383,11 +675,52 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 		g_clearsPerEye = g_clearCount / 2;
 	else
 		g_clearsPerEye = 0;
-
-	
+		
 	// reset counter for next time
 	g_clearCount = 0;
 
 	return 1;
+}
+/************************************************************************************/
+void initialiseVariables()
+{
+	m_framesGL = 0;
+	m_samplesGL = 0;
+
+	
+	m_drawBuffer = 0;
+	m_readBuffer = 0;
+	
+	m_verbose = false;
+	m_stereoMode = false;
+	//m_clearCount = 0;
+	m_clearCountPersist = 0;
+	m_firstFrameTimeGL = 0.0;
+	m_lastFrameTimeGL = 0.0;
+	m_quadListGL = 0;
+	m_thread = 0;
+	
+	m_width = 0;
+	m_height = 0;
+	m_initialised = false;
+}
+
+void sendFrame(GLuint drawBuffer)
+{
+	// set the OpenGL draw buffer destination
+	m_target[m_drawBuffer].drawBuffer = drawBuffer;
+
+	// select next draw buffer
+	m_drawBuffer = (m_drawBuffer + 1) % m_target.size();
+
+	// count DX frames
+	//if (m_stereoMode) ++m_framesDX;
+}//sendFrame
+unsigned getSamples()
+{
+	GLint samples = 0;
+	glGetIntegerv(GL_SAMPLES, &samples);
+	if (samples < 0) samples = 0;
+	return static_cast<unsigned>(samples);
 }
 /************************************************************************************/
