@@ -31,6 +31,8 @@ struct Extensions {
     PFNGLBLITFRAMEBUFFERPROC                glBlitFramebuffer;
     PFNGLCHECKFRAMEBUFFERSTATUSPROC         glCheckFramebufferStatus;
     PFNGLGETRENDERBUFFERPARAMETERIVPROC     glGetRenderbufferParameteriv;
+	PFNGLGENERATEMIPMAPPROC					glGenerateMipmap;
+
 	void *_getAnyGLFuncAddress(const char *name)
 	{
 		//Log::open("intercept.log");

@@ -618,7 +618,9 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 	//glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[m_readBuffer].frameBuffer);
 	//glClearColor(0, 1, 0, 1);
 	// bind the texture
-	glBindTexture(GL_TEXTURE_2D, m_target[m_readBuffer].texture);
+	//glBindTexture(GL_TEXTURE_2D, m_target[m_readBuffer].texture);
+	
+	glx.glGenerateMipmap(GL_TEXTURE_2D);
 	
 	glBegin(GL_QUADS);
 	glTexCoord2i(0, 0);
@@ -634,17 +636,11 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 	glVertex3f(-1.0f, -1.0f, 0.0f);
 	glEnd();
 
-	glLineWidth(2.5);
-	glColor3f(0.0, 0.0, 1.0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
-	glBegin(GL_LINES);
-	glVertex3f(-1, -1.0, 0.0);
-	glVertex3f(1, 1, 0);
-	glEnd();
-	
 	glDrawBuffer(GL_BACK_RIGHT);
 	//glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[m_readBuffer].frameBuffer);
-	glClearColor(1, 0, 0, 1);
+	glClearColor(0, 1, 0, 1);
 	//// bind the texture
 	//glBindTexture(GL_TEXTURE_2D, m_target[m_readBuffer].texture);
 
@@ -662,6 +658,12 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 	//glVertex3f(-1.0f, -1.0f, 0.0f);
 	//glEnd();
 
+	glLineWidth(2.5);
+	glColor3f(0.0, 0.0, 1.0);
+	glBegin(GL_LINES);
+	glVertex3f(-1, -1.0, 0.0);
+	glVertex3f(1, 1, 0);
+	glEnd();
 	/**********************************************/
 
 	/*

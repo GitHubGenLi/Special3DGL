@@ -20,7 +20,8 @@ Extensions::Extensions() :
     glFramebufferRenderbuffer(0),
     glBlitFramebuffer(0),
     glCheckFramebufferStatus(0),
-    glGetRenderbufferParameteriv(0)
+    glGetRenderbufferParameteriv(0), 
+	glGenerateMipmap(0)
 {
 }
 
@@ -142,6 +143,12 @@ bool Extensions::load()
             ( wglGetProcAddress( "glGetRenderbufferParameteriv" ) );
 
     success = success && ( glGetRenderbufferParameteriv != 0 );
+
+	glGenerateMipmap =
+		reinterpret_cast<PFNGLGENERATEMIPMAPPROC>
+		(wglGetProcAddress("glGenerateMipmap"));
+	
+	success = success && (glGenerateMipmap != 0);
 
     return success;
 }//load
