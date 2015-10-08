@@ -66,6 +66,9 @@ extern Extensions glx;                 ///< Stores the OpenGL extension function
 
 extern bool useTexture;
 extern bool mustUseBlit;
+extern GLint textureSize;
+extern int widthScreen;
+extern int heightScreen;
 /*************************************************************/
 void * _getPublicProcAddress(const char *procName);
 void * _getPrivateProcAddress(const char *procName);

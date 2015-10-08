@@ -45,6 +45,10 @@ Extensions glx;                 ///< Stores the OpenGL extension functions
 
 bool useTexture;
 bool mustUseBlit;
+GLint textureSize;
+
+int widthScreen;
+int heightScreen;
 /************************************************************************************/
 void * _getPublicProcAddress(const char *procName)
 {
@@ -313,6 +317,11 @@ int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR 
 {
 	initialiseVariables();
 
+	/************Just for now. Hard code the value of the screen************/
+	widthScreen = 1920;
+	heightScreen = 1080;
+	/************************/
+
 	currentOpenGLContext = hdc; //store the current context
 	//Log::open("intercept.log");
 	Log::print("OK: get interceptedwglChoosePixelFormat function \n");
@@ -364,138 +373,9 @@ int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR 
 		MessageBox(NULL, "Invalid Pixel Format", "Error! (interceptedwglChoosePixelFormat)", MB_OK);
 		return false;
 	}
-
-	GLint textureSize = 0;
-	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &textureSize);
-	
-	bool success = false;
-
+		
 	// use textures or renderbuffers?
-	useTexture = true;
-
-	if (!glx.load())
-		Log::print("error: failed to load GL extensions\n");
-	else do {
-		Log::print("loaded GL extensions\n");
-
-		// select standard or multisampled GL texture mode
-		GLenum textureMode = (m_samplesGL > 1) ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D;
-
-		Log::print("generating render buffers\n");
-		unsigned i = 0;
-		for (i = 0; i<m_target.size(); ++i) {
-			// are we using textures or renderbuffers?
-			if (useTexture) {
-				// using GL_TEXTURE_2D
-				glGenTextures(1, &m_target[i].texture);
-
-				if (m_target[i].texture == 0) {
-					Log::print("error: failed to generate texture ID\n");
-					break;
-				}
-			}
-			else {
-				// using GL_RENDERBUFFER
-				glx.glGenRenderbuffers(1, &m_target[i].renderBuffer);
-
-				if (m_target[i].renderBuffer == 0) {
-					Log::print("error: failed to generate render buffer ID\n");
-					break;
-				}
-			}
-
-			
-			if (m_target[i].object == 0) {
-				DWORD error = GetLastError();
-				Log::print("error: wglDXRegisterObjectNV failed for render target: ");
-					
-				break;
-			}
-
-			glx.glGenFramebuffers(1, &m_target[i].frameBuffer);
-
-			if (m_target[i].frameBuffer == 0) {
-				Log::print("error: glGenFramebuffers failed\n");
-				break;
-			}
-
-			glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[i].frameBuffer);
-			
-
-			if (useTexture) {
-				// using GL_TEXTURE_2D
-
-				// important to lock before using glFramebufferTexture2D
-				
-					// attach colour buffer texture
-					glx.glFramebufferTexture2D(
-						GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-						textureMode, m_target[i].texture, 0
-						);
-
-			}
-			else {
-				// using GL_RENDERBUFFER
-
-				// important to lock before using glFramebufferRenderbuffer
-				
-					// attach colour renderbuffer
-					glx.glFramebufferRenderbuffer(
-						GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-						GL_RENDERBUFFER, m_target[i].renderBuffer
-						);
-
-				
-				// this table defines the renderbuffer parameters to be listed
-				struct {
-					GLenum name;
-					const char *text;
-				} table[] = {
-						{ GL_RENDERBUFFER_WIDTH, "width" },
-						{ GL_RENDERBUFFER_HEIGHT, "height" },
-						{ GL_RENDERBUFFER_INTERNAL_FORMAT, "format" },
-						{ GL_RENDERBUFFER_RED_SIZE, "red" },
-						{ GL_RENDERBUFFER_GREEN_SIZE, "green" },
-						{ GL_RENDERBUFFER_BLUE_SIZE, "blue" },
-						{ GL_RENDERBUFFER_ALPHA_SIZE, "alpha" },
-						{ GL_RENDERBUFFER_DEPTH_SIZE, "depth" },
-						{ GL_RENDERBUFFER_STENCIL_SIZE, "stencil" },
-						{ 0, 0 }
-				};
-
-				glx.glBindRenderbuffer(GL_RENDERBUFFER, m_target[i].renderBuffer);
-
-				// query and log all the renderbuffer parameters
-				for (int p = 0; table[p].name != 0; ++p) {
-					GLint value = 0;
-					glx.glGetRenderbufferParameteriv(GL_RENDERBUFFER, table[p].name, &value);
-					Log::print("renderBuffer.") << table[p].text << " = " << value << endl;
-				}
-
-				glx.glBindRenderbuffer(GL_RENDERBUFFER, 0);
-			}
-
-			// log the framebuffer status (should be GL_FRAMEBUFFER_COMPLETE)
-			GLenum status = glx.glCheckFramebufferStatus(GL_FRAMEBUFFER);
-			Log::print() << "glCheckFramebufferStatus = " << GLFRAMEBUFFERSTATUStoString(status) << endl;
-		}
-
-		// successful only if all render buffers were created and initialised
-		success = (i == m_target.size());
-	} while (0);
-
-	// default OpenGL settings
-	glEnable(GL_COLOR_MATERIAL);
-	glDisable(GL_LIGHTING);
-	glDisable(GL_DEPTH_TEST);
-
-	// default viewing system
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	
+	useTexture = true;//false; //true;
 
 	return 1;
 }
@@ -505,8 +385,6 @@ void WINAPI interceptedglClear(GLbitfield mask)
 	//Log::open("intercept.log");
 	Log::print("interceptedglClear\n");
 
-	
-
 	if (!_glClear)
 	{
 		MessageBox(NULL, "_glClear not supported", "Error! (interceptedglClear)", MB_OK);
@@ -514,13 +392,174 @@ void WINAPI interceptedglClear(GLbitfield mask)
 		return;
 	}
 
-	if (!g_stereoDetect)
-		glDrawBuffer(GL_BACK);
-	else if (g_clearCount < g_clearsPerEye)
-		glDrawBuffer(GL_BACK_LEFT);
-	else
-		glDrawBuffer(GL_BACK_RIGHT);
+	Log::print("Start initialisation.\n");
 
+	if (!m_initialised)
+	{
+		Log::print("Begin initialisation.\n");
+		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &textureSize);
+
+		bool success = false;
+				
+
+		if (!glx.load())
+			Log::print("error: failed to load GL extensions\n");
+		else do {
+			Log::print("loaded GL extensions\n");
+
+			// select standard or multisampled GL texture mode
+			GLenum textureMode = (m_samplesGL > 1) ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D;
+
+			Log::print("generating render buffers\n");
+			unsigned i = 0;
+			for (i = 0; i<m_target.size(); ++i) {
+				// are we using textures or renderbuffers?
+				if (useTexture) {
+					// using GL_TEXTURE_2D
+					glGenTextures(1, &m_target[i].texture);
+
+					glBindTexture(GL_TEXTURE_2D, m_target[i].texture);
+					
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+					glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+					glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+					glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+					glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE); // automatic mipmap generation included in OpenGL v1.4
+					
+					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthScreen, heightScreen, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+					glBindTexture(GL_TEXTURE_2D, 0);
+
+					if (m_target[i].texture == 0) {
+						Log::print("error: failed to generate texture ID\n");
+						break;
+					}
+				}
+				else {
+					// using GL_RENDERBUFFER
+					glx.glGenRenderbuffers(1, &m_target[i].renderBuffer);
+
+					if (m_target[i].renderBuffer == 0) {
+						Log::print("error: failed to generate render buffer ID\n");
+						break;
+					}
+				}
+
+				/*
+				if (m_target[i].object == 0) {
+					DWORD error = GetLastError();
+					Log::print("error: wglDXRegisterObjectNV failed for render target: ");
+
+					break;
+				}
+				*/
+				glx.glGenFramebuffers(1, &m_target[i].frameBuffer);
+
+				if (m_target[i].frameBuffer == 0) {
+					Log::print("error: glGenFramebuffers failed\n");
+					break;
+				}
+
+				glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[i].frameBuffer);
+
+
+				if (useTexture) {
+					// using GL_TEXTURE_2D
+
+					// important to lock before using glFramebufferTexture2D
+
+					// attach colour buffer texture
+					glx.glFramebufferTexture2D(
+						GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+						textureMode, m_target[i].texture, 0
+						);
+
+				}
+				else {
+					// using GL_RENDERBUFFER
+
+					// important to lock before using glFramebufferRenderbuffer
+
+					// attach colour renderbuffer
+					glx.glFramebufferRenderbuffer(
+						GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+						GL_RENDERBUFFER, m_target[i].renderBuffer
+						);
+
+
+					// this table defines the renderbuffer parameters to be listed
+					struct {
+						GLenum name;
+						const char *text;
+					} table[] = {
+							{ GL_RENDERBUFFER_WIDTH, "width" },
+							{ GL_RENDERBUFFER_HEIGHT, "height" },
+							{ GL_RENDERBUFFER_INTERNAL_FORMAT, "format" },
+							{ GL_RENDERBUFFER_RED_SIZE, "red" },
+							{ GL_RENDERBUFFER_GREEN_SIZE, "green" },
+							{ GL_RENDERBUFFER_BLUE_SIZE, "blue" },
+							{ GL_RENDERBUFFER_ALPHA_SIZE, "alpha" },
+							{ GL_RENDERBUFFER_DEPTH_SIZE, "depth" },
+							{ GL_RENDERBUFFER_STENCIL_SIZE, "stencil" },
+							{ 0, 0 }
+					};
+
+					glx.glBindRenderbuffer(GL_RENDERBUFFER, m_target[i].renderBuffer);
+
+					// query and log all the renderbuffer parameters
+					for (int p = 0; table[p].name != 0; ++p) {
+						GLint value = 0;
+						glx.glGetRenderbufferParameteriv(GL_RENDERBUFFER, table[p].name, &value);
+						Log::print("renderBuffer.") << table[p].text << " = " << value << endl;
+					}
+
+					glx.glBindRenderbuffer(GL_RENDERBUFFER, 0);
+				}
+
+				// log the framebuffer status (should be GL_FRAMEBUFFER_COMPLETE)
+				GLenum status = glx.glCheckFramebufferStatus(GL_FRAMEBUFFER);
+				Log::print() << "glCheckFramebufferStatus = " << GLFRAMEBUFFERSTATUStoString(status) << endl;
+			}
+
+			// successful only if all render buffers were created and initialised
+			success = (i == m_target.size());
+			Log::print("Eng initialisation.\n");
+		} while (0);
+
+		//for testing
+		//glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[m_drawBuffer].frameBuffer);
+		glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[1].frameBuffer);
+
+		Log::print("Out initialisation.\n");
+		// default OpenGL settings
+		//glEnable(GL_COLOR_MATERIAL);
+		//glDisable(GL_LIGHTING);
+		//glDisable(GL_DEPTH_TEST);
+
+		// default viewing system
+		//glMatrixMode(GL_MODELVIEW);
+		//glLoadIdentity();
+		//glMatrixMode(GL_PROJECTION);
+		//glLoadIdentity();
+
+		m_initialised = true;
+	}
+	
+	if (!g_stereoDetect)
+	{
+		glDrawBuffer(GL_BACK);
+	}
+	else if (g_clearCount < g_clearsPerEye)
+	{
+		glDrawBuffer(GL_BACK_LEFT);
+	}
+	else
+	{
+		glDrawBuffer(GL_BACK_RIGHT);
+	}
+		
 	// call the original function
 	_glClear(mask);
 
@@ -544,12 +583,90 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 		return false;
 	}
 
-
+	/**********************************************/
+	// Testing: drawing everything into a Framebuffer and then redraw
 	// draw to default framebuffer
 	glx.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 
-	// are we using textures?
+
+	/*glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[m_readBuffer].frameBuffer);
+
+	// bind the texture
+	glBindTexture(GL_TEXTURE_2D, m_target[m_readBuffer].texture);
+
+	glBegin(GL_QUADS);
+	glTexCoord2i(0, 0);
+	glVertex3f(-1.0f, +1.0f, 0.0f);
+
+	glTexCoord2i(1, 0);
+	glVertex3f(+1.0f, +1.0f, 0.0f);
+
+	glTexCoord2i(1, 1);
+	glVertex3f(+1.0f, -1.0f, 0.0f);
+
+	glTexCoord2i(0, 1);
+	glVertex3f(-1.0f, -1.0f, 0.0f);
+	glEnd();
+	*/
+
+	//testing drawing to 2 buffers
+	// for each eye
 	
+	
+	
+	glDrawBuffer(GL_BACK_LEFT);
+	//glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[m_readBuffer].frameBuffer);
+	//glClearColor(0, 1, 0, 1);
+	// bind the texture
+	glBindTexture(GL_TEXTURE_2D, m_target[m_readBuffer].texture);
+	
+	glBegin(GL_QUADS);
+	glTexCoord2i(0, 0);
+	glVertex3f(-1.0f, +1.0f, 0.0f);
+
+	glTexCoord2i(1, 0);
+	glVertex3f(+1.0f, +1.0f, 0.0f);
+
+	glTexCoord2i(1, 1);
+	glVertex3f(+1.0f, -1.0f, 0.0f);
+
+	glTexCoord2i(0, 1);
+	glVertex3f(-1.0f, -1.0f, 0.0f);
+	glEnd();
+
+	glLineWidth(2.5);
+	glColor3f(0.0, 0.0, 1.0);
+
+	glBegin(GL_LINES);
+	glVertex3f(-1, -1.0, 0.0);
+	glVertex3f(1, 1, 0);
+	glEnd();
+	
+	glDrawBuffer(GL_BACK_RIGHT);
+	//glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[m_readBuffer].frameBuffer);
+	glClearColor(1, 0, 0, 1);
+	//// bind the texture
+	//glBindTexture(GL_TEXTURE_2D, m_target[m_readBuffer].texture);
+
+	//glBegin(GL_QUADS);
+	//glTexCoord2i(0, 0);
+	//glVertex3f(-1.0f, +1.0f, 0.0f);
+
+	//glTexCoord2i(1, 0);
+	//glVertex3f(+1.0f, +1.0f, 0.0f);
+
+	//glTexCoord2i(1, 1);
+	//glVertex3f(+1.0f, -1.0f, 0.0f);
+
+	//glTexCoord2i(0, 1);
+	//glVertex3f(-1.0f, -1.0f, 0.0f);
+	//glEnd();
+
+	/**********************************************/
+
+	/*
+	// draw to default framebuffer
+	glx.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 
 	// are we forced to use blit?
 	mustUseBlit = true;
@@ -573,7 +690,7 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 		glDrawBuffer(drawBuffer);
 
 		// lock the shared DX/GL render target
-		if (m_target[m_readBuffer].object != 0)  {
+		//if (m_target[m_readBuffer].object != 0)  {
 
 			// are we rendering using textures or framebuffer blitting?
 			if (!useTexture || mustUseBlit) {
@@ -624,9 +741,9 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 
 			// unlock the shared DX/GL target
 		
-		}
-		else
-			Log::print() << "unable to lock DX target on paint\n";
+		//}
+		//else
+		//	Log::print() << "unable to lock DX target on paint\n";
 
 		// pick next read buffer
 		m_readBuffer = (m_readBuffer + 1) % m_target.size();
@@ -678,6 +795,8 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 		
 	// reset counter for next time
 	g_clearCount = 0;
+
+	*/
 
 	return 1;
 }

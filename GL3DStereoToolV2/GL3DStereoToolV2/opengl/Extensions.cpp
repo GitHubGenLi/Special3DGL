@@ -77,8 +77,8 @@ bool Extensions::load()
 
 	glGenFramebuffers = (PFNGLGENFRAMEBUFFERSPROC)(wglGetProcAddress("glGenFramebuffers"));
 
-	printf("OK: get glGenFramebuffers function: ");
-	printf("%d", glGenFramebuffers);
+	//printf("OK: get glGenFramebuffers function: ");
+	//printf("%d", glGenFramebuffers);
 
     //success = success && ( glGenFramebuffers != 0 );
 	success = (glGenFramebuffers != 0);

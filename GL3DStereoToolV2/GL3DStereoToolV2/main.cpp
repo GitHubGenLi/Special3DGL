@@ -51,7 +51,7 @@ void initialiseRealOpenGLFunctions()
 
 void processAttach()
 {
-	/*bool isOpened = Log::open("intercept.log");*/
+	//bool isOpened = Log::open("intercept.log");
 	Log::print("DLL_PROCESS_ATTACH\n");
 
 	printf("processAttach\n");

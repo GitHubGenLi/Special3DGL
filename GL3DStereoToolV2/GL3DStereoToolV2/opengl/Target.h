@@ -9,7 +9,7 @@
 /// Stores all the details of an individual render target
 struct Target {
 
-	HANDLE              object;         ///< Handle of interop object
+	//HANDLE              object;         ///< Handle of interop object
 	GLuint              texture;        ///< OpenGL texture
 	GLuint              renderBuffer;   ///< OpenGL renderbuffer
 	GLuint              frameBuffer;    ///< OpenGL framebuffer
