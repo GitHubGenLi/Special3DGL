@@ -1,6 +1,10 @@
 #include "OpenGLProc.h"
 
+#include <GL\GL.h>
+
 #include <stdio.h>
+
+#include "GLWindow.h"
 
 bool g_stereoDetect = false;
 unsigned g_clearsPerEye = 0;
@@ -43,12 +47,16 @@ Event m_frameDone;              ///< Signals when frame is rendered out
 
 Extensions glx;                 ///< Stores the OpenGL extension functions
 
-bool useTexture;
+bool useTexture = true;
 bool mustUseBlit;
 GLint textureSize;
 
-int widthScreen;
-int heightScreen;
+int widthScreen = 1920;
+int heightScreen = 1080;
+
+PIXELFORMATDESCRIPTOR currentStereo_ppfd;
+int currentStereoPixelFormat;
+
 /************************************************************************************/
 void * _getPublicProcAddress(const char *procName)
 {
@@ -333,49 +341,108 @@ int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR 
 		return false;
 	}
 
-	PIXELFORMATDESCRIPTOR newppfd = {};
-	newppfd.nSize = sizeof(newppfd);
+	//PIXELFORMATDESCRIPTOR newppfd = {};
+	//newppfd.nSize = sizeof(newppfd);
+
+	////copy all existing values
+	//newppfd.cAccumAlphaBits = ppfd->cAccumAlphaBits;
+	//newppfd.cAccumBits = ppfd->cAccumBits;
+	//newppfd.cAccumBlueBits = ppfd->cAccumBlueBits;
+	//newppfd.cAccumGreenBits = ppfd->cAccumGreenBits;
+	//newppfd.cAccumRedBits = ppfd->cAccumRedBits;
+	//newppfd.cAlphaBits = ppfd->cAlphaBits;
+	//newppfd.cAlphaShift = ppfd->cAlphaShift;
+	//newppfd.cAuxBuffers = ppfd->cAuxBuffers;
+	//newppfd.cBlueBits = ppfd->cBlueBits;
+	//newppfd.cBlueShift = ppfd->cBlueShift;
+	//newppfd.cColorBits = ppfd->cColorBits;
+	//newppfd.cDepthBits = ppfd->cDepthBits;
+	//newppfd.cGreenBits = ppfd->cGreenBits;
+	//newppfd.cGreenShift = ppfd->cGreenShift;
+	//newppfd.cRedBits = ppfd->cRedBits;
+	//newppfd.cRedShift = ppfd->cRedShift;
+	//newppfd.cStencilBits = ppfd->cStencilBits;
+	//newppfd.dwDamageMask = ppfd->dwDamageMask;
+	//newppfd.dwFlags = ppfd->dwFlags;
+	//newppfd.dwLayerMask = ppfd->dwLayerMask;
+	//newppfd.dwVisibleMask = ppfd->dwVisibleMask;
+	////change to stereo
+	//newppfd.dwFlags |= PFD_STEREO | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_DRAW_TO_WINDOW;
+
+	currentStereo_ppfd = {};
+	currentStereo_ppfd.nSize = sizeof(currentStereo_ppfd);
 
 	//copy all existing values
-	newppfd.cAccumAlphaBits = ppfd->cAccumAlphaBits;
-	newppfd.cAccumBits = ppfd->cAccumBits;
-	newppfd.cAccumBlueBits = ppfd->cAccumBlueBits;
-	newppfd.cAccumGreenBits = ppfd->cAccumGreenBits;
-	newppfd.cAccumRedBits = ppfd->cAccumRedBits;
-	newppfd.cAlphaBits = ppfd->cAlphaBits;
-	newppfd.cAlphaShift = ppfd->cAlphaShift;
-	newppfd.cAuxBuffers = ppfd->cAuxBuffers;
-	newppfd.cBlueBits = ppfd->cBlueBits;
-	newppfd.cBlueShift = ppfd->cBlueShift;
-	newppfd.cColorBits = ppfd->cColorBits;
-	newppfd.cDepthBits = ppfd->cDepthBits;
-	newppfd.cGreenBits = ppfd->cGreenBits;
-	newppfd.cGreenShift = ppfd->cGreenShift;
-	newppfd.cRedBits = ppfd->cRedBits;
-	newppfd.cRedShift = ppfd->cRedShift;
-	newppfd.cStencilBits = ppfd->cStencilBits;
-	newppfd.dwDamageMask = ppfd->dwDamageMask;
-	newppfd.dwFlags = ppfd->dwFlags;
-	newppfd.dwLayerMask = ppfd->dwLayerMask;
-	newppfd.dwVisibleMask = ppfd->dwVisibleMask;
-
+	currentStereo_ppfd.cAccumAlphaBits = ppfd->cAccumAlphaBits;
+	currentStereo_ppfd.cAccumBits = ppfd->cAccumBits;
+	currentStereo_ppfd.cAccumBlueBits = ppfd->cAccumBlueBits;
+	currentStereo_ppfd.cAccumGreenBits = ppfd->cAccumGreenBits;
+	currentStereo_ppfd.cAccumRedBits = ppfd->cAccumRedBits;
+	currentStereo_ppfd.cAlphaBits = ppfd->cAlphaBits;
+	currentStereo_ppfd.cAlphaShift = ppfd->cAlphaShift;
+	currentStereo_ppfd.cAuxBuffers = ppfd->cAuxBuffers;
+	currentStereo_ppfd.cBlueBits = ppfd->cBlueBits;
+	currentStereo_ppfd.cBlueShift = ppfd->cBlueShift;
+	currentStereo_ppfd.cColorBits = ppfd->cColorBits;
+	currentStereo_ppfd.cDepthBits = ppfd->cDepthBits;
+	currentStereo_ppfd.cGreenBits = ppfd->cGreenBits;
+	currentStereo_ppfd.cGreenShift = ppfd->cGreenShift;
+	currentStereo_ppfd.cRedBits = ppfd->cRedBits;
+	currentStereo_ppfd.cRedShift = ppfd->cRedShift;
+	currentStereo_ppfd.cStencilBits = ppfd->cStencilBits;
+	currentStereo_ppfd.dwDamageMask = ppfd->dwDamageMask;
+	currentStereo_ppfd.dwFlags = ppfd->dwFlags;
+	currentStereo_ppfd.dwLayerMask = ppfd->dwLayerMask;
+	currentStereo_ppfd.dwVisibleMask = ppfd->dwVisibleMask;
 	//change to stereo
-	newppfd.dwFlags |= PFD_STEREO;
+	currentStereo_ppfd.dwFlags |= PFD_STEREO | PFD_SUPPORT_OPENGL; //| PFD_DOUBLEBUFFER | PFD_DRAW_TO_WINDOW;
+
+	//just for NOW
 	g_stereoDetect = true;
 
-	BOOL bValidPixFormat;
+	//BOOL bValidPixFormat;
 	
 	//call the original function
-	bValidPixFormat = _wglChoosePixelFormat(hdc, &newppfd);
+	//bValidPixFormat = _wglChoosePixelFormat(hdc, &newppfd);
+	currentStereoPixelFormat = _wglChoosePixelFormat(hdc, &currentStereo_ppfd);
 
-	if (!bValidPixFormat)
+	//HWND     window;        ///< window handle
+	//HDC      context;         ///< device context
+	//HGLRC    glcontext;       ///< OpenGL resource context
+	//int      pixelFormat; ///< OpenGL pixel format
+
+	//GLWindow glWin;
+	//glWin.getSuitableStereoWindow(window, context, glcontext, pixelFormat);
+
+	//// attempt to describe the pixel format
+	//PIXELFORMATDESCRIPTOR pfd = {};
+	//pfd.nSize = sizeof(pfd);
+	//pfd.nVersion = 1;
+	//if (DescribePixelFormat(hdc, pixelFormat, sizeof(pfd), &pfd) == 0)
+	//	return 0;
+
+	//// attempt to set the pixel format
+	//if (SetPixelFormat(hdc, pixelFormat, &pfd) != TRUE) return 0;
+	
+	//_wglChoosePixelFormatARB()
+
+	if (currentStereoPixelFormat == 0)//!bValidPixFormat)
 	{
 		MessageBox(NULL, "Invalid Pixel Format", "Error! (interceptedwglChoosePixelFormat)", MB_OK);
-		return false;
+		return 0;
+		//return _wglChoosePixelFormat(hdc, ppfd);
 	}
+	else
+	{
 		
+	}
+	// attempt to set the pixel format
+	//if (_wglSetPixelFormat(hdc, bValidPixFormat, &newppfd) != TRUE) return 0;
+
+
 	// use textures or renderbuffers?
-	useTexture = true;//false; //true;
+	//JUST FOR NOW
+	//useTexture = true;//false; //true;
 
 	return 1;
 }
@@ -390,6 +457,17 @@ void WINAPI interceptedglClear(GLbitfield mask)
 		MessageBox(NULL, "_glClear not supported", "Error! (interceptedglClear)", MB_OK);
 		//return false;
 		return;
+	}
+
+	//g_stereoDetect = isOpenGLStereoAvailable();
+
+	if (g_stereoDetect)
+	{
+
+	}
+	else
+	{
+		Log::print("No: you don't have stereo enabled.\n");
 	}
 
 	Log::print("Start initialisation.\n");
@@ -436,10 +514,31 @@ void WINAPI interceptedglClear(GLbitfield mask)
 						Log::print("error: failed to generate texture ID\n");
 						break;
 					}
+
+
+					glGenTextures(1, &m_target[i].depthTexture);
+					glBindTexture(GL_TEXTURE_2D, m_target[i].depthTexture);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+					glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+					//NULL means reserve texture memory, but texels are undefined
+					glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, widthScreen, heightScreen, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+
+					//glBindTexture(GL_FRAMEBUFFER_EXT, m_target[i].depthTexture/*mipmap level*/);
+
+					glBindTexture(GL_TEXTURE_2D, 0);
 				}
 				else {
 					// using GL_RENDERBUFFER
 					glx.glGenRenderbuffers(1, &m_target[i].renderBuffer);
+
+					glx.glBindRenderbuffer(GL_RENDERBUFFER, m_target[i].renderBuffer);
+					glx.glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, widthScreen, heightScreen);
+					
 
 					if (m_target[i].renderBuffer == 0) {
 						Log::print("error: failed to generate render buffer ID\n");
@@ -476,19 +575,23 @@ void WINAPI interceptedglClear(GLbitfield mask)
 						textureMode, m_target[i].texture, 0
 						);
 
+					glx.glFramebufferTexture2D(
+						GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, textureMode, m_target[i].depthTexture, 0);
+					
+
 				}
 				else {
 					// using GL_RENDERBUFFER
 
 					// important to lock before using glFramebufferRenderbuffer
-
+					
 					// attach colour renderbuffer
 					glx.glFramebufferRenderbuffer(
 						GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
 						GL_RENDERBUFFER, m_target[i].renderBuffer
 						);
 
-
+					
 					// this table defines the renderbuffer parameters to be listed
 					struct {
 						GLenum name;
@@ -529,8 +632,8 @@ void WINAPI interceptedglClear(GLbitfield mask)
 		} while (0);
 
 		//for testing
-		//glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[m_drawBuffer].frameBuffer);
-		glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[1].frameBuffer);
+		glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[0].frameBuffer);
+		//glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[1].frameBuffer);
 
 		Log::print("Out initialisation.\n");
 		// default OpenGL settings
@@ -543,11 +646,33 @@ void WINAPI interceptedglClear(GLbitfield mask)
 		//glLoadIdentity();
 		//glMatrixMode(GL_PROJECTION);
 		//glLoadIdentity();
-
+		glEnable(GL_DEPTH_TEST);
 		m_initialised = true;
 	}
 	
-	if (!g_stereoDetect)
+	
+
+	//for testing
+	// enable texturing if required
+	if (useTexture) {
+		glEnable(GL_TEXTURE_2D);
+		glColor3f(1, 0, 0);
+	}
+
+	glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[1].frameBuffer);
+	glDrawBuffer(GL_COLOR_ATTACHMENT0);
+	glClearColor(1.0, 0.0, 0, 1.0);
+	// call the original function
+	_glClear(mask);
+	glClearColor(1.0, 0.0, 0, 1.0);
+
+	// count the number of glClear calls
+	++g_clearCount;
+
+	//glDrawBuffer(GL_COLOR_ATTACHMENT0);
+	//glDrawBuffer(GL_BACK_LEFT);
+
+	/*if (!g_stereoDetect)
 	{
 		glDrawBuffer(GL_BACK);
 	}
@@ -559,14 +684,35 @@ void WINAPI interceptedglClear(GLbitfield mask)
 	{
 		glDrawBuffer(GL_BACK_RIGHT);
 	}
-		
-	// call the original function
-	_glClear(mask);
+		*/
 
-	// count the number of glClear calls
-	++g_clearCount;
+	
 
 	return;
+}
+
+BOOL WINAPI interceptedwglSetPixelFormat(HDC hdc, int iPixelFormat, const PIXELFORMATDESCRIPTOR * ppfd)
+{
+	Log::print("OK: get interceptedwglSetPixelFormat function \n");
+
+	if (!_wglSetPixelFormat)
+	{
+		MessageBox(NULL, "_wglSetPixelFormat not supported", "Error! (interceptedwglSetPixelFormat)", MB_OK);
+		return false;
+	}
+
+
+	if (_wglSetPixelFormat(hdc, currentStereoPixelFormat, &currentStereo_ppfd) != TRUE)
+	{
+		Log::print("_wglSetPixelFormat get error.\n");
+		return 0;
+	}
+	else
+	{
+		//return _wglSetPixelFormat(hdc, iPixelFormat, ppfd);
+	}
+
+	return 1;
 }
 
 BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
@@ -585,12 +731,20 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 
 	/**********************************************/
 	// Testing: drawing everything into a Framebuffer and then redraw
+	glPushAttrib(GL_ENABLE_BIT | GL_CURRENT_BIT);
+
+	// enable texturing if required
+	/*if (useTexture) {
+		glEnable(GL_TEXTURE_2D);
+		glColor3f(1, 1, 1);
+	}*/
+
 	// draw to default framebuffer
 	glx.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 
 
 	/*glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[m_readBuffer].frameBuffer);
-
+	
 	// bind the texture
 	glBindTexture(GL_TEXTURE_2D, m_target[m_readBuffer].texture);
 
@@ -615,12 +769,16 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 	
 	
 	glDrawBuffer(GL_BACK_LEFT);
-	//glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[m_readBuffer].frameBuffer);
-	//glClearColor(0, 1, 0, 1);
-	// bind the texture
-	//glBindTexture(GL_TEXTURE_2D, m_target[m_readBuffer].texture);
+	int error = glGetError();
 	
-	glx.glGenerateMipmap(GL_TEXTURE_2D);
+	//printf("Error %d ", error); 
+
+	//glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[0].frameBuffer);
+	glClearColor(0, 1, 0, 1);
+	// bind the texture
+	glBindTexture(GL_TEXTURE_2D, m_target[0].texture);
+	
+	//glx.glGenerateMipmap(GL_TEXTURE_2D);
 	
 	glBegin(GL_QUADS);
 	glTexCoord2i(0, 0);
@@ -636,34 +794,37 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 	glVertex3f(-1.0f, -1.0f, 0.0f);
 	glEnd();
 
-	glBindTexture(GL_TEXTURE_2D, 0);
+	//glBindTexture(GL_TEXTURE_2D, 0);
 
 	glDrawBuffer(GL_BACK_RIGHT);
-	//glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[m_readBuffer].frameBuffer);
+	glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[0].frameBuffer);
 	glClearColor(0, 1, 0, 1);
 	//// bind the texture
-	//glBindTexture(GL_TEXTURE_2D, m_target[m_readBuffer].texture);
+	glBindTexture(GL_TEXTURE_2D, m_target[0].texture);
+	//glx.glGenerateMipmap(GL_TEXTURE_2D);
 
-	//glBegin(GL_QUADS);
-	//glTexCoord2i(0, 0);
-	//glVertex3f(-1.0f, +1.0f, 0.0f);
+	glBegin(GL_QUADS);
+	glTexCoord2i(0, 0);
+	glVertex3f(-1.0f, +1.0f, 0.0f);
 
-	//glTexCoord2i(1, 0);
-	//glVertex3f(+1.0f, +1.0f, 0.0f);
+	glTexCoord2i(1, 0);
+	glVertex3f(+1.0f, +1.0f, 0.0f);
 
-	//glTexCoord2i(1, 1);
-	//glVertex3f(+1.0f, -1.0f, 0.0f);
+	glTexCoord2i(1, 1);
+	glVertex3f(+1.0f, -1.0f, 0.0f);
 
-	//glTexCoord2i(0, 1);
-	//glVertex3f(-1.0f, -1.0f, 0.0f);
-	//glEnd();
+	glTexCoord2i(0, 1);
+	glVertex3f(-1.0f, -1.0f, 0.0f);
+	glEnd();
 
-	glLineWidth(2.5);
+	/*glLineWidth(2.5);
 	glColor3f(0.0, 0.0, 1.0);
 	glBegin(GL_LINES);
 	glVertex3f(-1, -1.0, 0.0);
 	glVertex3f(1, 1, 0);
-	glEnd();
+	glEnd();*/
+
+	//glBindTexture(GL_TEXTURE_2D, 0);
 	/**********************************************/
 
 	/*

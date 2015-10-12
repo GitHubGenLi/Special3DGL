@@ -14,7 +14,7 @@ struct Target {
 	GLuint              renderBuffer;   ///< OpenGL renderbuffer
 	GLuint              frameBuffer;    ///< OpenGL framebuffer
 	GLuint              drawBuffer;     ///< OpenGL draw buffer identifier
-
+	GLuint              depthTexture;        ///< OpenGL texture
 	/// Default constructor
 	Target()
 	{

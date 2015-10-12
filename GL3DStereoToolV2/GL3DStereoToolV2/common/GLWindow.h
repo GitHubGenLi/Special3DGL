@@ -65,6 +65,8 @@ public:
         const Attributes & userAttributes = emptyAttributes
     );
 
+	bool getSuitableStereoWindow(HWND &wnd, HDC &hdc, HGLRC &hglrc, int &pixelFormat);
+
     /// Destroy window
     void destroy();
 

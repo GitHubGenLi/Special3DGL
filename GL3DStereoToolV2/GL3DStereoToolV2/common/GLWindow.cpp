@@ -354,3 +354,138 @@ int GLWindow::getPixelFormat() const
 }
 
 //-----------------------------------------------------------------------------
+
+bool GLWindow::getSuitableStereoWindow(HWND &wnd, HDC &hdc, HGLRC &hglrc, int &pixelFormat)
+{
+
+	// window class name
+	static const _TCHAR *className = _T("GLCLASS");
+
+	// define window class
+	WNDCLASS wc = {};
+	wc.style = CS_OWNDC | CS_HREDRAW | CS_VREDRAW;
+	wc.lpfnWndProc = DefWindowProc;
+	wc.hInstance = GetModuleHandle(0);
+	wc.hIcon = LoadIcon(0, IDI_APPLICATION);
+	wc.hCursor = LoadCursor(0, IDC_ARROW);
+	wc.hbrBackground = 0;
+	wc.lpszMenuName = _T("");
+	wc.lpszClassName = className;
+
+	HWND window = 0;
+	HDC context = 0;
+	HGLRC glcontext = 0;
+	//int pixelFormat = 0;
+	int multisamples = 0;
+
+	do {
+		// register window class
+		RegisterClass(&wc);
+
+		// create a temporary window
+		window = CreateWindowEx(
+			0,                      // extended style
+			className,              // class name
+			_T(""),                 // window title
+			WS_OVERLAPPEDWINDOW |   // window style
+			WS_CLIPCHILDREN |
+			WS_CLIPSIBLINGS,
+			0, 0,                   // position
+			8, 8,                   // size
+			0,                      // parent
+			0,                      // menu
+			wc.hInstance,           // application instance handle
+			0                       // window creation data
+			);
+		if (window == 0) break;
+
+		// get device context for window
+		context = GetDC(window);
+		if (context == 0) break;
+
+		// setup pixel format descriptor
+		PIXELFORMATDESCRIPTOR pfd = {};
+		pfd.nSize = sizeof(pfd);
+		pfd.nVersion = 1;
+		pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL;
+		pfd.cColorBits = 32;
+		pfd.cDepthBits = 24;
+		pfd.cStencilBits = 8;
+		pfd.iLayerType = PFD_MAIN_PLANE;
+
+		// choose the pixel format
+		pixelFormat = ChoosePixelFormat(context, &pfd);
+		if (pixelFormat == 0) break;
+
+		// attempt to set the pixel format
+		if (SetPixelFormat(context, pixelFormat, &pfd) != TRUE) break;
+
+		// create OpenGL context
+		glcontext = wglCreateContext(context);
+		if (glcontext == 0) break;
+
+		// attempt to make OpenGL context current
+		if (wglMakeCurrent(context, glcontext) != TRUE) break;
+
+		// obtain function pointer to wglChoosePixelFormatARB
+		PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB =
+			reinterpret_cast<PFNWGLCHOOSEPIXELFORMATARBPROC>(
+			wglGetProcAddress("wglChoosePixelFormatARB"));
+		if (wglChoosePixelFormatARB == 0) break;
+
+		// define our default pixel format attributes
+		// attributes for an OpenGL stereo window
+		Attributes attributes;
+		attributes[WGL_STEREO_ARB] = GL_TRUE;
+		
+		attributes[WGL_DRAW_TO_WINDOW_ARB] = GL_TRUE;
+		attributes[WGL_SUPPORT_OPENGL_ARB] = GL_TRUE;
+		attributes[WGL_DOUBLE_BUFFER_ARB] = GL_TRUE;
+		attributes[WGL_ACCELERATION_ARB] = WGL_FULL_ACCELERATION_ARB;
+		attributes[WGL_PIXEL_TYPE_ARB] = WGL_TYPE_RGBA_ARB;
+		attributes[WGL_COLOR_BITS_ARB] = 32;
+		attributes[WGL_DEPTH_BITS_ARB] = 24;
+		attributes[WGL_STENCIL_BITS_ARB] = 8;
+
+		// insert the user defined attributes (which can override defaults)
+		//attributes.insert(userAttributes.begin(), userAttributes.end());
+
+		// flatten the map to an integer vector and terminate it with 0
+		vector<int> data;
+		for (Attributes::iterator it = attributes.begin(); it != attributes.end(); ++it) {
+			data.push_back(it->first);
+			data.push_back(it->second);
+		}
+		data.push_back(0);
+
+		pixelFormat = 0;
+		UINT numFormats = 0;
+
+		// choose closest pixel format to the attributes above
+		if (wglChoosePixelFormatARB(
+			context, &data[0], 0, 1, &pixelFormat, &numFormats
+			) != TRUE) {
+			pixelFormat = 0;
+			break;
+		}
+		
+	} while (0, 0);
+
+	// delete temporary OpenGL context
+	if (glcontext != 0) {
+		wglMakeCurrent(context, 0);
+		wglDeleteContext(glcontext);
+		glcontext = 0;
+	}
+
+	// destroy temporary window
+	if (window != 0) {
+		DestroyWindow(window);
+		window = 0;
+	}
+
+	// if we failed to find a pixel format, exit now
+	if (pixelFormat == 0) return false;
+	
+	return true;
+}

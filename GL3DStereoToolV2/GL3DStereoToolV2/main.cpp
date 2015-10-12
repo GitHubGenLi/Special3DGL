@@ -47,6 +47,11 @@ void initialiseRealOpenGLFunctions()
 	//_wglChoosePixelFormat = &_get_wglChoosePixelFormat; //not working with styles
 	//_glClear = &_get_glClear;
 	//_wglSwapBuffers = &_get_wglSwapBuffers;
+
+	_wglSetPixelFormat = (PFN_WGLSETPIXELFORMAT)_getPublicProcAddress("wglSetPixelFormat");
+
+	_wglChoosePixelFormatARB = (PFN_WGLCHOOSEPIXELFORMATARB)_getAnyGLFuncAddress("wglChoosePixelFormatARB");
+
 }
 
 void processAttach()
@@ -56,9 +61,6 @@ void processAttach()
 
 	printf("processAttach\n");
 	
-	
-
-
 	initialiseRealOpenGLFunctions(); 
 
 	if ((_wglChoosePixelFormat == 0) || !Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglChoosePixelFormat), interceptedwglChoosePixelFormat))
@@ -69,6 +71,15 @@ void processAttach()
 	else
 	{
 		printf("Hooked _wglChoosePixelFormat\n");
+	}
+	if ((_wglSetPixelFormat == 0) || !Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetPixelFormat), interceptedwglSetPixelFormat))
+	{
+		cerr << "Failed to hook _wglSetPixelFormat" << endl;
+		MessageBox(0, "Failed to hook _wglSetPixelFormat", "Error", MB_OK);
+	}
+	else
+	{
+		printf("Hooked _wglSetPixelFormat\n");
 	}
 
 	if ((_glClear == 0) || !Mhook_SetHook(reinterpret_cast<PVOID*>(&_glClear), interceptedglClear))
@@ -96,6 +107,7 @@ void processDetach()
 	printf("processDetach\n");
 
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglChoosePixelFormat));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglSetPixelFormat));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glClear));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglSwapBuffers));
 }

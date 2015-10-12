@@ -17,6 +17,8 @@
 #include "Target.h"
 #include "DebugUtil.h"
 
+#include "StereoUtil.h"
+
 using namespace std;
 using namespace hive;
 
@@ -69,6 +71,9 @@ extern bool mustUseBlit;
 extern GLint textureSize;
 extern int widthScreen;
 extern int heightScreen;
+extern PIXELFORMATDESCRIPTOR currentStereo_ppfd;
+extern int currentStereoPixelFormat;
+
 /*************************************************************/
 void * _getPublicProcAddress(const char *procName);
 void * _getPrivateProcAddress(const char *procName);
@@ -119,6 +124,8 @@ void initialiseVariables();
 int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd);
 void WINAPI interceptedglClear(GLbitfield mask);
 BOOL WINAPI interceptedwglSwapBuffers(HDC hdc);
+BOOL WINAPI interceptedwglSetPixelFormat(HDC hdc, int iPixelFormat, const PIXELFORMATDESCRIPTOR * ppfd);
+
 /*************************************************************/
 
 /// OpenGL rendering thread function
