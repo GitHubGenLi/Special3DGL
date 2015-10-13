@@ -47,7 +47,7 @@ Event m_frameDone;              ///< Signals when frame is rendered out
 
 Extensions glx;                 ///< Stores the OpenGL extension functions
 
-bool useTexture = true;
+bool useTexture = false;
 bool mustUseBlit;
 GLint textureSize;
 
@@ -516,7 +516,7 @@ void WINAPI interceptedglClear(GLbitfield mask)
 					}
 
 
-					glGenTextures(1, &m_target[i].depthTexture);
+					/*glGenTextures(1, &m_target[i].depthTexture);
 					glBindTexture(GL_TEXTURE_2D, m_target[i].depthTexture);
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -528,17 +528,16 @@ void WINAPI interceptedglClear(GLbitfield mask)
 					//NULL means reserve texture memory, but texels are undefined
 					glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, widthScreen, heightScreen, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 
-					//glBindTexture(GL_FRAMEBUFFER_EXT, m_target[i].depthTexture/*mipmap level*/);
-
+					
 					glBindTexture(GL_TEXTURE_2D, 0);
+					*/
 				}
 				else {
 					// using GL_RENDERBUFFER
 					glx.glGenRenderbuffers(1, &m_target[i].renderBuffer);
-
 					glx.glBindRenderbuffer(GL_RENDERBUFFER, m_target[i].renderBuffer);
-					glx.glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, widthScreen, heightScreen);
 					
+					glx.glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, widthScreen, heightScreen);
 
 					if (m_target[i].renderBuffer == 0) {
 						Log::print("error: failed to generate render buffer ID\n");
@@ -562,7 +561,7 @@ void WINAPI interceptedglClear(GLbitfield mask)
 				}
 
 				glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[i].frameBuffer);
-
+				
 
 				if (useTexture) {
 					// using GL_TEXTURE_2D
@@ -575,8 +574,8 @@ void WINAPI interceptedglClear(GLbitfield mask)
 						textureMode, m_target[i].texture, 0
 						);
 
-					glx.glFramebufferTexture2D(
-						GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, textureMode, m_target[i].depthTexture, 0);
+					//glx.glFramebufferTexture2D(
+					//	GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, textureMode, m_target[i].depthTexture, 0);
 					
 
 				}
@@ -585,7 +584,10 @@ void WINAPI interceptedglClear(GLbitfield mask)
 
 					// important to lock before using glFramebufferRenderbuffer
 					
+
 					// attach colour renderbuffer
+					
+
 					glx.glFramebufferRenderbuffer(
 						GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
 						GL_RENDERBUFFER, m_target[i].renderBuffer
@@ -609,7 +611,7 @@ void WINAPI interceptedglClear(GLbitfield mask)
 							{ 0, 0 }
 					};
 
-					glx.glBindRenderbuffer(GL_RENDERBUFFER, m_target[i].renderBuffer);
+				
 
 					// query and log all the renderbuffer parameters
 					for (int p = 0; table[p].name != 0; ++p) {
@@ -624,17 +626,23 @@ void WINAPI interceptedglClear(GLbitfield mask)
 				// log the framebuffer status (should be GL_FRAMEBUFFER_COMPLETE)
 				GLenum status = glx.glCheckFramebufferStatus(GL_FRAMEBUFFER);
 				Log::print() << "glCheckFramebufferStatus = " << GLFRAMEBUFFERSTATUStoString(status) << endl;
+
+				status = glx.glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
+				Log::print() << "DRAWING glCheckFramebufferStatus = " << GLFRAMEBUFFERSTATUStoString(status) << endl;
+
+				glx.glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			}
 
 			// successful only if all render buffers were created and initialised
 			success = (i == m_target.size());
 			Log::print("Eng initialisation.\n");
 		} while (0);
+		
 
 		//for testing
-		glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[0].frameBuffer);
+		//glx.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_target[0].frameBuffer);
 		//glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[1].frameBuffer);
-
+		//glDrawBuffer(GL_COLOR_ATTACHMENT0);
 		Log::print("Out initialisation.\n");
 		// default OpenGL settings
 		//glEnable(GL_COLOR_MATERIAL);
@@ -646,7 +654,7 @@ void WINAPI interceptedglClear(GLbitfield mask)
 		//glLoadIdentity();
 		//glMatrixMode(GL_PROJECTION);
 		//glLoadIdentity();
-		glEnable(GL_DEPTH_TEST);
+		//glEnable(GL_DEPTH_TEST);
 		m_initialised = true;
 	}
 	
@@ -658,13 +666,18 @@ void WINAPI interceptedglClear(GLbitfield mask)
 		glEnable(GL_TEXTURE_2D);
 		glColor3f(1, 0, 0);
 	}
-
-	glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[1].frameBuffer);
-	glDrawBuffer(GL_COLOR_ATTACHMENT0);
-	glClearColor(1.0, 0.0, 0, 1.0);
-	// call the original function
+	
+	//glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[0].frameBuffer);
+	
 	_glClear(mask);
-	glClearColor(1.0, 0.0, 0, 1.0);
+
+	
+	
+	//glDrawBuffer(GL_COLOR_ATTACHMENT0);
+	//glClearColor(1.0, 0.0, 0, 1.0);
+	// call the original function
+	//_glClear(mask);
+	//glClearColor(1.0, 0.0, 0, 1.0);
 
 	// count the number of glClear calls
 	++g_clearCount;
@@ -740,13 +753,22 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 	}*/
 
 	// draw to default framebuffer
-	glx.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+	//glx.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+	glx.glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glDrawBuffer(GL_BACK);
+	//glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[0].frameBuffer);
+	//glViewport(0, 0, widthScreen/2, heightScreen/2);
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadIdentity();
 
-
-	/*glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[m_readBuffer].frameBuffer);
-	
-	// bind the texture
-	glBindTexture(GL_TEXTURE_2D, m_target[m_readBuffer].texture);
+	//glClearColor(0, 0, 1, 1);
+	//
+	////
+	////// bind the texture
+	glBindTexture(GL_TEXTURE_2D, m_target[0].texture);
 
 	glBegin(GL_QUADS);
 	glTexCoord2i(0, 0);
@@ -761,72 +783,109 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 	glTexCoord2i(0, 1);
 	glVertex3f(-1.0f, -1.0f, 0.0f);
 	glEnd();
-	*/
+	
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	//testing drawing to 2 buffers
 	// for each eye
 	
 	
-	
-	glDrawBuffer(GL_BACK_LEFT);
-	int error = glGetError();
-	
-	//printf("Error %d ", error); 
+	//glDrawBuffer(GL_BACK_LEFT);
+	//int error = glGetError();
+	//
+	////printf("Error %d ", error); 
 
 	//glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[0].frameBuffer);
-	glClearColor(0, 1, 0, 1);
-	// bind the texture
-	glBindTexture(GL_TEXTURE_2D, m_target[0].texture);
-	
+	////glx.glBlitFramebuffer(
+	////	0, 0, widthScreen, heightScreen,        // source rectangle
+	////	0, heightScreen, widthScreen, 0,        // destination: flip the image vertically
+	////	GL_COLOR_BUFFER_BIT,
+	////	GL_LINEAR
+	////	);
+	//
+	//glViewport(0, 0, widthScreen, heightScreen);
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadIdentity();
+	//glClearColor(1, 1, 1, 1);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//
+	//// bind the texture
+	//glBindTexture(GL_TEXTURE_2D, m_target[0].texture);
+	//
 	//glx.glGenerateMipmap(GL_TEXTURE_2D);
-	
-	glBegin(GL_QUADS);
-	glTexCoord2i(0, 0);
-	glVertex3f(-1.0f, +1.0f, 0.0f);
+	//
+	//glBegin(GL_QUADS);
+	//glTexCoord2i(0, 0);
+	//glVertex3f(-1.0f, +1.0f, 0.0f);
 
-	glTexCoord2i(1, 0);
-	glVertex3f(+1.0f, +1.0f, 0.0f);
+	//glTexCoord2i(1, 0);
+	//glVertex3f(+1.0f, +1.0f, 0.0f);
 
-	glTexCoord2i(1, 1);
-	glVertex3f(+1.0f, -1.0f, 0.0f);
+	//glTexCoord2i(1, 1);
+	//glVertex3f(+1.0f, -1.0f, 0.0f);
 
-	glTexCoord2i(0, 1);
-	glVertex3f(-1.0f, -1.0f, 0.0f);
-	glEnd();
+	//glTexCoord2i(0, 1);
+	//glVertex3f(-1.0f, -1.0f, 0.0f);
+	//glEnd();
 
 	//glBindTexture(GL_TEXTURE_2D, 0);
 
-	glDrawBuffer(GL_BACK_RIGHT);
-	glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[0].frameBuffer);
-	glClearColor(0, 1, 0, 1);
+	//glDrawBuffer(GL_BACK_RIGHT);
+	//glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[0].frameBuffer);
+	////glx.glBlitFramebuffer(
+	////	0, 0, widthScreen, heightScreen,        // source rectangle
+	////	0, heightScreen, widthScreen, 0,        // destination: flip the image vertically
+	////	GL_COLOR_BUFFER_BIT,
+	////	GL_LINEAR
+	////	);
+	//glViewport(0, 0, widthScreen, heightScreen);
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadIdentity();
+	//glClearColor(1, 1, 1, 1);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	//// bind the texture
-	glBindTexture(GL_TEXTURE_2D, m_target[0].texture);
+	//glBindTexture(GL_TEXTURE_2D, m_target[0].texture);
 	//glx.glGenerateMipmap(GL_TEXTURE_2D);
 
-	glBegin(GL_QUADS);
-	glTexCoord2i(0, 0);
-	glVertex3f(-1.0f, +1.0f, 0.0f);
+	//glBegin(GL_QUADS);
+	//glTexCoord2i(0, 0);
+	//glVertex3f(-1.0f, +1.0f, 0.0f);
 
-	glTexCoord2i(1, 0);
-	glVertex3f(+1.0f, +1.0f, 0.0f);
+	//glTexCoord2i(1, 0);
+	//glVertex3f(+1.0f, +1.0f, 0.0f);
 
-	glTexCoord2i(1, 1);
-	glVertex3f(+1.0f, -1.0f, 0.0f);
+	//glTexCoord2i(1, 1);
+	//glVertex3f(+1.0f, -1.0f, 0.0f);
 
-	glTexCoord2i(0, 1);
-	glVertex3f(-1.0f, -1.0f, 0.0f);
-	glEnd();
+	//glTexCoord2i(0, 1);
+	//glVertex3f(-1.0f, -1.0f, 0.0f);
+	//glEnd();
 
-	/*glLineWidth(2.5);
-	glColor3f(0.0, 0.0, 1.0);
-	glBegin(GL_LINES);
-	glVertex3f(-1, -1.0, 0.0);
-	glVertex3f(1, 1, 0);
-	glEnd();*/
+	//glLineWidth(2.5);
+	//glColor3f(0.0, 0.0, 1.0);
+	//glBegin(GL_LINES);
+	//glVertex3f(-1, -1.0, 0.0);
+	//glVertex3f(1, 1, 0);
+	//glEnd();
 
 	//glBindTexture(GL_TEXTURE_2D, 0);
 	/**********************************************/
 
+	// restore OpenGL state
+	glPopAttrib();
+
+
+	// call the original function
+	_wglSwapBuffers(hdc);
+
+	//for testing
+	glx.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_target[0].frameBuffer);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	/*
 	// draw to default framebuffer
 	glx.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
