@@ -19,6 +19,8 @@
 
 #include "StereoUtil.h"
 
+#include "..\Config3DSettings.h"
+
 using namespace std;
 using namespace hive;
 
@@ -74,6 +76,9 @@ extern int heightScreen;
 extern PIXELFORMATDESCRIPTOR currentStereo_ppfd;
 extern int currentStereoPixelFormat;
 
+extern long functionCallIndex;
+extern Config3DSettings currentConfig3DSettings;
+
 /*************************************************************/
 void * _getPublicProcAddress(const char *procName);
 void * _getPrivateProcAddress(const char *procName);
@@ -116,6 +121,12 @@ extern PFN_WGLGETPIXELFORMAT _wglGetPixelFormat;
 typedef int(__stdcall * PFN_WGLDESCRIBEPIXELFORMAT)(HDC hdc, int iPixelFormat, UINT nBytes, PIXELFORMATDESCRIPTOR * ppfd);
 extern PFN_WGLDESCRIBEPIXELFORMAT _wglDescribePixelFormat;
 
+typedef void (APIENTRY * PFN_GLCOLOR3F)(GLfloat red, GLfloat green, GLfloat blue);
+extern PFN_GLCOLOR3F _glColor3f;
+
+typedef void (APIENTRY * PFN_GLROTATEF)(GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
+extern PFN_GLROTATEF _glRotatef;
+
 /*************************************************************/
 //void initialiseRealOpenGLFunctions();
 void initialiseVariables();
@@ -125,6 +136,8 @@ int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR 
 void WINAPI interceptedglClear(GLbitfield mask);
 BOOL WINAPI interceptedwglSwapBuffers(HDC hdc);
 BOOL WINAPI interceptedwglSetPixelFormat(HDC hdc, int iPixelFormat, const PIXELFORMATDESCRIPTOR * ppfd);
+void APIENTRY interceptedglRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
+void APIENTRY interceptedglColor3f(GLfloat red, GLfloat green, GLfloat blue);
 
 /*************************************************************/
 

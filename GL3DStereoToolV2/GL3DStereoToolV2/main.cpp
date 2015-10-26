@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 
+#include "Config3DSettings.h"
 
 using namespace hive;
 using namespace std;
@@ -51,7 +52,8 @@ void initialiseRealOpenGLFunctions()
 	_wglSetPixelFormat = (PFN_WGLSETPIXELFORMAT)_getPublicProcAddress("wglSetPixelFormat");
 
 	_wglChoosePixelFormatARB = (PFN_WGLCHOOSEPIXELFORMATARB)_getAnyGLFuncAddress("wglChoosePixelFormatARB");
-
+	_glColor3f = (PFN_GLCOLOR3F)_getAnyGLFuncAddress("glColor3f");
+	_glRotatef = (PFN_GLROTATEF)_getAnyGLFuncAddress("glRotatef");
 }
 
 void processAttach()
@@ -101,6 +103,26 @@ void processAttach()
 	{
 		printf("Hooked _wglSwapBuffers\n");
 	}
+	if ((_glColor3f == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColor3f), interceptedglColor3f))
+	{
+		cerr << "Failed to hook _glColor3f" << endl;
+		MessageBox(0, "Failed to hook _glColor3f", "Error", MB_OK);
+	}
+	else
+	{
+		printf("Hooked _glColor3f\n");
+	}
+	if ((_glRotatef == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glRotatef), interceptedglRotatef))
+	{
+		cerr << "Failed to hook _glRotatef" << endl;
+		MessageBox(0, "Failed to hook _glRotatef", "Error", MB_OK);
+	}
+	else
+	{
+		printf("Hooked _glRotatef\n");
+	}
 }
 void processDetach()
 {
@@ -110,6 +132,8 @@ void processDetach()
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglSetPixelFormat));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glClear));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglSwapBuffers));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glColor3f));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glRotatef));
 }
 BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
 {
@@ -119,6 +143,9 @@ BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
 	{
 		printf("Opened\n");
 	}
+
+	//Config3DSettings config;
+	//config.readConfig3DSettingsFromFile();
 
 	switch (reason)
 	{
