@@ -5,6 +5,10 @@
 
 Config3DSettings::Config3DSettings()
 {
+	currentDrawingBuffer = GL_BACK;
+	currentFrameGL = 0;
+	currentBoundaryLoc = ObjectBoundary::Start;
+	currentObjectType = ObjectType::Background;
 }
 
 
@@ -45,6 +49,11 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 			key = "#DrawingBuffer:";
 			line = "";
 		}
+		else if (line == "#Frame:")
+		{
+			key = "#Frame:";
+			line = "";
+		}
 		else if (line == "#Background:")
 		{
 			key = "#Background:";
@@ -62,7 +71,7 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 		// look for values for the current key
 		if (key == "#DrawingBuffer:" && line.length() > 0)
 		{
-			cout << "DrawingBuffer: " << endl;
+			std::cout << "DrawingBuffer: " << endl;
 
 			//for each value, parse it into 3 parts: key, value and comment (if has). The comment is specified by the ; and key by the :
 			if (line.length() > 0)
@@ -71,8 +80,8 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 				std::string token;
 				pos = line.find(";"); //find comments
 
-				cout << "Line: " << line << endl;
-				cout << "Pos 1: " << pos << endl;
+				std::cout << "Line: " << line << endl;
+				std::cout << "Pos 1: " << pos << endl;
 				if (pos != std::string::npos)
 				{
 					line.erase(pos, line.length() - pos);
@@ -85,19 +94,54 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 					string subKey = line.substr(0, pos);
 					string value = line.substr(pos + 1, line.length() - pos - 1);
 					
-					cout << "subKey: " << subKey << endl;
-					cout << "value: " << value << endl;
+					std::cout << "subKey: " << subKey << endl;
+					std::cout << "value: " << value << endl;
 					
 					if (subKey == "Buffer")
 					{
-						this->bufferIndex = convertStringToInt(value);
+						this->BufferIndex = convertStringToInt(value);
+					}
+				}
+			}
+		}
+		else if (key == "#Frame:" && line.length() > 0)
+		{
+			std::cout << "Frame: " << endl;
+
+			//for each value, parse it into 3 parts: key, value and comment (if has). The comment is specified by the ; and key by the :
+			if (line.length() > 0)
+			{
+				size_t pos = 0;
+				std::string token;
+				pos = line.find(";"); //find comments
+
+				std::cout << "Line: " << line << endl;
+				std::cout << "Pos 1: " << pos << endl;
+				if (pos != std::string::npos)
+				{
+					line.erase(pos, line.length() - pos);
+				}
+
+				pos = line.find(":");
+
+				if (pos != std::string::npos)
+				{
+					string subKey = line.substr(0, pos);
+					string value = line.substr(pos + 1, line.length() - pos - 1);
+
+					std::cout << "subKey: " << subKey << endl;
+					std::cout << "value: " << value << endl;
+
+					if (subKey == "StartFrame")
+					{
+						this->StartInterceptedFrame = convertStringToLong(value);
 					}
 				}
 			}
 		}
 		else if (key == "#Background:" && line.length() > 0)
 		{
-			cout << "Background: " << endl;
+			std::cout << "Background: " << endl;
 
 			if (line.length() > 0)
 			{
@@ -105,7 +149,7 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 				std::string token;
 				pos = line.find(";"); //find comments
 
-				cout << "Line: " << line << endl;
+				std::cout << "Line: " << line << endl;
 
 				if (pos != std::string::npos)
 				{
@@ -119,8 +163,8 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 					string subKey = line.substr(0, pos);
 					string value = line.substr(pos + 1, line.length() - pos - 1);
 
-					cout << "subKey: " << subKey << endl;
-					cout << "value: " << value << endl;
+					std::cout << "subKey: " << subKey << endl;
+					std::cout << "value: " << value << endl;
 
 					if (subKey == "StartFunctionCallBackground")
 					{
@@ -143,7 +187,7 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 		}
 		else if (key == "#Foregound:" && line.length() > 0)
 		{
-			cout << "Foregound: " << endl;
+			std::cout << "Foregound: " << endl;
 
 			if (line.length() > 0)
 			{
@@ -151,7 +195,7 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 				std::string token;
 				pos = line.find(";"); //find comments
 
-				cout << "Line: " << line << endl;
+				std::cout << "Line: " << line << endl;
 
 				if (pos != std::string::npos)
 				{
@@ -165,8 +209,8 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 					string subKey = line.substr(0, pos);
 					string value = line.substr(pos + 1, line.length() - pos - 1);
 
-					cout << "subKey: " << subKey << endl;
-					cout << "value: " << value << endl;
+					std::cout << "subKey: " << subKey << endl;
+					std::cout << "value: " << value << endl;
 
 					if (subKey == "StartFunctionCallForegound")
 					{
@@ -210,4 +254,128 @@ long Config3DSettings::convertStringToLong(string s)
 	buffer >> number;
 
 	return number;
+}
+bool Config3DSettings::checkFunctionCall(const string funcName, ObjectType objType, ObjectBoundary bound)
+{
+	switch (objType)
+	{
+	case Background:
+		switch (bound)
+		{
+		case Start:
+			if (funcName.compare(StartFunctionCallBackground) == 0)
+			{
+				return true;
+			}
+			
+			break;
+		case End:
+			if (funcName.compare(EndFunctionCallBackground) == 0)
+			{
+				return true;
+			}
+			break;
+		default:
+			break;
+		}
+		break;
+	case Foreground:
+		switch (bound)
+		{
+		case Start:
+			if (funcName.compare(StartFunctionCallForegound) == 0)
+			{
+				return true;
+			}
+			break;
+		case End:
+			if (funcName.compare(EndFunctionCallForegound) == 0)
+			{
+				return true;
+			}
+			break;
+		default:
+			break;
+		}
+		break;
+	default:
+		break;
+	}
+	
+	return false;
+}
+bool Config3DSettings::checkFunctionCallNumber(long indexCall, ObjectType objType, ObjectBoundary bound)
+{
+	switch (objType)
+	{
+	case Background:
+		switch (bound)
+		{
+		case Start:
+			return indexCall == StartFunctionCallBackgroundNumber;
+			break;
+		case End:
+			return indexCall == EndFunctionCallBackgroundNumber;
+			break;
+		default:
+			break;
+		}
+		break;
+	case Foreground:
+		switch (bound)
+		{
+		case Start:
+			return indexCall == StartFunctionCallForegoundNumber;
+			break;
+		case End:
+			return indexCall == EndFunctionCallForegoundNumber;
+			break;
+		default:
+			break;
+		}
+		break;
+	default:
+		break;
+	}
+
+	return false;
+}
+void Config3DSettings::getDrawingBuffer(const string funcName, GLuint &buffer, ObjectType &objType, ObjectBoundary &bound, bool updated)
+{
+	buffer = GL_BACK;
+	objType = ObjectType::Background;
+	bound = ObjectBoundary::Middle;
+
+	if (funcName.compare(StartFunctionCallForegound) == 0 && (currentFunctionCallIndexPerFrame == StartFunctionCallForegoundNumber))
+	{
+		buffer = getBuffer();
+		objType = ObjectType::Foreground;
+		bound = ObjectBoundary::Start;
+	}
+	else if (funcName.compare(EndFunctionCallForegound) == 0 && (currentFunctionCallIndexPerFrame == EndFunctionCallForegoundNumber))
+	{
+		buffer = getBuffer();
+		objType = ObjectType::Foreground;
+		bound = ObjectBoundary::Start;
+	}
+	else if (funcName.compare(StartFunctionCallBackground) == 0 && (currentFunctionCallIndexPerFrame == StartFunctionCallBackgroundNumber))
+	{
+		buffer = GL_BACK;
+		objType = ObjectType::Background;
+		bound = ObjectBoundary::Start;
+	}
+	else if (funcName.compare(EndFunctionCallBackground) == 0 && (currentFunctionCallIndexPerFrame == EndFunctionCallBackgroundNumber))
+	{
+		buffer = GL_BACK;
+		objType = ObjectType::Background;
+		bound = ObjectBoundary::End;
+	}
+
+	if (updated)
+	{
+		currentDrawingBuffer = buffer;
+		currentBoundaryLoc = bound;
+		currentObjectType = objType;
+	}
+	
 }

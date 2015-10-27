@@ -447,7 +447,8 @@ int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR 
 	//change to stereo
 	currentStereo_ppfd.dwFlags |= PFD_STEREO | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_DRAW_TO_WINDOW;
 	currentStereo_ppfd.iPixelType = PFD_TYPE_RGBA;
-	//currentStereo_ppfd.cColorBits = 24;
+	//currentStereo_ppfd.cColorBits = 24;
+
 	//just for NOW
 	g_stereoDetect = true;
 
@@ -809,12 +810,6 @@ void WINAPI interceptedglClear(GLbitfield mask)
 
 	_glClear(mask);
 	
-	
-	//glDrawBuffer(GL_COLOR_ATTACHMENT0);
-	//glClearColor(1.0, 0.0, 0, 1.0);
-	// call the original function
-	//_glClear(mask);
-	//glClearColor(1.0, 0.0, 0, 1.0);
 
 	// count the number of glClear calls
 	if (increaseClearCount)
@@ -1237,11 +1232,24 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 
 	*/
 
+	currentConfig3DSettings.increaseFrameGL();
+
+
 	return 1;
 }
 
 void APIENTRY interceptedglRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z)
 {
+	
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+
+	}
+
+
+
 	if (m_framesGL > 10)
 	{
 		if (firstForground)
