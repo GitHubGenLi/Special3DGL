@@ -1,0 +1,14 @@
+#DrawingBuffer:
+Buffer:1
+#Frame:
+StartFrame:10
+#Background:
+StartFunctionCallBackground:glClear
+StartFunctionCallBackgroundNumber:0
+EndFunctionCallBackground:glRotatef
+EndFunctionCallBackgroundNumber:6
+#Foregound:
+StartFunctionCallForegound:glColor3f
+StartFunctionCallForegoundNumber:7
+EndFunctionCallForegound:glFlush
+EndFunctionCallForegoundNumber:50
