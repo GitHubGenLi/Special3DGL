@@ -154,6 +154,451 @@ extern PFN_GLEND _glEnd;
 typedef void (APIENTRY * PFN_GLFLUSH)(void);
 extern PFN_GLFLUSH _glFlush;
 
+typedef BOOL(__stdcall * PFN_WGLMAKECURRENT)(HDC hdc, HGLRC hglrc);
+extern PFN_WGLMAKECURRENT _wglMakeCurrent;
+
+typedef void (APIENTRY * PFN_GLSCALED)(GLdouble x, GLdouble y, GLdouble z);
+extern PFN_GLSCALED _glScaled;
+
+typedef void (APIENTRY * PFN_GLCOLOR3D)(GLdouble red, GLdouble green, GLdouble blue);
+extern PFN_GLCOLOR3D _glColor3d;
+
+typedef void (APIENTRY * PFN_GLPUSHMATRIX)(void);
+extern PFN_GLPUSHMATRIX _glPushMatrix;
+
+typedef void (APIENTRY * PFN_GLMULTMATRIXD)(const GLdouble * m);
+extern PFN_GLMULTMATRIXD _glMultMatrixd;
+
+typedef HGLRC(__stdcall * PFN_WGLCREATECONTEXT)(HDC hdc);
+extern PFN_WGLCREATECONTEXT _wglCreateContext;
+
+typedef BOOL(__stdcall * PFN_WGLDELETECONTEXT)(HGLRC hglrc);
+extern PFN_WGLDELETECONTEXT _wglDeleteContext;
+
+typedef HGLRC(__stdcall * PFN_WGLGETCURRENTCONTEXT)(void);
+extern PFN_WGLGETCURRENTCONTEXT _wglGetCurrentContext;
+
+typedef BOOL(__stdcall * PFN_WGLMAKECURRENT)(HDC hdc, HGLRC hglrc);
+extern PFN_WGLMAKECURRENT _wglMakeCurrent;
+
+typedef BOOL(__stdcall * PFN_WGLCOPYCONTEXT)(HGLRC hglrcSrc, HGLRC hglrcDst, UINT mask);
+extern PFN_WGLCOPYCONTEXT _wglCopyContext;
+
+typedef int(__stdcall * PFN_WGLCHOOSEPIXELFORMAT)(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd);
+extern PFN_WGLCHOOSEPIXELFORMAT _wglChoosePixelFormat;
+
+typedef int(__stdcall * PFN_WGLDESCRIBEPIXELFORMAT)(HDC hdc, int iPixelFormat, UINT nBytes, PIXELFORMATDESCRIPTOR * ppfd);
+extern PFN_WGLDESCRIBEPIXELFORMAT _wglDescribePixelFormat;
+
+typedef HDC(__stdcall * PFN_WGLGETCURRENTDC)(void);
+extern PFN_WGLGETCURRENTDC _wglGetCurrentDC;
+
+typedef PROC(__stdcall * PFN_WGLGETDEFAULTPROCADDRESS)(const char * lpszProc);
+extern PFN_WGLGETDEFAULTPROCADDRESS _wglGetDefaultProcAddress;
+
+typedef int(__stdcall * PFN_WGLGETPIXELFORMAT)(HDC hdc);
+extern PFN_WGLGETPIXELFORMAT _wglGetPixelFormat;
+
+typedef BOOL(__stdcall * PFN_WGLSETPIXELFORMAT)(HDC hdc, int iPixelFormat, const PIXELFORMATDESCRIPTOR * ppfd);
+extern PFN_WGLSETPIXELFORMAT _wglSetPixelFormat;
+
+typedef BOOL(__stdcall * PFN_WGLSWAPBUFFERS)(HDC hdc);
+extern PFN_WGLSWAPBUFFERS _wglSwapBuffers;
+
+typedef BOOL(__stdcall * PFN_WGLSHARELISTS)(HGLRC hglrc1, HGLRC hglrc2);
+extern PFN_WGLSHARELISTS _wglShareLists;
+
+typedef HGLRC(__stdcall * PFN_WGLCREATELAYERCONTEXT)(HDC hdc, int iLayerPlane);
+extern PFN_WGLCREATELAYERCONTEXT _wglCreateLayerContext;
+
+typedef BOOL(__stdcall * PFN_WGLDESCRIBELAYERPLANE)(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nBytes, LAYERPLANEDESCRIPTOR * plpd);
+extern PFN_WGLDESCRIBELAYERPLANE _wglDescribeLayerPlane;
+
+typedef int(__stdcall * PFN_WGLSETLAYERPALETTEENTRIES)(HDC hdc, int iLayerPlane, int iStart, int cEntries, const COLORREF * pcr);
+extern PFN_WGLSETLAYERPALETTEENTRIES _wglSetLayerPaletteEntries;
+
+typedef int(__stdcall * PFN_WGLGETLAYERPALETTEENTRIES)(HDC hdc, int iLayerPlane, int iStart, int cEntries, COLORREF * pcr);
+extern PFN_WGLGETLAYERPALETTEENTRIES _wglGetLayerPaletteEntries;
+
+typedef BOOL(__stdcall * PFN_WGLREALIZELAYERPALETTE)(HDC hdc, int iLayerPlane, BOOL bRealize);
+extern PFN_WGLREALIZELAYERPALETTE _wglRealizeLayerPalette;
+
+typedef BOOL(__stdcall * PFN_WGLSWAPLAYERBUFFERS)(HDC hdc, UINT fuPlanes);
+extern PFN_WGLSWAPLAYERBUFFERS _wglSwapLayerBuffers;
+
+typedef BOOL(__stdcall * PFN_WGLUSEFONTBITMAPSA)(HDC hdc, DWORD first, DWORD count, DWORD listBase);
+extern PFN_WGLUSEFONTBITMAPSA _wglUseFontBitmapsA;
+
+typedef BOOL(__stdcall * PFN_WGLUSEFONTBITMAPSW)(HDC hdc, DWORD first, DWORD count, DWORD listBase);
+extern PFN_WGLUSEFONTBITMAPSW _wglUseFontBitmapsW;
+
+typedef DWORD(__stdcall * PFN_WGLSWAPMULTIPLEBUFFERS)(UINT n, const WGLSWAP * ps);
+extern PFN_WGLSWAPMULTIPLEBUFFERS _wglSwapMultipleBuffers;
+
+typedef BOOL(__stdcall * PFN_WGLUSEFONTOUTLINESA)(HDC hdc, DWORD first, DWORD count, DWORD listBase, FLOAT deviation, FLOAT extrusion, int format, GLYPHMETRICSFLOAT * lpgmf);
+extern PFN_WGLUSEFONTOUTLINESA _wglUseFontOutlinesA;
+
+typedef BOOL(__stdcall * PFN_WGLUSEFONTOUTLINESW)(HDC hdc, DWORD first, DWORD count, DWORD listBase, FLOAT deviation, FLOAT extrusion, int format, GLYPHMETRICSFLOAT * lpgmf);
+extern PFN_WGLUSEFONTOUTLINESW _wglUseFontOutlinesW;
+
+typedef HANDLE(__stdcall * PFN_WGLCREATEBUFFERREGIONARB)(HDC hDC, int iLayerPlane, UINT uType);
+extern PFN_WGLCREATEBUFFERREGIONARB _wglCreateBufferRegionARB;
+
+typedef void(__stdcall * PFN_WGLDELETEBUFFERREGIONARB)(HANDLE hRegion);
+extern PFN_WGLDELETEBUFFERREGIONARB _wglDeleteBufferRegionARB;
+
+typedef BOOL(__stdcall * PFN_WGLSAVEBUFFERREGIONARB)(HANDLE hRegion, int x, int y, int width, int height);
+extern PFN_WGLSAVEBUFFERREGIONARB _wglSaveBufferRegionARB;
+
+typedef BOOL(__stdcall * PFN_WGLRESTOREBUFFERREGIONARB)(HANDLE hRegion, int x, int y, int width, int height, int xSrc, int ySrc);
+extern PFN_WGLRESTOREBUFFERREGIONARB _wglRestoreBufferRegionARB;
+
+typedef const char * (__stdcall * PFN_WGLGETEXTENSIONSSTRINGARB)(HDC hdc);
+extern PFN_WGLGETEXTENSIONSSTRINGARB _wglGetExtensionsStringARB;
+
+typedef BOOL(__stdcall * PFN_WGLGETPIXELFORMATATTRIBIVARB)(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, int * piValues);
+extern PFN_WGLGETPIXELFORMATATTRIBIVARB _wglGetPixelFormatAttribivARB;
+
+typedef BOOL(__stdcall * PFN_WGLGETPIXELFORMATATTRIBFVARB)(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, FLOAT * pfValues);
+extern PFN_WGLGETPIXELFORMATATTRIBFVARB _wglGetPixelFormatAttribfvARB;
+
+typedef BOOL(__stdcall * PFN_WGLCHOOSEPIXELFORMATARB)(HDC hdc, const int * piAttribIList, const FLOAT * pfAttribFList, UINT nMaxFormats, int * piFormats, UINT * nNumFormats);
+extern PFN_WGLCHOOSEPIXELFORMATARB _wglChoosePixelFormatARB;
+
+typedef BOOL(__stdcall * PFN_WGLMAKECONTEXTCURRENTARB)(HDC hDrawDC, HDC hReadDC, HGLRC hglrc);
+extern PFN_WGLMAKECONTEXTCURRENTARB _wglMakeContextCurrentARB;
+
+typedef HDC(__stdcall * PFN_WGLGETCURRENTREADDCARB)(void);
+extern PFN_WGLGETCURRENTREADDCARB _wglGetCurrentReadDCARB;
+
+typedef HPBUFFERARB(__stdcall * PFN_WGLCREATEPBUFFERARB)(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int * piAttribList);
+extern PFN_WGLCREATEPBUFFERARB _wglCreatePbufferARB;
+
+typedef HDC(__stdcall * PFN_WGLGETPBUFFERDCARB)(HPBUFFERARB hPbuffer);
+extern PFN_WGLGETPBUFFERDCARB _wglGetPbufferDCARB;
+
+typedef int(__stdcall * PFN_WGLRELEASEPBUFFERDCARB)(HPBUFFERARB hPbuffer, HDC hDC);
+extern PFN_WGLRELEASEPBUFFERDCARB _wglReleasePbufferDCARB;
+
+typedef BOOL(__stdcall * PFN_WGLDESTROYPBUFFERARB)(HPBUFFERARB hPbuffer);
+extern PFN_WGLDESTROYPBUFFERARB _wglDestroyPbufferARB;
+
+typedef BOOL(__stdcall * PFN_WGLQUERYPBUFFERARB)(HPBUFFERARB hPbuffer, int iAttribute, int * piValue);
+extern PFN_WGLQUERYPBUFFERARB _wglQueryPbufferARB;
+
+typedef BOOL(__stdcall * PFN_WGLBINDTEXIMAGEARB)(HPBUFFERARB hPbuffer, int iBuffer);
+extern PFN_WGLBINDTEXIMAGEARB _wglBindTexImageARB;
+
+typedef BOOL(__stdcall * PFN_WGLRELEASETEXIMAGEARB)(HPBUFFERARB hPbuffer, int iBuffer);
+extern PFN_WGLRELEASETEXIMAGEARB _wglReleaseTexImageARB;
+
+typedef BOOL(__stdcall * PFN_WGLSETPBUFFERATTRIBARB)(HPBUFFERARB hPbuffer, const int * piAttribList);
+extern PFN_WGLSETPBUFFERATTRIBARB _wglSetPbufferAttribARB;
+
+typedef HGLRC(__stdcall * PFN_WGLCREATECONTEXTATTRIBSARB)(HDC hDC, HGLRC hShareContext, const int * attribList);
+extern PFN_WGLCREATECONTEXTATTRIBSARB _wglCreateContextAttribsARB;
+
+typedef GLboolean(__stdcall * PFN_WGLCREATEDISPLAYCOLORTABLEEXT)(GLushort id);
+extern PFN_WGLCREATEDISPLAYCOLORTABLEEXT _wglCreateDisplayColorTableEXT;
+
+typedef GLboolean(__stdcall * PFN_WGLLOADDISPLAYCOLORTABLEEXT)(const GLushort * table, GLuint length);
+extern PFN_WGLLOADDISPLAYCOLORTABLEEXT _wglLoadDisplayColorTableEXT;
+
+typedef GLboolean(__stdcall * PFN_WGLBINDDISPLAYCOLORTABLEEXT)(GLushort id);
+extern PFN_WGLBINDDISPLAYCOLORTABLEEXT _wglBindDisplayColorTableEXT;
+
+typedef void(__stdcall * PFN_WGLDESTROYDISPLAYCOLORTABLEEXT)(GLushort id);
+extern PFN_WGLDESTROYDISPLAYCOLORTABLEEXT _wglDestroyDisplayColorTableEXT;
+
+typedef const char * (__stdcall * PFN_WGLGETEXTENSIONSSTRINGEXT)(void);
+extern PFN_WGLGETEXTENSIONSSTRINGEXT _wglGetExtensionsStringEXT;
+
+typedef BOOL(__stdcall * PFN_WGLMAKECONTEXTCURRENTEXT)(HDC hDrawDC, HDC hReadDC, HGLRC hglrc);
+extern PFN_WGLMAKECONTEXTCURRENTEXT _wglMakeContextCurrentEXT;
+
+typedef HDC(__stdcall * PFN_WGLGETCURRENTREADDCEXT)(void);
+extern PFN_WGLGETCURRENTREADDCEXT _wglGetCurrentReadDCEXT;
+
+typedef HPBUFFEREXT(__stdcall * PFN_WGLCREATEPBUFFEREXT)(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int * piAttribList);
+extern PFN_WGLCREATEPBUFFEREXT _wglCreatePbufferEXT;
+
+typedef HDC(__stdcall * PFN_WGLGETPBUFFERDCEXT)(HPBUFFEREXT hPbuffer);
+extern PFN_WGLGETPBUFFERDCEXT _wglGetPbufferDCEXT;
+
+typedef int(__stdcall * PFN_WGLRELEASEPBUFFERDCEXT)(HPBUFFEREXT hPbuffer, HDC hDC);
+extern PFN_WGLRELEASEPBUFFERDCEXT _wglReleasePbufferDCEXT;
+
+typedef BOOL(__stdcall * PFN_WGLDESTROYPBUFFEREXT)(HPBUFFEREXT hPbuffer);
+extern PFN_WGLDESTROYPBUFFEREXT _wglDestroyPbufferEXT;
+
+typedef BOOL(__stdcall * PFN_WGLQUERYPBUFFEREXT)(HPBUFFEREXT hPbuffer, int iAttribute, int * piValue);
+extern PFN_WGLQUERYPBUFFEREXT _wglQueryPbufferEXT;
+
+typedef BOOL(__stdcall * PFN_WGLGETPIXELFORMATATTRIBIVEXT)(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, int * piValues);
+extern PFN_WGLGETPIXELFORMATATTRIBIVEXT _wglGetPixelFormatAttribivEXT;
+
+typedef BOOL(__stdcall * PFN_WGLGETPIXELFORMATATTRIBFVEXT)(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, FLOAT * pfValues);
+extern PFN_WGLGETPIXELFORMATATTRIBFVEXT _wglGetPixelFormatAttribfvEXT;
+
+typedef BOOL(__stdcall * PFN_WGLCHOOSEPIXELFORMATEXT)(HDC hdc, const int * piAttribIList, const FLOAT * pfAttribFList, UINT nMaxFormats, int * piFormats, UINT * nNumFormats);
+extern PFN_WGLCHOOSEPIXELFORMATEXT _wglChoosePixelFormatEXT;
+
+typedef BOOL(__stdcall * PFN_WGLSWAPINTERVALEXT)(int interval);
+extern PFN_WGLSWAPINTERVALEXT _wglSwapIntervalEXT;
+
+typedef int(__stdcall * PFN_WGLGETSWAPINTERVALEXT)(void);
+extern PFN_WGLGETSWAPINTERVALEXT _wglGetSwapIntervalEXT;
+
+typedef void * (__stdcall * PFN_WGLALLOCATEMEMORYNV)(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority);
+extern PFN_WGLALLOCATEMEMORYNV _wglAllocateMemoryNV;
+
+typedef void(__stdcall * PFN_WGLFREEMEMORYNV)(void * pointer);
+extern PFN_WGLFREEMEMORYNV _wglFreeMemoryNV;
+
+typedef BOOL(__stdcall * PFN_WGLGETSYNCVALUESOML)(HDC hdc, INT64 * ust, INT64 * msc, INT64 * sbc);
+extern PFN_WGLGETSYNCVALUESOML _wglGetSyncValuesOML;
+
+typedef BOOL(__stdcall * PFN_WGLGETMSCRATEOML)(HDC hdc, INT32 * numerator, INT32 * denominator);
+extern PFN_WGLGETMSCRATEOML _wglGetMscRateOML;
+
+typedef INT64(__stdcall * PFN_WGLSWAPBUFFERSMSCOML)(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder);
+extern PFN_WGLSWAPBUFFERSMSCOML _wglSwapBuffersMscOML;
+
+typedef INT64(__stdcall * PFN_WGLSWAPLAYERBUFFERSMSCOML)(HDC hdc, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder);
+extern PFN_WGLSWAPLAYERBUFFERSMSCOML _wglSwapLayerBuffersMscOML;
+
+typedef BOOL(__stdcall * PFN_WGLWAITFORMSCOML)(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 * ust, INT64 * msc, INT64 * sbc);
+extern PFN_WGLWAITFORMSCOML _wglWaitForMscOML;
+
+typedef BOOL(__stdcall * PFN_WGLWAITFORSBCOML)(HDC hdc, INT64 target_sbc, INT64 * ust, INT64 * msc, INT64 * sbc);
+extern PFN_WGLWAITFORSBCOML _wglWaitForSbcOML;
+
+typedef BOOL(__stdcall * PFN_WGLGETDIGITALVIDEOPARAMETERSI3D)(HDC hDC, int iAttribute, int * piValue);
+extern PFN_WGLGETDIGITALVIDEOPARAMETERSI3D _wglGetDigitalVideoParametersI3D;
+
+typedef BOOL(__stdcall * PFN_WGLSETDIGITALVIDEOPARAMETERSI3D)(HDC hDC, int iAttribute, const int * piValue);
+extern PFN_WGLSETDIGITALVIDEOPARAMETERSI3D _wglSetDigitalVideoParametersI3D;
+
+typedef BOOL(__stdcall * PFN_WGLGETGAMMATABLEPARAMETERSI3D)(HDC hDC, int iAttribute, int * piValue);
+extern PFN_WGLGETGAMMATABLEPARAMETERSI3D _wglGetGammaTableParametersI3D;
+
+typedef BOOL(__stdcall * PFN_WGLSETGAMMATABLEPARAMETERSI3D)(HDC hDC, int iAttribute, const int * piValue);
+extern PFN_WGLSETGAMMATABLEPARAMETERSI3D _wglSetGammaTableParametersI3D;
+
+typedef BOOL(__stdcall * PFN_WGLGETGAMMATABLEI3D)(HDC hDC, int iEntries, USHORT * puRed, USHORT * puGreen, USHORT * puBlue);
+extern PFN_WGLGETGAMMATABLEI3D _wglGetGammaTableI3D;
+
+typedef BOOL(__stdcall * PFN_WGLSETGAMMATABLEI3D)(HDC hDC, int iEntries, const USHORT * puRed, const USHORT * puGreen, const USHORT * puBlue);
+extern PFN_WGLSETGAMMATABLEI3D _wglSetGammaTableI3D;
+
+typedef BOOL(__stdcall * PFN_WGLENABLEGENLOCKI3D)(HDC hDC);
+extern PFN_WGLENABLEGENLOCKI3D _wglEnableGenlockI3D;
+
+typedef BOOL(__stdcall * PFN_WGLDISABLEGENLOCKI3D)(HDC hDC);
+extern PFN_WGLDISABLEGENLOCKI3D _wglDisableGenlockI3D;
+
+typedef BOOL(__stdcall * PFN_WGLISENABLEDGENLOCKI3D)(HDC hDC, BOOL * pFlag);
+extern PFN_WGLISENABLEDGENLOCKI3D _wglIsEnabledGenlockI3D;
+
+typedef BOOL(__stdcall * PFN_WGLGENLOCKSOURCEI3D)(HDC hDC, UINT uSource);
+extern PFN_WGLGENLOCKSOURCEI3D _wglGenlockSourceI3D;
+
+typedef BOOL(__stdcall * PFN_WGLGETGENLOCKSOURCEI3D)(HDC hDC, UINT * uSource);
+extern PFN_WGLGETGENLOCKSOURCEI3D _wglGetGenlockSourceI3D;
+
+typedef BOOL(__stdcall * PFN_WGLGENLOCKSOURCEEDGEI3D)(HDC hDC, UINT uEdge);
+extern PFN_WGLGENLOCKSOURCEEDGEI3D _wglGenlockSourceEdgeI3D;
+
+typedef BOOL(__stdcall * PFN_WGLGETGENLOCKSOURCEEDGEI3D)(HDC hDC, UINT * uEdge);
+extern PFN_WGLGETGENLOCKSOURCEEDGEI3D _wglGetGenlockSourceEdgeI3D;
+
+typedef BOOL(__stdcall * PFN_WGLGENLOCKSAMPLERATEI3D)(HDC hDC, UINT uRate);
+extern PFN_WGLGENLOCKSAMPLERATEI3D _wglGenlockSampleRateI3D;
+
+typedef BOOL(__stdcall * PFN_WGLGETGENLOCKSAMPLERATEI3D)(HDC hDC, UINT * uRate);
+extern PFN_WGLGETGENLOCKSAMPLERATEI3D _wglGetGenlockSampleRateI3D;
+
+typedef BOOL(__stdcall * PFN_WGLGENLOCKSOURCEDELAYI3D)(HDC hDC, UINT uDelay);
+extern PFN_WGLGENLOCKSOURCEDELAYI3D _wglGenlockSourceDelayI3D;
+
+typedef BOOL(__stdcall * PFN_WGLGETGENLOCKSOURCEDELAYI3D)(HDC hDC, UINT * uDelay);
+extern PFN_WGLGETGENLOCKSOURCEDELAYI3D _wglGetGenlockSourceDelayI3D;
+
+typedef BOOL(__stdcall * PFN_WGLQUERYGENLOCKMAXSOURCEDELAYI3D)(HDC hDC, UINT * uMaxLineDelay, UINT * uMaxPixelDelay);
+extern PFN_WGLQUERYGENLOCKMAXSOURCEDELAYI3D _wglQueryGenlockMaxSourceDelayI3D;
+
+typedef void * (__stdcall * PFN_WGLCREATEIMAGEBUFFERI3D)(HDC hDC, DWORD dwSize, UINT uFlags);
+extern PFN_WGLCREATEIMAGEBUFFERI3D _wglCreateImageBufferI3D;
+
+typedef BOOL(__stdcall * PFN_WGLDESTROYIMAGEBUFFERI3D)(HDC hDC, void * pAddress);
+extern PFN_WGLDESTROYIMAGEBUFFERI3D _wglDestroyImageBufferI3D;
+
+typedef BOOL(__stdcall * PFN_WGLASSOCIATEIMAGEBUFFEREVENTSI3D)(HDC hDC, const HANDLE * pEvent, void * const * pAddress, const DWORD * pSize, UINT count);
+extern PFN_WGLASSOCIATEIMAGEBUFFEREVENTSI3D _wglAssociateImageBufferEventsI3D;
+
+typedef BOOL(__stdcall * PFN_WGLRELEASEIMAGEBUFFEREVENTSI3D)(HDC hDC, void * const * pAddress, UINT count);
+extern PFN_WGLRELEASEIMAGEBUFFEREVENTSI3D _wglReleaseImageBufferEventsI3D;
+
+typedef BOOL(__stdcall * PFN_WGLENABLEFRAMELOCKI3D)(void);
+extern PFN_WGLENABLEFRAMELOCKI3D _wglEnableFrameLockI3D;
+
+typedef BOOL(__stdcall * PFN_WGLDISABLEFRAMELOCKI3D)(void);
+extern PFN_WGLDISABLEFRAMELOCKI3D _wglDisableFrameLockI3D;
+
+typedef BOOL(__stdcall * PFN_WGLISENABLEDFRAMELOCKI3D)(BOOL * pFlag);
+extern PFN_WGLISENABLEDFRAMELOCKI3D _wglIsEnabledFrameLockI3D;
+
+typedef BOOL(__stdcall * PFN_WGLQUERYFRAMELOCKMASTERI3D)(BOOL * pFlag);
+extern PFN_WGLQUERYFRAMELOCKMASTERI3D _wglQueryFrameLockMasterI3D;
+
+typedef BOOL(__stdcall * PFN_WGLGETFRAMEUSAGEI3D)(float * pUsage);
+extern PFN_WGLGETFRAMEUSAGEI3D _wglGetFrameUsageI3D;
+
+typedef BOOL(__stdcall * PFN_WGLBEGINFRAMETRACKINGI3D)(void);
+extern PFN_WGLBEGINFRAMETRACKINGI3D _wglBeginFrameTrackingI3D;
+
+typedef BOOL(__stdcall * PFN_WGLENDFRAMETRACKINGI3D)(void);
+extern PFN_WGLENDFRAMETRACKINGI3D _wglEndFrameTrackingI3D;
+
+typedef BOOL(__stdcall * PFN_WGLQUERYFRAMETRACKINGI3D)(DWORD * pFrameCount, DWORD * pMissedFrames, float * pLastMissedUsage);
+extern PFN_WGLQUERYFRAMETRACKINGI3D _wglQueryFrameTrackingI3D;
+
+typedef BOOL(__stdcall * PFN_WGLSETSTEREOEMITTERSTATE3DL)(HDC hDC, UINT uState);
+extern PFN_WGLSETSTEREOEMITTERSTATE3DL _wglSetStereoEmitterState3DL;
+
+typedef int(__stdcall * PFN_WGLENUMERATEVIDEODEVICESNV)(HDC hDC, HVIDEOOUTPUTDEVICENV * phDeviceList);
+extern PFN_WGLENUMERATEVIDEODEVICESNV _wglEnumerateVideoDevicesNV;
+
+typedef BOOL(__stdcall * PFN_WGLBINDVIDEODEVICENV)(HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int * piAttribList);
+extern PFN_WGLBINDVIDEODEVICENV _wglBindVideoDeviceNV;
+
+typedef BOOL(__stdcall * PFN_WGLQUERYCURRENTCONTEXTNV)(int iAttribute, int * piValue);
+extern PFN_WGLQUERYCURRENTCONTEXTNV _wglQueryCurrentContextNV;
+
+typedef BOOL(__stdcall * PFN_WGLGETVIDEODEVICENV)(HDC hDC, int numDevices, HPVIDEODEV * hVideoDevice);
+extern PFN_WGLGETVIDEODEVICENV _wglGetVideoDeviceNV;
+
+typedef BOOL(__stdcall * PFN_WGLRELEASEVIDEODEVICENV)(HPVIDEODEV hVideoDevice);
+extern PFN_WGLRELEASEVIDEODEVICENV _wglReleaseVideoDeviceNV;
+
+typedef BOOL(__stdcall * PFN_WGLBINDVIDEOIMAGENV)(HPVIDEODEV hVideoDevice, HPBUFFERARB hPbuffer, int iVideoBuffer);
+extern PFN_WGLBINDVIDEOIMAGENV _wglBindVideoImageNV;
+
+typedef BOOL(__stdcall * PFN_WGLRELEASEVIDEOIMAGENV)(HPBUFFERARB hPbuffer, int iVideoBuffer);
+extern PFN_WGLRELEASEVIDEOIMAGENV _wglReleaseVideoImageNV;
+
+typedef BOOL(__stdcall * PFN_WGLSENDPBUFFERTOVIDEONV)(HPBUFFERARB hPbuffer, int iBufferType, unsigned long * pulCounterPbuffer, BOOL bBlock);
+extern PFN_WGLSENDPBUFFERTOVIDEONV _wglSendPbufferToVideoNV;
+
+typedef BOOL(__stdcall * PFN_WGLGETVIDEOINFONV)(HPVIDEODEV hpVideoDevice, unsigned long * pulCounterOutputPbuffer, unsigned long * pulCounterOutputVideo);
+extern PFN_WGLGETVIDEOINFONV _wglGetVideoInfoNV;
+
+typedef BOOL(__stdcall * PFN_WGLJOINSWAPGROUPNV)(HDC hDC, GLuint group);
+extern PFN_WGLJOINSWAPGROUPNV _wglJoinSwapGroupNV;
+
+typedef BOOL(__stdcall * PFN_WGLBINDSWAPBARRIERNV)(GLuint group, GLuint barrier);
+extern PFN_WGLBINDSWAPBARRIERNV _wglBindSwapBarrierNV;
+
+typedef BOOL(__stdcall * PFN_WGLQUERYSWAPGROUPNV)(HDC hDC, GLuint * group, GLuint * barrier);
+extern PFN_WGLQUERYSWAPGROUPNV _wglQuerySwapGroupNV;
+
+typedef BOOL(__stdcall * PFN_WGLQUERYMAXSWAPGROUPSNV)(HDC hDC, GLuint * maxGroups, GLuint * maxBarriers);
+extern PFN_WGLQUERYMAXSWAPGROUPSNV _wglQueryMaxSwapGroupsNV;
+
+typedef BOOL(__stdcall * PFN_WGLQUERYFRAMECOUNTNV)(HDC hDC, GLuint * count);
+extern PFN_WGLQUERYFRAMECOUNTNV _wglQueryFrameCountNV;
+
+typedef BOOL(__stdcall * PFN_WGLRESETFRAMECOUNTNV)(HDC hDC);
+extern PFN_WGLRESETFRAMECOUNTNV _wglResetFrameCountNV;
+
+typedef BOOL(__stdcall * PFN_WGLENUMGPUSNV)(UINT iGpuIndex, HGPUNV * phGpu);
+extern PFN_WGLENUMGPUSNV _wglEnumGpusNV;
+
+typedef BOOL(__stdcall * PFN_WGLENUMGPUDEVICESNV)(HGPUNV hGpu, UINT iDeviceIndex, _GPU_DEVICE * lpGpuDevice);
+extern PFN_WGLENUMGPUDEVICESNV _wglEnumGpuDevicesNV;
+
+typedef HDC(__stdcall * PFN_WGLCREATEAFFINITYDCNV)(const HGPUNV * phGpuList);
+extern PFN_WGLCREATEAFFINITYDCNV _wglCreateAffinityDCNV;
+
+typedef BOOL(__stdcall * PFN_WGLENUMGPUSFROMAFFINITYDCNV)(HDC hAffinityDC, UINT iGpuIndex, HGPUNV * hGpu);
+extern PFN_WGLENUMGPUSFROMAFFINITYDCNV _wglEnumGpusFromAffinityDCNV;
+
+typedef BOOL(__stdcall * PFN_WGLDELETEDCNV)(HDC hdc);
+extern PFN_WGLDELETEDCNV _wglDeleteDCNV;
+
+typedef UINT(__stdcall * PFN_WGLGETGPUIDSAMD)(UINT maxCount, UINT * ids);
+extern PFN_WGLGETGPUIDSAMD _wglGetGPUIDsAMD;
+
+typedef INT(__stdcall * PFN_WGLGETGPUINFOAMD)(UINT id, int property, GLenum dataType, UINT size, void * data);
+extern PFN_WGLGETGPUINFOAMD _wglGetGPUInfoAMD;
+
+typedef UINT(__stdcall * PFN_WGLGETCONTEXTGPUIDAMD)(HGLRC hglrc);
+extern PFN_WGLGETCONTEXTGPUIDAMD _wglGetContextGPUIDAMD;
+
+typedef HGLRC(__stdcall * PFN_WGLCREATEASSOCIATEDCONTEXTAMD)(UINT id);
+extern PFN_WGLCREATEASSOCIATEDCONTEXTAMD _wglCreateAssociatedContextAMD;
+
+typedef HGLRC(__stdcall * PFN_WGLCREATEASSOCIATEDCONTEXTATTRIBSAMD)(UINT id, HGLRC hShareContext, const int * attribList);
+extern PFN_WGLCREATEASSOCIATEDCONTEXTATTRIBSAMD _wglCreateAssociatedContextAttribsAMD;
+
+typedef BOOL(__stdcall * PFN_WGLDELETEASSOCIATEDCONTEXTAMD)(HGLRC hglrc);
+extern PFN_WGLDELETEASSOCIATEDCONTEXTAMD _wglDeleteAssociatedContextAMD;
+
+typedef BOOL(__stdcall * PFN_WGLMAKEASSOCIATEDCONTEXTCURRENTAMD)(HGLRC hglrc);
+extern PFN_WGLMAKEASSOCIATEDCONTEXTCURRENTAMD _wglMakeAssociatedContextCurrentAMD;
+
+typedef HGLRC(__stdcall * PFN_WGLGETCURRENTASSOCIATEDCONTEXTAMD)(void);
+extern PFN_WGLGETCURRENTASSOCIATEDCONTEXTAMD _wglGetCurrentAssociatedContextAMD;
+
+typedef void(__stdcall * PFN_WGLBLITCONTEXTFRAMEBUFFERAMD)(HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
+extern PFN_WGLBLITCONTEXTFRAMEBUFFERAMD _wglBlitContextFramebufferAMD;
+
+typedef BOOL(__stdcall * PFN_WGLBINDVIDEOCAPTUREDEVICENV)(UINT uVideoSlot, HVIDEOINPUTDEVICENV hDevice);
+extern PFN_WGLBINDVIDEOCAPTUREDEVICENV _wglBindVideoCaptureDeviceNV;
+
+typedef UINT(__stdcall * PFN_WGLENUMERATEVIDEOCAPTUREDEVICESNV)(HDC hDc, HVIDEOINPUTDEVICENV * phDeviceList);
+extern PFN_WGLENUMERATEVIDEOCAPTUREDEVICESNV _wglEnumerateVideoCaptureDevicesNV;
+
+typedef BOOL(__stdcall * PFN_WGLLOCKVIDEOCAPTUREDEVICENV)(HDC hDc, HVIDEOINPUTDEVICENV hDevice);
+extern PFN_WGLLOCKVIDEOCAPTUREDEVICENV _wglLockVideoCaptureDeviceNV;
+
+typedef BOOL(__stdcall * PFN_WGLQUERYVIDEOCAPTUREDEVICENV)(HDC hDc, HVIDEOINPUTDEVICENV hDevice, int iAttribute, int * piValue);
+extern PFN_WGLQUERYVIDEOCAPTUREDEVICENV _wglQueryVideoCaptureDeviceNV;
+
+typedef BOOL(__stdcall * PFN_WGLRELEASEVIDEOCAPTUREDEVICENV)(HDC hDc, HVIDEOINPUTDEVICENV hDevice);
+extern PFN_WGLRELEASEVIDEOCAPTUREDEVICENV _wglReleaseVideoCaptureDeviceNV;
+
+typedef BOOL(__stdcall * PFN_WGLCOPYIMAGESUBDATANV)(HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth);
+extern PFN_WGLCOPYIMAGESUBDATANV _wglCopyImageSubDataNV;
+
+typedef BOOL(__stdcall * PFN_WGLDXSETRESOURCESHAREHANDLENV)(void * dxObject, HANDLE shareHandle);
+extern PFN_WGLDXSETRESOURCESHAREHANDLENV _wglDXSetResourceShareHandleNV;
+
+typedef HANDLE(__stdcall * PFN_WGLDXOPENDEVICENV)(void * dxDevice);
+extern PFN_WGLDXOPENDEVICENV _wglDXOpenDeviceNV;
+
+typedef BOOL(__stdcall * PFN_WGLDXCLOSEDEVICENV)(HANDLE hDevice);
+extern PFN_WGLDXCLOSEDEVICENV _wglDXCloseDeviceNV;
+
+typedef HANDLE(__stdcall * PFN_WGLDXREGISTEROBJECTNV)(HANDLE hDevice, void * dxObject, GLuint name, GLenum type, GLenum access);
+extern PFN_WGLDXREGISTEROBJECTNV _wglDXRegisterObjectNV;
+
+typedef BOOL(__stdcall * PFN_WGLDXUNREGISTEROBJECTNV)(HANDLE hDevice, HANDLE hObject);
+extern PFN_WGLDXUNREGISTEROBJECTNV _wglDXUnregisterObjectNV;
+
+typedef BOOL(__stdcall * PFN_WGLDXOBJECTACCESSNV)(HANDLE hObject, GLenum access);
+extern PFN_WGLDXOBJECTACCESSNV _wglDXObjectAccessNV;
+
+typedef BOOL(__stdcall * PFN_WGLDXLOCKOBJECTSNV)(HANDLE hDevice, GLint count, HANDLE * hObjects);
+extern PFN_WGLDXLOCKOBJECTSNV _wglDXLockObjectsNV;
+
+typedef BOOL(__stdcall * PFN_WGLDXUNLOCKOBJECTSNV)(HANDLE hDevice, GLint count, HANDLE * hObjects);
+extern PFN_WGLDXUNLOCKOBJECTSNV _wglDXUnlockObjectsNV;
+
+typedef BOOL(__stdcall * PFN_WGLDELAYBEFORESWAPNV)(HDC hDC, GLfloat seconds);
+extern PFN_WGLDELAYBEFORESWAPNV _wglDelayBeforeSwapNV;
+
+
 /*************************************************************/
 //void initialiseRealOpenGLFunctions();
 void initialiseVariables();

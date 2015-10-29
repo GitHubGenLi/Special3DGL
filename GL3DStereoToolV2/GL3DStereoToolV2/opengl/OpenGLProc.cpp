@@ -527,6 +527,2420 @@ static void APIENTRY _get_glFlush(void) {
 
 PFN_GLFLUSH _glFlush = &_get_glFlush;
 
+static BOOL __stdcall _fail_wglMakeCurrent(HDC hdc, HGLRC hglrc) {
+	const char *_name = "wglMakeCurrent";
+	
+	return false;
+}
+
+static BOOL __stdcall _get_wglMakeCurrent(HDC hdc, HGLRC hglrc) {
+	PFN_WGLMAKECURRENT _ptr;
+	_ptr = (PFN_WGLMAKECURRENT)_getPublicProcAddress("wglMakeCurrent");
+	if (!_ptr) {
+		_ptr = &_fail_wglMakeCurrent;
+	}
+	_wglMakeCurrent = _ptr;
+	return _wglMakeCurrent(hdc, hglrc);
+}
+
+PFN_WGLMAKECURRENT _wglMakeCurrent = &_get_wglMakeCurrent;
+
+static void APIENTRY _fail_glScaled(GLdouble x, GLdouble y, GLdouble z) {
+	const char *_name = "glScaled";
+	
+	return;
+}
+
+static void APIENTRY _get_glScaled(GLdouble x, GLdouble y, GLdouble z) {
+	PFN_GLSCALED _ptr;
+	_ptr = (PFN_GLSCALED)_getPublicProcAddress("glScaled");
+	if (!_ptr) {
+		_ptr = &_fail_glScaled;
+	}
+	_glScaled = _ptr;
+	_glScaled(x, y, z);
+}
+
+PFN_GLSCALED _glScaled = &_get_glScaled;
+
+static void APIENTRY _fail_glColor3d(GLdouble red, GLdouble green, GLdouble blue) {
+	const char *_name = "glColor3d";
+	
+	return;
+}
+
+static void APIENTRY _get_glColor3d(GLdouble red, GLdouble green, GLdouble blue) {
+	PFN_GLCOLOR3D _ptr;
+	_ptr = (PFN_GLCOLOR3D)_getPublicProcAddress("glColor3d");
+	if (!_ptr) {
+		_ptr = &_fail_glColor3d;
+	}
+	_glColor3d = _ptr;
+	_glColor3d(red, green, blue);
+}
+
+PFN_GLCOLOR3D _glColor3d = &_get_glColor3d;
+
+static void APIENTRY _fail_glPushMatrix(void) {
+	const char *_name = "glPushMatrix";
+	
+	return;
+}
+
+static void APIENTRY _get_glPushMatrix(void) {
+	PFN_GLPUSHMATRIX _ptr;
+	_ptr = (PFN_GLPUSHMATRIX)_getPublicProcAddress("glPushMatrix");
+	if (!_ptr) {
+		_ptr = &_fail_glPushMatrix;
+	}
+	_glPushMatrix = _ptr;
+	_glPushMatrix();
+}
+
+PFN_GLPUSHMATRIX _glPushMatrix = &_get_glPushMatrix;
+
+static void APIENTRY _fail_glMultMatrixd(const GLdouble * m) {
+	const char *_name = "glMultMatrixd";
+	
+	return;
+}
+
+static void APIENTRY _get_glMultMatrixd(const GLdouble * m) {
+	PFN_GLMULTMATRIXD _ptr;
+	_ptr = (PFN_GLMULTMATRIXD)_getPublicProcAddress("glMultMatrixd");
+	if (!_ptr) {
+		_ptr = &_fail_glMultMatrixd;
+	}
+	_glMultMatrixd = _ptr;
+	_glMultMatrixd(m);
+}
+
+PFN_GLMULTMATRIXD _glMultMatrixd = &_get_glMultMatrixd;
+
+
+static HGLRC __stdcall _fail_wglCreateContext(HDC hdc) {
+	const char *_name = "wglCreateContext";
+	
+	return false;
+}
+
+static HGLRC __stdcall _get_wglCreateContext(HDC hdc) {
+	PFN_WGLCREATECONTEXT _ptr;
+	_ptr = (PFN_WGLCREATECONTEXT)_getPublicProcAddress("wglCreateContext");
+	if (!_ptr) {
+		_ptr = &_fail_wglCreateContext;
+	}
+	_wglCreateContext = _ptr;
+	return _wglCreateContext(hdc);
+}
+
+PFN_WGLCREATECONTEXT _wglCreateContext = &_get_wglCreateContext;
+
+static BOOL __stdcall _fail_wglDeleteContext(HGLRC hglrc) {
+	const char *_name = "wglDeleteContext";
+	
+	return false;
+}
+
+static BOOL __stdcall _get_wglDeleteContext(HGLRC hglrc) {
+	PFN_WGLDELETECONTEXT _ptr;
+	_ptr = (PFN_WGLDELETECONTEXT)_getPublicProcAddress("wglDeleteContext");
+	if (!_ptr) {
+		_ptr = &_fail_wglDeleteContext;
+	}
+	_wglDeleteContext = _ptr;
+	return _wglDeleteContext(hglrc);
+}
+
+PFN_WGLDELETECONTEXT _wglDeleteContext = &_get_wglDeleteContext;
+
+static HGLRC __stdcall _fail_wglGetCurrentContext(void) {
+	const char *_name = "wglGetCurrentContext";
+
+	return false;
+}
+
+static HGLRC __stdcall _get_wglGetCurrentContext(void) {
+	PFN_WGLGETCURRENTCONTEXT _ptr;
+	_ptr = (PFN_WGLGETCURRENTCONTEXT)_getPublicProcAddress("wglGetCurrentContext");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetCurrentContext;
+	}
+	_wglGetCurrentContext = _ptr;
+	return _wglGetCurrentContext();
+}
+
+PFN_WGLGETCURRENTCONTEXT _wglGetCurrentContext = &_get_wglGetCurrentContext;
+
+static BOOL __stdcall _fail_wglCopyContext(HGLRC hglrcSrc, HGLRC hglrcDst, UINT mask) {
+	const char *_name = "wglCopyContext";
+	
+	return false;
+}
+
+static BOOL __stdcall _get_wglCopyContext(HGLRC hglrcSrc, HGLRC hglrcDst, UINT mask) {
+	PFN_WGLCOPYCONTEXT _ptr;
+	_ptr = (PFN_WGLCOPYCONTEXT)_getPublicProcAddress("wglCopyContext");
+	if (!_ptr) {
+		_ptr = &_fail_wglCopyContext;
+	}
+	_wglCopyContext = _ptr;
+	return _wglCopyContext(hglrcSrc, hglrcDst, mask);
+}
+
+PFN_WGLCOPYCONTEXT _wglCopyContext = &_get_wglCopyContext;
+
+static HDC __stdcall _fail_wglGetCurrentDC(void) {
+	const char *_name = "wglGetCurrentDC";
+	return false;
+}
+
+static HDC __stdcall _get_wglGetCurrentDC(void) {
+	PFN_WGLGETCURRENTDC _ptr;
+	_ptr = (PFN_WGLGETCURRENTDC)_getPublicProcAddress("wglGetCurrentDC");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetCurrentDC;
+	}
+	_wglGetCurrentDC = _ptr;
+	return _wglGetCurrentDC();
+}
+
+PFN_WGLGETCURRENTDC _wglGetCurrentDC = &_get_wglGetCurrentDC;
+
+static PROC __stdcall _fail_wglGetDefaultProcAddress(const char * lpszProc) {
+	const char *_name = "wglGetDefaultProcAddress";
+	
+	return false;
+}
+
+static PROC __stdcall _get_wglGetDefaultProcAddress(const char * lpszProc) {
+	PFN_WGLGETDEFAULTPROCADDRESS _ptr;
+	_ptr = (PFN_WGLGETDEFAULTPROCADDRESS)_getPublicProcAddress("wglGetDefaultProcAddress");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetDefaultProcAddress;
+	}
+	_wglGetDefaultProcAddress = _ptr;
+	return _wglGetDefaultProcAddress(lpszProc);
+}
+
+PFN_WGLGETDEFAULTPROCADDRESS _wglGetDefaultProcAddress = &_get_wglGetDefaultProcAddress;
+
+static BOOL __stdcall _fail_wglShareLists(HGLRC hglrc1, HGLRC hglrc2) {
+	const char *_name = "wglShareLists";
+	return false;
+}
+
+static BOOL __stdcall _get_wglShareLists(HGLRC hglrc1, HGLRC hglrc2) {
+	PFN_WGLSHARELISTS _ptr;
+	_ptr = (PFN_WGLSHARELISTS)_getPublicProcAddress("wglShareLists");
+	if (!_ptr) {
+		_ptr = &_fail_wglShareLists;
+	}
+	_wglShareLists = _ptr;
+	return _wglShareLists(hglrc1, hglrc2);
+}
+
+PFN_WGLSHARELISTS _wglShareLists = &_get_wglShareLists;
+
+static HGLRC __stdcall _fail_wglCreateLayerContext(HDC hdc, int iLayerPlane) {
+	const char *_name = "wglCreateLayerContext";
+	return NULL;
+}
+
+static HGLRC __stdcall _get_wglCreateLayerContext(HDC hdc, int iLayerPlane) {
+	PFN_WGLCREATELAYERCONTEXT _ptr;
+	_ptr = (PFN_WGLCREATELAYERCONTEXT)_getPublicProcAddress("wglCreateLayerContext");
+	if (!_ptr) {
+		_ptr = &_fail_wglCreateLayerContext;
+	}
+	_wglCreateLayerContext = _ptr;
+	return _wglCreateLayerContext(hdc, iLayerPlane);
+}
+
+PFN_WGLCREATELAYERCONTEXT _wglCreateLayerContext = &_get_wglCreateLayerContext;
+
+static BOOL __stdcall _fail_wglDescribeLayerPlane(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nBytes, LAYERPLANEDESCRIPTOR * plpd) {
+	const char *_name = "wglDescribeLayerPlane";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDescribeLayerPlane(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nBytes, LAYERPLANEDESCRIPTOR * plpd) {
+	PFN_WGLDESCRIBELAYERPLANE _ptr;
+	_ptr = (PFN_WGLDESCRIBELAYERPLANE)_getPublicProcAddress("wglDescribeLayerPlane");
+	if (!_ptr) {
+		_ptr = &_fail_wglDescribeLayerPlane;
+	}
+	_wglDescribeLayerPlane = _ptr;
+	return _wglDescribeLayerPlane(hdc, iPixelFormat, iLayerPlane, nBytes, plpd);
+}
+
+PFN_WGLDESCRIBELAYERPLANE _wglDescribeLayerPlane = &_get_wglDescribeLayerPlane;
+
+static int __stdcall _fail_wglSetLayerPaletteEntries(HDC hdc, int iLayerPlane, int iStart, int cEntries, const COLORREF * pcr) {
+	const char *_name = "wglSetLayerPaletteEntries";
+	return NULL;
+}
+
+static int __stdcall _get_wglSetLayerPaletteEntries(HDC hdc, int iLayerPlane, int iStart, int cEntries, const COLORREF * pcr) {
+	PFN_WGLSETLAYERPALETTEENTRIES _ptr;
+	_ptr = (PFN_WGLSETLAYERPALETTEENTRIES)_getPublicProcAddress("wglSetLayerPaletteEntries");
+	if (!_ptr) {
+		_ptr = &_fail_wglSetLayerPaletteEntries;
+	}
+	_wglSetLayerPaletteEntries = _ptr;
+	return _wglSetLayerPaletteEntries(hdc, iLayerPlane, iStart, cEntries, pcr);
+}
+
+PFN_WGLSETLAYERPALETTEENTRIES _wglSetLayerPaletteEntries = &_get_wglSetLayerPaletteEntries;
+
+static int __stdcall _fail_wglGetLayerPaletteEntries(HDC hdc, int iLayerPlane, int iStart, int cEntries, COLORREF * pcr) {
+	const char *_name = "wglGetLayerPaletteEntries";
+	return 0;
+}
+
+static int __stdcall _get_wglGetLayerPaletteEntries(HDC hdc, int iLayerPlane, int iStart, int cEntries, COLORREF * pcr) {
+	PFN_WGLGETLAYERPALETTEENTRIES _ptr;
+	_ptr = (PFN_WGLGETLAYERPALETTEENTRIES)_getPublicProcAddress("wglGetLayerPaletteEntries");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetLayerPaletteEntries;
+	}
+	_wglGetLayerPaletteEntries = _ptr;
+	return _wglGetLayerPaletteEntries(hdc, iLayerPlane, iStart, cEntries, pcr);
+}
+
+PFN_WGLGETLAYERPALETTEENTRIES _wglGetLayerPaletteEntries = &_get_wglGetLayerPaletteEntries;
+
+static BOOL __stdcall _fail_wglRealizeLayerPalette(HDC hdc, int iLayerPlane, BOOL bRealize) {
+	const char *_name = "wglRealizeLayerPalette";
+
+	return false;
+}
+
+static BOOL __stdcall _get_wglRealizeLayerPalette(HDC hdc, int iLayerPlane, BOOL bRealize) {
+	PFN_WGLREALIZELAYERPALETTE _ptr;
+	_ptr = (PFN_WGLREALIZELAYERPALETTE)_getPublicProcAddress("wglRealizeLayerPalette");
+	if (!_ptr) {
+		_ptr = &_fail_wglRealizeLayerPalette;
+	}
+	_wglRealizeLayerPalette = _ptr;
+	return _wglRealizeLayerPalette(hdc, iLayerPlane, bRealize);
+}
+
+PFN_WGLREALIZELAYERPALETTE _wglRealizeLayerPalette = &_get_wglRealizeLayerPalette;
+
+static BOOL __stdcall _fail_wglSwapLayerBuffers(HDC hdc, UINT fuPlanes) {
+	const char *_name = "wglSwapLayerBuffers";
+	return false;
+}
+
+static BOOL __stdcall _get_wglSwapLayerBuffers(HDC hdc, UINT fuPlanes) {
+	PFN_WGLSWAPLAYERBUFFERS _ptr;
+	_ptr = (PFN_WGLSWAPLAYERBUFFERS)_getPublicProcAddress("wglSwapLayerBuffers");
+	if (!_ptr) {
+		_ptr = &_fail_wglSwapLayerBuffers;
+	}
+	_wglSwapLayerBuffers = _ptr;
+	return _wglSwapLayerBuffers(hdc, fuPlanes);
+}
+
+PFN_WGLSWAPLAYERBUFFERS _wglSwapLayerBuffers = &_get_wglSwapLayerBuffers;
+
+static BOOL __stdcall _fail_wglUseFontBitmapsA(HDC hdc, DWORD first, DWORD count, DWORD listBase) {
+	const char *_name = "wglUseFontBitmapsA";
+	return false;
+}
+
+static BOOL __stdcall _get_wglUseFontBitmapsA(HDC hdc, DWORD first, DWORD count, DWORD listBase) {
+	PFN_WGLUSEFONTBITMAPSA _ptr;
+	_ptr = (PFN_WGLUSEFONTBITMAPSA)_getPublicProcAddress("wglUseFontBitmapsA");
+	if (!_ptr) {
+		_ptr = &_fail_wglUseFontBitmapsA;
+	}
+	_wglUseFontBitmapsA = _ptr;
+	return _wglUseFontBitmapsA(hdc, first, count, listBase);
+}
+
+PFN_WGLUSEFONTBITMAPSA _wglUseFontBitmapsA = &_get_wglUseFontBitmapsA;
+
+static BOOL __stdcall _fail_wglUseFontBitmapsW(HDC hdc, DWORD first, DWORD count, DWORD listBase) {
+	const char *_name = "wglUseFontBitmapsW";
+	return false;
+}
+
+static BOOL __stdcall _get_wglUseFontBitmapsW(HDC hdc, DWORD first, DWORD count, DWORD listBase) {
+	PFN_WGLUSEFONTBITMAPSW _ptr;
+	_ptr = (PFN_WGLUSEFONTBITMAPSW)_getPublicProcAddress("wglUseFontBitmapsW");
+	if (!_ptr) {
+		_ptr = &_fail_wglUseFontBitmapsW;
+	}
+	_wglUseFontBitmapsW = _ptr;
+	return _wglUseFontBitmapsW(hdc, first, count, listBase);
+}
+
+PFN_WGLUSEFONTBITMAPSW _wglUseFontBitmapsW = &_get_wglUseFontBitmapsW;
+
+static DWORD __stdcall _fail_wglSwapMultipleBuffers(UINT n, const WGLSWAP * ps) {
+	const char *_name = "wglSwapMultipleBuffers";
+	return false;
+}
+
+static DWORD __stdcall _get_wglSwapMultipleBuffers(UINT n, const WGLSWAP * ps) {
+	PFN_WGLSWAPMULTIPLEBUFFERS _ptr;
+	_ptr = (PFN_WGLSWAPMULTIPLEBUFFERS)_getPublicProcAddress("wglSwapMultipleBuffers");
+	if (!_ptr) {
+		_ptr = &_fail_wglSwapMultipleBuffers;
+	}
+	_wglSwapMultipleBuffers = _ptr;
+	return _wglSwapMultipleBuffers(n, ps);
+}
+
+PFN_WGLSWAPMULTIPLEBUFFERS _wglSwapMultipleBuffers = &_get_wglSwapMultipleBuffers;
+
+static BOOL __stdcall _fail_wglUseFontOutlinesA(HDC hdc, DWORD first, DWORD count, DWORD listBase, FLOAT deviation, FLOAT extrusion, int format, GLYPHMETRICSFLOAT * lpgmf) {
+	const char *_name = "wglUseFontOutlinesA";
+	return false;
+}
+
+static BOOL __stdcall _get_wglUseFontOutlinesA(HDC hdc, DWORD first, DWORD count, DWORD listBase, FLOAT deviation, FLOAT extrusion, int format, GLYPHMETRICSFLOAT * lpgmf) {
+	PFN_WGLUSEFONTOUTLINESA _ptr;
+	_ptr = (PFN_WGLUSEFONTOUTLINESA)_getPublicProcAddress("wglUseFontOutlinesA");
+	if (!_ptr) {
+		_ptr = &_fail_wglUseFontOutlinesA;
+	}
+	_wglUseFontOutlinesA = _ptr;
+	return _wglUseFontOutlinesA(hdc, first, count, listBase, deviation, extrusion, format, lpgmf);
+}
+
+PFN_WGLUSEFONTOUTLINESA _wglUseFontOutlinesA = &_get_wglUseFontOutlinesA;
+
+static BOOL __stdcall _fail_wglUseFontOutlinesW(HDC hdc, DWORD first, DWORD count, DWORD listBase, FLOAT deviation, FLOAT extrusion, int format, GLYPHMETRICSFLOAT * lpgmf) {
+	const char *_name = "wglUseFontOutlinesW";
+	return false;
+}
+
+static BOOL __stdcall _get_wglUseFontOutlinesW(HDC hdc, DWORD first, DWORD count, DWORD listBase, FLOAT deviation, FLOAT extrusion, int format, GLYPHMETRICSFLOAT * lpgmf) {
+	PFN_WGLUSEFONTOUTLINESW _ptr;
+	_ptr = (PFN_WGLUSEFONTOUTLINESW)_getPublicProcAddress("wglUseFontOutlinesW");
+	if (!_ptr) {
+		_ptr = &_fail_wglUseFontOutlinesW;
+	}
+	_wglUseFontOutlinesW = _ptr;
+	return _wglUseFontOutlinesW(hdc, first, count, listBase, deviation, extrusion, format, lpgmf);
+}
+
+PFN_WGLUSEFONTOUTLINESW _wglUseFontOutlinesW = &_get_wglUseFontOutlinesW;
+
+static HANDLE __stdcall _fail_wglCreateBufferRegionARB(HDC hDC, int iLayerPlane, UINT uType) {
+	const char *_name = "wglCreateBufferRegionARB";
+	return false;
+}
+
+static HANDLE __stdcall _get_wglCreateBufferRegionARB(HDC hDC, int iLayerPlane, UINT uType) {
+	PFN_WGLCREATEBUFFERREGIONARB _ptr;
+	_ptr = (PFN_WGLCREATEBUFFERREGIONARB)_getPrivateProcAddress("wglCreateBufferRegionARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglCreateBufferRegionARB;
+	}
+	_wglCreateBufferRegionARB = _ptr;
+	return _wglCreateBufferRegionARB(hDC, iLayerPlane, uType);
+}
+
+PFN_WGLCREATEBUFFERREGIONARB _wglCreateBufferRegionARB = &_get_wglCreateBufferRegionARB;
+
+static void __stdcall _fail_wglDeleteBufferRegionARB(HANDLE hRegion) {
+	const char *_name = "wglDeleteBufferRegionARB";
+	
+	return;
+}
+
+static void __stdcall _get_wglDeleteBufferRegionARB(HANDLE hRegion) {
+	PFN_WGLDELETEBUFFERREGIONARB _ptr;
+	_ptr = (PFN_WGLDELETEBUFFERREGIONARB)_getPrivateProcAddress("wglDeleteBufferRegionARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglDeleteBufferRegionARB;
+	}
+	_wglDeleteBufferRegionARB = _ptr;
+	_wglDeleteBufferRegionARB(hRegion);
+}
+
+PFN_WGLDELETEBUFFERREGIONARB _wglDeleteBufferRegionARB = &_get_wglDeleteBufferRegionARB;
+
+static BOOL __stdcall _fail_wglSaveBufferRegionARB(HANDLE hRegion, int x, int y, int width, int height) {
+	const char *_name = "wglSaveBufferRegionARB";
+	return false;
+}
+
+static BOOL __stdcall _get_wglSaveBufferRegionARB(HANDLE hRegion, int x, int y, int width, int height) {
+	PFN_WGLSAVEBUFFERREGIONARB _ptr;
+	_ptr = (PFN_WGLSAVEBUFFERREGIONARB)_getPrivateProcAddress("wglSaveBufferRegionARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglSaveBufferRegionARB;
+	}
+	_wglSaveBufferRegionARB = _ptr;
+	return _wglSaveBufferRegionARB(hRegion, x, y, width, height);
+}
+
+PFN_WGLSAVEBUFFERREGIONARB _wglSaveBufferRegionARB = &_get_wglSaveBufferRegionARB;
+
+static BOOL __stdcall _fail_wglRestoreBufferRegionARB(HANDLE hRegion, int x, int y, int width, int height, int xSrc, int ySrc) {
+	const char *_name = "wglRestoreBufferRegionARB";
+	return false;
+}
+
+static BOOL __stdcall _get_wglRestoreBufferRegionARB(HANDLE hRegion, int x, int y, int width, int height, int xSrc, int ySrc) {
+	PFN_WGLRESTOREBUFFERREGIONARB _ptr;
+	_ptr = (PFN_WGLRESTOREBUFFERREGIONARB)_getPrivateProcAddress("wglRestoreBufferRegionARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglRestoreBufferRegionARB;
+	}
+	_wglRestoreBufferRegionARB = _ptr;
+	return _wglRestoreBufferRegionARB(hRegion, x, y, width, height, xSrc, ySrc);
+}
+
+PFN_WGLRESTOREBUFFERREGIONARB _wglRestoreBufferRegionARB = &_get_wglRestoreBufferRegionARB;
+
+static const char * __stdcall _fail_wglGetExtensionsStringARB(HDC hdc) {
+	const char *_name = "wglGetExtensionsStringARB";
+	return "";
+}
+
+static const char * __stdcall _get_wglGetExtensionsStringARB(HDC hdc) {
+	PFN_WGLGETEXTENSIONSSTRINGARB _ptr;
+	_ptr = (PFN_WGLGETEXTENSIONSSTRINGARB)_getPrivateProcAddress("wglGetExtensionsStringARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetExtensionsStringARB;
+	}
+	_wglGetExtensionsStringARB = _ptr;
+	return _wglGetExtensionsStringARB(hdc);
+}
+
+PFN_WGLGETEXTENSIONSSTRINGARB _wglGetExtensionsStringARB = &_get_wglGetExtensionsStringARB;
+
+static BOOL __stdcall _fail_wglGetPixelFormatAttribivARB(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, int * piValues) {
+	const char *_name = "wglGetPixelFormatAttribivARB";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetPixelFormatAttribivARB(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, int * piValues) {
+	PFN_WGLGETPIXELFORMATATTRIBIVARB _ptr;
+	_ptr = (PFN_WGLGETPIXELFORMATATTRIBIVARB)_getPrivateProcAddress("wglGetPixelFormatAttribivARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetPixelFormatAttribivARB;
+	}
+	_wglGetPixelFormatAttribivARB = _ptr;
+	return _wglGetPixelFormatAttribivARB(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
+}
+
+PFN_WGLGETPIXELFORMATATTRIBIVARB _wglGetPixelFormatAttribivARB = &_get_wglGetPixelFormatAttribivARB;
+
+static BOOL __stdcall _fail_wglGetPixelFormatAttribfvARB(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, FLOAT * pfValues) {
+	const char *_name = "wglGetPixelFormatAttribfvARB";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetPixelFormatAttribfvARB(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, FLOAT * pfValues) {
+	PFN_WGLGETPIXELFORMATATTRIBFVARB _ptr;
+	_ptr = (PFN_WGLGETPIXELFORMATATTRIBFVARB)_getPrivateProcAddress("wglGetPixelFormatAttribfvARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetPixelFormatAttribfvARB;
+	}
+	_wglGetPixelFormatAttribfvARB = _ptr;
+	return _wglGetPixelFormatAttribfvARB(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
+}
+
+PFN_WGLGETPIXELFORMATATTRIBFVARB _wglGetPixelFormatAttribfvARB = &_get_wglGetPixelFormatAttribfvARB;
+
+static BOOL __stdcall _fail_wglMakeContextCurrentARB(HDC hDrawDC, HDC hReadDC, HGLRC hglrc) {
+	const char *_name = "wglMakeContextCurrentARB";
+	return false;
+}
+
+static BOOL __stdcall _get_wglMakeContextCurrentARB(HDC hDrawDC, HDC hReadDC, HGLRC hglrc) {
+	PFN_WGLMAKECONTEXTCURRENTARB _ptr;
+	_ptr = (PFN_WGLMAKECONTEXTCURRENTARB)_getPrivateProcAddress("wglMakeContextCurrentARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglMakeContextCurrentARB;
+	}
+	_wglMakeContextCurrentARB = _ptr;
+	return _wglMakeContextCurrentARB(hDrawDC, hReadDC, hglrc);
+}
+
+PFN_WGLMAKECONTEXTCURRENTARB _wglMakeContextCurrentARB = &_get_wglMakeContextCurrentARB;
+
+static HDC __stdcall _fail_wglGetCurrentReadDCARB(void) {
+	const char *_name = "wglGetCurrentReadDCARB";
+	return 0;
+}
+
+static HDC __stdcall _get_wglGetCurrentReadDCARB(void) {
+	PFN_WGLGETCURRENTREADDCARB _ptr;
+	_ptr = (PFN_WGLGETCURRENTREADDCARB)_getPrivateProcAddress("wglGetCurrentReadDCARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetCurrentReadDCARB;
+	}
+	_wglGetCurrentReadDCARB = _ptr;
+	return _wglGetCurrentReadDCARB();
+}
+
+PFN_WGLGETCURRENTREADDCARB _wglGetCurrentReadDCARB = &_get_wglGetCurrentReadDCARB;
+
+static HPBUFFERARB __stdcall _fail_wglCreatePbufferARB(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int * piAttribList) {
+	const char *_name = "wglCreatePbufferARB";
+	return NULL;
+}
+
+static HPBUFFERARB __stdcall _get_wglCreatePbufferARB(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int * piAttribList) {
+	PFN_WGLCREATEPBUFFERARB _ptr;
+	_ptr = (PFN_WGLCREATEPBUFFERARB)_getPrivateProcAddress("wglCreatePbufferARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglCreatePbufferARB;
+	}
+	_wglCreatePbufferARB = _ptr;
+	return _wglCreatePbufferARB(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
+}
+
+PFN_WGLCREATEPBUFFERARB _wglCreatePbufferARB = &_get_wglCreatePbufferARB;
+
+static HDC __stdcall _fail_wglGetPbufferDCARB(HPBUFFERARB hPbuffer) {
+	const char *_name = "wglGetPbufferDCARB";
+	return NULL;
+}
+
+static HDC __stdcall _get_wglGetPbufferDCARB(HPBUFFERARB hPbuffer) {
+	PFN_WGLGETPBUFFERDCARB _ptr;
+	_ptr = (PFN_WGLGETPBUFFERDCARB)_getPrivateProcAddress("wglGetPbufferDCARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetPbufferDCARB;
+	}
+	_wglGetPbufferDCARB = _ptr;
+	return _wglGetPbufferDCARB(hPbuffer);
+}
+
+PFN_WGLGETPBUFFERDCARB _wglGetPbufferDCARB = &_get_wglGetPbufferDCARB;
+
+static int __stdcall _fail_wglReleasePbufferDCARB(HPBUFFERARB hPbuffer, HDC hDC) {
+	const char *_name = "wglReleasePbufferDCARB";
+	return NULL;
+}
+
+static int __stdcall _get_wglReleasePbufferDCARB(HPBUFFERARB hPbuffer, HDC hDC) {
+	PFN_WGLRELEASEPBUFFERDCARB _ptr;
+	_ptr = (PFN_WGLRELEASEPBUFFERDCARB)_getPrivateProcAddress("wglReleasePbufferDCARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglReleasePbufferDCARB;
+	}
+	_wglReleasePbufferDCARB = _ptr;
+	return _wglReleasePbufferDCARB(hPbuffer, hDC);
+}
+
+PFN_WGLRELEASEPBUFFERDCARB _wglReleasePbufferDCARB = &_get_wglReleasePbufferDCARB;
+
+static BOOL __stdcall _fail_wglDestroyPbufferARB(HPBUFFERARB hPbuffer) {
+	const char *_name = "wglDestroyPbufferARB";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDestroyPbufferARB(HPBUFFERARB hPbuffer) {
+	PFN_WGLDESTROYPBUFFERARB _ptr;
+	_ptr = (PFN_WGLDESTROYPBUFFERARB)_getPrivateProcAddress("wglDestroyPbufferARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglDestroyPbufferARB;
+	}
+	_wglDestroyPbufferARB = _ptr;
+	return _wglDestroyPbufferARB(hPbuffer);
+}
+
+PFN_WGLDESTROYPBUFFERARB _wglDestroyPbufferARB = &_get_wglDestroyPbufferARB;
+
+static BOOL __stdcall _fail_wglQueryPbufferARB(HPBUFFERARB hPbuffer, int iAttribute, int * piValue) {
+	const char *_name = "wglQueryPbufferARB";
+	return false;
+}
+
+static BOOL __stdcall _get_wglQueryPbufferARB(HPBUFFERARB hPbuffer, int iAttribute, int * piValue) {
+	PFN_WGLQUERYPBUFFERARB _ptr;
+	_ptr = (PFN_WGLQUERYPBUFFERARB)_getPrivateProcAddress("wglQueryPbufferARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglQueryPbufferARB;
+	}
+	_wglQueryPbufferARB = _ptr;
+	return _wglQueryPbufferARB(hPbuffer, iAttribute, piValue);
+}
+
+PFN_WGLQUERYPBUFFERARB _wglQueryPbufferARB = &_get_wglQueryPbufferARB;
+
+static BOOL __stdcall _fail_wglBindTexImageARB(HPBUFFERARB hPbuffer, int iBuffer) {
+	const char *_name = "wglBindTexImageARB";
+	return false;
+}
+
+static BOOL __stdcall _get_wglBindTexImageARB(HPBUFFERARB hPbuffer, int iBuffer) {
+	PFN_WGLBINDTEXIMAGEARB _ptr;
+	_ptr = (PFN_WGLBINDTEXIMAGEARB)_getPrivateProcAddress("wglBindTexImageARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglBindTexImageARB;
+	}
+	_wglBindTexImageARB = _ptr;
+	return _wglBindTexImageARB(hPbuffer, iBuffer);
+}
+
+PFN_WGLBINDTEXIMAGEARB _wglBindTexImageARB = &_get_wglBindTexImageARB;
+
+static BOOL __stdcall _fail_wglReleaseTexImageARB(HPBUFFERARB hPbuffer, int iBuffer) {
+	const char *_name = "wglReleaseTexImageARB";
+	return false;
+}
+
+static BOOL __stdcall _get_wglReleaseTexImageARB(HPBUFFERARB hPbuffer, int iBuffer) {
+	PFN_WGLRELEASETEXIMAGEARB _ptr;
+	_ptr = (PFN_WGLRELEASETEXIMAGEARB)_getPrivateProcAddress("wglReleaseTexImageARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglReleaseTexImageARB;
+	}
+	_wglReleaseTexImageARB = _ptr;
+	return _wglReleaseTexImageARB(hPbuffer, iBuffer);
+}
+
+PFN_WGLRELEASETEXIMAGEARB _wglReleaseTexImageARB = &_get_wglReleaseTexImageARB;
+
+static BOOL __stdcall _fail_wglSetPbufferAttribARB(HPBUFFERARB hPbuffer, const int * piAttribList) {
+	const char *_name = "wglSetPbufferAttribARB";
+	return false;
+}
+
+static BOOL __stdcall _get_wglSetPbufferAttribARB(HPBUFFERARB hPbuffer, const int * piAttribList) {
+	PFN_WGLSETPBUFFERATTRIBARB _ptr;
+	_ptr = (PFN_WGLSETPBUFFERATTRIBARB)_getPrivateProcAddress("wglSetPbufferAttribARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglSetPbufferAttribARB;
+	}
+	_wglSetPbufferAttribARB = _ptr;
+	return _wglSetPbufferAttribARB(hPbuffer, piAttribList);
+}
+
+PFN_WGLSETPBUFFERATTRIBARB _wglSetPbufferAttribARB = &_get_wglSetPbufferAttribARB;
+
+static HGLRC __stdcall _fail_wglCreateContextAttribsARB(HDC hDC, HGLRC hShareContext, const int * attribList) {
+	const char *_name = "wglCreateContextAttribsARB";
+	return NULL;
+}
+
+static HGLRC __stdcall _get_wglCreateContextAttribsARB(HDC hDC, HGLRC hShareContext, const int * attribList) {
+	PFN_WGLCREATECONTEXTATTRIBSARB _ptr;
+	_ptr = (PFN_WGLCREATECONTEXTATTRIBSARB)_getPrivateProcAddress("wglCreateContextAttribsARB");
+	if (!_ptr) {
+		_ptr = &_fail_wglCreateContextAttribsARB;
+	}
+	_wglCreateContextAttribsARB = _ptr;
+	return _wglCreateContextAttribsARB(hDC, hShareContext, attribList);
+}
+
+PFN_WGLCREATECONTEXTATTRIBSARB _wglCreateContextAttribsARB = &_get_wglCreateContextAttribsARB;
+
+static GLboolean __stdcall _fail_wglCreateDisplayColorTableEXT(GLushort id) {
+	const char *_name = "wglCreateDisplayColorTableEXT";
+	return false;
+}
+
+static GLboolean __stdcall _get_wglCreateDisplayColorTableEXT(GLushort id) {
+	PFN_WGLCREATEDISPLAYCOLORTABLEEXT _ptr;
+	_ptr = (PFN_WGLCREATEDISPLAYCOLORTABLEEXT)_getPrivateProcAddress("wglCreateDisplayColorTableEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglCreateDisplayColorTableEXT;
+	}
+	_wglCreateDisplayColorTableEXT = _ptr;
+	return _wglCreateDisplayColorTableEXT(id);
+}
+
+PFN_WGLCREATEDISPLAYCOLORTABLEEXT _wglCreateDisplayColorTableEXT = &_get_wglCreateDisplayColorTableEXT;
+
+static GLboolean __stdcall _fail_wglLoadDisplayColorTableEXT(const GLushort * table, GLuint length) {
+	const char *_name = "wglLoadDisplayColorTableEXT";
+	return false;
+}
+
+static GLboolean __stdcall _get_wglLoadDisplayColorTableEXT(const GLushort * table, GLuint length) {
+	PFN_WGLLOADDISPLAYCOLORTABLEEXT _ptr;
+	_ptr = (PFN_WGLLOADDISPLAYCOLORTABLEEXT)_getPrivateProcAddress("wglLoadDisplayColorTableEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglLoadDisplayColorTableEXT;
+	}
+	_wglLoadDisplayColorTableEXT = _ptr;
+	return _wglLoadDisplayColorTableEXT(table, length);
+}
+
+PFN_WGLLOADDISPLAYCOLORTABLEEXT _wglLoadDisplayColorTableEXT = &_get_wglLoadDisplayColorTableEXT;
+
+static GLboolean __stdcall _fail_wglBindDisplayColorTableEXT(GLushort id) {
+	const char *_name = "wglBindDisplayColorTableEXT";
+	return false;
+}
+
+static GLboolean __stdcall _get_wglBindDisplayColorTableEXT(GLushort id) {
+	PFN_WGLBINDDISPLAYCOLORTABLEEXT _ptr;
+	_ptr = (PFN_WGLBINDDISPLAYCOLORTABLEEXT)_getPrivateProcAddress("wglBindDisplayColorTableEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglBindDisplayColorTableEXT;
+	}
+	_wglBindDisplayColorTableEXT = _ptr;
+	return _wglBindDisplayColorTableEXT(id);
+}
+
+PFN_WGLBINDDISPLAYCOLORTABLEEXT _wglBindDisplayColorTableEXT = &_get_wglBindDisplayColorTableEXT;
+
+static void __stdcall _fail_wglDestroyDisplayColorTableEXT(GLushort id) {
+	const char *_name = "wglDestroyDisplayColorTableEXT";
+	
+	return;
+}
+
+static void __stdcall _get_wglDestroyDisplayColorTableEXT(GLushort id) {
+	PFN_WGLDESTROYDISPLAYCOLORTABLEEXT _ptr;
+	_ptr = (PFN_WGLDESTROYDISPLAYCOLORTABLEEXT)_getPrivateProcAddress("wglDestroyDisplayColorTableEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglDestroyDisplayColorTableEXT;
+	}
+	_wglDestroyDisplayColorTableEXT = _ptr;
+	_wglDestroyDisplayColorTableEXT(id);
+}
+
+PFN_WGLDESTROYDISPLAYCOLORTABLEEXT _wglDestroyDisplayColorTableEXT = &_get_wglDestroyDisplayColorTableEXT;
+
+static const char * __stdcall _fail_wglGetExtensionsStringEXT(void) {
+	const char *_name = "wglGetExtensionsStringEXT";
+	return NULL;
+}
+
+static const char * __stdcall _get_wglGetExtensionsStringEXT(void) {
+	PFN_WGLGETEXTENSIONSSTRINGEXT _ptr;
+	_ptr = (PFN_WGLGETEXTENSIONSSTRINGEXT)_getPrivateProcAddress("wglGetExtensionsStringEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetExtensionsStringEXT;
+	}
+	_wglGetExtensionsStringEXT = _ptr;
+	return _wglGetExtensionsStringEXT();
+}
+
+PFN_WGLGETEXTENSIONSSTRINGEXT _wglGetExtensionsStringEXT = &_get_wglGetExtensionsStringEXT;
+
+static BOOL __stdcall _fail_wglMakeContextCurrentEXT(HDC hDrawDC, HDC hReadDC, HGLRC hglrc) {
+	const char *_name = "wglMakeContextCurrentEXT";
+	return false;
+}
+
+static BOOL __stdcall _get_wglMakeContextCurrentEXT(HDC hDrawDC, HDC hReadDC, HGLRC hglrc) {
+	PFN_WGLMAKECONTEXTCURRENTEXT _ptr;
+	_ptr = (PFN_WGLMAKECONTEXTCURRENTEXT)_getPrivateProcAddress("wglMakeContextCurrentEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglMakeContextCurrentEXT;
+	}
+	_wglMakeContextCurrentEXT = _ptr;
+	return _wglMakeContextCurrentEXT(hDrawDC, hReadDC, hglrc);
+}
+
+PFN_WGLMAKECONTEXTCURRENTEXT _wglMakeContextCurrentEXT = &_get_wglMakeContextCurrentEXT;
+
+static HDC __stdcall _fail_wglGetCurrentReadDCEXT(void) {
+	const char *_name = "wglGetCurrentReadDCEXT";
+	return NULL;
+}
+
+static HDC __stdcall _get_wglGetCurrentReadDCEXT(void) {
+	PFN_WGLGETCURRENTREADDCEXT _ptr;
+	_ptr = (PFN_WGLGETCURRENTREADDCEXT)_getPrivateProcAddress("wglGetCurrentReadDCEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetCurrentReadDCEXT;
+	}
+	_wglGetCurrentReadDCEXT = _ptr;
+	return _wglGetCurrentReadDCEXT();
+}
+
+PFN_WGLGETCURRENTREADDCEXT _wglGetCurrentReadDCEXT = &_get_wglGetCurrentReadDCEXT;
+
+static HPBUFFEREXT __stdcall _fail_wglCreatePbufferEXT(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int * piAttribList) {
+	const char *_name = "wglCreatePbufferEXT";
+	return NULL;
+}
+
+static HPBUFFEREXT __stdcall _get_wglCreatePbufferEXT(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int * piAttribList) {
+	PFN_WGLCREATEPBUFFEREXT _ptr;
+	_ptr = (PFN_WGLCREATEPBUFFEREXT)_getPrivateProcAddress("wglCreatePbufferEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglCreatePbufferEXT;
+	}
+	_wglCreatePbufferEXT = _ptr;
+	return _wglCreatePbufferEXT(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
+}
+
+PFN_WGLCREATEPBUFFEREXT _wglCreatePbufferEXT = &_get_wglCreatePbufferEXT;
+
+static HDC __stdcall _fail_wglGetPbufferDCEXT(HPBUFFEREXT hPbuffer) {
+	const char *_name = "wglGetPbufferDCEXT";
+	return NULL;
+}
+
+static HDC __stdcall _get_wglGetPbufferDCEXT(HPBUFFEREXT hPbuffer) {
+	PFN_WGLGETPBUFFERDCEXT _ptr;
+	_ptr = (PFN_WGLGETPBUFFERDCEXT)_getPrivateProcAddress("wglGetPbufferDCEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetPbufferDCEXT;
+	}
+	_wglGetPbufferDCEXT = _ptr;
+	return _wglGetPbufferDCEXT(hPbuffer);
+}
+
+PFN_WGLGETPBUFFERDCEXT _wglGetPbufferDCEXT = &_get_wglGetPbufferDCEXT;
+
+static int __stdcall _fail_wglReleasePbufferDCEXT(HPBUFFEREXT hPbuffer, HDC hDC) {
+	const char *_name = "wglReleasePbufferDCEXT";
+	return false;
+}
+
+static int __stdcall _get_wglReleasePbufferDCEXT(HPBUFFEREXT hPbuffer, HDC hDC) {
+	PFN_WGLRELEASEPBUFFERDCEXT _ptr;
+	_ptr = (PFN_WGLRELEASEPBUFFERDCEXT)_getPrivateProcAddress("wglReleasePbufferDCEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglReleasePbufferDCEXT;
+	}
+	_wglReleasePbufferDCEXT = _ptr;
+	return _wglReleasePbufferDCEXT(hPbuffer, hDC);
+}
+
+PFN_WGLRELEASEPBUFFERDCEXT _wglReleasePbufferDCEXT = &_get_wglReleasePbufferDCEXT;
+
+static BOOL __stdcall _fail_wglDestroyPbufferEXT(HPBUFFEREXT hPbuffer) {
+	const char *_name = "wglDestroyPbufferEXT";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDestroyPbufferEXT(HPBUFFEREXT hPbuffer) {
+	PFN_WGLDESTROYPBUFFEREXT _ptr;
+	_ptr = (PFN_WGLDESTROYPBUFFEREXT)_getPrivateProcAddress("wglDestroyPbufferEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglDestroyPbufferEXT;
+	}
+	_wglDestroyPbufferEXT = _ptr;
+	return _wglDestroyPbufferEXT(hPbuffer);
+}
+
+PFN_WGLDESTROYPBUFFEREXT _wglDestroyPbufferEXT = &_get_wglDestroyPbufferEXT;
+
+static BOOL __stdcall _fail_wglQueryPbufferEXT(HPBUFFEREXT hPbuffer, int iAttribute, int * piValue) {
+	const char *_name = "wglQueryPbufferEXT";
+	return false;
+}
+
+static BOOL __stdcall _get_wglQueryPbufferEXT(HPBUFFEREXT hPbuffer, int iAttribute, int * piValue) {
+	PFN_WGLQUERYPBUFFEREXT _ptr;
+	_ptr = (PFN_WGLQUERYPBUFFEREXT)_getPrivateProcAddress("wglQueryPbufferEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglQueryPbufferEXT;
+	}
+	_wglQueryPbufferEXT = _ptr;
+	return _wglQueryPbufferEXT(hPbuffer, iAttribute, piValue);
+}
+
+PFN_WGLQUERYPBUFFEREXT _wglQueryPbufferEXT = &_get_wglQueryPbufferEXT;
+
+static BOOL __stdcall _fail_wglGetPixelFormatAttribivEXT(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, int * piValues) {
+	const char *_name = "wglGetPixelFormatAttribivEXT";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetPixelFormatAttribivEXT(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, int * piValues) {
+	PFN_WGLGETPIXELFORMATATTRIBIVEXT _ptr;
+	_ptr = (PFN_WGLGETPIXELFORMATATTRIBIVEXT)_getPrivateProcAddress("wglGetPixelFormatAttribivEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetPixelFormatAttribivEXT;
+	}
+	_wglGetPixelFormatAttribivEXT = _ptr;
+	return _wglGetPixelFormatAttribivEXT(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
+}
+
+PFN_WGLGETPIXELFORMATATTRIBIVEXT _wglGetPixelFormatAttribivEXT = &_get_wglGetPixelFormatAttribivEXT;
+
+static BOOL __stdcall _fail_wglGetPixelFormatAttribfvEXT(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, FLOAT * pfValues) {
+	const char *_name = "wglGetPixelFormatAttribfvEXT";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetPixelFormatAttribfvEXT(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, FLOAT * pfValues) {
+	PFN_WGLGETPIXELFORMATATTRIBFVEXT _ptr;
+	_ptr = (PFN_WGLGETPIXELFORMATATTRIBFVEXT)_getPrivateProcAddress("wglGetPixelFormatAttribfvEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetPixelFormatAttribfvEXT;
+	}
+	_wglGetPixelFormatAttribfvEXT = _ptr;
+	return _wglGetPixelFormatAttribfvEXT(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
+}
+
+PFN_WGLGETPIXELFORMATATTRIBFVEXT _wglGetPixelFormatAttribfvEXT = &_get_wglGetPixelFormatAttribfvEXT;
+
+static BOOL __stdcall _fail_wglChoosePixelFormatEXT(HDC hdc, const int * piAttribIList, const FLOAT * pfAttribFList, UINT nMaxFormats, int * piFormats, UINT * nNumFormats) {
+	const char *_name = "wglChoosePixelFormatEXT";
+	return false;
+}
+
+static BOOL __stdcall _get_wglChoosePixelFormatEXT(HDC hdc, const int * piAttribIList, const FLOAT * pfAttribFList, UINT nMaxFormats, int * piFormats, UINT * nNumFormats) {
+	PFN_WGLCHOOSEPIXELFORMATEXT _ptr;
+	_ptr = (PFN_WGLCHOOSEPIXELFORMATEXT)_getPrivateProcAddress("wglChoosePixelFormatEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglChoosePixelFormatEXT;
+	}
+	_wglChoosePixelFormatEXT = _ptr;
+	return _wglChoosePixelFormatEXT(hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats);
+}
+
+PFN_WGLCHOOSEPIXELFORMATEXT _wglChoosePixelFormatEXT = &_get_wglChoosePixelFormatEXT;
+
+static BOOL __stdcall _fail_wglSwapIntervalEXT(int interval) {
+	const char *_name = "wglSwapIntervalEXT";
+	return false;
+}
+
+static BOOL __stdcall _get_wglSwapIntervalEXT(int interval) {
+	PFN_WGLSWAPINTERVALEXT _ptr;
+	_ptr = (PFN_WGLSWAPINTERVALEXT)_getPrivateProcAddress("wglSwapIntervalEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglSwapIntervalEXT;
+	}
+	_wglSwapIntervalEXT = _ptr;
+	return _wglSwapIntervalEXT(interval);
+}
+
+PFN_WGLSWAPINTERVALEXT _wglSwapIntervalEXT = &_get_wglSwapIntervalEXT;
+
+static int __stdcall _fail_wglGetSwapIntervalEXT(void) {
+	const char *_name = "wglGetSwapIntervalEXT";
+	return false;
+}
+
+static int __stdcall _get_wglGetSwapIntervalEXT(void) {
+	PFN_WGLGETSWAPINTERVALEXT _ptr;
+	_ptr = (PFN_WGLGETSWAPINTERVALEXT)_getPrivateProcAddress("wglGetSwapIntervalEXT");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetSwapIntervalEXT;
+	}
+	_wglGetSwapIntervalEXT = _ptr;
+	return _wglGetSwapIntervalEXT();
+}
+
+PFN_WGLGETSWAPINTERVALEXT _wglGetSwapIntervalEXT = &_get_wglGetSwapIntervalEXT;
+
+static void * __stdcall _fail_wglAllocateMemoryNV(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority) {
+	const char *_name = "wglAllocateMemoryNV";
+	return NULL;
+}
+
+static void * __stdcall _get_wglAllocateMemoryNV(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority) {
+	PFN_WGLALLOCATEMEMORYNV _ptr;
+	_ptr = (PFN_WGLALLOCATEMEMORYNV)_getPrivateProcAddress("wglAllocateMemoryNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglAllocateMemoryNV;
+	}
+	_wglAllocateMemoryNV = _ptr;
+	return _wglAllocateMemoryNV(size, readfreq, writefreq, priority);
+}
+
+PFN_WGLALLOCATEMEMORYNV _wglAllocateMemoryNV = &_get_wglAllocateMemoryNV;
+
+static void __stdcall _fail_wglFreeMemoryNV(void * pointer) {
+	const char *_name = "wglFreeMemoryNV";
+	
+	return;
+}
+
+static void __stdcall _get_wglFreeMemoryNV(void * pointer) {
+	PFN_WGLFREEMEMORYNV _ptr;
+	_ptr = (PFN_WGLFREEMEMORYNV)_getPrivateProcAddress("wglFreeMemoryNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglFreeMemoryNV;
+	}
+	_wglFreeMemoryNV = _ptr;
+	_wglFreeMemoryNV(pointer);
+}
+
+PFN_WGLFREEMEMORYNV _wglFreeMemoryNV = &_get_wglFreeMemoryNV;
+
+static BOOL __stdcall _fail_wglGetSyncValuesOML(HDC hdc, INT64 * ust, INT64 * msc, INT64 * sbc) {
+	const char *_name = "wglGetSyncValuesOML";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetSyncValuesOML(HDC hdc, INT64 * ust, INT64 * msc, INT64 * sbc) {
+	PFN_WGLGETSYNCVALUESOML _ptr;
+	_ptr = (PFN_WGLGETSYNCVALUESOML)_getPrivateProcAddress("wglGetSyncValuesOML");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetSyncValuesOML;
+	}
+	_wglGetSyncValuesOML = _ptr;
+	return _wglGetSyncValuesOML(hdc, ust, msc, sbc);
+}
+
+PFN_WGLGETSYNCVALUESOML _wglGetSyncValuesOML = &_get_wglGetSyncValuesOML;
+
+static BOOL __stdcall _fail_wglGetMscRateOML(HDC hdc, INT32 * numerator, INT32 * denominator) {
+	const char *_name = "wglGetMscRateOML";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetMscRateOML(HDC hdc, INT32 * numerator, INT32 * denominator) {
+	PFN_WGLGETMSCRATEOML _ptr;
+	_ptr = (PFN_WGLGETMSCRATEOML)_getPrivateProcAddress("wglGetMscRateOML");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetMscRateOML;
+	}
+	_wglGetMscRateOML = _ptr;
+	return _wglGetMscRateOML(hdc, numerator, denominator);
+}
+
+PFN_WGLGETMSCRATEOML _wglGetMscRateOML = &_get_wglGetMscRateOML;
+
+static INT64 __stdcall _fail_wglSwapBuffersMscOML(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder) {
+	const char *_name = "wglSwapBuffersMscOML";
+	return false;
+}
+
+static INT64 __stdcall _get_wglSwapBuffersMscOML(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder) {
+	PFN_WGLSWAPBUFFERSMSCOML _ptr;
+	_ptr = (PFN_WGLSWAPBUFFERSMSCOML)_getPrivateProcAddress("wglSwapBuffersMscOML");
+	if (!_ptr) {
+		_ptr = &_fail_wglSwapBuffersMscOML;
+	}
+	_wglSwapBuffersMscOML = _ptr;
+	return _wglSwapBuffersMscOML(hdc, target_msc, divisor, remainder);
+}
+
+PFN_WGLSWAPBUFFERSMSCOML _wglSwapBuffersMscOML = &_get_wglSwapBuffersMscOML;
+
+static INT64 __stdcall _fail_wglSwapLayerBuffersMscOML(HDC hdc, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder) {
+	const char *_name = "wglSwapLayerBuffersMscOML";
+	return false;
+}
+
+static INT64 __stdcall _get_wglSwapLayerBuffersMscOML(HDC hdc, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder) {
+	PFN_WGLSWAPLAYERBUFFERSMSCOML _ptr;
+	_ptr = (PFN_WGLSWAPLAYERBUFFERSMSCOML)_getPrivateProcAddress("wglSwapLayerBuffersMscOML");
+	if (!_ptr) {
+		_ptr = &_fail_wglSwapLayerBuffersMscOML;
+	}
+	_wglSwapLayerBuffersMscOML = _ptr;
+	return _wglSwapLayerBuffersMscOML(hdc, fuPlanes, target_msc, divisor, remainder);
+}
+
+PFN_WGLSWAPLAYERBUFFERSMSCOML _wglSwapLayerBuffersMscOML = &_get_wglSwapLayerBuffersMscOML;
+
+static BOOL __stdcall _fail_wglWaitForMscOML(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 * ust, INT64 * msc, INT64 * sbc) {
+	const char *_name = "wglWaitForMscOML";
+	return false;
+}
+
+static BOOL __stdcall _get_wglWaitForMscOML(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 * ust, INT64 * msc, INT64 * sbc) {
+	PFN_WGLWAITFORMSCOML _ptr;
+	_ptr = (PFN_WGLWAITFORMSCOML)_getPrivateProcAddress("wglWaitForMscOML");
+	if (!_ptr) {
+		_ptr = &_fail_wglWaitForMscOML;
+	}
+	_wglWaitForMscOML = _ptr;
+	return _wglWaitForMscOML(hdc, target_msc, divisor, remainder, ust, msc, sbc);
+}
+
+PFN_WGLWAITFORMSCOML _wglWaitForMscOML = &_get_wglWaitForMscOML;
+
+static BOOL __stdcall _fail_wglWaitForSbcOML(HDC hdc, INT64 target_sbc, INT64 * ust, INT64 * msc, INT64 * sbc) {
+	const char *_name = "wglWaitForSbcOML";
+	return false;
+}
+
+static BOOL __stdcall _get_wglWaitForSbcOML(HDC hdc, INT64 target_sbc, INT64 * ust, INT64 * msc, INT64 * sbc) {
+	PFN_WGLWAITFORSBCOML _ptr;
+	_ptr = (PFN_WGLWAITFORSBCOML)_getPrivateProcAddress("wglWaitForSbcOML");
+	if (!_ptr) {
+		_ptr = &_fail_wglWaitForSbcOML;
+	}
+	_wglWaitForSbcOML = _ptr;
+	return _wglWaitForSbcOML(hdc, target_sbc, ust, msc, sbc);
+}
+
+PFN_WGLWAITFORSBCOML _wglWaitForSbcOML = &_get_wglWaitForSbcOML;
+
+static BOOL __stdcall _fail_wglGetDigitalVideoParametersI3D(HDC hDC, int iAttribute, int * piValue) {
+	const char *_name = "wglGetDigitalVideoParametersI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetDigitalVideoParametersI3D(HDC hDC, int iAttribute, int * piValue) {
+	PFN_WGLGETDIGITALVIDEOPARAMETERSI3D _ptr;
+	_ptr = (PFN_WGLGETDIGITALVIDEOPARAMETERSI3D)_getPrivateProcAddress("wglGetDigitalVideoParametersI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetDigitalVideoParametersI3D;
+	}
+	_wglGetDigitalVideoParametersI3D = _ptr;
+	return _wglGetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
+}
+
+PFN_WGLGETDIGITALVIDEOPARAMETERSI3D _wglGetDigitalVideoParametersI3D = &_get_wglGetDigitalVideoParametersI3D;
+
+static BOOL __stdcall _fail_wglSetDigitalVideoParametersI3D(HDC hDC, int iAttribute, const int * piValue) {
+	const char *_name = "wglSetDigitalVideoParametersI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglSetDigitalVideoParametersI3D(HDC hDC, int iAttribute, const int * piValue) {
+	PFN_WGLSETDIGITALVIDEOPARAMETERSI3D _ptr;
+	_ptr = (PFN_WGLSETDIGITALVIDEOPARAMETERSI3D)_getPrivateProcAddress("wglSetDigitalVideoParametersI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglSetDigitalVideoParametersI3D;
+	}
+	_wglSetDigitalVideoParametersI3D = _ptr;
+	return _wglSetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
+}
+
+PFN_WGLSETDIGITALVIDEOPARAMETERSI3D _wglSetDigitalVideoParametersI3D = &_get_wglSetDigitalVideoParametersI3D;
+
+static BOOL __stdcall _fail_wglGetGammaTableParametersI3D(HDC hDC, int iAttribute, int * piValue) {
+	const char *_name = "wglGetGammaTableParametersI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetGammaTableParametersI3D(HDC hDC, int iAttribute, int * piValue) {
+	PFN_WGLGETGAMMATABLEPARAMETERSI3D _ptr;
+	_ptr = (PFN_WGLGETGAMMATABLEPARAMETERSI3D)_getPrivateProcAddress("wglGetGammaTableParametersI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetGammaTableParametersI3D;
+	}
+	_wglGetGammaTableParametersI3D = _ptr;
+	return _wglGetGammaTableParametersI3D(hDC, iAttribute, piValue);
+}
+
+PFN_WGLGETGAMMATABLEPARAMETERSI3D _wglGetGammaTableParametersI3D = &_get_wglGetGammaTableParametersI3D;
+
+static BOOL __stdcall _fail_wglSetGammaTableParametersI3D(HDC hDC, int iAttribute, const int * piValue) {
+	const char *_name = "wglSetGammaTableParametersI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglSetGammaTableParametersI3D(HDC hDC, int iAttribute, const int * piValue) {
+	PFN_WGLSETGAMMATABLEPARAMETERSI3D _ptr;
+	_ptr = (PFN_WGLSETGAMMATABLEPARAMETERSI3D)_getPrivateProcAddress("wglSetGammaTableParametersI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglSetGammaTableParametersI3D;
+	}
+	_wglSetGammaTableParametersI3D = _ptr;
+	return _wglSetGammaTableParametersI3D(hDC, iAttribute, piValue);
+}
+
+PFN_WGLSETGAMMATABLEPARAMETERSI3D _wglSetGammaTableParametersI3D = &_get_wglSetGammaTableParametersI3D;
+
+static BOOL __stdcall _fail_wglGetGammaTableI3D(HDC hDC, int iEntries, USHORT * puRed, USHORT * puGreen, USHORT * puBlue) {
+	const char *_name = "wglGetGammaTableI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetGammaTableI3D(HDC hDC, int iEntries, USHORT * puRed, USHORT * puGreen, USHORT * puBlue) {
+	PFN_WGLGETGAMMATABLEI3D _ptr;
+	_ptr = (PFN_WGLGETGAMMATABLEI3D)_getPrivateProcAddress("wglGetGammaTableI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetGammaTableI3D;
+	}
+	_wglGetGammaTableI3D = _ptr;
+	return _wglGetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
+}
+
+PFN_WGLGETGAMMATABLEI3D _wglGetGammaTableI3D = &_get_wglGetGammaTableI3D;
+
+static BOOL __stdcall _fail_wglSetGammaTableI3D(HDC hDC, int iEntries, const USHORT * puRed, const USHORT * puGreen, const USHORT * puBlue) {
+	const char *_name = "wglSetGammaTableI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglSetGammaTableI3D(HDC hDC, int iEntries, const USHORT * puRed, const USHORT * puGreen, const USHORT * puBlue) {
+	PFN_WGLSETGAMMATABLEI3D _ptr;
+	_ptr = (PFN_WGLSETGAMMATABLEI3D)_getPrivateProcAddress("wglSetGammaTableI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglSetGammaTableI3D;
+	}
+	_wglSetGammaTableI3D = _ptr;
+	return _wglSetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
+}
+
+PFN_WGLSETGAMMATABLEI3D _wglSetGammaTableI3D = &_get_wglSetGammaTableI3D;
+
+static BOOL __stdcall _fail_wglEnableGenlockI3D(HDC hDC) {
+	const char *_name = "wglEnableGenlockI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglEnableGenlockI3D(HDC hDC) {
+	PFN_WGLENABLEGENLOCKI3D _ptr;
+	_ptr = (PFN_WGLENABLEGENLOCKI3D)_getPrivateProcAddress("wglEnableGenlockI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglEnableGenlockI3D;
+	}
+	_wglEnableGenlockI3D = _ptr;
+	return _wglEnableGenlockI3D(hDC);
+}
+
+PFN_WGLENABLEGENLOCKI3D _wglEnableGenlockI3D = &_get_wglEnableGenlockI3D;
+
+static BOOL __stdcall _fail_wglDisableGenlockI3D(HDC hDC) {
+	const char *_name = "wglDisableGenlockI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDisableGenlockI3D(HDC hDC) {
+	PFN_WGLDISABLEGENLOCKI3D _ptr;
+	_ptr = (PFN_WGLDISABLEGENLOCKI3D)_getPrivateProcAddress("wglDisableGenlockI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglDisableGenlockI3D;
+	}
+	_wglDisableGenlockI3D = _ptr;
+	return _wglDisableGenlockI3D(hDC);
+}
+
+PFN_WGLDISABLEGENLOCKI3D _wglDisableGenlockI3D = &_get_wglDisableGenlockI3D;
+
+static BOOL __stdcall _fail_wglIsEnabledGenlockI3D(HDC hDC, BOOL * pFlag) {
+	const char *_name = "wglIsEnabledGenlockI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglIsEnabledGenlockI3D(HDC hDC, BOOL * pFlag) {
+	PFN_WGLISENABLEDGENLOCKI3D _ptr;
+	_ptr = (PFN_WGLISENABLEDGENLOCKI3D)_getPrivateProcAddress("wglIsEnabledGenlockI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglIsEnabledGenlockI3D;
+	}
+	_wglIsEnabledGenlockI3D = _ptr;
+	return _wglIsEnabledGenlockI3D(hDC, pFlag);
+}
+
+PFN_WGLISENABLEDGENLOCKI3D _wglIsEnabledGenlockI3D = &_get_wglIsEnabledGenlockI3D;
+
+static BOOL __stdcall _fail_wglGenlockSourceI3D(HDC hDC, UINT uSource) {
+	const char *_name = "wglGenlockSourceI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGenlockSourceI3D(HDC hDC, UINT uSource) {
+	PFN_WGLGENLOCKSOURCEI3D _ptr;
+	_ptr = (PFN_WGLGENLOCKSOURCEI3D)_getPrivateProcAddress("wglGenlockSourceI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglGenlockSourceI3D;
+	}
+	_wglGenlockSourceI3D = _ptr;
+	return _wglGenlockSourceI3D(hDC, uSource);
+}
+
+PFN_WGLGENLOCKSOURCEI3D _wglGenlockSourceI3D = &_get_wglGenlockSourceI3D;
+
+static BOOL __stdcall _fail_wglGetGenlockSourceI3D(HDC hDC, UINT * uSource) {
+	const char *_name = "wglGetGenlockSourceI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetGenlockSourceI3D(HDC hDC, UINT * uSource) {
+	PFN_WGLGETGENLOCKSOURCEI3D _ptr;
+	_ptr = (PFN_WGLGETGENLOCKSOURCEI3D)_getPrivateProcAddress("wglGetGenlockSourceI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetGenlockSourceI3D;
+	}
+	_wglGetGenlockSourceI3D = _ptr;
+	return _wglGetGenlockSourceI3D(hDC, uSource);
+}
+
+PFN_WGLGETGENLOCKSOURCEI3D _wglGetGenlockSourceI3D = &_get_wglGetGenlockSourceI3D;
+
+static BOOL __stdcall _fail_wglGenlockSourceEdgeI3D(HDC hDC, UINT uEdge) {
+	const char *_name = "wglGenlockSourceEdgeI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGenlockSourceEdgeI3D(HDC hDC, UINT uEdge) {
+	PFN_WGLGENLOCKSOURCEEDGEI3D _ptr;
+	_ptr = (PFN_WGLGENLOCKSOURCEEDGEI3D)_getPrivateProcAddress("wglGenlockSourceEdgeI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglGenlockSourceEdgeI3D;
+	}
+	_wglGenlockSourceEdgeI3D = _ptr;
+	return _wglGenlockSourceEdgeI3D(hDC, uEdge);
+}
+
+PFN_WGLGENLOCKSOURCEEDGEI3D _wglGenlockSourceEdgeI3D = &_get_wglGenlockSourceEdgeI3D;
+
+static BOOL __stdcall _fail_wglGetGenlockSourceEdgeI3D(HDC hDC, UINT * uEdge) {
+	const char *_name = "wglGetGenlockSourceEdgeI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetGenlockSourceEdgeI3D(HDC hDC, UINT * uEdge) {
+	PFN_WGLGETGENLOCKSOURCEEDGEI3D _ptr;
+	_ptr = (PFN_WGLGETGENLOCKSOURCEEDGEI3D)_getPrivateProcAddress("wglGetGenlockSourceEdgeI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetGenlockSourceEdgeI3D;
+	}
+	_wglGetGenlockSourceEdgeI3D = _ptr;
+	return _wglGetGenlockSourceEdgeI3D(hDC, uEdge);
+}
+
+PFN_WGLGETGENLOCKSOURCEEDGEI3D _wglGetGenlockSourceEdgeI3D = &_get_wglGetGenlockSourceEdgeI3D;
+
+static BOOL __stdcall _fail_wglGenlockSampleRateI3D(HDC hDC, UINT uRate) {
+	const char *_name = "wglGenlockSampleRateI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGenlockSampleRateI3D(HDC hDC, UINT uRate) {
+	PFN_WGLGENLOCKSAMPLERATEI3D _ptr;
+	_ptr = (PFN_WGLGENLOCKSAMPLERATEI3D)_getPrivateProcAddress("wglGenlockSampleRateI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglGenlockSampleRateI3D;
+	}
+	_wglGenlockSampleRateI3D = _ptr;
+	return _wglGenlockSampleRateI3D(hDC, uRate);
+}
+
+PFN_WGLGENLOCKSAMPLERATEI3D _wglGenlockSampleRateI3D = &_get_wglGenlockSampleRateI3D;
+
+static BOOL __stdcall _fail_wglGetGenlockSampleRateI3D(HDC hDC, UINT * uRate) {
+	const char *_name = "wglGetGenlockSampleRateI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetGenlockSampleRateI3D(HDC hDC, UINT * uRate) {
+	PFN_WGLGETGENLOCKSAMPLERATEI3D _ptr;
+	_ptr = (PFN_WGLGETGENLOCKSAMPLERATEI3D)_getPrivateProcAddress("wglGetGenlockSampleRateI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetGenlockSampleRateI3D;
+	}
+	_wglGetGenlockSampleRateI3D = _ptr;
+	return _wglGetGenlockSampleRateI3D(hDC, uRate);
+}
+
+PFN_WGLGETGENLOCKSAMPLERATEI3D _wglGetGenlockSampleRateI3D = &_get_wglGetGenlockSampleRateI3D;
+
+static BOOL __stdcall _fail_wglGenlockSourceDelayI3D(HDC hDC, UINT uDelay) {
+	const char *_name = "wglGenlockSourceDelayI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGenlockSourceDelayI3D(HDC hDC, UINT uDelay) {
+	PFN_WGLGENLOCKSOURCEDELAYI3D _ptr;
+	_ptr = (PFN_WGLGENLOCKSOURCEDELAYI3D)_getPrivateProcAddress("wglGenlockSourceDelayI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglGenlockSourceDelayI3D;
+	}
+	_wglGenlockSourceDelayI3D = _ptr;
+	return _wglGenlockSourceDelayI3D(hDC, uDelay);
+}
+
+PFN_WGLGENLOCKSOURCEDELAYI3D _wglGenlockSourceDelayI3D = &_get_wglGenlockSourceDelayI3D;
+
+static BOOL __stdcall _fail_wglGetGenlockSourceDelayI3D(HDC hDC, UINT * uDelay) {
+	const char *_name = "wglGetGenlockSourceDelayI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetGenlockSourceDelayI3D(HDC hDC, UINT * uDelay) {
+	PFN_WGLGETGENLOCKSOURCEDELAYI3D _ptr;
+	_ptr = (PFN_WGLGETGENLOCKSOURCEDELAYI3D)_getPrivateProcAddress("wglGetGenlockSourceDelayI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetGenlockSourceDelayI3D;
+	}
+	_wglGetGenlockSourceDelayI3D = _ptr;
+	return _wglGetGenlockSourceDelayI3D(hDC, uDelay);
+}
+
+PFN_WGLGETGENLOCKSOURCEDELAYI3D _wglGetGenlockSourceDelayI3D = &_get_wglGetGenlockSourceDelayI3D;
+
+static BOOL __stdcall _fail_wglQueryGenlockMaxSourceDelayI3D(HDC hDC, UINT * uMaxLineDelay, UINT * uMaxPixelDelay) {
+	const char *_name = "wglQueryGenlockMaxSourceDelayI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglQueryGenlockMaxSourceDelayI3D(HDC hDC, UINT * uMaxLineDelay, UINT * uMaxPixelDelay) {
+	PFN_WGLQUERYGENLOCKMAXSOURCEDELAYI3D _ptr;
+	_ptr = (PFN_WGLQUERYGENLOCKMAXSOURCEDELAYI3D)_getPrivateProcAddress("wglQueryGenlockMaxSourceDelayI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglQueryGenlockMaxSourceDelayI3D;
+	}
+	_wglQueryGenlockMaxSourceDelayI3D = _ptr;
+	return _wglQueryGenlockMaxSourceDelayI3D(hDC, uMaxLineDelay, uMaxPixelDelay);
+}
+
+PFN_WGLQUERYGENLOCKMAXSOURCEDELAYI3D _wglQueryGenlockMaxSourceDelayI3D = &_get_wglQueryGenlockMaxSourceDelayI3D;
+
+static void * __stdcall _fail_wglCreateImageBufferI3D(HDC hDC, DWORD dwSize, UINT uFlags) {
+	const char *_name = "wglCreateImageBufferI3D";
+	return NULL;
+}
+
+static void * __stdcall _get_wglCreateImageBufferI3D(HDC hDC, DWORD dwSize, UINT uFlags) {
+	PFN_WGLCREATEIMAGEBUFFERI3D _ptr;
+	_ptr = (PFN_WGLCREATEIMAGEBUFFERI3D)_getPrivateProcAddress("wglCreateImageBufferI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglCreateImageBufferI3D;
+	}
+	_wglCreateImageBufferI3D = _ptr;
+	return _wglCreateImageBufferI3D(hDC, dwSize, uFlags);
+}
+
+PFN_WGLCREATEIMAGEBUFFERI3D _wglCreateImageBufferI3D = &_get_wglCreateImageBufferI3D;
+
+static BOOL __stdcall _fail_wglDestroyImageBufferI3D(HDC hDC, void * pAddress) {
+	const char *_name = "wglDestroyImageBufferI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDestroyImageBufferI3D(HDC hDC, void * pAddress) {
+	PFN_WGLDESTROYIMAGEBUFFERI3D _ptr;
+	_ptr = (PFN_WGLDESTROYIMAGEBUFFERI3D)_getPrivateProcAddress("wglDestroyImageBufferI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglDestroyImageBufferI3D;
+	}
+	_wglDestroyImageBufferI3D = _ptr;
+	return _wglDestroyImageBufferI3D(hDC, pAddress);
+}
+
+PFN_WGLDESTROYIMAGEBUFFERI3D _wglDestroyImageBufferI3D = &_get_wglDestroyImageBufferI3D;
+
+static BOOL __stdcall _fail_wglAssociateImageBufferEventsI3D(HDC hDC, const HANDLE * pEvent, void * const * pAddress, const DWORD * pSize, UINT count) {
+	const char *_name = "wglAssociateImageBufferEventsI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglAssociateImageBufferEventsI3D(HDC hDC, const HANDLE * pEvent, void * const * pAddress, const DWORD * pSize, UINT count) {
+	PFN_WGLASSOCIATEIMAGEBUFFEREVENTSI3D _ptr;
+	_ptr = (PFN_WGLASSOCIATEIMAGEBUFFEREVENTSI3D)_getPrivateProcAddress("wglAssociateImageBufferEventsI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglAssociateImageBufferEventsI3D;
+	}
+	_wglAssociateImageBufferEventsI3D = _ptr;
+	return _wglAssociateImageBufferEventsI3D(hDC, pEvent, pAddress, pSize, count);
+}
+
+PFN_WGLASSOCIATEIMAGEBUFFEREVENTSI3D _wglAssociateImageBufferEventsI3D = &_get_wglAssociateImageBufferEventsI3D;
+
+static BOOL __stdcall _fail_wglReleaseImageBufferEventsI3D(HDC hDC, void * const * pAddress, UINT count) {
+	const char *_name = "wglReleaseImageBufferEventsI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglReleaseImageBufferEventsI3D(HDC hDC, void * const * pAddress, UINT count) {
+	PFN_WGLRELEASEIMAGEBUFFEREVENTSI3D _ptr;
+	_ptr = (PFN_WGLRELEASEIMAGEBUFFEREVENTSI3D)_getPrivateProcAddress("wglReleaseImageBufferEventsI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglReleaseImageBufferEventsI3D;
+	}
+	_wglReleaseImageBufferEventsI3D = _ptr;
+	return _wglReleaseImageBufferEventsI3D(hDC, pAddress, count);
+}
+
+PFN_WGLRELEASEIMAGEBUFFEREVENTSI3D _wglReleaseImageBufferEventsI3D = &_get_wglReleaseImageBufferEventsI3D;
+
+static BOOL __stdcall _fail_wglEnableFrameLockI3D(void) {
+	const char *_name = "wglEnableFrameLockI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglEnableFrameLockI3D(void) {
+	PFN_WGLENABLEFRAMELOCKI3D _ptr;
+	_ptr = (PFN_WGLENABLEFRAMELOCKI3D)_getPrivateProcAddress("wglEnableFrameLockI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglEnableFrameLockI3D;
+	}
+	_wglEnableFrameLockI3D = _ptr;
+	return _wglEnableFrameLockI3D();
+}
+
+PFN_WGLENABLEFRAMELOCKI3D _wglEnableFrameLockI3D = &_get_wglEnableFrameLockI3D;
+
+static BOOL __stdcall _fail_wglDisableFrameLockI3D(void) {
+	const char *_name = "wglDisableFrameLockI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDisableFrameLockI3D(void) {
+	PFN_WGLDISABLEFRAMELOCKI3D _ptr;
+	_ptr = (PFN_WGLDISABLEFRAMELOCKI3D)_getPrivateProcAddress("wglDisableFrameLockI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglDisableFrameLockI3D;
+	}
+	_wglDisableFrameLockI3D = _ptr;
+	return _wglDisableFrameLockI3D();
+}
+
+PFN_WGLDISABLEFRAMELOCKI3D _wglDisableFrameLockI3D = &_get_wglDisableFrameLockI3D;
+
+static BOOL __stdcall _fail_wglIsEnabledFrameLockI3D(BOOL * pFlag) {
+	const char *_name = "wglIsEnabledFrameLockI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglIsEnabledFrameLockI3D(BOOL * pFlag) {
+	PFN_WGLISENABLEDFRAMELOCKI3D _ptr;
+	_ptr = (PFN_WGLISENABLEDFRAMELOCKI3D)_getPrivateProcAddress("wglIsEnabledFrameLockI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglIsEnabledFrameLockI3D;
+	}
+	_wglIsEnabledFrameLockI3D = _ptr;
+	return _wglIsEnabledFrameLockI3D(pFlag);
+}
+
+PFN_WGLISENABLEDFRAMELOCKI3D _wglIsEnabledFrameLockI3D = &_get_wglIsEnabledFrameLockI3D;
+
+static BOOL __stdcall _fail_wglQueryFrameLockMasterI3D(BOOL * pFlag) {
+	const char *_name = "wglQueryFrameLockMasterI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglQueryFrameLockMasterI3D(BOOL * pFlag) {
+	PFN_WGLQUERYFRAMELOCKMASTERI3D _ptr;
+	_ptr = (PFN_WGLQUERYFRAMELOCKMASTERI3D)_getPrivateProcAddress("wglQueryFrameLockMasterI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglQueryFrameLockMasterI3D;
+	}
+	_wglQueryFrameLockMasterI3D = _ptr;
+	return _wglQueryFrameLockMasterI3D(pFlag);
+}
+
+PFN_WGLQUERYFRAMELOCKMASTERI3D _wglQueryFrameLockMasterI3D = &_get_wglQueryFrameLockMasterI3D;
+
+static BOOL __stdcall _fail_wglGetFrameUsageI3D(float * pUsage) {
+	const char *_name = "wglGetFrameUsageI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetFrameUsageI3D(float * pUsage) {
+	PFN_WGLGETFRAMEUSAGEI3D _ptr;
+	_ptr = (PFN_WGLGETFRAMEUSAGEI3D)_getPrivateProcAddress("wglGetFrameUsageI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetFrameUsageI3D;
+	}
+	_wglGetFrameUsageI3D = _ptr;
+	return _wglGetFrameUsageI3D(pUsage);
+}
+
+PFN_WGLGETFRAMEUSAGEI3D _wglGetFrameUsageI3D = &_get_wglGetFrameUsageI3D;
+
+static BOOL __stdcall _fail_wglBeginFrameTrackingI3D(void) {
+	const char *_name = "wglBeginFrameTrackingI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglBeginFrameTrackingI3D(void) {
+	PFN_WGLBEGINFRAMETRACKINGI3D _ptr;
+	_ptr = (PFN_WGLBEGINFRAMETRACKINGI3D)_getPrivateProcAddress("wglBeginFrameTrackingI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglBeginFrameTrackingI3D;
+	}
+	_wglBeginFrameTrackingI3D = _ptr;
+	return _wglBeginFrameTrackingI3D();
+}
+
+PFN_WGLBEGINFRAMETRACKINGI3D _wglBeginFrameTrackingI3D = &_get_wglBeginFrameTrackingI3D;
+
+static BOOL __stdcall _fail_wglEndFrameTrackingI3D(void) {
+	const char *_name = "wglEndFrameTrackingI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglEndFrameTrackingI3D(void) {
+	PFN_WGLENDFRAMETRACKINGI3D _ptr;
+	_ptr = (PFN_WGLENDFRAMETRACKINGI3D)_getPrivateProcAddress("wglEndFrameTrackingI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglEndFrameTrackingI3D;
+	}
+	_wglEndFrameTrackingI3D = _ptr;
+	return _wglEndFrameTrackingI3D();
+}
+
+PFN_WGLENDFRAMETRACKINGI3D _wglEndFrameTrackingI3D = &_get_wglEndFrameTrackingI3D;
+
+static BOOL __stdcall _fail_wglQueryFrameTrackingI3D(DWORD * pFrameCount, DWORD * pMissedFrames, float * pLastMissedUsage) {
+	const char *_name = "wglQueryFrameTrackingI3D";
+	return false;
+}
+
+static BOOL __stdcall _get_wglQueryFrameTrackingI3D(DWORD * pFrameCount, DWORD * pMissedFrames, float * pLastMissedUsage) {
+	PFN_WGLQUERYFRAMETRACKINGI3D _ptr;
+	_ptr = (PFN_WGLQUERYFRAMETRACKINGI3D)_getPrivateProcAddress("wglQueryFrameTrackingI3D");
+	if (!_ptr) {
+		_ptr = &_fail_wglQueryFrameTrackingI3D;
+	}
+	_wglQueryFrameTrackingI3D = _ptr;
+	return _wglQueryFrameTrackingI3D(pFrameCount, pMissedFrames, pLastMissedUsage);
+}
+
+PFN_WGLQUERYFRAMETRACKINGI3D _wglQueryFrameTrackingI3D = &_get_wglQueryFrameTrackingI3D;
+
+static BOOL __stdcall _fail_wglSetStereoEmitterState3DL(HDC hDC, UINT uState) {
+	const char *_name = "wglSetStereoEmitterState3DL";
+	return false;
+}
+
+static BOOL __stdcall _get_wglSetStereoEmitterState3DL(HDC hDC, UINT uState) {
+	PFN_WGLSETSTEREOEMITTERSTATE3DL _ptr;
+	_ptr = (PFN_WGLSETSTEREOEMITTERSTATE3DL)_getPrivateProcAddress("wglSetStereoEmitterState3DL");
+	if (!_ptr) {
+		_ptr = &_fail_wglSetStereoEmitterState3DL;
+	}
+	_wglSetStereoEmitterState3DL = _ptr;
+	return _wglSetStereoEmitterState3DL(hDC, uState);
+}
+
+PFN_WGLSETSTEREOEMITTERSTATE3DL _wglSetStereoEmitterState3DL = &_get_wglSetStereoEmitterState3DL;
+
+static int __stdcall _fail_wglEnumerateVideoDevicesNV(HDC hDC, HVIDEOOUTPUTDEVICENV * phDeviceList) {
+	const char *_name = "wglEnumerateVideoDevicesNV";
+	return false;
+}
+
+static int __stdcall _get_wglEnumerateVideoDevicesNV(HDC hDC, HVIDEOOUTPUTDEVICENV * phDeviceList) {
+	PFN_WGLENUMERATEVIDEODEVICESNV _ptr;
+	_ptr = (PFN_WGLENUMERATEVIDEODEVICESNV)_getPrivateProcAddress("wglEnumerateVideoDevicesNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglEnumerateVideoDevicesNV;
+	}
+	_wglEnumerateVideoDevicesNV = _ptr;
+	return _wglEnumerateVideoDevicesNV(hDC, phDeviceList);
+}
+
+PFN_WGLENUMERATEVIDEODEVICESNV _wglEnumerateVideoDevicesNV = &_get_wglEnumerateVideoDevicesNV;
+
+static BOOL __stdcall _fail_wglBindVideoDeviceNV(HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int * piAttribList) {
+	const char *_name = "wglBindVideoDeviceNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglBindVideoDeviceNV(HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int * piAttribList) {
+	PFN_WGLBINDVIDEODEVICENV _ptr;
+	_ptr = (PFN_WGLBINDVIDEODEVICENV)_getPrivateProcAddress("wglBindVideoDeviceNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglBindVideoDeviceNV;
+	}
+	_wglBindVideoDeviceNV = _ptr;
+	return _wglBindVideoDeviceNV(hDC, uVideoSlot, hVideoDevice, piAttribList);
+}
+
+PFN_WGLBINDVIDEODEVICENV _wglBindVideoDeviceNV = &_get_wglBindVideoDeviceNV;
+
+static BOOL __stdcall _fail_wglQueryCurrentContextNV(int iAttribute, int * piValue) {
+	const char *_name = "wglQueryCurrentContextNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglQueryCurrentContextNV(int iAttribute, int * piValue) {
+	PFN_WGLQUERYCURRENTCONTEXTNV _ptr;
+	_ptr = (PFN_WGLQUERYCURRENTCONTEXTNV)_getPrivateProcAddress("wglQueryCurrentContextNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglQueryCurrentContextNV;
+	}
+	_wglQueryCurrentContextNV = _ptr;
+	return _wglQueryCurrentContextNV(iAttribute, piValue);
+}
+
+PFN_WGLQUERYCURRENTCONTEXTNV _wglQueryCurrentContextNV = &_get_wglQueryCurrentContextNV;
+
+static BOOL __stdcall _fail_wglGetVideoDeviceNV(HDC hDC, int numDevices, HPVIDEODEV * hVideoDevice) {
+	const char *_name = "wglGetVideoDeviceNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetVideoDeviceNV(HDC hDC, int numDevices, HPVIDEODEV * hVideoDevice) {
+	PFN_WGLGETVIDEODEVICENV _ptr;
+	_ptr = (PFN_WGLGETVIDEODEVICENV)_getPrivateProcAddress("wglGetVideoDeviceNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetVideoDeviceNV;
+	}
+	_wglGetVideoDeviceNV = _ptr;
+	return _wglGetVideoDeviceNV(hDC, numDevices, hVideoDevice);
+}
+
+PFN_WGLGETVIDEODEVICENV _wglGetVideoDeviceNV = &_get_wglGetVideoDeviceNV;
+
+static BOOL __stdcall _fail_wglReleaseVideoDeviceNV(HPVIDEODEV hVideoDevice) {
+	const char *_name = "wglReleaseVideoDeviceNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglReleaseVideoDeviceNV(HPVIDEODEV hVideoDevice) {
+	PFN_WGLRELEASEVIDEODEVICENV _ptr;
+	_ptr = (PFN_WGLRELEASEVIDEODEVICENV)_getPrivateProcAddress("wglReleaseVideoDeviceNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglReleaseVideoDeviceNV;
+	}
+	_wglReleaseVideoDeviceNV = _ptr;
+	return _wglReleaseVideoDeviceNV(hVideoDevice);
+}
+
+PFN_WGLRELEASEVIDEODEVICENV _wglReleaseVideoDeviceNV = &_get_wglReleaseVideoDeviceNV;
+
+static BOOL __stdcall _fail_wglBindVideoImageNV(HPVIDEODEV hVideoDevice, HPBUFFERARB hPbuffer, int iVideoBuffer) {
+	const char *_name = "wglBindVideoImageNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglBindVideoImageNV(HPVIDEODEV hVideoDevice, HPBUFFERARB hPbuffer, int iVideoBuffer) {
+	PFN_WGLBINDVIDEOIMAGENV _ptr;
+	_ptr = (PFN_WGLBINDVIDEOIMAGENV)_getPrivateProcAddress("wglBindVideoImageNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglBindVideoImageNV;
+	}
+	_wglBindVideoImageNV = _ptr;
+	return _wglBindVideoImageNV(hVideoDevice, hPbuffer, iVideoBuffer);
+}
+
+PFN_WGLBINDVIDEOIMAGENV _wglBindVideoImageNV = &_get_wglBindVideoImageNV;
+
+static BOOL __stdcall _fail_wglReleaseVideoImageNV(HPBUFFERARB hPbuffer, int iVideoBuffer) {
+	const char *_name = "wglReleaseVideoImageNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglReleaseVideoImageNV(HPBUFFERARB hPbuffer, int iVideoBuffer) {
+	PFN_WGLRELEASEVIDEOIMAGENV _ptr;
+	_ptr = (PFN_WGLRELEASEVIDEOIMAGENV)_getPrivateProcAddress("wglReleaseVideoImageNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglReleaseVideoImageNV;
+	}
+	_wglReleaseVideoImageNV = _ptr;
+	return _wglReleaseVideoImageNV(hPbuffer, iVideoBuffer);
+}
+
+PFN_WGLRELEASEVIDEOIMAGENV _wglReleaseVideoImageNV = &_get_wglReleaseVideoImageNV;
+
+static BOOL __stdcall _fail_wglSendPbufferToVideoNV(HPBUFFERARB hPbuffer, int iBufferType, unsigned long * pulCounterPbuffer, BOOL bBlock) {
+	const char *_name = "wglSendPbufferToVideoNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglSendPbufferToVideoNV(HPBUFFERARB hPbuffer, int iBufferType, unsigned long * pulCounterPbuffer, BOOL bBlock) {
+	PFN_WGLSENDPBUFFERTOVIDEONV _ptr;
+	_ptr = (PFN_WGLSENDPBUFFERTOVIDEONV)_getPrivateProcAddress("wglSendPbufferToVideoNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglSendPbufferToVideoNV;
+	}
+	_wglSendPbufferToVideoNV = _ptr;
+	return _wglSendPbufferToVideoNV(hPbuffer, iBufferType, pulCounterPbuffer, bBlock);
+}
+
+PFN_WGLSENDPBUFFERTOVIDEONV _wglSendPbufferToVideoNV = &_get_wglSendPbufferToVideoNV;
+
+static BOOL __stdcall _fail_wglGetVideoInfoNV(HPVIDEODEV hpVideoDevice, unsigned long * pulCounterOutputPbuffer, unsigned long * pulCounterOutputVideo) {
+	const char *_name = "wglGetVideoInfoNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglGetVideoInfoNV(HPVIDEODEV hpVideoDevice, unsigned long * pulCounterOutputPbuffer, unsigned long * pulCounterOutputVideo) {
+	PFN_WGLGETVIDEOINFONV _ptr;
+	_ptr = (PFN_WGLGETVIDEOINFONV)_getPrivateProcAddress("wglGetVideoInfoNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetVideoInfoNV;
+	}
+	_wglGetVideoInfoNV = _ptr;
+	return _wglGetVideoInfoNV(hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo);
+}
+
+PFN_WGLGETVIDEOINFONV _wglGetVideoInfoNV = &_get_wglGetVideoInfoNV;
+
+static BOOL __stdcall _fail_wglJoinSwapGroupNV(HDC hDC, GLuint group) {
+	const char *_name = "wglJoinSwapGroupNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglJoinSwapGroupNV(HDC hDC, GLuint group) {
+	PFN_WGLJOINSWAPGROUPNV _ptr;
+	_ptr = (PFN_WGLJOINSWAPGROUPNV)_getPrivateProcAddress("wglJoinSwapGroupNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglJoinSwapGroupNV;
+	}
+	_wglJoinSwapGroupNV = _ptr;
+	return _wglJoinSwapGroupNV(hDC, group);
+}
+
+PFN_WGLJOINSWAPGROUPNV _wglJoinSwapGroupNV = &_get_wglJoinSwapGroupNV;
+
+static BOOL __stdcall _fail_wglBindSwapBarrierNV(GLuint group, GLuint barrier) {
+	const char *_name = "wglBindSwapBarrierNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglBindSwapBarrierNV(GLuint group, GLuint barrier) {
+	PFN_WGLBINDSWAPBARRIERNV _ptr;
+	_ptr = (PFN_WGLBINDSWAPBARRIERNV)_getPrivateProcAddress("wglBindSwapBarrierNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglBindSwapBarrierNV;
+	}
+	_wglBindSwapBarrierNV = _ptr;
+	return _wglBindSwapBarrierNV(group, barrier);
+}
+
+PFN_WGLBINDSWAPBARRIERNV _wglBindSwapBarrierNV = &_get_wglBindSwapBarrierNV;
+
+static BOOL __stdcall _fail_wglQuerySwapGroupNV(HDC hDC, GLuint * group, GLuint * barrier) {
+	const char *_name = "wglQuerySwapGroupNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglQuerySwapGroupNV(HDC hDC, GLuint * group, GLuint * barrier) {
+	PFN_WGLQUERYSWAPGROUPNV _ptr;
+	_ptr = (PFN_WGLQUERYSWAPGROUPNV)_getPrivateProcAddress("wglQuerySwapGroupNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglQuerySwapGroupNV;
+	}
+	_wglQuerySwapGroupNV = _ptr;
+	return _wglQuerySwapGroupNV(hDC, group, barrier);
+}
+
+PFN_WGLQUERYSWAPGROUPNV _wglQuerySwapGroupNV = &_get_wglQuerySwapGroupNV;
+
+static BOOL __stdcall _fail_wglQueryMaxSwapGroupsNV(HDC hDC, GLuint * maxGroups, GLuint * maxBarriers) {
+	const char *_name = "wglQueryMaxSwapGroupsNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglQueryMaxSwapGroupsNV(HDC hDC, GLuint * maxGroups, GLuint * maxBarriers) {
+	PFN_WGLQUERYMAXSWAPGROUPSNV _ptr;
+	_ptr = (PFN_WGLQUERYMAXSWAPGROUPSNV)_getPrivateProcAddress("wglQueryMaxSwapGroupsNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglQueryMaxSwapGroupsNV;
+	}
+	_wglQueryMaxSwapGroupsNV = _ptr;
+	return _wglQueryMaxSwapGroupsNV(hDC, maxGroups, maxBarriers);
+}
+
+PFN_WGLQUERYMAXSWAPGROUPSNV _wglQueryMaxSwapGroupsNV = &_get_wglQueryMaxSwapGroupsNV;
+
+static BOOL __stdcall _fail_wglQueryFrameCountNV(HDC hDC, GLuint * count) {
+	const char *_name = "wglQueryFrameCountNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglQueryFrameCountNV(HDC hDC, GLuint * count) {
+	PFN_WGLQUERYFRAMECOUNTNV _ptr;
+	_ptr = (PFN_WGLQUERYFRAMECOUNTNV)_getPrivateProcAddress("wglQueryFrameCountNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglQueryFrameCountNV;
+	}
+	_wglQueryFrameCountNV = _ptr;
+	return _wglQueryFrameCountNV(hDC, count);
+}
+
+PFN_WGLQUERYFRAMECOUNTNV _wglQueryFrameCountNV = &_get_wglQueryFrameCountNV;
+
+static BOOL __stdcall _fail_wglResetFrameCountNV(HDC hDC) {
+	const char *_name = "wglResetFrameCountNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglResetFrameCountNV(HDC hDC) {
+	PFN_WGLRESETFRAMECOUNTNV _ptr;
+	_ptr = (PFN_WGLRESETFRAMECOUNTNV)_getPrivateProcAddress("wglResetFrameCountNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglResetFrameCountNV;
+	}
+	_wglResetFrameCountNV = _ptr;
+	return _wglResetFrameCountNV(hDC);
+}
+
+PFN_WGLRESETFRAMECOUNTNV _wglResetFrameCountNV = &_get_wglResetFrameCountNV;
+
+static BOOL __stdcall _fail_wglEnumGpusNV(UINT iGpuIndex, HGPUNV * phGpu) {
+	const char *_name = "wglEnumGpusNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglEnumGpusNV(UINT iGpuIndex, HGPUNV * phGpu) {
+	PFN_WGLENUMGPUSNV _ptr;
+	_ptr = (PFN_WGLENUMGPUSNV)_getPrivateProcAddress("wglEnumGpusNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglEnumGpusNV;
+	}
+	_wglEnumGpusNV = _ptr;
+	return _wglEnumGpusNV(iGpuIndex, phGpu);
+}
+
+PFN_WGLENUMGPUSNV _wglEnumGpusNV = &_get_wglEnumGpusNV;
+
+static BOOL __stdcall _fail_wglEnumGpuDevicesNV(HGPUNV hGpu, UINT iDeviceIndex, _GPU_DEVICE * lpGpuDevice) {
+	const char *_name = "wglEnumGpuDevicesNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglEnumGpuDevicesNV(HGPUNV hGpu, UINT iDeviceIndex, _GPU_DEVICE * lpGpuDevice) {
+	PFN_WGLENUMGPUDEVICESNV _ptr;
+	_ptr = (PFN_WGLENUMGPUDEVICESNV)_getPrivateProcAddress("wglEnumGpuDevicesNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglEnumGpuDevicesNV;
+	}
+	_wglEnumGpuDevicesNV = _ptr;
+	return _wglEnumGpuDevicesNV(hGpu, iDeviceIndex, lpGpuDevice);
+}
+
+PFN_WGLENUMGPUDEVICESNV _wglEnumGpuDevicesNV = &_get_wglEnumGpuDevicesNV;
+
+static HDC __stdcall _fail_wglCreateAffinityDCNV(const HGPUNV * phGpuList) {
+	const char *_name = "wglCreateAffinityDCNV";
+	return false;
+}
+
+static HDC __stdcall _get_wglCreateAffinityDCNV(const HGPUNV * phGpuList) {
+	PFN_WGLCREATEAFFINITYDCNV _ptr;
+	_ptr = (PFN_WGLCREATEAFFINITYDCNV)_getPrivateProcAddress("wglCreateAffinityDCNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglCreateAffinityDCNV;
+	}
+	_wglCreateAffinityDCNV = _ptr;
+	return _wglCreateAffinityDCNV(phGpuList);
+}
+
+PFN_WGLCREATEAFFINITYDCNV _wglCreateAffinityDCNV = &_get_wglCreateAffinityDCNV;
+
+static BOOL __stdcall _fail_wglEnumGpusFromAffinityDCNV(HDC hAffinityDC, UINT iGpuIndex, HGPUNV * hGpu) {
+	const char *_name = "wglEnumGpusFromAffinityDCNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglEnumGpusFromAffinityDCNV(HDC hAffinityDC, UINT iGpuIndex, HGPUNV * hGpu) {
+	PFN_WGLENUMGPUSFROMAFFINITYDCNV _ptr;
+	_ptr = (PFN_WGLENUMGPUSFROMAFFINITYDCNV)_getPrivateProcAddress("wglEnumGpusFromAffinityDCNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglEnumGpusFromAffinityDCNV;
+	}
+	_wglEnumGpusFromAffinityDCNV = _ptr;
+	return _wglEnumGpusFromAffinityDCNV(hAffinityDC, iGpuIndex, hGpu);
+}
+
+PFN_WGLENUMGPUSFROMAFFINITYDCNV _wglEnumGpusFromAffinityDCNV = &_get_wglEnumGpusFromAffinityDCNV;
+
+static BOOL __stdcall _fail_wglDeleteDCNV(HDC hdc) {
+	const char *_name = "wglDeleteDCNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDeleteDCNV(HDC hdc) {
+	PFN_WGLDELETEDCNV _ptr;
+	_ptr = (PFN_WGLDELETEDCNV)_getPrivateProcAddress("wglDeleteDCNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglDeleteDCNV;
+	}
+	_wglDeleteDCNV = _ptr;
+	return _wglDeleteDCNV(hdc);
+}
+
+PFN_WGLDELETEDCNV _wglDeleteDCNV = &_get_wglDeleteDCNV;
+
+static UINT __stdcall _fail_wglGetGPUIDsAMD(UINT maxCount, UINT * ids) {
+	const char *_name = "wglGetGPUIDsAMD";
+	return false;
+}
+
+static UINT __stdcall _get_wglGetGPUIDsAMD(UINT maxCount, UINT * ids) {
+	PFN_WGLGETGPUIDSAMD _ptr;
+	_ptr = (PFN_WGLGETGPUIDSAMD)_getPrivateProcAddress("wglGetGPUIDsAMD");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetGPUIDsAMD;
+	}
+	_wglGetGPUIDsAMD = _ptr;
+	return _wglGetGPUIDsAMD(maxCount, ids);
+}
+
+PFN_WGLGETGPUIDSAMD _wglGetGPUIDsAMD = &_get_wglGetGPUIDsAMD;
+
+static INT __stdcall _fail_wglGetGPUInfoAMD(UINT id, int property, GLenum dataType, UINT size, void * data) {
+	const char *_name = "wglGetGPUInfoAMD";
+	return false;
+}
+
+static INT __stdcall _get_wglGetGPUInfoAMD(UINT id, int property, GLenum dataType, UINT size, void * data) {
+	PFN_WGLGETGPUINFOAMD _ptr;
+	_ptr = (PFN_WGLGETGPUINFOAMD)_getPrivateProcAddress("wglGetGPUInfoAMD");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetGPUInfoAMD;
+	}
+	_wglGetGPUInfoAMD = _ptr;
+	return _wglGetGPUInfoAMD(id, property, dataType, size, data);
+}
+
+PFN_WGLGETGPUINFOAMD _wglGetGPUInfoAMD = &_get_wglGetGPUInfoAMD;
+
+static UINT __stdcall _fail_wglGetContextGPUIDAMD(HGLRC hglrc) {
+	const char *_name = "wglGetContextGPUIDAMD";
+	return false;
+}
+
+static UINT __stdcall _get_wglGetContextGPUIDAMD(HGLRC hglrc) {
+	PFN_WGLGETCONTEXTGPUIDAMD _ptr;
+	_ptr = (PFN_WGLGETCONTEXTGPUIDAMD)_getPrivateProcAddress("wglGetContextGPUIDAMD");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetContextGPUIDAMD;
+	}
+	_wglGetContextGPUIDAMD = _ptr;
+	return _wglGetContextGPUIDAMD(hglrc);
+}
+
+PFN_WGLGETCONTEXTGPUIDAMD _wglGetContextGPUIDAMD = &_get_wglGetContextGPUIDAMD;
+
+static HGLRC __stdcall _fail_wglCreateAssociatedContextAMD(UINT id) {
+	const char *_name = "wglCreateAssociatedContextAMD";
+	return false;
+}
+
+static HGLRC __stdcall _get_wglCreateAssociatedContextAMD(UINT id) {
+	PFN_WGLCREATEASSOCIATEDCONTEXTAMD _ptr;
+	_ptr = (PFN_WGLCREATEASSOCIATEDCONTEXTAMD)_getPrivateProcAddress("wglCreateAssociatedContextAMD");
+	if (!_ptr) {
+		_ptr = &_fail_wglCreateAssociatedContextAMD;
+	}
+	_wglCreateAssociatedContextAMD = _ptr;
+	return _wglCreateAssociatedContextAMD(id);
+}
+
+PFN_WGLCREATEASSOCIATEDCONTEXTAMD _wglCreateAssociatedContextAMD = &_get_wglCreateAssociatedContextAMD;
+
+static HGLRC __stdcall _fail_wglCreateAssociatedContextAttribsAMD(UINT id, HGLRC hShareContext, const int * attribList) {
+	const char *_name = "wglCreateAssociatedContextAttribsAMD";
+	return false;
+}
+
+static HGLRC __stdcall _get_wglCreateAssociatedContextAttribsAMD(UINT id, HGLRC hShareContext, const int * attribList) {
+	PFN_WGLCREATEASSOCIATEDCONTEXTATTRIBSAMD _ptr;
+	_ptr = (PFN_WGLCREATEASSOCIATEDCONTEXTATTRIBSAMD)_getPrivateProcAddress("wglCreateAssociatedContextAttribsAMD");
+	if (!_ptr) {
+		_ptr = &_fail_wglCreateAssociatedContextAttribsAMD;
+	}
+	_wglCreateAssociatedContextAttribsAMD = _ptr;
+	return _wglCreateAssociatedContextAttribsAMD(id, hShareContext, attribList);
+}
+
+PFN_WGLCREATEASSOCIATEDCONTEXTATTRIBSAMD _wglCreateAssociatedContextAttribsAMD = &_get_wglCreateAssociatedContextAttribsAMD;
+
+static BOOL __stdcall _fail_wglDeleteAssociatedContextAMD(HGLRC hglrc) {
+	const char *_name = "wglDeleteAssociatedContextAMD";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDeleteAssociatedContextAMD(HGLRC hglrc) {
+	PFN_WGLDELETEASSOCIATEDCONTEXTAMD _ptr;
+	_ptr = (PFN_WGLDELETEASSOCIATEDCONTEXTAMD)_getPrivateProcAddress("wglDeleteAssociatedContextAMD");
+	if (!_ptr) {
+		_ptr = &_fail_wglDeleteAssociatedContextAMD;
+	}
+	_wglDeleteAssociatedContextAMD = _ptr;
+	return _wglDeleteAssociatedContextAMD(hglrc);
+}
+
+PFN_WGLDELETEASSOCIATEDCONTEXTAMD _wglDeleteAssociatedContextAMD = &_get_wglDeleteAssociatedContextAMD;
+
+static BOOL __stdcall _fail_wglMakeAssociatedContextCurrentAMD(HGLRC hglrc) {
+	const char *_name = "wglMakeAssociatedContextCurrentAMD";
+	return false;
+}
+
+static BOOL __stdcall _get_wglMakeAssociatedContextCurrentAMD(HGLRC hglrc) {
+	PFN_WGLMAKEASSOCIATEDCONTEXTCURRENTAMD _ptr;
+	_ptr = (PFN_WGLMAKEASSOCIATEDCONTEXTCURRENTAMD)_getPrivateProcAddress("wglMakeAssociatedContextCurrentAMD");
+	if (!_ptr) {
+		_ptr = &_fail_wglMakeAssociatedContextCurrentAMD;
+	}
+	_wglMakeAssociatedContextCurrentAMD = _ptr;
+	return _wglMakeAssociatedContextCurrentAMD(hglrc);
+}
+
+PFN_WGLMAKEASSOCIATEDCONTEXTCURRENTAMD _wglMakeAssociatedContextCurrentAMD = &_get_wglMakeAssociatedContextCurrentAMD;
+
+static HGLRC __stdcall _fail_wglGetCurrentAssociatedContextAMD(void) {
+	const char *_name = "wglGetCurrentAssociatedContextAMD";
+	return false;
+}
+
+static HGLRC __stdcall _get_wglGetCurrentAssociatedContextAMD(void) {
+	PFN_WGLGETCURRENTASSOCIATEDCONTEXTAMD _ptr;
+	_ptr = (PFN_WGLGETCURRENTASSOCIATEDCONTEXTAMD)_getPrivateProcAddress("wglGetCurrentAssociatedContextAMD");
+	if (!_ptr) {
+		_ptr = &_fail_wglGetCurrentAssociatedContextAMD;
+	}
+	_wglGetCurrentAssociatedContextAMD = _ptr;
+	return _wglGetCurrentAssociatedContextAMD();
+}
+
+PFN_WGLGETCURRENTASSOCIATEDCONTEXTAMD _wglGetCurrentAssociatedContextAMD = &_get_wglGetCurrentAssociatedContextAMD;
+
+static void __stdcall _fail_wglBlitContextFramebufferAMD(HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) {
+	const char *_name = "wglBlitContextFramebufferAMD";
+	
+	return;
+}
+
+static void __stdcall _get_wglBlitContextFramebufferAMD(HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) {
+	PFN_WGLBLITCONTEXTFRAMEBUFFERAMD _ptr;
+	_ptr = (PFN_WGLBLITCONTEXTFRAMEBUFFERAMD)_getPrivateProcAddress("wglBlitContextFramebufferAMD");
+	if (!_ptr) {
+		_ptr = &_fail_wglBlitContextFramebufferAMD;
+	}
+	_wglBlitContextFramebufferAMD = _ptr;
+	_wglBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+}
+
+PFN_WGLBLITCONTEXTFRAMEBUFFERAMD _wglBlitContextFramebufferAMD = &_get_wglBlitContextFramebufferAMD;
+
+static BOOL __stdcall _fail_wglBindVideoCaptureDeviceNV(UINT uVideoSlot, HVIDEOINPUTDEVICENV hDevice) {
+	const char *_name = "wglBindVideoCaptureDeviceNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglBindVideoCaptureDeviceNV(UINT uVideoSlot, HVIDEOINPUTDEVICENV hDevice) {
+	PFN_WGLBINDVIDEOCAPTUREDEVICENV _ptr;
+	_ptr = (PFN_WGLBINDVIDEOCAPTUREDEVICENV)_getPrivateProcAddress("wglBindVideoCaptureDeviceNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglBindVideoCaptureDeviceNV;
+	}
+	_wglBindVideoCaptureDeviceNV = _ptr;
+	return _wglBindVideoCaptureDeviceNV(uVideoSlot, hDevice);
+}
+
+PFN_WGLBINDVIDEOCAPTUREDEVICENV _wglBindVideoCaptureDeviceNV = &_get_wglBindVideoCaptureDeviceNV;
+
+static UINT __stdcall _fail_wglEnumerateVideoCaptureDevicesNV(HDC hDc, HVIDEOINPUTDEVICENV * phDeviceList) {
+	const char *_name = "wglEnumerateVideoCaptureDevicesNV";
+	return false;
+}
+
+static UINT __stdcall _get_wglEnumerateVideoCaptureDevicesNV(HDC hDc, HVIDEOINPUTDEVICENV * phDeviceList) {
+	PFN_WGLENUMERATEVIDEOCAPTUREDEVICESNV _ptr;
+	_ptr = (PFN_WGLENUMERATEVIDEOCAPTUREDEVICESNV)_getPrivateProcAddress("wglEnumerateVideoCaptureDevicesNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglEnumerateVideoCaptureDevicesNV;
+	}
+	_wglEnumerateVideoCaptureDevicesNV = _ptr;
+	return _wglEnumerateVideoCaptureDevicesNV(hDc, phDeviceList);
+}
+
+PFN_WGLENUMERATEVIDEOCAPTUREDEVICESNV _wglEnumerateVideoCaptureDevicesNV = &_get_wglEnumerateVideoCaptureDevicesNV;
+
+static BOOL __stdcall _fail_wglLockVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice) {
+	const char *_name = "wglLockVideoCaptureDeviceNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglLockVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice) {
+	PFN_WGLLOCKVIDEOCAPTUREDEVICENV _ptr;
+	_ptr = (PFN_WGLLOCKVIDEOCAPTUREDEVICENV)_getPrivateProcAddress("wglLockVideoCaptureDeviceNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglLockVideoCaptureDeviceNV;
+	}
+	_wglLockVideoCaptureDeviceNV = _ptr;
+	return _wglLockVideoCaptureDeviceNV(hDc, hDevice);
+}
+
+PFN_WGLLOCKVIDEOCAPTUREDEVICENV _wglLockVideoCaptureDeviceNV = &_get_wglLockVideoCaptureDeviceNV;
+
+static BOOL __stdcall _fail_wglQueryVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice, int iAttribute, int * piValue) {
+	const char *_name = "wglQueryVideoCaptureDeviceNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglQueryVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice, int iAttribute, int * piValue) {
+	PFN_WGLQUERYVIDEOCAPTUREDEVICENV _ptr;
+	_ptr = (PFN_WGLQUERYVIDEOCAPTUREDEVICENV)_getPrivateProcAddress("wglQueryVideoCaptureDeviceNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglQueryVideoCaptureDeviceNV;
+	}
+	_wglQueryVideoCaptureDeviceNV = _ptr;
+	return _wglQueryVideoCaptureDeviceNV(hDc, hDevice, iAttribute, piValue);
+}
+
+PFN_WGLQUERYVIDEOCAPTUREDEVICENV _wglQueryVideoCaptureDeviceNV = &_get_wglQueryVideoCaptureDeviceNV;
+
+static BOOL __stdcall _fail_wglReleaseVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice) {
+	const char *_name = "wglReleaseVideoCaptureDeviceNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglReleaseVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice) {
+	PFN_WGLRELEASEVIDEOCAPTUREDEVICENV _ptr;
+	_ptr = (PFN_WGLRELEASEVIDEOCAPTUREDEVICENV)_getPrivateProcAddress("wglReleaseVideoCaptureDeviceNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglReleaseVideoCaptureDeviceNV;
+	}
+	_wglReleaseVideoCaptureDeviceNV = _ptr;
+	return _wglReleaseVideoCaptureDeviceNV(hDc, hDevice);
+}
+
+PFN_WGLRELEASEVIDEOCAPTUREDEVICENV _wglReleaseVideoCaptureDeviceNV = &_get_wglReleaseVideoCaptureDeviceNV;
+
+static BOOL __stdcall _fail_wglCopyImageSubDataNV(HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth) {
+	const char *_name = "wglCopyImageSubDataNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglCopyImageSubDataNV(HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth) {
+	PFN_WGLCOPYIMAGESUBDATANV _ptr;
+	_ptr = (PFN_WGLCOPYIMAGESUBDATANV)_getPrivateProcAddress("wglCopyImageSubDataNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglCopyImageSubDataNV;
+	}
+	_wglCopyImageSubDataNV = _ptr;
+	return _wglCopyImageSubDataNV(hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth);
+}
+
+PFN_WGLCOPYIMAGESUBDATANV _wglCopyImageSubDataNV = &_get_wglCopyImageSubDataNV;
+
+static BOOL __stdcall _fail_wglDXSetResourceShareHandleNV(void * dxObject, HANDLE shareHandle) {
+	const char *_name = "wglDXSetResourceShareHandleNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDXSetResourceShareHandleNV(void * dxObject, HANDLE shareHandle) {
+	PFN_WGLDXSETRESOURCESHAREHANDLENV _ptr;
+	_ptr = (PFN_WGLDXSETRESOURCESHAREHANDLENV)_getPrivateProcAddress("wglDXSetResourceShareHandleNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglDXSetResourceShareHandleNV;
+	}
+	_wglDXSetResourceShareHandleNV = _ptr;
+	return _wglDXSetResourceShareHandleNV(dxObject, shareHandle);
+}
+
+PFN_WGLDXSETRESOURCESHAREHANDLENV _wglDXSetResourceShareHandleNV = &_get_wglDXSetResourceShareHandleNV;
+
+static HANDLE __stdcall _fail_wglDXOpenDeviceNV(void * dxDevice) {
+	const char *_name = "wglDXOpenDeviceNV";
+	return false;
+}
+
+static HANDLE __stdcall _get_wglDXOpenDeviceNV(void * dxDevice) {
+	PFN_WGLDXOPENDEVICENV _ptr;
+	_ptr = (PFN_WGLDXOPENDEVICENV)_getPrivateProcAddress("wglDXOpenDeviceNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglDXOpenDeviceNV;
+	}
+	_wglDXOpenDeviceNV = _ptr;
+	return _wglDXOpenDeviceNV(dxDevice);
+}
+
+PFN_WGLDXOPENDEVICENV _wglDXOpenDeviceNV = &_get_wglDXOpenDeviceNV;
+
+static BOOL __stdcall _fail_wglDXCloseDeviceNV(HANDLE hDevice) {
+	const char *_name = "wglDXCloseDeviceNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDXCloseDeviceNV(HANDLE hDevice) {
+	PFN_WGLDXCLOSEDEVICENV _ptr;
+	_ptr = (PFN_WGLDXCLOSEDEVICENV)_getPrivateProcAddress("wglDXCloseDeviceNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglDXCloseDeviceNV;
+	}
+	_wglDXCloseDeviceNV = _ptr;
+	return _wglDXCloseDeviceNV(hDevice);
+}
+
+PFN_WGLDXCLOSEDEVICENV _wglDXCloseDeviceNV = &_get_wglDXCloseDeviceNV;
+
+static HANDLE __stdcall _fail_wglDXRegisterObjectNV(HANDLE hDevice, void * dxObject, GLuint name, GLenum type, GLenum access) {
+	const char *_name = "wglDXRegisterObjectNV";
+	return false;
+}
+
+static HANDLE __stdcall _get_wglDXRegisterObjectNV(HANDLE hDevice, void * dxObject, GLuint name, GLenum type, GLenum access) {
+	PFN_WGLDXREGISTEROBJECTNV _ptr;
+	_ptr = (PFN_WGLDXREGISTEROBJECTNV)_getPrivateProcAddress("wglDXRegisterObjectNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglDXRegisterObjectNV;
+	}
+	_wglDXRegisterObjectNV = _ptr;
+	return _wglDXRegisterObjectNV(hDevice, dxObject, name, type, access);
+}
+
+PFN_WGLDXREGISTEROBJECTNV _wglDXRegisterObjectNV = &_get_wglDXRegisterObjectNV;
+
+static BOOL __stdcall _fail_wglDXUnregisterObjectNV(HANDLE hDevice, HANDLE hObject) {
+	const char *_name = "wglDXUnregisterObjectNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDXUnregisterObjectNV(HANDLE hDevice, HANDLE hObject) {
+	PFN_WGLDXUNREGISTEROBJECTNV _ptr;
+	_ptr = (PFN_WGLDXUNREGISTEROBJECTNV)_getPrivateProcAddress("wglDXUnregisterObjectNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglDXUnregisterObjectNV;
+	}
+	_wglDXUnregisterObjectNV = _ptr;
+	return _wglDXUnregisterObjectNV(hDevice, hObject);
+}
+
+PFN_WGLDXUNREGISTEROBJECTNV _wglDXUnregisterObjectNV = &_get_wglDXUnregisterObjectNV;
+
+static BOOL __stdcall _fail_wglDXObjectAccessNV(HANDLE hObject, GLenum access) {
+	const char *_name = "wglDXObjectAccessNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDXObjectAccessNV(HANDLE hObject, GLenum access) {
+	PFN_WGLDXOBJECTACCESSNV _ptr;
+	_ptr = (PFN_WGLDXOBJECTACCESSNV)_getPrivateProcAddress("wglDXObjectAccessNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglDXObjectAccessNV;
+	}
+	_wglDXObjectAccessNV = _ptr;
+	return _wglDXObjectAccessNV(hObject, access);
+}
+
+PFN_WGLDXOBJECTACCESSNV _wglDXObjectAccessNV = &_get_wglDXObjectAccessNV;
+
+static BOOL __stdcall _fail_wglDXLockObjectsNV(HANDLE hDevice, GLint count, HANDLE * hObjects) {
+	const char *_name = "wglDXLockObjectsNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDXLockObjectsNV(HANDLE hDevice, GLint count, HANDLE * hObjects) {
+	PFN_WGLDXLOCKOBJECTSNV _ptr;
+	_ptr = (PFN_WGLDXLOCKOBJECTSNV)_getPrivateProcAddress("wglDXLockObjectsNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglDXLockObjectsNV;
+	}
+	_wglDXLockObjectsNV = _ptr;
+	return _wglDXLockObjectsNV(hDevice, count, hObjects);
+}
+
+PFN_WGLDXLOCKOBJECTSNV _wglDXLockObjectsNV = &_get_wglDXLockObjectsNV;
+
+static BOOL __stdcall _fail_wglDXUnlockObjectsNV(HANDLE hDevice, GLint count, HANDLE * hObjects) {
+	const char *_name = "wglDXUnlockObjectsNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDXUnlockObjectsNV(HANDLE hDevice, GLint count, HANDLE * hObjects) {
+	PFN_WGLDXUNLOCKOBJECTSNV _ptr;
+	_ptr = (PFN_WGLDXUNLOCKOBJECTSNV)_getPrivateProcAddress("wglDXUnlockObjectsNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglDXUnlockObjectsNV;
+	}
+	_wglDXUnlockObjectsNV = _ptr;
+	return _wglDXUnlockObjectsNV(hDevice, count, hObjects);
+}
+
+PFN_WGLDXUNLOCKOBJECTSNV _wglDXUnlockObjectsNV = &_get_wglDXUnlockObjectsNV;
+
+static BOOL __stdcall _fail_wglDelayBeforeSwapNV(HDC hDC, GLfloat seconds) {
+	const char *_name = "wglDelayBeforeSwapNV";
+	return false;
+}
+
+static BOOL __stdcall _get_wglDelayBeforeSwapNV(HDC hDC, GLfloat seconds) {
+	PFN_WGLDELAYBEFORESWAPNV _ptr;
+	_ptr = (PFN_WGLDELAYBEFORESWAPNV)_getPrivateProcAddress("wglDelayBeforeSwapNV");
+	if (!_ptr) {
+		_ptr = &_fail_wglDelayBeforeSwapNV;
+	}
+	_wglDelayBeforeSwapNV = _ptr;
+	return _wglDelayBeforeSwapNV(hDC, seconds);
+}
+
+PFN_WGLDELAYBEFORESWAPNV _wglDelayBeforeSwapNV = &_get_wglDelayBeforeSwapNV;
+
+
 /************************************************************************************/
 int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd)
 {
