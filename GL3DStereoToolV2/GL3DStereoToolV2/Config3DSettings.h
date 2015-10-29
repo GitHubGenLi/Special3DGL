@@ -9,6 +9,8 @@
 #include <fstream>
 #include <algorithm>
 
+#include <sstream>
+#include <iostream>
 
 using namespace std;
 
@@ -64,9 +66,14 @@ public:
 		currentFrameGL++;
 		currentFunctionCallIndexPerFrame = 0;
 	}
-	void increaseFunctionCall()
+	void increaseFunctionCall(string funcName = "")
 	{
 		currentFunctionCallIndexPerFrame ++;
+		
+		if (funcName.length() > 0)
+		{
+			std::cout << "Current Func call: " << funcName << " Index :" << currentFunctionCallIndexPerFrame << endl;
+		}
 	}
 	static void switchBuffer(GLuint drawBuffer)
 	{
@@ -74,12 +81,23 @@ public:
 	}
 	void switchCurrentBuffer()
 	{
-		glDrawBuffer(currentDrawingBuffer);
-		if (currentBoundaryLoc == ObjectBoundary::Start)
+		if (currentBoundaryLoc != ObjectBoundary::End)
 		{
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			currentBoundaryLoc = ObjectBoundary::Middle;
+			glDrawBuffer(currentDrawingBuffer);
+			//std::cout << "Current buffer: " << currentDrawingBuffer << endl;
+			if (currentBoundaryLoc == ObjectBoundary::Start)
+			{
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+				glClearColor(0, 0, 0, 1);
+				currentBoundaryLoc = ObjectBoundary::Middle;
+			}
+			else if (currentBoundaryLoc == ObjectBoundary::End)
+			{
+				currentDrawingBuffer = GL_BACK;
+				currentBoundaryLoc = ObjectBoundary::Start;
+			}
 		}
+		
 	}
 	void setCurrentBuffer(GLuint drawBuffer)
 	{
@@ -91,9 +109,9 @@ public:
 		{
 		case 0:
 			return GL_BACK;
-		case 1:
+		case 2: //use this because opposite side
 			return GL_BACK_LEFT;
-		case 2:
+		case 1:
 			return GL_BACK_RIGHT;
 		default:
 			break;
@@ -108,6 +126,8 @@ public:
 		return currentFrameGL >= StartInterceptedFrame;
 	}
 	void getDrawingBuffer(const string funcName, GLuint &buffer, ObjectType &objType, ObjectBoundary &bound, bool updated = true);
+	void Config3DSettings::getDrawingBuffer(const string funcName);
+	void resetCurrentStatusOfEachFrame();
 };
 
 #endif

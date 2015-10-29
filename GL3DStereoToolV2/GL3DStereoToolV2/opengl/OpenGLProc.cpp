@@ -12,7 +12,7 @@ unsigned g_clearCount = 0;
 HMODULE _libGlHandle = NULL;
 HDC currentOpenGLContext;
 
-unsigned m_framesGL = 0;    ///< OpenGL frame count
+//unsigned m_framesGL = 0;    ///< OpenGL frame count
 
 unsigned m_samplesGL;   ///< OpenGL multisamples (or 0)
 
@@ -364,6 +364,169 @@ void APIENTRY _get_glRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z) {
 }
 
 PFN_GLROTATEF _glRotatef = &_get_glRotatef;
+
+static void APIENTRY _fail_glLoadIdentity(void) {
+	const char *_name = "glLoadIdentity";
+	
+	return;
+}
+
+static void APIENTRY _get_glLoadIdentity(void) {
+	PFN_GLLOADIDENTITY _ptr;
+	_ptr = (PFN_GLLOADIDENTITY)_getPublicProcAddress("glLoadIdentity");
+	if (!_ptr) {
+		_ptr = &_fail_glLoadIdentity;
+	}
+	_glLoadIdentity = _ptr;
+	_glLoadIdentity();
+}
+
+PFN_GLLOADIDENTITY _glLoadIdentity = &_get_glLoadIdentity;
+
+static void APIENTRY _fail_glMultMatrixf(const GLfloat * m) {
+	const char *_name = "glMultMatrixf";
+	
+	return;
+}
+
+static void APIENTRY _get_glMultMatrixf(const GLfloat * m) {
+	PFN_GLMULTMATRIXF _ptr;
+	_ptr = (PFN_GLMULTMATRIXF)_getPublicProcAddress("glMultMatrixf");
+	if (!_ptr) {
+		_ptr = &_fail_glMultMatrixf;
+	}
+	_glMultMatrixf = _ptr;
+	_glMultMatrixf(m);
+}
+
+PFN_GLMULTMATRIXF _glMultMatrixf = &_get_glMultMatrixf;
+
+static void APIENTRY _fail_glTranslated(GLdouble x, GLdouble y, GLdouble z) {
+	const char *_name = "glTranslated";
+	
+	return;
+}
+
+static void APIENTRY _get_glTranslated(GLdouble x, GLdouble y, GLdouble z) {
+	PFN_GLTRANSLATED _ptr;
+	_ptr = (PFN_GLTRANSLATED)_getPublicProcAddress("glTranslated");
+	if (!_ptr) {
+		_ptr = &_fail_glTranslated;
+	}
+	_glTranslated = _ptr;
+	_glTranslated(x, y, z);
+}
+
+PFN_GLTRANSLATED _glTranslated = &_get_glTranslated;
+
+static void APIENTRY _fail_glLightfv(GLenum light, GLenum pname, const GLfloat * params) {
+	const char *_name = "glLightfv";
+	
+	return;
+}
+
+static void APIENTRY _get_glLightfv(GLenum light, GLenum pname, const GLfloat * params) {
+	PFN_GLLIGHTFV _ptr;
+	_ptr = (PFN_GLLIGHTFV)_getPublicProcAddress("glLightfv");
+	if (!_ptr) {
+		_ptr = &_fail_glLightfv;
+	}
+	_glLightfv = _ptr;
+	_glLightfv(light, pname, params);
+}
+
+PFN_GLLIGHTFV _glLightfv = &_get_glLightfv;
+
+static void APIENTRY _fail_glTranslatef(GLfloat x, GLfloat y, GLfloat z) {
+	const char *_name = "glTranslatef";
+	
+	return;
+}
+
+static void APIENTRY _get_glTranslatef(GLfloat x, GLfloat y, GLfloat z) {
+	PFN_GLTRANSLATEF _ptr;
+	_ptr = (PFN_GLTRANSLATEF)_getPublicProcAddress("glTranslatef");
+	if (!_ptr) {
+		_ptr = &_fail_glTranslatef;
+	}
+	_glTranslatef = _ptr;
+	_glTranslatef(x, y, z);
+}
+
+PFN_GLTRANSLATEF _glTranslatef = &_get_glTranslatef;
+
+static void APIENTRY _fail_glBegin(GLenum mode) {
+	const char *_name = "glBegin";
+	
+	return;
+}
+
+static void APIENTRY _get_glBegin(GLenum mode) {
+	PFN_GLBEGIN _ptr;
+	_ptr = (PFN_GLBEGIN)_getPublicProcAddress("glBegin");
+	if (!_ptr) {
+		_ptr = &_fail_glBegin;
+	}
+	_glBegin = _ptr;
+	_glBegin(mode);
+}
+
+PFN_GLBEGIN _glBegin = &_get_glBegin;
+
+static void APIENTRY _fail_glVertex3f(GLfloat x, GLfloat y, GLfloat z) {
+	const char *_name = "glVertex3f";
+
+	return;
+}
+
+static void APIENTRY _get_glVertex3f(GLfloat x, GLfloat y, GLfloat z) {
+	PFN_GLVERTEX3F _ptr;
+	_ptr = (PFN_GLVERTEX3F)_getPublicProcAddress("glVertex3f");
+	if (!_ptr) {
+		_ptr = &_fail_glVertex3f;
+	}
+	_glVertex3f = _ptr;
+	_glVertex3f(x, y, z);
+}
+
+PFN_GLVERTEX3F _glVertex3f = &_get_glVertex3f;
+
+static void APIENTRY _fail_glEnd(void) {
+	const char *_name = "glEnd";
+	
+	return;
+}
+
+static void APIENTRY _get_glEnd(void) {
+	PFN_GLEND _ptr;
+	_ptr = (PFN_GLEND)_getPublicProcAddress("glEnd");
+	if (!_ptr) {
+		_ptr = &_fail_glEnd;
+	}
+	_glEnd = _ptr;
+	_glEnd();
+}
+
+PFN_GLEND _glEnd = &_get_glEnd;
+
+static void APIENTRY _fail_glFlush(void) {
+	const char *_name = "glFlush";
+	
+	return;
+}
+
+static void APIENTRY _get_glFlush(void) {
+	PFN_GLFLUSH _ptr;
+	_ptr = (PFN_GLFLUSH)_getPublicProcAddress("glFlush");
+	if (!_ptr) {
+		_ptr = &_fail_glFlush;
+	}
+	_glFlush = _ptr;
+	_glFlush();
+}
+
+PFN_GLFLUSH _glFlush = &_get_glFlush;
+
 /************************************************************************************/
 int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd)
 {
@@ -374,7 +537,7 @@ int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR 
 	heightScreen = 1080;
 	/************************/
 
-	m_framesGL = 0;
+	//m_framesGL = 0;
 	currentConfig3DSettings.readConfig3DSettingsFromFile();
 
 	/************************/
@@ -808,6 +971,8 @@ void WINAPI interceptedglClear(GLbitfield mask)
 	//	glDrawBuffer(GL_BACK_LEFT);
 	//}
 
+	currentConfig3DSettings.increaseFunctionCall();
+
 	_glClear(mask);
 	
 
@@ -889,198 +1054,61 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 		return false;
 	}
 
-	/**********************************************/
-	// Testing: drawing everything into a Framebuffer and then redraw
-	//glPushAttrib(GL_ENABLE_BIT | GL_CURRENT_BIT);
+	currentConfig3DSettings.increaseFunctionCall();
 
-	// enable texturing if required
-	/*if (useTexture) {
-		glEnable(GL_TEXTURE_2D);
-		glColor3f(1, 1, 1);
-		}*/
-
-	// draw to default framebuffer
-	//glx.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-	
-	//glx.glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//glDrawBuffer(GL_BACK);
-	////glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[0].frameBuffer);
-	////glViewport(0, 0, widthScreen/2, heightScreen/2);
-	////glMatrixMode(GL_PROJECTION);
-	////glLoadIdentity();
-	////glMatrixMode(GL_MODELVIEW);
-	////glLoadIdentity();
-
-	////glClearColor(0, 0, 1, 1);
-	////
-	//////
-	//////// bind the texture
-	//glBindTexture(GL_TEXTURE_2D, m_target[0].texture);
-
-	//glBegin(GL_QUADS);
-	//glTexCoord2i(0, 0);
-	//glVertex3f(-1.0f, +1.0f, 0.0f);
-
-	//glTexCoord2i(1, 0);
-	//glVertex3f(+1.0f, +1.0f, 0.0f);
-
-	//glTexCoord2i(1, 1);
-	//glVertex3f(+1.0f, -1.0f, 0.0f);
-
-	//glTexCoord2i(0, 1);
-	//glVertex3f(-1.0f, -1.0f, 0.0f);
-	//glEnd();
-	//
-	//glBindTexture(GL_TEXTURE_2D, 0);
-
-	////testing drawing to 2 buffers
-	//// for each eye
-	//
-	//
-	////glDrawBuffer(GL_BACK_LEFT);
-	////int error = glGetError();
-	////
-	//////printf("Error %d ", error); 
-
-	////glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[0].frameBuffer);
-	//////glx.glBlitFramebuffer(
-	//////	0, 0, widthScreen, heightScreen,        // source rectangle
-	//////	0, heightScreen, widthScreen, 0,        // destination: flip the image vertically
-	//////	GL_COLOR_BUFFER_BIT,
-	//////	GL_LINEAR
-	//////	);
-	////
-	////glViewport(0, 0, widthScreen, heightScreen);
-	////glMatrixMode(GL_PROJECTION);
-	////glLoadIdentity();
-	////glMatrixMode(GL_MODELVIEW);
-	////glLoadIdentity();
-	////glClearColor(1, 1, 1, 1);
-	////glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	////
-	////// bind the texture
-	////glBindTexture(GL_TEXTURE_2D, m_target[0].texture);
-	////
-	////glx.glGenerateMipmap(GL_TEXTURE_2D);
-	////
-	////glBegin(GL_QUADS);
-	////glTexCoord2i(0, 0);
-	////glVertex3f(-1.0f, +1.0f, 0.0f);
-
-	////glTexCoord2i(1, 0);
-	////glVertex3f(+1.0f, +1.0f, 0.0f);
-
-	////glTexCoord2i(1, 1);
-	////glVertex3f(+1.0f, -1.0f, 0.0f);
-
-	////glTexCoord2i(0, 1);
-	////glVertex3f(-1.0f, -1.0f, 0.0f);
-	////glEnd();
-
-	////glBindTexture(GL_TEXTURE_2D, 0);
-
-	////glDrawBuffer(GL_BACK_RIGHT);
-	////glx.glBindFramebuffer(GL_READ_FRAMEBUFFER, m_target[0].frameBuffer);
-	//////glx.glBlitFramebuffer(
-	//////	0, 0, widthScreen, heightScreen,        // source rectangle
-	//////	0, heightScreen, widthScreen, 0,        // destination: flip the image vertically
-	//////	GL_COLOR_BUFFER_BIT,
-	//////	GL_LINEAR
-	//////	);
-	////glViewport(0, 0, widthScreen, heightScreen);
-	////glMatrixMode(GL_PROJECTION);
-	////glLoadIdentity();
-	////glMatrixMode(GL_MODELVIEW);
-	////glLoadIdentity();
-	////glClearColor(1, 1, 1, 1);
-	////glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	////// bind the texture
-	////glBindTexture(GL_TEXTURE_2D, m_target[0].texture);
-	////glx.glGenerateMipmap(GL_TEXTURE_2D);
-
-	////glBegin(GL_QUADS);
-	////glTexCoord2i(0, 0);
-	////glVertex3f(-1.0f, +1.0f, 0.0f);
-
-	////glTexCoord2i(1, 0);
-	////glVertex3f(+1.0f, +1.0f, 0.0f);
-
-	////glTexCoord2i(1, 1);
-	////glVertex3f(+1.0f, -1.0f, 0.0f);
-
-	////glTexCoord2i(0, 1);
-	////glVertex3f(-1.0f, -1.0f, 0.0f);
-	////glEnd();
-
-	////glLineWidth(2.5);
-	////glColor3f(0.0, 0.0, 1.0);
-	////glBegin(GL_LINES);
-	////glVertex3f(-1, -1.0, 0.0);
-	////glVertex3f(1, 1, 0);
-	////glEnd();
-
-	////glBindTexture(GL_TEXTURE_2D, 0);
-	///**********************************************/
-
-	//// restore OpenGL state
-	//glPopAttrib();
-
-	m_framesGL++;
+	//m_framesGL++;
 
 	
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//increaseClearCount = false;
-	inLeft = true;
-	glDrawBuffer(GL_BACK_LEFT);
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(0, 0, 0, 1);
+	//inLeft = true;
+	//glDrawBuffer(GL_BACK_LEFT);
+	////glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT);
+	//glClearColor(0, 0, 0, 1);
 
-	/*glLineWidth(2.5);
-	glColor3f(1.0, 1.0, 0.0);
-	glBegin(GL_LINES);
-	glVertex3f(-1, -1.0, 0.0);
-	glVertex3f(1, 1, 0);
-	glEnd();*/
+	///*glLineWidth(2.5);
+	//glColor3f(1.0, 1.0, 0.0);
+	//glBegin(GL_LINES);
+	//glVertex3f(-1, -1.0, 0.0);
+	//glVertex3f(1, 1, 0);
+	//glEnd();*/
 
-	inLeft = false;
+	//inLeft = false;
 
-	if (g_clearCount % 2 == 1)
-	{
-		//increaseClearCount = false;
-		//glDrawBuffer(GL_BACK_LEFT);
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//glClearColor(1, 0, 1, 1);
-		//increaseClearCount = true;
-		//increaseClearCount = true;
-		//glClear(GL_DEPTH_BUFFER_BIT);
-		//increaseClearCount = false;
-		
-	}
-	else
-	{
-		//glDrawBuffer(GL_BACK_RIGHT);
-		//increaseClearCount = false;
-		////glClear(GL_DEPTH_BUFFER_BIT);
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//glClearColor(0, 1, 1, 1);
-		////glMatrixMode(GL_MODELVIEW);
-		////glLoadIdentity();
-		//glLineWidth(2.5);
-		//glColor3f(1.0, 1.0, 0.0);
-		//glBegin(GL_LINES);
-		//glVertex3f(-1, -1.0, 0.0);
-		//glVertex3f(1, 1, 0);
-		//glEnd();
-		//increaseClearCount = true;
-	}
+	//if (g_clearCount % 2 == 1)
+	//{
+	//	//increaseClearCount = false;
+	//	//glDrawBuffer(GL_BACK_LEFT);
+	//	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//	//glClearColor(1, 0, 1, 1);
+	//	//increaseClearCount = true;
+	//	//increaseClearCount = true;
+	//	//glClear(GL_DEPTH_BUFFER_BIT);
+	//	//increaseClearCount = false;
+	//	
+	//}
+	//else
+	//{
+	//	//glDrawBuffer(GL_BACK_RIGHT);
+	//	//increaseClearCount = false;
+	//	////glClear(GL_DEPTH_BUFFER_BIT);
+	//	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//	//glClearColor(0, 1, 1, 1);
+	//	////glMatrixMode(GL_MODELVIEW);
+	//	////glLoadIdentity();
+	//	//glLineWidth(2.5);
+	//	//glColor3f(1.0, 1.0, 0.0);
+	//	//glBegin(GL_LINES);
+	//	//glVertex3f(-1, -1.0, 0.0);
+	//	//glVertex3f(1, 1, 0);
+	//	//glEnd();
+	//	//increaseClearCount = true;
+	//}
 
-	firstForground = true;
-	inLeft = false;
+	//firstForground = true;
+	//inLeft = false;
 
 	// call the original function
 	_wglSwapBuffers(hdc);
@@ -1090,11 +1118,12 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//inLeft = false;
 	
-	glDrawBuffer(GL_BACK);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(0, 0, 0, 1);
-	glClearDepth(1.0);
+	//glDrawBuffer(GL_BACK);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	////glClear(GL_COLOR_BUFFER_BIT);
+	//glClearColor(0, 0, 0, 1);
+	//glClearDepth(1.0);
+
 	////for testing
 	//glx.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_target[0].frameBuffer);
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -1233,7 +1262,8 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 	*/
 
 	currentConfig3DSettings.increaseFrameGL();
-
+	currentConfig3DSettings.resetCurrentStatusOfEachFrame();
+	currentConfig3DSettings.switchCurrentBuffer();
 
 	return 1;
 }
@@ -1245,38 +1275,37 @@ void APIENTRY interceptedglRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat 
 
 	if (currentConfig3DSettings.startInterception())
 	{
-
+		currentConfig3DSettings.getDrawingBuffer("glRotatef");
+		currentConfig3DSettings.switchCurrentBuffer();
 	}
 
+	//if (m_framesGL > 10)
+	//{
+	//	if (firstForground)
+	//	{
+	//		inLeft = true;
 
+	//		glDrawBuffer(GL_BACK_RIGHT);
+	//		increaseClearCount = false;
 
-	if (m_framesGL > 10)
-	{
-		if (firstForground)
-		{
-			inLeft = true;
+	//		//glDrawBuffer(GL_BACK_RIGHT);
+	//		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//		glClear(GL_COLOR_BUFFER_BIT);
+	//		glClearColor(0, 0, 0, 1);
+	//		inLeft = false;
+	//		increaseClearCount = true;
 
-			glDrawBuffer(GL_BACK_RIGHT);
-			increaseClearCount = false;
-
-			//glDrawBuffer(GL_BACK_RIGHT);
-			//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glClear(GL_COLOR_BUFFER_BIT);
-			glClearColor(0, 0, 0, 1);
-			inLeft = false;
-			increaseClearCount = true;
-
-			firstForground = false;
-		}
-		else
-		{
-			glDrawBuffer(GL_BACK_RIGHT);
-			//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glClear(GL_COLOR_BUFFER_BIT);
-			glClearColor(0, 0, 0, 1);
-		}
-		
-	}
+	//		firstForground = false;
+	//	}
+	//	else
+	//	{
+	//		glDrawBuffer(GL_BACK_RIGHT);
+	//		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//		glClear(GL_COLOR_BUFFER_BIT);
+	//		glClearColor(0, 0, 0, 1);
+	//	}
+	//	
+	//}
 	
 	_glRotatef(angle, x, y, z);
 }
@@ -1285,48 +1314,141 @@ void APIENTRY interceptedglColor3f(GLfloat red, GLfloat green, GLfloat blue)
 {
 	//std::cout << "interceptedglColor3f ";
 	
-	//inLeft = true;
-	//glDrawBuffer(GL_BACK_LEFT);
-	//glDrawBuffer(GL_BACK_RIGHT);
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//inLeft = true;
-	//glDrawBuffer(GL_BACK_LEFT);
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	if (m_framesGL > 10)
+	currentConfig3DSettings.increaseFunctionCall("glColor3f");
+
+	if (currentConfig3DSettings.startInterception())
 	{
-		if (firstForground)
-		{
-			inLeft = true;
-
-			glDrawBuffer(GL_BACK_RIGHT);
-			increaseClearCount = false;
-
-			//glDrawBuffer(GL_BACK_RIGHT);
-			//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glClear(GL_COLOR_BUFFER_BIT);
-			glClearColor(0, 0, 0, 1);
-			inLeft = false;
-			increaseClearCount = true;
-
-			firstForground = false;
-		}
-		else
-		{
-			glDrawBuffer(GL_BACK_RIGHT);
-			//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			//glClear(GL_COLOR_BUFFER_BIT);
-			//glClearColor(0, 0, 0, 1);
-		}
-
+		currentConfig3DSettings.getDrawingBuffer("glColor3f");
+		currentConfig3DSettings.switchCurrentBuffer();
 	}
+
+	//if (m_framesGL > 10)
+	//{
+	//	if (firstForground)
+	//	{
+	//		inLeft = true;
+
+	//		glDrawBuffer(GL_BACK_RIGHT);
+	//		increaseClearCount = false;
+
+	//		//glDrawBuffer(GL_BACK_RIGHT);
+	//		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//		glClear(GL_COLOR_BUFFER_BIT);
+	//		glClearColor(0, 0, 0, 1);
+	//		inLeft = false;
+	//		increaseClearCount = true;
+
+	//		firstForground = false;
+	//	}
+	//	else
+	//	{
+	//		glDrawBuffer(GL_BACK_RIGHT);
+	//		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//		//glClear(GL_COLOR_BUFFER_BIT);
+	//		//glClearColor(0, 0, 0, 1);
+	//	}
+	//}
 	
 	_glColor3f(red, green, blue);
 	//inLeft = false;
 }
+void APIENTRY interceptedglLoadIdentity(void) {
+
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glLoadIdentity");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glLoadIdentity();
+}
+void APIENTRY interceptedglMultMatrixf(const GLfloat * m)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glMultMatrixf");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glMultMatrixf(m);
+}
+void APIENTRY interceptedglTranslated(GLdouble x, GLdouble y, GLdouble z) {
+
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glTranslated");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glTranslated(x, y, z);
+}
+void APIENTRY interceptedglLightfv(GLenum light, GLenum pname, const GLfloat * params) {
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glLightfv");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glLightfv(light, pname, params);
+}
+void APIENTRY interceptedglTranslatef(GLfloat x, GLfloat y, GLfloat z) {
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glTranslatef");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glTranslatef(x, y, z);
+}
+void APIENTRY interceptedglBegin(GLenum mode) {
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glBegin");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glBegin(mode);
+}
+void APIENTRY interceptedglVertex3f(GLfloat x, GLfloat y, GLfloat z) {
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glVertex3f");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glVertex3f(x, y, z);
+}
+void APIENTRY interceptedglEnd(void) {
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glEnd");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glEnd();
+}
+void APIENTRY interceptedglFlush(void) {
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glFlush");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glFlush();
+}
 /************************************************************************************/
 void initialiseVariables()
 {
-	m_framesGL = 0;
+	//m_framesGL = 0;
 	m_samplesGL = 0;
 
 	

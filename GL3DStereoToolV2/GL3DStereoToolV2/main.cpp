@@ -54,6 +54,15 @@ void initialiseRealOpenGLFunctions()
 	_wglChoosePixelFormatARB = (PFN_WGLCHOOSEPIXELFORMATARB)_getAnyGLFuncAddress("wglChoosePixelFormatARB");
 	_glColor3f = (PFN_GLCOLOR3F)_getAnyGLFuncAddress("glColor3f");
 	_glRotatef = (PFN_GLROTATEF)_getAnyGLFuncAddress("glRotatef");
+	_glLoadIdentity = (PFN_GLLOADIDENTITY)_getAnyGLFuncAddress("glLoadIdentity");
+
+	_glMultMatrixf = (PFN_GLMULTMATRIXF)_getAnyGLFuncAddress("glMultMatrixf");
+	_glTranslated = (PFN_GLTRANSLATED)_getAnyGLFuncAddress("glTranslated");
+	_glTranslatef = (PFN_GLTRANSLATEF)_getAnyGLFuncAddress("glTranslatef");
+	_glBegin = (PFN_GLBEGIN)_getAnyGLFuncAddress("glBegin");
+	_glVertex3f = (PFN_GLVERTEX3F)_getAnyGLFuncAddress("glVertex3f");
+	_glEnd = (PFN_GLEND)_getAnyGLFuncAddress("glEnd");
+	_glFlush = (PFN_GLFLUSH)_getAnyGLFuncAddress("glFlush");
 }
 
 void processAttach()
@@ -122,6 +131,86 @@ void processAttach()
 	else
 	{
 		printf("Hooked _glRotatef\n");
+	}
+	if ((_glLoadIdentity == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glLoadIdentity), interceptedglLoadIdentity))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+		MessageBox(0, "Failed to hook _glLoadIdentity", "Error", MB_OK);
+	}
+	else
+	{
+		printf("Hooked _glLoadIdentity\n");
+	}
+	if ((_glMultMatrixf == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glMultMatrixf), interceptedglMultMatrixf))
+	{
+		cerr << "Failed to hook _glMultMatrixf" << endl;
+		MessageBox(0, "Failed to hook _glMultMatrixf", "Error", MB_OK);
+	}
+	else
+	{
+		printf("Hooked _glMultMatrixf\n");
+	}
+	if ((_glTranslated == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTranslated), interceptedglTranslated))
+	{
+		cerr << "Failed to hook _glTranslated" << endl;
+		MessageBox(0, "Failed to hook _glTranslated", "Error", MB_OK);
+	}
+	else
+	{
+		printf("Hooked _glTranslated\n");
+	}
+	if ((_glTranslatef == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTranslatef), interceptedglTranslatef))
+	{
+		cerr << "Failed to hook _glTranslatef" << endl;
+		MessageBox(0, "Failed to hook _glTranslatef", "Error", MB_OK);
+	}
+	else
+	{
+		printf("Hooked _glTranslatef\n");
+	}
+	if ((_glBegin == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glBegin), interceptedglBegin))
+	{
+		cerr << "Failed to hook _glBegin" << endl;
+		MessageBox(0, "Failed to hook _glBegin", "Error", MB_OK);
+	}
+	else
+	{
+		printf("Hooked _glBegin\n");
+	}
+	if ((_glVertex3f == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertex3f), interceptedglVertex3f))
+	{
+		cerr << "Failed to hook _glVertex3f" << endl;
+		MessageBox(0, "Failed to hook _glVertex3f", "Error", MB_OK);
+	}
+	else
+	{
+		printf("Hooked _glVertex3f\n");
+	}
+	if ((_glEnd == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glEnd), interceptedglEnd))
+	{
+		cerr << "Failed to hook _glEnd" << endl;
+		MessageBox(0, "Failed to hook _glEnd", "Error", MB_OK);
+	}
+	else
+	{
+		printf("Hooked _glEnd\n");
+	}
+	if ((_glFlush == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glFlush), interceptedglFlush))
+	{
+		cerr << "Failed to hook _glFlush" << endl;
+		MessageBox(0, "Failed to hook _glFlush", "Error", MB_OK);
+	}
+	else
+	{
+		printf("Hooked _glFlush\n");
 	}
 }
 void processDetach()

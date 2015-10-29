@@ -1,7 +1,5 @@
 #include "Config3DSettings.h"
 
-#include <sstream>
-#include <iostream>
 
 Config3DSettings::Config3DSettings()
 {
@@ -346,19 +344,30 @@ void Config3DSettings::getDrawingBuffer(const string funcName, GLuint &buffer, O
 	objType = ObjectType::Background;
 	bound = ObjectBoundary::Middle;
 
+	/*buffer = this->currentDrawingBuffer;
+	objType = this->currentObjectType;
+	bound = this->currentBoundaryLoc;*/
+
 	if (funcName.compare(StartFunctionCallForegound) == 0 && (currentFunctionCallIndexPerFrame == StartFunctionCallForegoundNumber))
 	{
 		buffer = getBuffer();
 		objType = ObjectType::Foreground;
 		bound = ObjectBoundary::Start;
+
+		std::cout << "In forground start: " << funcName << endl;
+		std::cout << "Index start: " << currentFunctionCallIndexPerFrame << endl;
+		std::cout << "Buffer Index : " << this->BufferIndex << endl;
 	}
 	else if (funcName.compare(EndFunctionCallForegound) == 0 && (currentFunctionCallIndexPerFrame == EndFunctionCallForegoundNumber))
 	{
 		buffer = getBuffer();
 		objType = ObjectType::Foreground;
 		bound = ObjectBoundary::Start;
+		std::cout << "In forground end: " << funcName << endl;
+		std::cout << "Index end: " << currentFunctionCallIndexPerFrame << endl;
+		std::cout << "Buffer Index : " << this->BufferIndex << endl;
 	}
-	else if (funcName.compare(StartFunctionCallBackground) == 0 && (currentFunctionCallIndexPerFrame == StartFunctionCallBackgroundNumber))
+	/*else if (funcName.compare(StartFunctionCallBackground) == 0 && (currentFunctionCallIndexPerFrame == StartFunctionCallBackgroundNumber))
 	{
 		buffer = GL_BACK;
 		objType = ObjectType::Background;
@@ -369,13 +378,33 @@ void Config3DSettings::getDrawingBuffer(const string funcName, GLuint &buffer, O
 		buffer = GL_BACK;
 		objType = ObjectType::Background;
 		bound = ObjectBoundary::End;
-	}
+	}*/
 
 	if (updated)
 	{
-		currentDrawingBuffer = buffer;
-		currentBoundaryLoc = bound;
-		currentObjectType = objType;
+		//only update if the current drawing buffer is not BACK and in the middle of the drawing of the foreground
+		if (!(currentDrawingBuffer != GL_BACK && currentBoundaryLoc == ObjectBoundary::Middle))
+		{
+			currentDrawingBuffer = buffer;
+			currentBoundaryLoc = bound;
+			currentObjectType = objType;
+		}
+		
 	}
-	
+}
+void Config3DSettings::getDrawingBuffer(const string funcName)
+{
+	GLuint buffer; 
+	ObjectType objType;
+	ObjectBoundary bound;
+	bool updated = true;
+
+	getDrawingBuffer(funcName, buffer, objType, bound, updated);
+
+}
+void Config3DSettings::resetCurrentStatusOfEachFrame()
+{
+	currentDrawingBuffer = GL_BACK;
+	currentBoundaryLoc = ObjectBoundary::Start;
+	currentObjectType = ObjectType::Background;
 }

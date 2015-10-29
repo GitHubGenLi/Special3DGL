@@ -33,7 +33,7 @@ extern bool g_stereoDetect;    ///< have we detected incoming stereo frames?
 extern unsigned g_clearsPerEye;    ///< number of glClear calls per eye
 extern unsigned g_clearCount;    ///< used to count number of glClear calls
 
-extern unsigned m_framesGL;    ///< OpenGL frame count
+//extern unsigned m_framesGL;    ///< OpenGL frame count
 
 extern unsigned m_samplesGL;   ///< OpenGL multisamples (or 0)
 
@@ -127,6 +127,33 @@ extern PFN_GLCOLOR3F _glColor3f;
 typedef void (APIENTRY * PFN_GLROTATEF)(GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
 extern PFN_GLROTATEF _glRotatef;
 
+typedef void (APIENTRY * PFN_GLLOADIDENTITY)(void);
+extern PFN_GLLOADIDENTITY _glLoadIdentity;
+
+typedef void (APIENTRY * PFN_GLMULTMATRIXF)(const GLfloat * m);
+extern PFN_GLMULTMATRIXF _glMultMatrixf;
+
+typedef void (APIENTRY * PFN_GLTRANSLATED)(GLdouble x, GLdouble y, GLdouble z);
+extern PFN_GLTRANSLATED _glTranslated;
+
+typedef void (APIENTRY * PFN_GLLIGHTFV)(GLenum light, GLenum pname, const GLfloat * params);
+extern PFN_GLLIGHTFV _glLightfv;
+
+typedef void (APIENTRY * PFN_GLTRANSLATEF)(GLfloat x, GLfloat y, GLfloat z);
+extern PFN_GLTRANSLATEF _glTranslatef;
+
+typedef void (APIENTRY * PFN_GLBEGIN)(GLenum mode);
+extern PFN_GLBEGIN _glBegin;
+
+typedef void (APIENTRY * PFN_GLVERTEX3F)(GLfloat x, GLfloat y, GLfloat z);
+extern PFN_GLVERTEX3F _glVertex3f;
+
+typedef void (APIENTRY * PFN_GLEND)(void);
+extern PFN_GLEND _glEnd;
+
+typedef void (APIENTRY * PFN_GLFLUSH)(void);
+extern PFN_GLFLUSH _glFlush;
+
 /*************************************************************/
 //void initialiseRealOpenGLFunctions();
 void initialiseVariables();
@@ -138,7 +165,15 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc);
 BOOL WINAPI interceptedwglSetPixelFormat(HDC hdc, int iPixelFormat, const PIXELFORMATDESCRIPTOR * ppfd);
 void APIENTRY interceptedglRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
 void APIENTRY interceptedglColor3f(GLfloat red, GLfloat green, GLfloat blue);
-
+void APIENTRY interceptedglLoadIdentity(void);
+void APIENTRY interceptedglMultMatrixf(const GLfloat * m);
+void APIENTRY interceptedglTranslated(GLdouble x, GLdouble y, GLdouble z);
+void APIENTRY interceptedglLightfv(GLenum light, GLenum pname, const GLfloat * params);
+void APIENTRY interceptedglTranslatef(GLfloat x, GLfloat y, GLfloat z);
+void APIENTRY interceptedglBegin(GLenum mode);
+void APIENTRY interceptedglVertex3f(GLfloat x, GLfloat y, GLfloat z);
+void APIENTRY interceptedglEnd(void);
+void APIENTRY interceptedglFlush(void);
 /*************************************************************/
 
 /// OpenGL rendering thread function
