@@ -92,7 +92,7 @@ for index = 1: totalFunction(1)
         %get the return value of the function
         %returnPart = funcDefined{1}(1 : firstOpen - 1);
         %realReturnPart = textscan(returnPart, 'typedef %s');
-        realReturnPart = char(funcDefined{1}(9 : firstOpen - 1)); %typedef has 8 characters
+        realReturnPart = strtrim(char(funcDefined{1}(9 : firstOpen - 1))); %typedef has 8 characters
         
         %write full intercepted functions (including return value and
         %signature)
@@ -107,7 +107,13 @@ for index = 1: totalFunction(1)
         fullInterceptedFunction = sprintf('%s\n\t\t%s', fullInterceptedFunction, 'currentConfig3DSettings.getDrawingBuffer("');
         fullInterceptedFunction = strcat(fullInterceptedFunction, realFunc, '");');
         fullInterceptedFunction = sprintf('%s\n\t\t%s\n\t}', fullInterceptedFunction,'currentConfig3DSettings.switchCurrentBuffer();');
-        fullInterceptedFunction = sprintf('%s\n\t_%s(', fullInterceptedFunction, realFunc);
+        
+        if (strcmp(realReturnPart, 'void') == 0) %not void
+            fullInterceptedFunction = sprintf('%s\n\treturn _%s(', fullInterceptedFunction, realFunc);    
+        elseif (strcmp(realReturnPart, 'void') == 1)
+            fullInterceptedFunction = sprintf('%s\n\t_%s(', fullInterceptedFunction, realFunc);    
+        end
+        
         
         %fill parameters if has: get each paramter's name
         remain = listParams;

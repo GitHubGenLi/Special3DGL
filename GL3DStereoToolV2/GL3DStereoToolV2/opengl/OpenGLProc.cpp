@@ -3869,7 +3869,7 @@ BOOL APIENTRY interceptedwglMakeCurrent(HDC hdc, HGLRC hglrc)
 		currentConfig3DSettings.getDrawingBuffer("wglMakeCurrent");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglMakeCurrent(hdc, hglrc);
+	return _wglMakeCurrent(hdc, hglrc);
 }
 void APIENTRY interceptedglScaled(GLdouble x, GLdouble y, GLdouble z)
 {
@@ -3924,7 +3924,7 @@ HGLRC APIENTRY interceptedwglCreateContext(HDC hdc)
 		currentConfig3DSettings.getDrawingBuffer("wglCreateContext");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglCreateContext(hdc);
+	return _wglCreateContext(hdc);
 }
 BOOL APIENTRY interceptedwglDeleteContext(HGLRC hglrc)
 {
@@ -3935,7 +3935,7 @@ BOOL APIENTRY interceptedwglDeleteContext(HGLRC hglrc)
 		currentConfig3DSettings.getDrawingBuffer("wglDeleteContext");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDeleteContext(hglrc);
+	return _wglDeleteContext(hglrc);
 }
 HGLRC APIENTRY interceptedwglGetCurrentContext(void)
 {
@@ -3946,7 +3946,7 @@ HGLRC APIENTRY interceptedwglGetCurrentContext(void)
 		currentConfig3DSettings.getDrawingBuffer("wglGetCurrentContext");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetCurrentContext();
+	return _wglGetCurrentContext();
 }
 BOOL APIENTRY interceptedwglCopyContext(HGLRC hglrcSrc, HGLRC hglrcDst, UINT mask)
 {
@@ -3957,7 +3957,7 @@ BOOL APIENTRY interceptedwglCopyContext(HGLRC hglrcSrc, HGLRC hglrcDst, UINT mas
 		currentConfig3DSettings.getDrawingBuffer("wglCopyContext");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglCopyContext(hglrcSrc, hglrcDst, mask);
+	return _wglCopyContext(hglrcSrc, hglrcDst, mask);
 }
 HDC APIENTRY interceptedwglGetCurrentDC(void)
 {
@@ -3968,7 +3968,7 @@ HDC APIENTRY interceptedwglGetCurrentDC(void)
 		currentConfig3DSettings.getDrawingBuffer("wglGetCurrentDC");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetCurrentDC();
+	return _wglGetCurrentDC();
 }
 PROC APIENTRY interceptedwglGetDefaultProcAddress(const char * lpszProc)
 {
@@ -3979,7 +3979,7 @@ PROC APIENTRY interceptedwglGetDefaultProcAddress(const char * lpszProc)
 		currentConfig3DSettings.getDrawingBuffer("wglGetDefaultProcAddress");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetDefaultProcAddress(lpszProc);
+	return _wglGetDefaultProcAddress(lpszProc);
 }
 BOOL APIENTRY interceptedwglShareLists(HGLRC hglrc1, HGLRC hglrc2)
 {
@@ -3990,7 +3990,7 @@ BOOL APIENTRY interceptedwglShareLists(HGLRC hglrc1, HGLRC hglrc2)
 		currentConfig3DSettings.getDrawingBuffer("wglShareLists");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglShareLists(hglrc1, hglrc2);
+	return _wglShareLists(hglrc1, hglrc2);
 }
 HGLRC APIENTRY interceptedwglCreateLayerContext(HDC hdc, int iLayerPlane)
 {
@@ -4001,7 +4001,7 @@ HGLRC APIENTRY interceptedwglCreateLayerContext(HDC hdc, int iLayerPlane)
 		currentConfig3DSettings.getDrawingBuffer("wglCreateLayerContext");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglCreateLayerContext(hdc, iLayerPlane);
+	return _wglCreateLayerContext(hdc, iLayerPlane);
 }
 BOOL APIENTRY interceptedwglDescribeLayerPlane(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nBytes, LAYERPLANEDESCRIPTOR * plpd)
 {
@@ -4012,7 +4012,7 @@ BOOL APIENTRY interceptedwglDescribeLayerPlane(HDC hdc, int iPixelFormat, int iL
 		currentConfig3DSettings.getDrawingBuffer("wglDescribeLayerPlane");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDescribeLayerPlane(hdc, iPixelFormat, iLayerPlane, nBytes, plpd);
+	return _wglDescribeLayerPlane(hdc, iPixelFormat, iLayerPlane, nBytes, plpd);
 }
 int APIENTRY interceptedwglSetLayerPaletteEntries(HDC hdc, int iLayerPlane, int iStart, int cEntries, const COLORREF * pcr)
 {
@@ -4023,7 +4023,7 @@ int APIENTRY interceptedwglSetLayerPaletteEntries(HDC hdc, int iLayerPlane, int 
 		currentConfig3DSettings.getDrawingBuffer("wglSetLayerPaletteEntries");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglSetLayerPaletteEntries(hdc, iLayerPlane, iStart, cEntries, pcr);
+	return _wglSetLayerPaletteEntries(hdc, iLayerPlane, iStart, cEntries, pcr);
 }
 int APIENTRY interceptedwglGetLayerPaletteEntries(HDC hdc, int iLayerPlane, int iStart, int cEntries, COLORREF * pcr)
 {
@@ -4034,7 +4034,7 @@ int APIENTRY interceptedwglGetLayerPaletteEntries(HDC hdc, int iLayerPlane, int 
 		currentConfig3DSettings.getDrawingBuffer("wglGetLayerPaletteEntries");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetLayerPaletteEntries(hdc, iLayerPlane, iStart, cEntries, pcr);
+	return _wglGetLayerPaletteEntries(hdc, iLayerPlane, iStart, cEntries, pcr);
 }
 BOOL APIENTRY interceptedwglRealizeLayerPalette(HDC hdc, int iLayerPlane, BOOL bRealize)
 {
@@ -4045,7 +4045,7 @@ BOOL APIENTRY interceptedwglRealizeLayerPalette(HDC hdc, int iLayerPlane, BOOL b
 		currentConfig3DSettings.getDrawingBuffer("wglRealizeLayerPalette");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglRealizeLayerPalette(hdc, iLayerPlane, bRealize);
+	return _wglRealizeLayerPalette(hdc, iLayerPlane, bRealize);
 }
 BOOL APIENTRY interceptedwglSwapLayerBuffers(HDC hdc, UINT fuPlanes)
 {
@@ -4056,7 +4056,7 @@ BOOL APIENTRY interceptedwglSwapLayerBuffers(HDC hdc, UINT fuPlanes)
 		currentConfig3DSettings.getDrawingBuffer("wglSwapLayerBuffers");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglSwapLayerBuffers(hdc, fuPlanes);
+	return _wglSwapLayerBuffers(hdc, fuPlanes);
 }
 BOOL APIENTRY interceptedwglUseFontBitmapsA(HDC hdc, DWORD first, DWORD count, DWORD listBase)
 {
@@ -4067,7 +4067,7 @@ BOOL APIENTRY interceptedwglUseFontBitmapsA(HDC hdc, DWORD first, DWORD count, D
 		currentConfig3DSettings.getDrawingBuffer("wglUseFontBitmapsA");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglUseFontBitmapsA(hdc, first, count, listBase);
+	return _wglUseFontBitmapsA(hdc, first, count, listBase);
 }
 BOOL APIENTRY interceptedwglUseFontBitmapsW(HDC hdc, DWORD first, DWORD count, DWORD listBase)
 {
@@ -4078,7 +4078,7 @@ BOOL APIENTRY interceptedwglUseFontBitmapsW(HDC hdc, DWORD first, DWORD count, D
 		currentConfig3DSettings.getDrawingBuffer("wglUseFontBitmapsW");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglUseFontBitmapsW(hdc, first, count, listBase);
+	return _wglUseFontBitmapsW(hdc, first, count, listBase);
 }
 DWORD APIENTRY interceptedwglSwapMultipleBuffers(UINT n, const WGLSWAP * ps)
 {
@@ -4089,7 +4089,7 @@ DWORD APIENTRY interceptedwglSwapMultipleBuffers(UINT n, const WGLSWAP * ps)
 		currentConfig3DSettings.getDrawingBuffer("wglSwapMultipleBuffers");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglSwapMultipleBuffers(n, ps);
+	return _wglSwapMultipleBuffers(n, ps);
 }
 BOOL APIENTRY interceptedwglUseFontOutlinesA(HDC hdc, DWORD first, DWORD count, DWORD listBase, FLOAT deviation, FLOAT extrusion, int format, GLYPHMETRICSFLOAT * lpgmf)
 {
@@ -4100,7 +4100,7 @@ BOOL APIENTRY interceptedwglUseFontOutlinesA(HDC hdc, DWORD first, DWORD count, 
 		currentConfig3DSettings.getDrawingBuffer("wglUseFontOutlinesA");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglUseFontOutlinesA(hdc, first, count, listBase, deviation, extrusion, format, lpgmf);
+	return _wglUseFontOutlinesA(hdc, first, count, listBase, deviation, extrusion, format, lpgmf);
 }
 BOOL APIENTRY interceptedwglUseFontOutlinesW(HDC hdc, DWORD first, DWORD count, DWORD listBase, FLOAT deviation, FLOAT extrusion, int format, GLYPHMETRICSFLOAT * lpgmf)
 {
@@ -4111,7 +4111,7 @@ BOOL APIENTRY interceptedwglUseFontOutlinesW(HDC hdc, DWORD first, DWORD count, 
 		currentConfig3DSettings.getDrawingBuffer("wglUseFontOutlinesW");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglUseFontOutlinesW(hdc, first, count, listBase, deviation, extrusion, format, lpgmf);
+	return _wglUseFontOutlinesW(hdc, first, count, listBase, deviation, extrusion, format, lpgmf);
 }
 HANDLE APIENTRY interceptedwglCreateBufferRegionARB(HDC hDC, int iLayerPlane, UINT uType)
 {
@@ -4122,7 +4122,7 @@ HANDLE APIENTRY interceptedwglCreateBufferRegionARB(HDC hDC, int iLayerPlane, UI
 		currentConfig3DSettings.getDrawingBuffer("wglCreateBufferRegionARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglCreateBufferRegionARB(hDC, iLayerPlane, uType);
+	return _wglCreateBufferRegionARB(hDC, iLayerPlane, uType);
 }
 void APIENTRY interceptedwglDeleteBufferRegionARB(HANDLE hRegion)
 {
@@ -4144,7 +4144,7 @@ BOOL APIENTRY interceptedwglSaveBufferRegionARB(HANDLE hRegion, int x, int y, in
 		currentConfig3DSettings.getDrawingBuffer("wglSaveBufferRegionARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglSaveBufferRegionARB(hRegion, x, y, width, height);
+	return _wglSaveBufferRegionARB(hRegion, x, y, width, height);
 }
 BOOL APIENTRY interceptedwglRestoreBufferRegionARB(HANDLE hRegion, int x, int y, int width, int height, int xSrc, int ySrc)
 {
@@ -4155,7 +4155,7 @@ BOOL APIENTRY interceptedwglRestoreBufferRegionARB(HANDLE hRegion, int x, int y,
 		currentConfig3DSettings.getDrawingBuffer("wglRestoreBufferRegionARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglRestoreBufferRegionARB(hRegion, x, y, width, height, xSrc, ySrc);
+	return _wglRestoreBufferRegionARB(hRegion, x, y, width, height, xSrc, ySrc);
 }
 const char * APIENTRY interceptedwglGetExtensionsStringARB(HDC hdc)
 {
@@ -4166,7 +4166,7 @@ const char * APIENTRY interceptedwglGetExtensionsStringARB(HDC hdc)
 		currentConfig3DSettings.getDrawingBuffer("wglGetExtensionsStringARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetExtensionsStringARB(hdc);
+	return _wglGetExtensionsStringARB(hdc);
 }
 BOOL APIENTRY interceptedwglGetPixelFormatAttribivARB(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, int * piValues)
 {
@@ -4177,7 +4177,7 @@ BOOL APIENTRY interceptedwglGetPixelFormatAttribivARB(HDC hdc, int iPixelFormat,
 		currentConfig3DSettings.getDrawingBuffer("wglGetPixelFormatAttribivARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetPixelFormatAttribivARB(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
+	return _wglGetPixelFormatAttribivARB(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
 }
 BOOL APIENTRY interceptedwglGetPixelFormatAttribfvARB(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, FLOAT * pfValues)
 {
@@ -4188,7 +4188,7 @@ BOOL APIENTRY interceptedwglGetPixelFormatAttribfvARB(HDC hdc, int iPixelFormat,
 		currentConfig3DSettings.getDrawingBuffer("wglGetPixelFormatAttribfvARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetPixelFormatAttribfvARB(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
+	return _wglGetPixelFormatAttribfvARB(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
 }
 BOOL APIENTRY interceptedwglMakeContextCurrentARB(HDC hDrawDC, HDC hReadDC, HGLRC hglrc)
 {
@@ -4199,7 +4199,7 @@ BOOL APIENTRY interceptedwglMakeContextCurrentARB(HDC hDrawDC, HDC hReadDC, HGLR
 		currentConfig3DSettings.getDrawingBuffer("wglMakeContextCurrentARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglMakeContextCurrentARB(hDrawDC, hReadDC, hglrc);
+	return _wglMakeContextCurrentARB(hDrawDC, hReadDC, hglrc);
 }
 HDC APIENTRY interceptedwglGetCurrentReadDCARB(void)
 {
@@ -4210,7 +4210,7 @@ HDC APIENTRY interceptedwglGetCurrentReadDCARB(void)
 		currentConfig3DSettings.getDrawingBuffer("wglGetCurrentReadDCARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetCurrentReadDCARB();
+	return _wglGetCurrentReadDCARB();
 }
 HPBUFFERARB APIENTRY interceptedwglCreatePbufferARB(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int * piAttribList)
 {
@@ -4221,7 +4221,7 @@ HPBUFFERARB APIENTRY interceptedwglCreatePbufferARB(HDC hDC, int iPixelFormat, i
 		currentConfig3DSettings.getDrawingBuffer("wglCreatePbufferARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglCreatePbufferARB(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
+	return _wglCreatePbufferARB(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
 }
 HDC APIENTRY interceptedwglGetPbufferDCARB(HPBUFFERARB hPbuffer)
 {
@@ -4232,7 +4232,7 @@ HDC APIENTRY interceptedwglGetPbufferDCARB(HPBUFFERARB hPbuffer)
 		currentConfig3DSettings.getDrawingBuffer("wglGetPbufferDCARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetPbufferDCARB(hPbuffer);
+	return _wglGetPbufferDCARB(hPbuffer);
 }
 int APIENTRY interceptedwglReleasePbufferDCARB(HPBUFFERARB hPbuffer, HDC hDC)
 {
@@ -4243,7 +4243,7 @@ int APIENTRY interceptedwglReleasePbufferDCARB(HPBUFFERARB hPbuffer, HDC hDC)
 		currentConfig3DSettings.getDrawingBuffer("wglReleasePbufferDCARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglReleasePbufferDCARB(hPbuffer, hDC);
+	return _wglReleasePbufferDCARB(hPbuffer, hDC);
 }
 BOOL APIENTRY interceptedwglDestroyPbufferARB(HPBUFFERARB hPbuffer)
 {
@@ -4254,7 +4254,7 @@ BOOL APIENTRY interceptedwglDestroyPbufferARB(HPBUFFERARB hPbuffer)
 		currentConfig3DSettings.getDrawingBuffer("wglDestroyPbufferARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDestroyPbufferARB(hPbuffer);
+	return _wglDestroyPbufferARB(hPbuffer);
 }
 BOOL APIENTRY interceptedwglQueryPbufferARB(HPBUFFERARB hPbuffer, int iAttribute, int * piValue)
 {
@@ -4265,7 +4265,7 @@ BOOL APIENTRY interceptedwglQueryPbufferARB(HPBUFFERARB hPbuffer, int iAttribute
 		currentConfig3DSettings.getDrawingBuffer("wglQueryPbufferARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglQueryPbufferARB(hPbuffer, iAttribute, piValue);
+	return _wglQueryPbufferARB(hPbuffer, iAttribute, piValue);
 }
 BOOL APIENTRY interceptedwglBindTexImageARB(HPBUFFERARB hPbuffer, int iBuffer)
 {
@@ -4276,7 +4276,7 @@ BOOL APIENTRY interceptedwglBindTexImageARB(HPBUFFERARB hPbuffer, int iBuffer)
 		currentConfig3DSettings.getDrawingBuffer("wglBindTexImageARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglBindTexImageARB(hPbuffer, iBuffer);
+	return _wglBindTexImageARB(hPbuffer, iBuffer);
 }
 BOOL APIENTRY interceptedwglReleaseTexImageARB(HPBUFFERARB hPbuffer, int iBuffer)
 {
@@ -4287,7 +4287,7 @@ BOOL APIENTRY interceptedwglReleaseTexImageARB(HPBUFFERARB hPbuffer, int iBuffer
 		currentConfig3DSettings.getDrawingBuffer("wglReleaseTexImageARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglReleaseTexImageARB(hPbuffer, iBuffer);
+	return _wglReleaseTexImageARB(hPbuffer, iBuffer);
 }
 BOOL APIENTRY interceptedwglSetPbufferAttribARB(HPBUFFERARB hPbuffer, const int * piAttribList)
 {
@@ -4298,7 +4298,7 @@ BOOL APIENTRY interceptedwglSetPbufferAttribARB(HPBUFFERARB hPbuffer, const int 
 		currentConfig3DSettings.getDrawingBuffer("wglSetPbufferAttribARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglSetPbufferAttribARB(hPbuffer, piAttribList);
+	return _wglSetPbufferAttribARB(hPbuffer, piAttribList);
 }
 HGLRC APIENTRY interceptedwglCreateContextAttribsARB(HDC hDC, HGLRC hShareContext, const int * attribList)
 {
@@ -4309,7 +4309,7 @@ HGLRC APIENTRY interceptedwglCreateContextAttribsARB(HDC hDC, HGLRC hShareContex
 		currentConfig3DSettings.getDrawingBuffer("wglCreateContextAttribsARB");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglCreateContextAttribsARB(hDC, hShareContext, attribList);
+	return _wglCreateContextAttribsARB(hDC, hShareContext, attribList);
 }
 GLboolean APIENTRY interceptedwglCreateDisplayColorTableEXT(GLushort id)
 {
@@ -4320,7 +4320,7 @@ GLboolean APIENTRY interceptedwglCreateDisplayColorTableEXT(GLushort id)
 		currentConfig3DSettings.getDrawingBuffer("wglCreateDisplayColorTableEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglCreateDisplayColorTableEXT(id);
+	return _wglCreateDisplayColorTableEXT(id);
 }
 GLboolean APIENTRY interceptedwglLoadDisplayColorTableEXT(const GLushort * table, GLuint length)
 {
@@ -4331,7 +4331,7 @@ GLboolean APIENTRY interceptedwglLoadDisplayColorTableEXT(const GLushort * table
 		currentConfig3DSettings.getDrawingBuffer("wglLoadDisplayColorTableEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglLoadDisplayColorTableEXT(table, length);
+	return _wglLoadDisplayColorTableEXT(table, length);
 }
 GLboolean APIENTRY interceptedwglBindDisplayColorTableEXT(GLushort id)
 {
@@ -4342,7 +4342,7 @@ GLboolean APIENTRY interceptedwglBindDisplayColorTableEXT(GLushort id)
 		currentConfig3DSettings.getDrawingBuffer("wglBindDisplayColorTableEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglBindDisplayColorTableEXT(id);
+	return _wglBindDisplayColorTableEXT(id);
 }
 void APIENTRY interceptedwglDestroyDisplayColorTableEXT(GLushort id)
 {
@@ -4364,7 +4364,7 @@ const char * APIENTRY interceptedwglGetExtensionsStringEXT(void)
 		currentConfig3DSettings.getDrawingBuffer("wglGetExtensionsStringEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetExtensionsStringEXT();
+	return _wglGetExtensionsStringEXT();
 }
 BOOL APIENTRY interceptedwglMakeContextCurrentEXT(HDC hDrawDC, HDC hReadDC, HGLRC hglrc)
 {
@@ -4375,7 +4375,7 @@ BOOL APIENTRY interceptedwglMakeContextCurrentEXT(HDC hDrawDC, HDC hReadDC, HGLR
 		currentConfig3DSettings.getDrawingBuffer("wglMakeContextCurrentEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglMakeContextCurrentEXT(hDrawDC, hReadDC, hglrc);
+	return _wglMakeContextCurrentEXT(hDrawDC, hReadDC, hglrc);
 }
 HDC APIENTRY interceptedwglGetCurrentReadDCEXT(void)
 {
@@ -4386,7 +4386,7 @@ HDC APIENTRY interceptedwglGetCurrentReadDCEXT(void)
 		currentConfig3DSettings.getDrawingBuffer("wglGetCurrentReadDCEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetCurrentReadDCEXT();
+	return _wglGetCurrentReadDCEXT();
 }
 HPBUFFEREXT APIENTRY interceptedwglCreatePbufferEXT(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int * piAttribList)
 {
@@ -4397,7 +4397,7 @@ HPBUFFEREXT APIENTRY interceptedwglCreatePbufferEXT(HDC hDC, int iPixelFormat, i
 		currentConfig3DSettings.getDrawingBuffer("wglCreatePbufferEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglCreatePbufferEXT(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
+	return _wglCreatePbufferEXT(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
 }
 HDC APIENTRY interceptedwglGetPbufferDCEXT(HPBUFFEREXT hPbuffer)
 {
@@ -4408,7 +4408,7 @@ HDC APIENTRY interceptedwglGetPbufferDCEXT(HPBUFFEREXT hPbuffer)
 		currentConfig3DSettings.getDrawingBuffer("wglGetPbufferDCEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetPbufferDCEXT(hPbuffer);
+	return _wglGetPbufferDCEXT(hPbuffer);
 }
 int APIENTRY interceptedwglReleasePbufferDCEXT(HPBUFFEREXT hPbuffer, HDC hDC)
 {
@@ -4419,7 +4419,7 @@ int APIENTRY interceptedwglReleasePbufferDCEXT(HPBUFFEREXT hPbuffer, HDC hDC)
 		currentConfig3DSettings.getDrawingBuffer("wglReleasePbufferDCEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglReleasePbufferDCEXT(hPbuffer, hDC);
+	return _wglReleasePbufferDCEXT(hPbuffer, hDC);
 }
 BOOL APIENTRY interceptedwglDestroyPbufferEXT(HPBUFFEREXT hPbuffer)
 {
@@ -4430,7 +4430,7 @@ BOOL APIENTRY interceptedwglDestroyPbufferEXT(HPBUFFEREXT hPbuffer)
 		currentConfig3DSettings.getDrawingBuffer("wglDestroyPbufferEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDestroyPbufferEXT(hPbuffer);
+	return _wglDestroyPbufferEXT(hPbuffer);
 }
 BOOL APIENTRY interceptedwglQueryPbufferEXT(HPBUFFEREXT hPbuffer, int iAttribute, int * piValue)
 {
@@ -4441,7 +4441,7 @@ BOOL APIENTRY interceptedwglQueryPbufferEXT(HPBUFFEREXT hPbuffer, int iAttribute
 		currentConfig3DSettings.getDrawingBuffer("wglQueryPbufferEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglQueryPbufferEXT(hPbuffer, iAttribute, piValue);
+	return _wglQueryPbufferEXT(hPbuffer, iAttribute, piValue);
 }
 BOOL APIENTRY interceptedwglGetPixelFormatAttribivEXT(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, int * piValues)
 {
@@ -4452,7 +4452,7 @@ BOOL APIENTRY interceptedwglGetPixelFormatAttribivEXT(HDC hdc, int iPixelFormat,
 		currentConfig3DSettings.getDrawingBuffer("wglGetPixelFormatAttribivEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetPixelFormatAttribivEXT(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
+	return _wglGetPixelFormatAttribivEXT(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
 }
 BOOL APIENTRY interceptedwglGetPixelFormatAttribfvEXT(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, FLOAT * pfValues)
 {
@@ -4463,7 +4463,7 @@ BOOL APIENTRY interceptedwglGetPixelFormatAttribfvEXT(HDC hdc, int iPixelFormat,
 		currentConfig3DSettings.getDrawingBuffer("wglGetPixelFormatAttribfvEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetPixelFormatAttribfvEXT(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
+	return _wglGetPixelFormatAttribfvEXT(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
 }
 BOOL APIENTRY interceptedwglChoosePixelFormatEXT(HDC hdc, const int * piAttribIList, const FLOAT * pfAttribFList, UINT nMaxFormats, int * piFormats, UINT * nNumFormats)
 {
@@ -4474,7 +4474,7 @@ BOOL APIENTRY interceptedwglChoosePixelFormatEXT(HDC hdc, const int * piAttribIL
 		currentConfig3DSettings.getDrawingBuffer("wglChoosePixelFormatEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglChoosePixelFormatEXT(hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats);
+	return _wglChoosePixelFormatEXT(hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats);
 }
 BOOL APIENTRY interceptedwglSwapIntervalEXT(int interval)
 {
@@ -4485,7 +4485,7 @@ BOOL APIENTRY interceptedwglSwapIntervalEXT(int interval)
 		currentConfig3DSettings.getDrawingBuffer("wglSwapIntervalEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglSwapIntervalEXT(interval);
+	return _wglSwapIntervalEXT(interval);
 }
 int APIENTRY interceptedwglGetSwapIntervalEXT(void)
 {
@@ -4496,7 +4496,7 @@ int APIENTRY interceptedwglGetSwapIntervalEXT(void)
 		currentConfig3DSettings.getDrawingBuffer("wglGetSwapIntervalEXT");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetSwapIntervalEXT();
+	return _wglGetSwapIntervalEXT();
 }
 void * APIENTRY interceptedwglAllocateMemoryNV(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority)
 {
@@ -4507,7 +4507,7 @@ void * APIENTRY interceptedwglAllocateMemoryNV(GLsizei size, GLfloat readfreq, G
 		currentConfig3DSettings.getDrawingBuffer("wglAllocateMemoryNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglAllocateMemoryNV(size, readfreq, writefreq, priority);
+	return _wglAllocateMemoryNV(size, readfreq, writefreq, priority);
 }
 void APIENTRY interceptedwglFreeMemoryNV(void * pointer)
 {
@@ -4529,7 +4529,7 @@ BOOL APIENTRY interceptedwglGetSyncValuesOML(HDC hdc, INT64 * ust, INT64 * msc, 
 		currentConfig3DSettings.getDrawingBuffer("wglGetSyncValuesOML");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetSyncValuesOML(hdc, ust, msc, sbc);
+	return _wglGetSyncValuesOML(hdc, ust, msc, sbc);
 }
 BOOL APIENTRY interceptedwglGetMscRateOML(HDC hdc, INT32 * numerator, INT32 * denominator)
 {
@@ -4540,7 +4540,7 @@ BOOL APIENTRY interceptedwglGetMscRateOML(HDC hdc, INT32 * numerator, INT32 * de
 		currentConfig3DSettings.getDrawingBuffer("wglGetMscRateOML");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetMscRateOML(hdc, numerator, denominator);
+	return _wglGetMscRateOML(hdc, numerator, denominator);
 }
 INT64 APIENTRY interceptedwglSwapBuffersMscOML(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder)
 {
@@ -4551,7 +4551,7 @@ INT64 APIENTRY interceptedwglSwapBuffersMscOML(HDC hdc, INT64 target_msc, INT64 
 		currentConfig3DSettings.getDrawingBuffer("wglSwapBuffersMscOML");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglSwapBuffersMscOML(hdc, target_msc, divisor, remainder);
+	return _wglSwapBuffersMscOML(hdc, target_msc, divisor, remainder);
 }
 INT64 APIENTRY interceptedwglSwapLayerBuffersMscOML(HDC hdc, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder)
 {
@@ -4562,7 +4562,7 @@ INT64 APIENTRY interceptedwglSwapLayerBuffersMscOML(HDC hdc, int fuPlanes, INT64
 		currentConfig3DSettings.getDrawingBuffer("wglSwapLayerBuffersMscOML");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglSwapLayerBuffersMscOML(hdc, fuPlanes, target_msc, divisor, remainder);
+	return _wglSwapLayerBuffersMscOML(hdc, fuPlanes, target_msc, divisor, remainder);
 }
 BOOL APIENTRY interceptedwglWaitForMscOML(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 * ust, INT64 * msc, INT64 * sbc)
 {
@@ -4573,7 +4573,7 @@ BOOL APIENTRY interceptedwglWaitForMscOML(HDC hdc, INT64 target_msc, INT64 divis
 		currentConfig3DSettings.getDrawingBuffer("wglWaitForMscOML");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglWaitForMscOML(hdc, target_msc, divisor, remainder, ust, msc, sbc);
+	return _wglWaitForMscOML(hdc, target_msc, divisor, remainder, ust, msc, sbc);
 }
 BOOL APIENTRY interceptedwglWaitForSbcOML(HDC hdc, INT64 target_sbc, INT64 * ust, INT64 * msc, INT64 * sbc)
 {
@@ -4584,7 +4584,7 @@ BOOL APIENTRY interceptedwglWaitForSbcOML(HDC hdc, INT64 target_sbc, INT64 * ust
 		currentConfig3DSettings.getDrawingBuffer("wglWaitForSbcOML");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglWaitForSbcOML(hdc, target_sbc, ust, msc, sbc);
+	return _wglWaitForSbcOML(hdc, target_sbc, ust, msc, sbc);
 }
 BOOL APIENTRY interceptedwglGetDigitalVideoParametersI3D(HDC hDC, int iAttribute, int * piValue)
 {
@@ -4595,7 +4595,7 @@ BOOL APIENTRY interceptedwglGetDigitalVideoParametersI3D(HDC hDC, int iAttribute
 		currentConfig3DSettings.getDrawingBuffer("wglGetDigitalVideoParametersI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
+	return _wglGetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
 }
 BOOL APIENTRY interceptedwglSetDigitalVideoParametersI3D(HDC hDC, int iAttribute, const int * piValue)
 {
@@ -4606,7 +4606,7 @@ BOOL APIENTRY interceptedwglSetDigitalVideoParametersI3D(HDC hDC, int iAttribute
 		currentConfig3DSettings.getDrawingBuffer("wglSetDigitalVideoParametersI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglSetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
+	return _wglSetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
 }
 BOOL APIENTRY interceptedwglGetGammaTableParametersI3D(HDC hDC, int iAttribute, int * piValue)
 {
@@ -4617,7 +4617,7 @@ BOOL APIENTRY interceptedwglGetGammaTableParametersI3D(HDC hDC, int iAttribute, 
 		currentConfig3DSettings.getDrawingBuffer("wglGetGammaTableParametersI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetGammaTableParametersI3D(hDC, iAttribute, piValue);
+	return _wglGetGammaTableParametersI3D(hDC, iAttribute, piValue);
 }
 BOOL APIENTRY interceptedwglSetGammaTableParametersI3D(HDC hDC, int iAttribute, const int * piValue)
 {
@@ -4628,7 +4628,7 @@ BOOL APIENTRY interceptedwglSetGammaTableParametersI3D(HDC hDC, int iAttribute, 
 		currentConfig3DSettings.getDrawingBuffer("wglSetGammaTableParametersI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglSetGammaTableParametersI3D(hDC, iAttribute, piValue);
+	return _wglSetGammaTableParametersI3D(hDC, iAttribute, piValue);
 }
 BOOL APIENTRY interceptedwglGetGammaTableI3D(HDC hDC, int iEntries, USHORT * puRed, USHORT * puGreen, USHORT * puBlue)
 {
@@ -4639,7 +4639,7 @@ BOOL APIENTRY interceptedwglGetGammaTableI3D(HDC hDC, int iEntries, USHORT * puR
 		currentConfig3DSettings.getDrawingBuffer("wglGetGammaTableI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
+	return _wglGetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
 }
 BOOL APIENTRY interceptedwglSetGammaTableI3D(HDC hDC, int iEntries, const USHORT * puRed, const USHORT * puGreen, const USHORT * puBlue)
 {
@@ -4650,7 +4650,7 @@ BOOL APIENTRY interceptedwglSetGammaTableI3D(HDC hDC, int iEntries, const USHORT
 		currentConfig3DSettings.getDrawingBuffer("wglSetGammaTableI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglSetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
+	return _wglSetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
 }
 BOOL APIENTRY interceptedwglEnableGenlockI3D(HDC hDC)
 {
@@ -4661,7 +4661,7 @@ BOOL APIENTRY interceptedwglEnableGenlockI3D(HDC hDC)
 		currentConfig3DSettings.getDrawingBuffer("wglEnableGenlockI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglEnableGenlockI3D(hDC);
+	return _wglEnableGenlockI3D(hDC);
 }
 BOOL APIENTRY interceptedwglDisableGenlockI3D(HDC hDC)
 {
@@ -4672,7 +4672,7 @@ BOOL APIENTRY interceptedwglDisableGenlockI3D(HDC hDC)
 		currentConfig3DSettings.getDrawingBuffer("wglDisableGenlockI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDisableGenlockI3D(hDC);
+	return _wglDisableGenlockI3D(hDC);
 }
 BOOL APIENTRY interceptedwglIsEnabledGenlockI3D(HDC hDC, BOOL * pFlag)
 {
@@ -4683,7 +4683,7 @@ BOOL APIENTRY interceptedwglIsEnabledGenlockI3D(HDC hDC, BOOL * pFlag)
 		currentConfig3DSettings.getDrawingBuffer("wglIsEnabledGenlockI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglIsEnabledGenlockI3D(hDC, pFlag);
+	return _wglIsEnabledGenlockI3D(hDC, pFlag);
 }
 BOOL APIENTRY interceptedwglGenlockSourceI3D(HDC hDC, UINT uSource)
 {
@@ -4694,7 +4694,7 @@ BOOL APIENTRY interceptedwglGenlockSourceI3D(HDC hDC, UINT uSource)
 		currentConfig3DSettings.getDrawingBuffer("wglGenlockSourceI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGenlockSourceI3D(hDC, uSource);
+	return _wglGenlockSourceI3D(hDC, uSource);
 }
 BOOL APIENTRY interceptedwglGetGenlockSourceI3D(HDC hDC, UINT * uSource)
 {
@@ -4705,7 +4705,7 @@ BOOL APIENTRY interceptedwglGetGenlockSourceI3D(HDC hDC, UINT * uSource)
 		currentConfig3DSettings.getDrawingBuffer("wglGetGenlockSourceI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetGenlockSourceI3D(hDC, uSource);
+	return _wglGetGenlockSourceI3D(hDC, uSource);
 }
 BOOL APIENTRY interceptedwglGenlockSourceEdgeI3D(HDC hDC, UINT uEdge)
 {
@@ -4716,7 +4716,7 @@ BOOL APIENTRY interceptedwglGenlockSourceEdgeI3D(HDC hDC, UINT uEdge)
 		currentConfig3DSettings.getDrawingBuffer("wglGenlockSourceEdgeI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGenlockSourceEdgeI3D(hDC, uEdge);
+	return _wglGenlockSourceEdgeI3D(hDC, uEdge);
 }
 BOOL APIENTRY interceptedwglGetGenlockSourceEdgeI3D(HDC hDC, UINT * uEdge)
 {
@@ -4727,7 +4727,7 @@ BOOL APIENTRY interceptedwglGetGenlockSourceEdgeI3D(HDC hDC, UINT * uEdge)
 		currentConfig3DSettings.getDrawingBuffer("wglGetGenlockSourceEdgeI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetGenlockSourceEdgeI3D(hDC, uEdge);
+	return _wglGetGenlockSourceEdgeI3D(hDC, uEdge);
 }
 BOOL APIENTRY interceptedwglGenlockSampleRateI3D(HDC hDC, UINT uRate)
 {
@@ -4738,7 +4738,7 @@ BOOL APIENTRY interceptedwglGenlockSampleRateI3D(HDC hDC, UINT uRate)
 		currentConfig3DSettings.getDrawingBuffer("wglGenlockSampleRateI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGenlockSampleRateI3D(hDC, uRate);
+	return _wglGenlockSampleRateI3D(hDC, uRate);
 }
 BOOL APIENTRY interceptedwglGetGenlockSampleRateI3D(HDC hDC, UINT * uRate)
 {
@@ -4749,7 +4749,7 @@ BOOL APIENTRY interceptedwglGetGenlockSampleRateI3D(HDC hDC, UINT * uRate)
 		currentConfig3DSettings.getDrawingBuffer("wglGetGenlockSampleRateI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetGenlockSampleRateI3D(hDC, uRate);
+	return _wglGetGenlockSampleRateI3D(hDC, uRate);
 }
 BOOL APIENTRY interceptedwglGenlockSourceDelayI3D(HDC hDC, UINT uDelay)
 {
@@ -4760,7 +4760,7 @@ BOOL APIENTRY interceptedwglGenlockSourceDelayI3D(HDC hDC, UINT uDelay)
 		currentConfig3DSettings.getDrawingBuffer("wglGenlockSourceDelayI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGenlockSourceDelayI3D(hDC, uDelay);
+	return _wglGenlockSourceDelayI3D(hDC, uDelay);
 }
 BOOL APIENTRY interceptedwglGetGenlockSourceDelayI3D(HDC hDC, UINT * uDelay)
 {
@@ -4771,7 +4771,7 @@ BOOL APIENTRY interceptedwglGetGenlockSourceDelayI3D(HDC hDC, UINT * uDelay)
 		currentConfig3DSettings.getDrawingBuffer("wglGetGenlockSourceDelayI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetGenlockSourceDelayI3D(hDC, uDelay);
+	return _wglGetGenlockSourceDelayI3D(hDC, uDelay);
 }
 BOOL APIENTRY interceptedwglQueryGenlockMaxSourceDelayI3D(HDC hDC, UINT * uMaxLineDelay, UINT * uMaxPixelDelay)
 {
@@ -4782,7 +4782,7 @@ BOOL APIENTRY interceptedwglQueryGenlockMaxSourceDelayI3D(HDC hDC, UINT * uMaxLi
 		currentConfig3DSettings.getDrawingBuffer("wglQueryGenlockMaxSourceDelayI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglQueryGenlockMaxSourceDelayI3D(hDC, uMaxLineDelay, uMaxPixelDelay);
+	return _wglQueryGenlockMaxSourceDelayI3D(hDC, uMaxLineDelay, uMaxPixelDelay);
 }
 void * APIENTRY interceptedwglCreateImageBufferI3D(HDC hDC, DWORD dwSize, UINT uFlags)
 {
@@ -4793,7 +4793,7 @@ void * APIENTRY interceptedwglCreateImageBufferI3D(HDC hDC, DWORD dwSize, UINT u
 		currentConfig3DSettings.getDrawingBuffer("wglCreateImageBufferI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglCreateImageBufferI3D(hDC, dwSize, uFlags);
+	return _wglCreateImageBufferI3D(hDC, dwSize, uFlags);
 }
 BOOL APIENTRY interceptedwglDestroyImageBufferI3D(HDC hDC, void * pAddress)
 {
@@ -4804,7 +4804,7 @@ BOOL APIENTRY interceptedwglDestroyImageBufferI3D(HDC hDC, void * pAddress)
 		currentConfig3DSettings.getDrawingBuffer("wglDestroyImageBufferI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDestroyImageBufferI3D(hDC, pAddress);
+	return _wglDestroyImageBufferI3D(hDC, pAddress);
 }
 BOOL APIENTRY interceptedwglAssociateImageBufferEventsI3D(HDC hDC, const HANDLE * pEvent, void * const * pAddress, const DWORD * pSize, UINT count)
 {
@@ -4815,7 +4815,7 @@ BOOL APIENTRY interceptedwglAssociateImageBufferEventsI3D(HDC hDC, const HANDLE 
 		currentConfig3DSettings.getDrawingBuffer("wglAssociateImageBufferEventsI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglAssociateImageBufferEventsI3D(hDC, pEvent, pAddress, pSize, count);
+	return _wglAssociateImageBufferEventsI3D(hDC, pEvent, pAddress, pSize, count);
 }
 BOOL APIENTRY interceptedwglReleaseImageBufferEventsI3D(HDC hDC, void * const * pAddress, UINT count)
 {
@@ -4826,7 +4826,7 @@ BOOL APIENTRY interceptedwglReleaseImageBufferEventsI3D(HDC hDC, void * const * 
 		currentConfig3DSettings.getDrawingBuffer("wglReleaseImageBufferEventsI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglReleaseImageBufferEventsI3D(hDC, pAddress, count);
+	return _wglReleaseImageBufferEventsI3D(hDC, pAddress, count);
 }
 BOOL APIENTRY interceptedwglEnableFrameLockI3D(void)
 {
@@ -4837,7 +4837,7 @@ BOOL APIENTRY interceptedwglEnableFrameLockI3D(void)
 		currentConfig3DSettings.getDrawingBuffer("wglEnableFrameLockI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglEnableFrameLockI3D();
+	return _wglEnableFrameLockI3D();
 }
 BOOL APIENTRY interceptedwglDisableFrameLockI3D(void)
 {
@@ -4848,7 +4848,7 @@ BOOL APIENTRY interceptedwglDisableFrameLockI3D(void)
 		currentConfig3DSettings.getDrawingBuffer("wglDisableFrameLockI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDisableFrameLockI3D();
+	return _wglDisableFrameLockI3D();
 }
 BOOL APIENTRY interceptedwglIsEnabledFrameLockI3D(BOOL * pFlag)
 {
@@ -4859,7 +4859,7 @@ BOOL APIENTRY interceptedwglIsEnabledFrameLockI3D(BOOL * pFlag)
 		currentConfig3DSettings.getDrawingBuffer("wglIsEnabledFrameLockI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglIsEnabledFrameLockI3D(pFlag);
+	return _wglIsEnabledFrameLockI3D(pFlag);
 }
 BOOL APIENTRY interceptedwglQueryFrameLockMasterI3D(BOOL * pFlag)
 {
@@ -4870,7 +4870,7 @@ BOOL APIENTRY interceptedwglQueryFrameLockMasterI3D(BOOL * pFlag)
 		currentConfig3DSettings.getDrawingBuffer("wglQueryFrameLockMasterI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglQueryFrameLockMasterI3D(pFlag);
+	return _wglQueryFrameLockMasterI3D(pFlag);
 }
 BOOL APIENTRY interceptedwglGetFrameUsageI3D(float * pUsage)
 {
@@ -4881,7 +4881,7 @@ BOOL APIENTRY interceptedwglGetFrameUsageI3D(float * pUsage)
 		currentConfig3DSettings.getDrawingBuffer("wglGetFrameUsageI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetFrameUsageI3D(pUsage);
+	return _wglGetFrameUsageI3D(pUsage);
 }
 BOOL APIENTRY interceptedwglBeginFrameTrackingI3D(void)
 {
@@ -4892,7 +4892,7 @@ BOOL APIENTRY interceptedwglBeginFrameTrackingI3D(void)
 		currentConfig3DSettings.getDrawingBuffer("wglBeginFrameTrackingI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglBeginFrameTrackingI3D();
+	return _wglBeginFrameTrackingI3D();
 }
 BOOL APIENTRY interceptedwglEndFrameTrackingI3D(void)
 {
@@ -4903,7 +4903,7 @@ BOOL APIENTRY interceptedwglEndFrameTrackingI3D(void)
 		currentConfig3DSettings.getDrawingBuffer("wglEndFrameTrackingI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglEndFrameTrackingI3D();
+	return _wglEndFrameTrackingI3D();
 }
 BOOL APIENTRY interceptedwglQueryFrameTrackingI3D(DWORD * pFrameCount, DWORD * pMissedFrames, float * pLastMissedUsage)
 {
@@ -4914,7 +4914,7 @@ BOOL APIENTRY interceptedwglQueryFrameTrackingI3D(DWORD * pFrameCount, DWORD * p
 		currentConfig3DSettings.getDrawingBuffer("wglQueryFrameTrackingI3D");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglQueryFrameTrackingI3D(pFrameCount, pMissedFrames, pLastMissedUsage);
+	return _wglQueryFrameTrackingI3D(pFrameCount, pMissedFrames, pLastMissedUsage);
 }
 BOOL APIENTRY interceptedwglSetStereoEmitterState3DL(HDC hDC, UINT uState)
 {
@@ -4925,7 +4925,7 @@ BOOL APIENTRY interceptedwglSetStereoEmitterState3DL(HDC hDC, UINT uState)
 		currentConfig3DSettings.getDrawingBuffer("wglSetStereoEmitterState3DL");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglSetStereoEmitterState3DL(hDC, uState);
+	return _wglSetStereoEmitterState3DL(hDC, uState);
 }
 int APIENTRY interceptedwglEnumerateVideoDevicesNV(HDC hDC, HVIDEOOUTPUTDEVICENV * phDeviceList)
 {
@@ -4936,7 +4936,7 @@ int APIENTRY interceptedwglEnumerateVideoDevicesNV(HDC hDC, HVIDEOOUTPUTDEVICENV
 		currentConfig3DSettings.getDrawingBuffer("wglEnumerateVideoDevicesNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglEnumerateVideoDevicesNV(hDC, phDeviceList);
+	return _wglEnumerateVideoDevicesNV(hDC, phDeviceList);
 }
 BOOL APIENTRY interceptedwglBindVideoDeviceNV(HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int * piAttribList)
 {
@@ -4947,7 +4947,7 @@ BOOL APIENTRY interceptedwglBindVideoDeviceNV(HDC hDC, unsigned int uVideoSlot, 
 		currentConfig3DSettings.getDrawingBuffer("wglBindVideoDeviceNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglBindVideoDeviceNV(hDC, uVideoSlot, hVideoDevice, piAttribList);
+	return _wglBindVideoDeviceNV(hDC, uVideoSlot, hVideoDevice, piAttribList);
 }
 BOOL APIENTRY interceptedwglQueryCurrentContextNV(int iAttribute, int * piValue)
 {
@@ -4958,7 +4958,7 @@ BOOL APIENTRY interceptedwglQueryCurrentContextNV(int iAttribute, int * piValue)
 		currentConfig3DSettings.getDrawingBuffer("wglQueryCurrentContextNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglQueryCurrentContextNV(iAttribute, piValue);
+	return _wglQueryCurrentContextNV(iAttribute, piValue);
 }
 BOOL APIENTRY interceptedwglGetVideoDeviceNV(HDC hDC, int numDevices, HPVIDEODEV * hVideoDevice)
 {
@@ -4969,7 +4969,7 @@ BOOL APIENTRY interceptedwglGetVideoDeviceNV(HDC hDC, int numDevices, HPVIDEODEV
 		currentConfig3DSettings.getDrawingBuffer("wglGetVideoDeviceNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetVideoDeviceNV(hDC, numDevices, hVideoDevice);
+	return _wglGetVideoDeviceNV(hDC, numDevices, hVideoDevice);
 }
 BOOL APIENTRY interceptedwglReleaseVideoDeviceNV(HPVIDEODEV hVideoDevice)
 {
@@ -4980,7 +4980,7 @@ BOOL APIENTRY interceptedwglReleaseVideoDeviceNV(HPVIDEODEV hVideoDevice)
 		currentConfig3DSettings.getDrawingBuffer("wglReleaseVideoDeviceNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglReleaseVideoDeviceNV(hVideoDevice);
+	return _wglReleaseVideoDeviceNV(hVideoDevice);
 }
 BOOL APIENTRY interceptedwglBindVideoImageNV(HPVIDEODEV hVideoDevice, HPBUFFERARB hPbuffer, int iVideoBuffer)
 {
@@ -4991,7 +4991,7 @@ BOOL APIENTRY interceptedwglBindVideoImageNV(HPVIDEODEV hVideoDevice, HPBUFFERAR
 		currentConfig3DSettings.getDrawingBuffer("wglBindVideoImageNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglBindVideoImageNV(hVideoDevice, hPbuffer, iVideoBuffer);
+	return _wglBindVideoImageNV(hVideoDevice, hPbuffer, iVideoBuffer);
 }
 BOOL APIENTRY interceptedwglReleaseVideoImageNV(HPBUFFERARB hPbuffer, int iVideoBuffer)
 {
@@ -5002,7 +5002,7 @@ BOOL APIENTRY interceptedwglReleaseVideoImageNV(HPBUFFERARB hPbuffer, int iVideo
 		currentConfig3DSettings.getDrawingBuffer("wglReleaseVideoImageNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglReleaseVideoImageNV(hPbuffer, iVideoBuffer);
+	return _wglReleaseVideoImageNV(hPbuffer, iVideoBuffer);
 }
 BOOL APIENTRY interceptedwglSendPbufferToVideoNV(HPBUFFERARB hPbuffer, int iBufferType, unsigned long * pulCounterPbuffer, BOOL bBlock)
 {
@@ -5013,7 +5013,7 @@ BOOL APIENTRY interceptedwglSendPbufferToVideoNV(HPBUFFERARB hPbuffer, int iBuff
 		currentConfig3DSettings.getDrawingBuffer("wglSendPbufferToVideoNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglSendPbufferToVideoNV(hPbuffer, iBufferType, pulCounterPbuffer, bBlock);
+	return _wglSendPbufferToVideoNV(hPbuffer, iBufferType, pulCounterPbuffer, bBlock);
 }
 BOOL APIENTRY interceptedwglGetVideoInfoNV(HPVIDEODEV hpVideoDevice, unsigned long * pulCounterOutputPbuffer, unsigned long * pulCounterOutputVideo)
 {
@@ -5024,7 +5024,7 @@ BOOL APIENTRY interceptedwglGetVideoInfoNV(HPVIDEODEV hpVideoDevice, unsigned lo
 		currentConfig3DSettings.getDrawingBuffer("wglGetVideoInfoNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetVideoInfoNV(hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo);
+	return _wglGetVideoInfoNV(hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo);
 }
 BOOL APIENTRY interceptedwglJoinSwapGroupNV(HDC hDC, GLuint group)
 {
@@ -5035,7 +5035,7 @@ BOOL APIENTRY interceptedwglJoinSwapGroupNV(HDC hDC, GLuint group)
 		currentConfig3DSettings.getDrawingBuffer("wglJoinSwapGroupNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglJoinSwapGroupNV(hDC, group);
+	return _wglJoinSwapGroupNV(hDC, group);
 }
 BOOL APIENTRY interceptedwglBindSwapBarrierNV(GLuint group, GLuint barrier)
 {
@@ -5046,7 +5046,7 @@ BOOL APIENTRY interceptedwglBindSwapBarrierNV(GLuint group, GLuint barrier)
 		currentConfig3DSettings.getDrawingBuffer("wglBindSwapBarrierNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglBindSwapBarrierNV(group, barrier);
+	return _wglBindSwapBarrierNV(group, barrier);
 }
 BOOL APIENTRY interceptedwglQuerySwapGroupNV(HDC hDC, GLuint * group, GLuint * barrier)
 {
@@ -5057,7 +5057,7 @@ BOOL APIENTRY interceptedwglQuerySwapGroupNV(HDC hDC, GLuint * group, GLuint * b
 		currentConfig3DSettings.getDrawingBuffer("wglQuerySwapGroupNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglQuerySwapGroupNV(hDC, group, barrier);
+	return _wglQuerySwapGroupNV(hDC, group, barrier);
 }
 BOOL APIENTRY interceptedwglQueryMaxSwapGroupsNV(HDC hDC, GLuint * maxGroups, GLuint * maxBarriers)
 {
@@ -5068,7 +5068,7 @@ BOOL APIENTRY interceptedwglQueryMaxSwapGroupsNV(HDC hDC, GLuint * maxGroups, GL
 		currentConfig3DSettings.getDrawingBuffer("wglQueryMaxSwapGroupsNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglQueryMaxSwapGroupsNV(hDC, maxGroups, maxBarriers);
+	return _wglQueryMaxSwapGroupsNV(hDC, maxGroups, maxBarriers);
 }
 BOOL APIENTRY interceptedwglQueryFrameCountNV(HDC hDC, GLuint * count)
 {
@@ -5079,7 +5079,7 @@ BOOL APIENTRY interceptedwglQueryFrameCountNV(HDC hDC, GLuint * count)
 		currentConfig3DSettings.getDrawingBuffer("wglQueryFrameCountNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglQueryFrameCountNV(hDC, count);
+	return _wglQueryFrameCountNV(hDC, count);
 }
 BOOL APIENTRY interceptedwglResetFrameCountNV(HDC hDC)
 {
@@ -5090,7 +5090,7 @@ BOOL APIENTRY interceptedwglResetFrameCountNV(HDC hDC)
 		currentConfig3DSettings.getDrawingBuffer("wglResetFrameCountNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglResetFrameCountNV(hDC);
+	return _wglResetFrameCountNV(hDC);
 }
 BOOL APIENTRY interceptedwglEnumGpusNV(UINT iGpuIndex, HGPUNV * phGpu)
 {
@@ -5101,7 +5101,7 @@ BOOL APIENTRY interceptedwglEnumGpusNV(UINT iGpuIndex, HGPUNV * phGpu)
 		currentConfig3DSettings.getDrawingBuffer("wglEnumGpusNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglEnumGpusNV(iGpuIndex, phGpu);
+	return _wglEnumGpusNV(iGpuIndex, phGpu);
 }
 BOOL APIENTRY interceptedwglEnumGpuDevicesNV(HGPUNV hGpu, UINT iDeviceIndex, _GPU_DEVICE * lpGpuDevice)
 {
@@ -5112,7 +5112,7 @@ BOOL APIENTRY interceptedwglEnumGpuDevicesNV(HGPUNV hGpu, UINT iDeviceIndex, _GP
 		currentConfig3DSettings.getDrawingBuffer("wglEnumGpuDevicesNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglEnumGpuDevicesNV(hGpu, iDeviceIndex, lpGpuDevice);
+	return _wglEnumGpuDevicesNV(hGpu, iDeviceIndex, lpGpuDevice);
 }
 HDC APIENTRY interceptedwglCreateAffinityDCNV(const HGPUNV * phGpuList)
 {
@@ -5123,7 +5123,7 @@ HDC APIENTRY interceptedwglCreateAffinityDCNV(const HGPUNV * phGpuList)
 		currentConfig3DSettings.getDrawingBuffer("wglCreateAffinityDCNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglCreateAffinityDCNV(phGpuList);
+	return _wglCreateAffinityDCNV(phGpuList);
 }
 BOOL APIENTRY interceptedwglEnumGpusFromAffinityDCNV(HDC hAffinityDC, UINT iGpuIndex, HGPUNV * hGpu)
 {
@@ -5134,7 +5134,7 @@ BOOL APIENTRY interceptedwglEnumGpusFromAffinityDCNV(HDC hAffinityDC, UINT iGpuI
 		currentConfig3DSettings.getDrawingBuffer("wglEnumGpusFromAffinityDCNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglEnumGpusFromAffinityDCNV(hAffinityDC, iGpuIndex, hGpu);
+	return _wglEnumGpusFromAffinityDCNV(hAffinityDC, iGpuIndex, hGpu);
 }
 BOOL APIENTRY interceptedwglDeleteDCNV(HDC hdc)
 {
@@ -5145,7 +5145,7 @@ BOOL APIENTRY interceptedwglDeleteDCNV(HDC hdc)
 		currentConfig3DSettings.getDrawingBuffer("wglDeleteDCNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDeleteDCNV(hdc);
+	return _wglDeleteDCNV(hdc);
 }
 UINT APIENTRY interceptedwglGetGPUIDsAMD(UINT maxCount, UINT * ids)
 {
@@ -5156,7 +5156,7 @@ UINT APIENTRY interceptedwglGetGPUIDsAMD(UINT maxCount, UINT * ids)
 		currentConfig3DSettings.getDrawingBuffer("wglGetGPUIDsAMD");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetGPUIDsAMD(maxCount, ids);
+	return _wglGetGPUIDsAMD(maxCount, ids);
 }
 INT APIENTRY interceptedwglGetGPUInfoAMD(UINT id, int property, GLenum dataType, UINT size, void * data)
 {
@@ -5167,7 +5167,7 @@ INT APIENTRY interceptedwglGetGPUInfoAMD(UINT id, int property, GLenum dataType,
 		currentConfig3DSettings.getDrawingBuffer("wglGetGPUInfoAMD");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetGPUInfoAMD(id, property, dataType, size, data);
+	return _wglGetGPUInfoAMD(id, property, dataType, size, data);
 }
 UINT APIENTRY interceptedwglGetContextGPUIDAMD(HGLRC hglrc)
 {
@@ -5178,7 +5178,7 @@ UINT APIENTRY interceptedwglGetContextGPUIDAMD(HGLRC hglrc)
 		currentConfig3DSettings.getDrawingBuffer("wglGetContextGPUIDAMD");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetContextGPUIDAMD(hglrc);
+	return _wglGetContextGPUIDAMD(hglrc);
 }
 HGLRC APIENTRY interceptedwglCreateAssociatedContextAMD(UINT id)
 {
@@ -5189,7 +5189,7 @@ HGLRC APIENTRY interceptedwglCreateAssociatedContextAMD(UINT id)
 		currentConfig3DSettings.getDrawingBuffer("wglCreateAssociatedContextAMD");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglCreateAssociatedContextAMD(id);
+	return _wglCreateAssociatedContextAMD(id);
 }
 HGLRC APIENTRY interceptedwglCreateAssociatedContextAttribsAMD(UINT id, HGLRC hShareContext, const int * attribList)
 {
@@ -5200,7 +5200,7 @@ HGLRC APIENTRY interceptedwglCreateAssociatedContextAttribsAMD(UINT id, HGLRC hS
 		currentConfig3DSettings.getDrawingBuffer("wglCreateAssociatedContextAttribsAMD");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglCreateAssociatedContextAttribsAMD(id, hShareContext, attribList);
+	return _wglCreateAssociatedContextAttribsAMD(id, hShareContext, attribList);
 }
 BOOL APIENTRY interceptedwglDeleteAssociatedContextAMD(HGLRC hglrc)
 {
@@ -5211,7 +5211,7 @@ BOOL APIENTRY interceptedwglDeleteAssociatedContextAMD(HGLRC hglrc)
 		currentConfig3DSettings.getDrawingBuffer("wglDeleteAssociatedContextAMD");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDeleteAssociatedContextAMD(hglrc);
+	return _wglDeleteAssociatedContextAMD(hglrc);
 }
 BOOL APIENTRY interceptedwglMakeAssociatedContextCurrentAMD(HGLRC hglrc)
 {
@@ -5222,7 +5222,7 @@ BOOL APIENTRY interceptedwglMakeAssociatedContextCurrentAMD(HGLRC hglrc)
 		currentConfig3DSettings.getDrawingBuffer("wglMakeAssociatedContextCurrentAMD");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglMakeAssociatedContextCurrentAMD(hglrc);
+	return _wglMakeAssociatedContextCurrentAMD(hglrc);
 }
 HGLRC APIENTRY interceptedwglGetCurrentAssociatedContextAMD(void)
 {
@@ -5233,7 +5233,7 @@ HGLRC APIENTRY interceptedwglGetCurrentAssociatedContextAMD(void)
 		currentConfig3DSettings.getDrawingBuffer("wglGetCurrentAssociatedContextAMD");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglGetCurrentAssociatedContextAMD();
+	return _wglGetCurrentAssociatedContextAMD();
 }
 void APIENTRY interceptedwglBlitContextFramebufferAMD(HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
 {
@@ -5255,7 +5255,7 @@ BOOL APIENTRY interceptedwglBindVideoCaptureDeviceNV(UINT uVideoSlot, HVIDEOINPU
 		currentConfig3DSettings.getDrawingBuffer("wglBindVideoCaptureDeviceNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglBindVideoCaptureDeviceNV(uVideoSlot, hDevice);
+	return _wglBindVideoCaptureDeviceNV(uVideoSlot, hDevice);
 }
 UINT APIENTRY interceptedwglEnumerateVideoCaptureDevicesNV(HDC hDc, HVIDEOINPUTDEVICENV * phDeviceList)
 {
@@ -5266,7 +5266,7 @@ UINT APIENTRY interceptedwglEnumerateVideoCaptureDevicesNV(HDC hDc, HVIDEOINPUTD
 		currentConfig3DSettings.getDrawingBuffer("wglEnumerateVideoCaptureDevicesNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglEnumerateVideoCaptureDevicesNV(hDc, phDeviceList);
+	return _wglEnumerateVideoCaptureDevicesNV(hDc, phDeviceList);
 }
 BOOL APIENTRY interceptedwglLockVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice)
 {
@@ -5277,7 +5277,7 @@ BOOL APIENTRY interceptedwglLockVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICEN
 		currentConfig3DSettings.getDrawingBuffer("wglLockVideoCaptureDeviceNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglLockVideoCaptureDeviceNV(hDc, hDevice);
+	return _wglLockVideoCaptureDeviceNV(hDc, hDevice);
 }
 BOOL APIENTRY interceptedwglQueryVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice, int iAttribute, int * piValue)
 {
@@ -5288,7 +5288,7 @@ BOOL APIENTRY interceptedwglQueryVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICE
 		currentConfig3DSettings.getDrawingBuffer("wglQueryVideoCaptureDeviceNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglQueryVideoCaptureDeviceNV(hDc, hDevice, iAttribute, piValue);
+	return _wglQueryVideoCaptureDeviceNV(hDc, hDevice, iAttribute, piValue);
 }
 BOOL APIENTRY interceptedwglReleaseVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice)
 {
@@ -5299,7 +5299,7 @@ BOOL APIENTRY interceptedwglReleaseVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVI
 		currentConfig3DSettings.getDrawingBuffer("wglReleaseVideoCaptureDeviceNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglReleaseVideoCaptureDeviceNV(hDc, hDevice);
+	return _wglReleaseVideoCaptureDeviceNV(hDc, hDevice);
 }
 BOOL APIENTRY interceptedwglCopyImageSubDataNV(HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
 {
@@ -5310,7 +5310,7 @@ BOOL APIENTRY interceptedwglCopyImageSubDataNV(HGLRC hSrcRC, GLuint srcName, GLe
 		currentConfig3DSettings.getDrawingBuffer("wglCopyImageSubDataNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglCopyImageSubDataNV(hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth);
+	return _wglCopyImageSubDataNV(hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth);
 }
 BOOL APIENTRY interceptedwglDXSetResourceShareHandleNV(void * dxObject, HANDLE shareHandle)
 {
@@ -5321,7 +5321,7 @@ BOOL APIENTRY interceptedwglDXSetResourceShareHandleNV(void * dxObject, HANDLE s
 		currentConfig3DSettings.getDrawingBuffer("wglDXSetResourceShareHandleNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDXSetResourceShareHandleNV(dxObject, shareHandle);
+	return _wglDXSetResourceShareHandleNV(dxObject, shareHandle);
 }
 HANDLE APIENTRY interceptedwglDXOpenDeviceNV(void * dxDevice)
 {
@@ -5332,7 +5332,7 @@ HANDLE APIENTRY interceptedwglDXOpenDeviceNV(void * dxDevice)
 		currentConfig3DSettings.getDrawingBuffer("wglDXOpenDeviceNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDXOpenDeviceNV(dxDevice);
+	return _wglDXOpenDeviceNV(dxDevice);
 }
 BOOL APIENTRY interceptedwglDXCloseDeviceNV(HANDLE hDevice)
 {
@@ -5343,7 +5343,7 @@ BOOL APIENTRY interceptedwglDXCloseDeviceNV(HANDLE hDevice)
 		currentConfig3DSettings.getDrawingBuffer("wglDXCloseDeviceNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDXCloseDeviceNV(hDevice);
+	return _wglDXCloseDeviceNV(hDevice);
 }
 HANDLE APIENTRY interceptedwglDXRegisterObjectNV(HANDLE hDevice, void * dxObject, GLuint name, GLenum type, GLenum access)
 {
@@ -5354,7 +5354,7 @@ HANDLE APIENTRY interceptedwglDXRegisterObjectNV(HANDLE hDevice, void * dxObject
 		currentConfig3DSettings.getDrawingBuffer("wglDXRegisterObjectNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDXRegisterObjectNV(hDevice, dxObject, name, type, access);
+	return _wglDXRegisterObjectNV(hDevice, dxObject, name, type, access);
 }
 BOOL APIENTRY interceptedwglDXUnregisterObjectNV(HANDLE hDevice, HANDLE hObject)
 {
@@ -5365,7 +5365,7 @@ BOOL APIENTRY interceptedwglDXUnregisterObjectNV(HANDLE hDevice, HANDLE hObject)
 		currentConfig3DSettings.getDrawingBuffer("wglDXUnregisterObjectNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDXUnregisterObjectNV(hDevice, hObject);
+	return _wglDXUnregisterObjectNV(hDevice, hObject);
 }
 BOOL APIENTRY interceptedwglDXObjectAccessNV(HANDLE hObject, GLenum access)
 {
@@ -5376,7 +5376,7 @@ BOOL APIENTRY interceptedwglDXObjectAccessNV(HANDLE hObject, GLenum access)
 		currentConfig3DSettings.getDrawingBuffer("wglDXObjectAccessNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDXObjectAccessNV(hObject, access);
+	return _wglDXObjectAccessNV(hObject, access);
 }
 BOOL APIENTRY interceptedwglDXLockObjectsNV(HANDLE hDevice, GLint count, HANDLE * hObjects)
 {
@@ -5387,7 +5387,7 @@ BOOL APIENTRY interceptedwglDXLockObjectsNV(HANDLE hDevice, GLint count, HANDLE 
 		currentConfig3DSettings.getDrawingBuffer("wglDXLockObjectsNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDXLockObjectsNV(hDevice, count, hObjects);
+	return _wglDXLockObjectsNV(hDevice, count, hObjects);
 }
 BOOL APIENTRY interceptedwglDXUnlockObjectsNV(HANDLE hDevice, GLint count, HANDLE * hObjects)
 {
@@ -5398,7 +5398,7 @@ BOOL APIENTRY interceptedwglDXUnlockObjectsNV(HANDLE hDevice, GLint count, HANDL
 		currentConfig3DSettings.getDrawingBuffer("wglDXUnlockObjectsNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDXUnlockObjectsNV(hDevice, count, hObjects);
+	return _wglDXUnlockObjectsNV(hDevice, count, hObjects);
 }
 BOOL APIENTRY interceptedwglDelayBeforeSwapNV(HDC hDC, GLfloat seconds)
 {
@@ -5409,7 +5409,7 @@ BOOL APIENTRY interceptedwglDelayBeforeSwapNV(HDC hDC, GLfloat seconds)
 		currentConfig3DSettings.getDrawingBuffer("wglDelayBeforeSwapNV");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_wglDelayBeforeSwapNV(hDC, seconds);
+	return _wglDelayBeforeSwapNV(hDC, seconds);
 }
 
 
