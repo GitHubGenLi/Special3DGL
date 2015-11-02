@@ -356,16 +356,1276 @@ void processAttach()
 	{
 		printf("Hooked _glFlush\n");
 	}
-	/*if ((_wglMakeCurrent == 0) ||
-		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglMakeCurrent), interceptedwglMakeCurrenth))
+	if ((_wglMakeCurrent == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglMakeCurrent), interceptedwglMakeCurrent))
 	{
-		cerr << "Failed to hook _wglMakeCurrent" << endl;
-		MessageBox(0, "Failed to hook _wglMakeCurrent", "Error", MB_OK);
+		cerr << "Failed to hook _glLoadIdentity" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglMakeCurrent\n");
-	}*/
+	}
+	if ((_glScaled == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glScaled), interceptedglScaled))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glScaled\n");
+	}
+	if ((_glColor3d == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColor3d), interceptedglColor3d))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glColor3d\n");
+	}
+	if ((_glPushMatrix == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPushMatrix), interceptedglPushMatrix))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glPushMatrix\n");
+	}
+	if ((_glMultMatrixd == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glMultMatrixd), interceptedglMultMatrixd))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glMultMatrixd\n");
+	}
+	if ((_wglCreateContext == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateContext), interceptedwglCreateContext))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglCreateContext\n");
+	}
+	if ((_wglDeleteContext == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDeleteContext), interceptedwglDeleteContext))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDeleteContext\n");
+	}
+	if ((_wglGetCurrentContext == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetCurrentContext), interceptedwglGetCurrentContext))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetCurrentContext\n");
+	}
+	if ((_wglCopyContext == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCopyContext), interceptedwglCopyContext))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglCopyContext\n");
+	}
+	if ((_wglGetCurrentDC == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetCurrentDC), interceptedwglGetCurrentDC))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetCurrentDC\n");
+	}
+	if ((_wglGetDefaultProcAddress == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetDefaultProcAddress), interceptedwglGetDefaultProcAddress))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetDefaultProcAddress\n");
+	}
+	if ((_wglShareLists == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglShareLists), interceptedwglShareLists))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglShareLists\n");
+	}
+	if ((_wglCreateLayerContext == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateLayerContext), interceptedwglCreateLayerContext))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglCreateLayerContext\n");
+	}
+	if ((_wglDescribeLayerPlane == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDescribeLayerPlane), interceptedwglDescribeLayerPlane))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDescribeLayerPlane\n");
+	}
+	if ((_wglSetLayerPaletteEntries == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetLayerPaletteEntries), interceptedwglSetLayerPaletteEntries))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglSetLayerPaletteEntries\n");
+	}
+	if ((_wglGetLayerPaletteEntries == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetLayerPaletteEntries), interceptedwglGetLayerPaletteEntries))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetLayerPaletteEntries\n");
+	}
+	if ((_wglRealizeLayerPalette == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglRealizeLayerPalette), interceptedwglRealizeLayerPalette))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglRealizeLayerPalette\n");
+	}
+	if ((_wglSwapLayerBuffers == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSwapLayerBuffers), interceptedwglSwapLayerBuffers))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglSwapLayerBuffers\n");
+	}
+	if ((_wglUseFontBitmapsA == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglUseFontBitmapsA), interceptedwglUseFontBitmapsA))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglUseFontBitmapsA\n");
+	}
+	if ((_wglUseFontBitmapsW == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglUseFontBitmapsW), interceptedwglUseFontBitmapsW))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglUseFontBitmapsW\n");
+	}
+	if ((_wglSwapMultipleBuffers == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSwapMultipleBuffers), interceptedwglSwapMultipleBuffers))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglSwapMultipleBuffers\n");
+	}
+	if ((_wglUseFontOutlinesA == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglUseFontOutlinesA), interceptedwglUseFontOutlinesA))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglUseFontOutlinesA\n");
+	}
+	if ((_wglUseFontOutlinesW == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglUseFontOutlinesW), interceptedwglUseFontOutlinesW))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglUseFontOutlinesW\n");
+	}
+	if ((_wglCreateBufferRegionARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateBufferRegionARB), interceptedwglCreateBufferRegionARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglCreateBufferRegionARB\n");
+	}
+	if ((_wglDeleteBufferRegionARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDeleteBufferRegionARB), interceptedwglDeleteBufferRegionARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDeleteBufferRegionARB\n");
+	}
+	if ((_wglSaveBufferRegionARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSaveBufferRegionARB), interceptedwglSaveBufferRegionARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglSaveBufferRegionARB\n");
+	}
+	if ((_wglRestoreBufferRegionARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglRestoreBufferRegionARB), interceptedwglRestoreBufferRegionARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglRestoreBufferRegionARB\n");
+	}
+	if ((_wglGetExtensionsStringARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetExtensionsStringARB), interceptedwglGetExtensionsStringARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetExtensionsStringARB\n");
+	}
+	if ((_wglGetPixelFormatAttribivARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPixelFormatAttribivARB), interceptedwglGetPixelFormatAttribivARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetPixelFormatAttribivARB\n");
+	}
+	if ((_wglGetPixelFormatAttribfvARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPixelFormatAttribfvARB), interceptedwglGetPixelFormatAttribfvARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetPixelFormatAttribfvARB\n");
+	}
+	if ((_wglMakeContextCurrentARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglMakeContextCurrentARB), interceptedwglMakeContextCurrentARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglMakeContextCurrentARB\n");
+	}
+	if ((_wglGetCurrentReadDCARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetCurrentReadDCARB), interceptedwglGetCurrentReadDCARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetCurrentReadDCARB\n");
+	}
+	if ((_wglCreatePbufferARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreatePbufferARB), interceptedwglCreatePbufferARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglCreatePbufferARB\n");
+	}
+	if ((_wglGetPbufferDCARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPbufferDCARB), interceptedwglGetPbufferDCARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetPbufferDCARB\n");
+	}
+	if ((_wglReleasePbufferDCARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleasePbufferDCARB), interceptedwglReleasePbufferDCARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglReleasePbufferDCARB\n");
+	}
+	if ((_wglDestroyPbufferARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDestroyPbufferARB), interceptedwglDestroyPbufferARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDestroyPbufferARB\n");
+	}
+	if ((_wglQueryPbufferARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryPbufferARB), interceptedwglQueryPbufferARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglQueryPbufferARB\n");
+	}
+	if ((_wglBindTexImageARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBindTexImageARB), interceptedwglBindTexImageARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglBindTexImageARB\n");
+	}
+	if ((_wglReleaseTexImageARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleaseTexImageARB), interceptedwglReleaseTexImageARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglReleaseTexImageARB\n");
+	}
+	if ((_wglSetPbufferAttribARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetPbufferAttribARB), interceptedwglSetPbufferAttribARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglSetPbufferAttribARB\n");
+	}
+	if ((_wglCreateContextAttribsARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateContextAttribsARB), interceptedwglCreateContextAttribsARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglCreateContextAttribsARB\n");
+	}
+	if ((_wglCreateDisplayColorTableEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateDisplayColorTableEXT), interceptedwglCreateDisplayColorTableEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglCreateDisplayColorTableEXT\n");
+	}
+	if ((_wglLoadDisplayColorTableEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglLoadDisplayColorTableEXT), interceptedwglLoadDisplayColorTableEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglLoadDisplayColorTableEXT\n");
+	}
+	if ((_wglBindDisplayColorTableEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBindDisplayColorTableEXT), interceptedwglBindDisplayColorTableEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglBindDisplayColorTableEXT\n");
+	}
+	if ((_wglDestroyDisplayColorTableEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDestroyDisplayColorTableEXT), interceptedwglDestroyDisplayColorTableEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDestroyDisplayColorTableEXT\n");
+	}
+	if ((_wglGetExtensionsStringEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetExtensionsStringEXT), interceptedwglGetExtensionsStringEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetExtensionsStringEXT\n");
+	}
+	if ((_wglMakeContextCurrentEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglMakeContextCurrentEXT), interceptedwglMakeContextCurrentEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglMakeContextCurrentEXT\n");
+	}
+	if ((_wglGetCurrentReadDCEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetCurrentReadDCEXT), interceptedwglGetCurrentReadDCEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetCurrentReadDCEXT\n");
+	}
+	if ((_wglCreatePbufferEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreatePbufferEXT), interceptedwglCreatePbufferEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglCreatePbufferEXT\n");
+	}
+	if ((_wglGetPbufferDCEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPbufferDCEXT), interceptedwglGetPbufferDCEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetPbufferDCEXT\n");
+	}
+	if ((_wglReleasePbufferDCEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleasePbufferDCEXT), interceptedwglReleasePbufferDCEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglReleasePbufferDCEXT\n");
+	}
+	if ((_wglDestroyPbufferEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDestroyPbufferEXT), interceptedwglDestroyPbufferEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDestroyPbufferEXT\n");
+	}
+	if ((_wglQueryPbufferEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryPbufferEXT), interceptedwglQueryPbufferEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglQueryPbufferEXT\n");
+	}
+	if ((_wglGetPixelFormatAttribivEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPixelFormatAttribivEXT), interceptedwglGetPixelFormatAttribivEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetPixelFormatAttribivEXT\n");
+	}
+	if ((_wglGetPixelFormatAttribfvEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPixelFormatAttribfvEXT), interceptedwglGetPixelFormatAttribfvEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetPixelFormatAttribfvEXT\n");
+	}
+	if ((_wglChoosePixelFormatEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglChoosePixelFormatEXT), interceptedwglChoosePixelFormatEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglChoosePixelFormatEXT\n");
+	}
+	if ((_wglSwapIntervalEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSwapIntervalEXT), interceptedwglSwapIntervalEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglSwapIntervalEXT\n");
+	}
+	if ((_wglGetSwapIntervalEXT == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetSwapIntervalEXT), interceptedwglGetSwapIntervalEXT))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetSwapIntervalEXT\n");
+	}
+	if ((_wglAllocateMemoryNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglAllocateMemoryNV), interceptedwglAllocateMemoryNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglAllocateMemoryNV\n");
+	}
+	if ((_wglFreeMemoryNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglFreeMemoryNV), interceptedwglFreeMemoryNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglFreeMemoryNV\n");
+	}
+	if ((_wglGetSyncValuesOML == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetSyncValuesOML), interceptedwglGetSyncValuesOML))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetSyncValuesOML\n");
+	}
+	if ((_wglGetMscRateOML == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetMscRateOML), interceptedwglGetMscRateOML))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetMscRateOML\n");
+	}
+	if ((_wglSwapBuffersMscOML == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSwapBuffersMscOML), interceptedwglSwapBuffersMscOML))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglSwapBuffersMscOML\n");
+	}
+	if ((_wglSwapLayerBuffersMscOML == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSwapLayerBuffersMscOML), interceptedwglSwapLayerBuffersMscOML))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglSwapLayerBuffersMscOML\n");
+	}
+	if ((_wglWaitForMscOML == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglWaitForMscOML), interceptedwglWaitForMscOML))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglWaitForMscOML\n");
+	}
+	if ((_wglWaitForSbcOML == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglWaitForSbcOML), interceptedwglWaitForSbcOML))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglWaitForSbcOML\n");
+	}
+	if ((_wglGetDigitalVideoParametersI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetDigitalVideoParametersI3D), interceptedwglGetDigitalVideoParametersI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetDigitalVideoParametersI3D\n");
+	}
+	if ((_wglSetDigitalVideoParametersI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetDigitalVideoParametersI3D), interceptedwglSetDigitalVideoParametersI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglSetDigitalVideoParametersI3D\n");
+	}
+	if ((_wglGetGammaTableParametersI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGammaTableParametersI3D), interceptedwglGetGammaTableParametersI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetGammaTableParametersI3D\n");
+	}
+	if ((_wglSetGammaTableParametersI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetGammaTableParametersI3D), interceptedwglSetGammaTableParametersI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglSetGammaTableParametersI3D\n");
+	}
+	if ((_wglGetGammaTableI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGammaTableI3D), interceptedwglGetGammaTableI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetGammaTableI3D\n");
+	}
+	if ((_wglSetGammaTableI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetGammaTableI3D), interceptedwglSetGammaTableI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglSetGammaTableI3D\n");
+	}
+	if ((_wglEnableGenlockI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEnableGenlockI3D), interceptedwglEnableGenlockI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglEnableGenlockI3D\n");
+	}
+	if ((_wglDisableGenlockI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDisableGenlockI3D), interceptedwglDisableGenlockI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDisableGenlockI3D\n");
+	}
+	if ((_wglIsEnabledGenlockI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglIsEnabledGenlockI3D), interceptedwglIsEnabledGenlockI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglIsEnabledGenlockI3D\n");
+	}
+	if ((_wglGenlockSourceI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGenlockSourceI3D), interceptedwglGenlockSourceI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGenlockSourceI3D\n");
+	}
+	if ((_wglGetGenlockSourceI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGenlockSourceI3D), interceptedwglGetGenlockSourceI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetGenlockSourceI3D\n");
+	}
+	if ((_wglGenlockSourceEdgeI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGenlockSourceEdgeI3D), interceptedwglGenlockSourceEdgeI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGenlockSourceEdgeI3D\n");
+	}
+	if ((_wglGetGenlockSourceEdgeI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGenlockSourceEdgeI3D), interceptedwglGetGenlockSourceEdgeI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetGenlockSourceEdgeI3D\n");
+	}
+	if ((_wglGenlockSampleRateI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGenlockSampleRateI3D), interceptedwglGenlockSampleRateI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGenlockSampleRateI3D\n");
+	}
+	if ((_wglGetGenlockSampleRateI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGenlockSampleRateI3D), interceptedwglGetGenlockSampleRateI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetGenlockSampleRateI3D\n");
+	}
+	if ((_wglGenlockSourceDelayI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGenlockSourceDelayI3D), interceptedwglGenlockSourceDelayI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGenlockSourceDelayI3D\n");
+	}
+	if ((_wglGetGenlockSourceDelayI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGenlockSourceDelayI3D), interceptedwglGetGenlockSourceDelayI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetGenlockSourceDelayI3D\n");
+	}
+	if ((_wglQueryGenlockMaxSourceDelayI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryGenlockMaxSourceDelayI3D), interceptedwglQueryGenlockMaxSourceDelayI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglQueryGenlockMaxSourceDelayI3D\n");
+	}
+	if ((_wglCreateImageBufferI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateImageBufferI3D), interceptedwglCreateImageBufferI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglCreateImageBufferI3D\n");
+	}
+	if ((_wglDestroyImageBufferI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDestroyImageBufferI3D), interceptedwglDestroyImageBufferI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDestroyImageBufferI3D\n");
+	}
+	if ((_wglAssociateImageBufferEventsI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglAssociateImageBufferEventsI3D), interceptedwglAssociateImageBufferEventsI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglAssociateImageBufferEventsI3D\n");
+	}
+	if ((_wglReleaseImageBufferEventsI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleaseImageBufferEventsI3D), interceptedwglReleaseImageBufferEventsI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglReleaseImageBufferEventsI3D\n");
+	}
+	if ((_wglEnableFrameLockI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEnableFrameLockI3D), interceptedwglEnableFrameLockI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglEnableFrameLockI3D\n");
+	}
+	if ((_wglDisableFrameLockI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDisableFrameLockI3D), interceptedwglDisableFrameLockI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDisableFrameLockI3D\n");
+	}
+	if ((_wglIsEnabledFrameLockI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglIsEnabledFrameLockI3D), interceptedwglIsEnabledFrameLockI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglIsEnabledFrameLockI3D\n");
+	}
+	if ((_wglQueryFrameLockMasterI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryFrameLockMasterI3D), interceptedwglQueryFrameLockMasterI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglQueryFrameLockMasterI3D\n");
+	}
+	if ((_wglGetFrameUsageI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetFrameUsageI3D), interceptedwglGetFrameUsageI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetFrameUsageI3D\n");
+	}
+	if ((_wglBeginFrameTrackingI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBeginFrameTrackingI3D), interceptedwglBeginFrameTrackingI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglBeginFrameTrackingI3D\n");
+	}
+	if ((_wglEndFrameTrackingI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEndFrameTrackingI3D), interceptedwglEndFrameTrackingI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglEndFrameTrackingI3D\n");
+	}
+	if ((_wglQueryFrameTrackingI3D == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryFrameTrackingI3D), interceptedwglQueryFrameTrackingI3D))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglQueryFrameTrackingI3D\n");
+	}
+	if ((_wglSetStereoEmitterState3DL == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetStereoEmitterState3DL), interceptedwglSetStereoEmitterState3DL))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglSetStereoEmitterState3DL\n");
+	}
+	if ((_wglEnumerateVideoDevicesNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEnumerateVideoDevicesNV), interceptedwglEnumerateVideoDevicesNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglEnumerateVideoDevicesNV\n");
+	}
+	if ((_wglBindVideoDeviceNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBindVideoDeviceNV), interceptedwglBindVideoDeviceNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglBindVideoDeviceNV\n");
+	}
+	if ((_wglQueryCurrentContextNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryCurrentContextNV), interceptedwglQueryCurrentContextNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglQueryCurrentContextNV\n");
+	}
+	if ((_wglGetVideoDeviceNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetVideoDeviceNV), interceptedwglGetVideoDeviceNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetVideoDeviceNV\n");
+	}
+	if ((_wglReleaseVideoDeviceNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleaseVideoDeviceNV), interceptedwglReleaseVideoDeviceNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglReleaseVideoDeviceNV\n");
+	}
+	if ((_wglBindVideoImageNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBindVideoImageNV), interceptedwglBindVideoImageNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglBindVideoImageNV\n");
+	}
+	if ((_wglReleaseVideoImageNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleaseVideoImageNV), interceptedwglReleaseVideoImageNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglReleaseVideoImageNV\n");
+	}
+	if ((_wglSendPbufferToVideoNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSendPbufferToVideoNV), interceptedwglSendPbufferToVideoNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglSendPbufferToVideoNV\n");
+	}
+	if ((_wglGetVideoInfoNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetVideoInfoNV), interceptedwglGetVideoInfoNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetVideoInfoNV\n");
+	}
+	if ((_wglJoinSwapGroupNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglJoinSwapGroupNV), interceptedwglJoinSwapGroupNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglJoinSwapGroupNV\n");
+	}
+	if ((_wglBindSwapBarrierNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBindSwapBarrierNV), interceptedwglBindSwapBarrierNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglBindSwapBarrierNV\n");
+	}
+	if ((_wglQuerySwapGroupNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQuerySwapGroupNV), interceptedwglQuerySwapGroupNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglQuerySwapGroupNV\n");
+	}
+	if ((_wglQueryMaxSwapGroupsNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryMaxSwapGroupsNV), interceptedwglQueryMaxSwapGroupsNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglQueryMaxSwapGroupsNV\n");
+	}
+	if ((_wglQueryFrameCountNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryFrameCountNV), interceptedwglQueryFrameCountNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglQueryFrameCountNV\n");
+	}
+	if ((_wglResetFrameCountNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglResetFrameCountNV), interceptedwglResetFrameCountNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglResetFrameCountNV\n");
+	}
+	if ((_wglEnumGpusNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEnumGpusNV), interceptedwglEnumGpusNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglEnumGpusNV\n");
+	}
+	if ((_wglEnumGpuDevicesNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEnumGpuDevicesNV), interceptedwglEnumGpuDevicesNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglEnumGpuDevicesNV\n");
+	}
+	if ((_wglCreateAffinityDCNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateAffinityDCNV), interceptedwglCreateAffinityDCNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglCreateAffinityDCNV\n");
+	}
+	if ((_wglEnumGpusFromAffinityDCNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEnumGpusFromAffinityDCNV), interceptedwglEnumGpusFromAffinityDCNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglEnumGpusFromAffinityDCNV\n");
+	}
+	if ((_wglDeleteDCNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDeleteDCNV), interceptedwglDeleteDCNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDeleteDCNV\n");
+	}
+	if ((_wglGetGPUIDsAMD == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGPUIDsAMD), interceptedwglGetGPUIDsAMD))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetGPUIDsAMD\n");
+	}
+	if ((_wglGetGPUInfoAMD == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGPUInfoAMD), interceptedwglGetGPUInfoAMD))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetGPUInfoAMD\n");
+	}
+	if ((_wglGetContextGPUIDAMD == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetContextGPUIDAMD), interceptedwglGetContextGPUIDAMD))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetContextGPUIDAMD\n");
+	}
+	if ((_wglCreateAssociatedContextAMD == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateAssociatedContextAMD), interceptedwglCreateAssociatedContextAMD))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglCreateAssociatedContextAMD\n");
+	}
+	if ((_wglCreateAssociatedContextAttribsAMD == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateAssociatedContextAttribsAMD), interceptedwglCreateAssociatedContextAttribsAMD))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglCreateAssociatedContextAttribsAMD\n");
+	}
+	if ((_wglDeleteAssociatedContextAMD == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDeleteAssociatedContextAMD), interceptedwglDeleteAssociatedContextAMD))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDeleteAssociatedContextAMD\n");
+	}
+	if ((_wglMakeAssociatedContextCurrentAMD == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglMakeAssociatedContextCurrentAMD), interceptedwglMakeAssociatedContextCurrentAMD))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglMakeAssociatedContextCurrentAMD\n");
+	}
+	if ((_wglGetCurrentAssociatedContextAMD == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetCurrentAssociatedContextAMD), interceptedwglGetCurrentAssociatedContextAMD))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglGetCurrentAssociatedContextAMD\n");
+	}
+	if ((_wglBlitContextFramebufferAMD == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBlitContextFramebufferAMD), interceptedwglBlitContextFramebufferAMD))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglBlitContextFramebufferAMD\n");
+	}
+	if ((_wglBindVideoCaptureDeviceNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBindVideoCaptureDeviceNV), interceptedwglBindVideoCaptureDeviceNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglBindVideoCaptureDeviceNV\n");
+	}
+	if ((_wglEnumerateVideoCaptureDevicesNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEnumerateVideoCaptureDevicesNV), interceptedwglEnumerateVideoCaptureDevicesNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglEnumerateVideoCaptureDevicesNV\n");
+	}
+	if ((_wglLockVideoCaptureDeviceNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglLockVideoCaptureDeviceNV), interceptedwglLockVideoCaptureDeviceNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglLockVideoCaptureDeviceNV\n");
+	}
+	if ((_wglQueryVideoCaptureDeviceNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryVideoCaptureDeviceNV), interceptedwglQueryVideoCaptureDeviceNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglQueryVideoCaptureDeviceNV\n");
+	}
+	if ((_wglReleaseVideoCaptureDeviceNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleaseVideoCaptureDeviceNV), interceptedwglReleaseVideoCaptureDeviceNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglReleaseVideoCaptureDeviceNV\n");
+	}
+	if ((_wglCopyImageSubDataNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCopyImageSubDataNV), interceptedwglCopyImageSubDataNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglCopyImageSubDataNV\n");
+	}
+	if ((_wglDXSetResourceShareHandleNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXSetResourceShareHandleNV), interceptedwglDXSetResourceShareHandleNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDXSetResourceShareHandleNV\n");
+	}
+	if ((_wglDXOpenDeviceNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXOpenDeviceNV), interceptedwglDXOpenDeviceNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDXOpenDeviceNV\n");
+	}
+	if ((_wglDXCloseDeviceNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXCloseDeviceNV), interceptedwglDXCloseDeviceNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDXCloseDeviceNV\n");
+	}
+	if ((_wglDXRegisterObjectNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXRegisterObjectNV), interceptedwglDXRegisterObjectNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDXRegisterObjectNV\n");
+	}
+	if ((_wglDXUnregisterObjectNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXUnregisterObjectNV), interceptedwglDXUnregisterObjectNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDXUnregisterObjectNV\n");
+	}
+	if ((_wglDXObjectAccessNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXObjectAccessNV), interceptedwglDXObjectAccessNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDXObjectAccessNV\n");
+	}
+	if ((_wglDXLockObjectsNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXLockObjectsNV), interceptedwglDXLockObjectsNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDXLockObjectsNV\n");
+	}
+	if ((_wglDXUnlockObjectsNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXUnlockObjectsNV), interceptedwglDXUnlockObjectsNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDXUnlockObjectsNV\n");
+	}
+	if ((_wglDelayBeforeSwapNV == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDelayBeforeSwapNV), interceptedwglDelayBeforeSwapNV))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _wglDelayBeforeSwapNV\n");
+	}
+
 }
 void processDetach()
 {
