@@ -66,9 +66,10 @@ void initialiseRealOpenGLFunctions()
 
 	//part 2
 	_wglMakeCurrent = (PFN_WGLMAKECURRENT)_getAnyGLFuncAddress("wglMakeCurrent");
+	_glScaled = (PFN_GLSCALED)_getAnyGLFuncAddress("glScaled");
 	_glColor3d = (PFN_GLCOLOR3D)_getAnyGLFuncAddress("glColor3d");
-	_glPushMatrix = (PFN_GLPUSHMATRIX)_getPublicProcAddress("glPushMatrix");
-	_glMultMatrixd = (PFN_GLMULTMATRIXD)_getPublicProcAddress("glMultMatrixd");
+	_glPushMatrix = (PFN_GLPUSHMATRIX)_getAnyGLFuncAddress("glPushMatrix");
+	_glMultMatrixd = (PFN_GLMULTMATRIXD)_getAnyGLFuncAddress("glMultMatrixd");
 	_wglCreateContext = (PFN_WGLCREATECONTEXT)_getAnyGLFuncAddress("wglCreateContext");
 	_wglDeleteContext = (PFN_WGLDELETECONTEXT)_getAnyGLFuncAddress("wglDeleteContext");
 	_wglGetCurrentContext = (PFN_WGLGETCURRENTCONTEXT)_getAnyGLFuncAddress("wglGetCurrentContext");
