@@ -4,7 +4,7 @@ clc
 
 %%
 
-PATH_LOAD = 'H:\Private\MyProject\Matlab\IBit'; %'C:\Users\txn\Documents\MyProject\';
+PATH_LOAD = 'H:\Private\MyProject\Matlab\IBit\'; %'C:\Users\txn\Documents\MyProject\';
 PATH_SAVED = PATH_LOAD;
 
 OPENGL_FILE = 'opengl_toAny.txt';
@@ -46,11 +46,13 @@ hookedFuncFullpath = [PATH_LOAD HOOKED_FUNC_FILE];
 filehookedFuncID = fopen(hookedFuncFullpath,'w');
 
 %%
-for index = 1: 1%totalFunction(1)
+for index = 1: totalFunction(1)
     [token, remain] = strtok(opengl{1,1}(index), '=');
     token = strtrim(token);
     refinedFunc = textscan(token{1}, '_%s');
     realFunc = char(refinedFunc{1} (1));
+    
+    disp(['Processing function: ' realFunc]);
     
     %get the function pointer using the first open/close bracket
     openBracket = strfind(opengl{1,1}(index), '(');
@@ -114,13 +116,25 @@ for index = 1: 1%totalFunction(1)
            if isempty(params),  break;  end
            
            params = strtrim(params);
+           paramName = params;
+           realparamName = paramName;
            
-           [~, paramName] = strtok(params, ' ');
-           paramName = strtrim(paramName);
+           while true
+            [dataType, paramName] = strtok(paramName, ' ');
+            
+            paramName = strtrim(paramName);
+             
+            if isempty(paramName),  break; 
+            else
+                realparamName = paramName;
+            end
+            
+           end
            
-           fullInterceptedFunction = strcat(fullInterceptedFunction, paramName, ',');
+           fullInterceptedFunction = strcat(fullInterceptedFunction, realparamName, ',');
            %disp(sprintf('%s: %s', params, paramName))
         end
+        
         %remove the last ,
         fullInterceptedFunction = fullInterceptedFunction(1: length(fullInterceptedFunction)-1);
         %add the last ;
@@ -154,3 +168,4 @@ fclose(fileinterceptedOpenglFuncHeaderID);
 fclose(fileinterceptedOpenglFuncBodyID);
 fclose(filehookedFuncID);
 
+ disp('Finished!');
