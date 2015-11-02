@@ -3860,6 +3860,1560 @@ void APIENTRY interceptedglFlush(void) {
 	_glFlush();
 }
 /************************************************************************************/
+BOOL APIENTRY interceptedwglMakeCurrent(HDC hdc, HGLRC hglrc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglMakeCurrent");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglMakeCurrent(hdc, hglrc);
+}
+void APIENTRY interceptedglScaled(GLdouble x, GLdouble y, GLdouble z)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glScaled");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glScaled(x, y, z);
+}
+void APIENTRY interceptedglColor3d(GLdouble red, GLdouble green, GLdouble blue)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glColor3d");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glColor3d(red, green, blue);
+}
+void APIENTRY interceptedglPushMatrix(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glPushMatrix");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glPushMatrix();
+}
+void APIENTRY interceptedglMultMatrixd(const GLdouble * m)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glMultMatrixd");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glMultMatrixd(m);
+}
+HGLRC APIENTRY interceptedwglCreateContext(HDC hdc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglCreateContext");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglCreateContext(hdc);
+}
+BOOL APIENTRY interceptedwglDeleteContext(HGLRC hglrc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDeleteContext");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDeleteContext(hglrc);
+}
+HGLRC APIENTRY interceptedwglGetCurrentContext(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetCurrentContext");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetCurrentContext();
+}
+BOOL APIENTRY interceptedwglCopyContext(HGLRC hglrcSrc, HGLRC hglrcDst, UINT mask)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglCopyContext");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglCopyContext(hglrcSrc, hglrcDst, mask);
+}
+HDC APIENTRY interceptedwglGetCurrentDC(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetCurrentDC");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetCurrentDC();
+}
+PROC APIENTRY interceptedwglGetDefaultProcAddress(const char * lpszProc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetDefaultProcAddress");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetDefaultProcAddress(lpszProc);
+}
+BOOL APIENTRY interceptedwglShareLists(HGLRC hglrc1, HGLRC hglrc2)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglShareLists");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglShareLists(hglrc1, hglrc2);
+}
+HGLRC APIENTRY interceptedwglCreateLayerContext(HDC hdc, int iLayerPlane)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglCreateLayerContext");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglCreateLayerContext(hdc, iLayerPlane);
+}
+BOOL APIENTRY interceptedwglDescribeLayerPlane(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nBytes, LAYERPLANEDESCRIPTOR * plpd)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDescribeLayerPlane");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDescribeLayerPlane(hdc, iPixelFormat, iLayerPlane, nBytes, plpd);
+}
+int APIENTRY interceptedwglSetLayerPaletteEntries(HDC hdc, int iLayerPlane, int iStart, int cEntries, const COLORREF * pcr)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglSetLayerPaletteEntries");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglSetLayerPaletteEntries(hdc, iLayerPlane, iStart, cEntries, pcr);
+}
+int APIENTRY interceptedwglGetLayerPaletteEntries(HDC hdc, int iLayerPlane, int iStart, int cEntries, COLORREF * pcr)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetLayerPaletteEntries");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetLayerPaletteEntries(hdc, iLayerPlane, iStart, cEntries, pcr);
+}
+BOOL APIENTRY interceptedwglRealizeLayerPalette(HDC hdc, int iLayerPlane, BOOL bRealize)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglRealizeLayerPalette");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglRealizeLayerPalette(hdc, iLayerPlane, bRealize);
+}
+BOOL APIENTRY interceptedwglSwapLayerBuffers(HDC hdc, UINT fuPlanes)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglSwapLayerBuffers");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglSwapLayerBuffers(hdc, fuPlanes);
+}
+BOOL APIENTRY interceptedwglUseFontBitmapsA(HDC hdc, DWORD first, DWORD count, DWORD listBase)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglUseFontBitmapsA");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglUseFontBitmapsA(hdc, first, count, listBase);
+}
+BOOL APIENTRY interceptedwglUseFontBitmapsW(HDC hdc, DWORD first, DWORD count, DWORD listBase)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglUseFontBitmapsW");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglUseFontBitmapsW(hdc, first, count, listBase);
+}
+DWORD APIENTRY interceptedwglSwapMultipleBuffers(UINT n, const WGLSWAP * ps)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglSwapMultipleBuffers");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglSwapMultipleBuffers(n, ps);
+}
+BOOL APIENTRY interceptedwglUseFontOutlinesA(HDC hdc, DWORD first, DWORD count, DWORD listBase, FLOAT deviation, FLOAT extrusion, int format, GLYPHMETRICSFLOAT * lpgmf)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglUseFontOutlinesA");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglUseFontOutlinesA(hdc, first, count, listBase, deviation, extrusion, format, lpgmf);
+}
+BOOL APIENTRY interceptedwglUseFontOutlinesW(HDC hdc, DWORD first, DWORD count, DWORD listBase, FLOAT deviation, FLOAT extrusion, int format, GLYPHMETRICSFLOAT * lpgmf)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglUseFontOutlinesW");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglUseFontOutlinesW(hdc, first, count, listBase, deviation, extrusion, format, lpgmf);
+}
+HANDLE APIENTRY interceptedwglCreateBufferRegionARB(HDC hDC, int iLayerPlane, UINT uType)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglCreateBufferRegionARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglCreateBufferRegionARB(hDC, iLayerPlane, uType);
+}
+void APIENTRY interceptedwglDeleteBufferRegionARB(HANDLE hRegion)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDeleteBufferRegionARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDeleteBufferRegionARB(hRegion);
+}
+BOOL APIENTRY interceptedwglSaveBufferRegionARB(HANDLE hRegion, int x, int y, int width, int height)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglSaveBufferRegionARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglSaveBufferRegionARB(hRegion, x, y, width, height);
+}
+BOOL APIENTRY interceptedwglRestoreBufferRegionARB(HANDLE hRegion, int x, int y, int width, int height, int xSrc, int ySrc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglRestoreBufferRegionARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglRestoreBufferRegionARB(hRegion, x, y, width, height, xSrc, ySrc);
+}
+const char * APIENTRY interceptedwglGetExtensionsStringARB(HDC hdc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetExtensionsStringARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetExtensionsStringARB(hdc);
+}
+BOOL APIENTRY interceptedwglGetPixelFormatAttribivARB(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, int * piValues)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetPixelFormatAttribivARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetPixelFormatAttribivARB(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
+}
+BOOL APIENTRY interceptedwglGetPixelFormatAttribfvARB(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, FLOAT * pfValues)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetPixelFormatAttribfvARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetPixelFormatAttribfvARB(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
+}
+BOOL APIENTRY interceptedwglMakeContextCurrentARB(HDC hDrawDC, HDC hReadDC, HGLRC hglrc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglMakeContextCurrentARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglMakeContextCurrentARB(hDrawDC, hReadDC, hglrc);
+}
+HDC APIENTRY interceptedwglGetCurrentReadDCARB(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetCurrentReadDCARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetCurrentReadDCARB();
+}
+HPBUFFERARB APIENTRY interceptedwglCreatePbufferARB(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int * piAttribList)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglCreatePbufferARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglCreatePbufferARB(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
+}
+HDC APIENTRY interceptedwglGetPbufferDCARB(HPBUFFERARB hPbuffer)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetPbufferDCARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetPbufferDCARB(hPbuffer);
+}
+int APIENTRY interceptedwglReleasePbufferDCARB(HPBUFFERARB hPbuffer, HDC hDC)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglReleasePbufferDCARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglReleasePbufferDCARB(hPbuffer, hDC);
+}
+BOOL APIENTRY interceptedwglDestroyPbufferARB(HPBUFFERARB hPbuffer)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDestroyPbufferARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDestroyPbufferARB(hPbuffer);
+}
+BOOL APIENTRY interceptedwglQueryPbufferARB(HPBUFFERARB hPbuffer, int iAttribute, int * piValue)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglQueryPbufferARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglQueryPbufferARB(hPbuffer, iAttribute, piValue);
+}
+BOOL APIENTRY interceptedwglBindTexImageARB(HPBUFFERARB hPbuffer, int iBuffer)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglBindTexImageARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglBindTexImageARB(hPbuffer, iBuffer);
+}
+BOOL APIENTRY interceptedwglReleaseTexImageARB(HPBUFFERARB hPbuffer, int iBuffer)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglReleaseTexImageARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglReleaseTexImageARB(hPbuffer, iBuffer);
+}
+BOOL APIENTRY interceptedwglSetPbufferAttribARB(HPBUFFERARB hPbuffer, const int * piAttribList)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglSetPbufferAttribARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglSetPbufferAttribARB(hPbuffer, piAttribList);
+}
+HGLRC APIENTRY interceptedwglCreateContextAttribsARB(HDC hDC, HGLRC hShareContext, const int * attribList)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglCreateContextAttribsARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglCreateContextAttribsARB(hDC, hShareContext, attribList);
+}
+GLboolean APIENTRY interceptedwglCreateDisplayColorTableEXT(GLushort id)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglCreateDisplayColorTableEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglCreateDisplayColorTableEXT(id);
+}
+GLboolean APIENTRY interceptedwglLoadDisplayColorTableEXT(const GLushort * table, GLuint length)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglLoadDisplayColorTableEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglLoadDisplayColorTableEXT(table, length);
+}
+GLboolean APIENTRY interceptedwglBindDisplayColorTableEXT(GLushort id)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglBindDisplayColorTableEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglBindDisplayColorTableEXT(id);
+}
+void APIENTRY interceptedwglDestroyDisplayColorTableEXT(GLushort id)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDestroyDisplayColorTableEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDestroyDisplayColorTableEXT(id);
+}
+const char * APIENTRY interceptedwglGetExtensionsStringEXT(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetExtensionsStringEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetExtensionsStringEXT();
+}
+BOOL APIENTRY interceptedwglMakeContextCurrentEXT(HDC hDrawDC, HDC hReadDC, HGLRC hglrc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglMakeContextCurrentEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglMakeContextCurrentEXT(hDrawDC, hReadDC, hglrc);
+}
+HDC APIENTRY interceptedwglGetCurrentReadDCEXT(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetCurrentReadDCEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetCurrentReadDCEXT();
+}
+HPBUFFEREXT APIENTRY interceptedwglCreatePbufferEXT(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int * piAttribList)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglCreatePbufferEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglCreatePbufferEXT(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
+}
+HDC APIENTRY interceptedwglGetPbufferDCEXT(HPBUFFEREXT hPbuffer)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetPbufferDCEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetPbufferDCEXT(hPbuffer);
+}
+int APIENTRY interceptedwglReleasePbufferDCEXT(HPBUFFEREXT hPbuffer, HDC hDC)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglReleasePbufferDCEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglReleasePbufferDCEXT(hPbuffer, hDC);
+}
+BOOL APIENTRY interceptedwglDestroyPbufferEXT(HPBUFFEREXT hPbuffer)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDestroyPbufferEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDestroyPbufferEXT(hPbuffer);
+}
+BOOL APIENTRY interceptedwglQueryPbufferEXT(HPBUFFEREXT hPbuffer, int iAttribute, int * piValue)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglQueryPbufferEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglQueryPbufferEXT(hPbuffer, iAttribute, piValue);
+}
+BOOL APIENTRY interceptedwglGetPixelFormatAttribivEXT(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, int * piValues)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetPixelFormatAttribivEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetPixelFormatAttribivEXT(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
+}
+BOOL APIENTRY interceptedwglGetPixelFormatAttribfvEXT(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, FLOAT * pfValues)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetPixelFormatAttribfvEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetPixelFormatAttribfvEXT(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
+}
+BOOL APIENTRY interceptedwglChoosePixelFormatEXT(HDC hdc, const int * piAttribIList, const FLOAT * pfAttribFList, UINT nMaxFormats, int * piFormats, UINT * nNumFormats)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglChoosePixelFormatEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglChoosePixelFormatEXT(hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats);
+}
+BOOL APIENTRY interceptedwglSwapIntervalEXT(int interval)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglSwapIntervalEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglSwapIntervalEXT(interval);
+}
+int APIENTRY interceptedwglGetSwapIntervalEXT(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetSwapIntervalEXT");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetSwapIntervalEXT();
+}
+void * APIENTRY interceptedwglAllocateMemoryNV(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglAllocateMemoryNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglAllocateMemoryNV(size, readfreq, writefreq, priority);
+}
+void APIENTRY interceptedwglFreeMemoryNV(void * pointer)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglFreeMemoryNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglFreeMemoryNV(pointer);
+}
+BOOL APIENTRY interceptedwglGetSyncValuesOML(HDC hdc, INT64 * ust, INT64 * msc, INT64 * sbc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetSyncValuesOML");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetSyncValuesOML(hdc, ust, msc, sbc);
+}
+BOOL APIENTRY interceptedwglGetMscRateOML(HDC hdc, INT32 * numerator, INT32 * denominator)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetMscRateOML");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetMscRateOML(hdc, numerator, denominator);
+}
+INT64 APIENTRY interceptedwglSwapBuffersMscOML(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglSwapBuffersMscOML");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglSwapBuffersMscOML(hdc, target_msc, divisor, remainder);
+}
+INT64 APIENTRY interceptedwglSwapLayerBuffersMscOML(HDC hdc, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglSwapLayerBuffersMscOML");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglSwapLayerBuffersMscOML(hdc, fuPlanes, target_msc, divisor, remainder);
+}
+BOOL APIENTRY interceptedwglWaitForMscOML(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 * ust, INT64 * msc, INT64 * sbc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglWaitForMscOML");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglWaitForMscOML(hdc, target_msc, divisor, remainder, ust, msc, sbc);
+}
+BOOL APIENTRY interceptedwglWaitForSbcOML(HDC hdc, INT64 target_sbc, INT64 * ust, INT64 * msc, INT64 * sbc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglWaitForSbcOML");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglWaitForSbcOML(hdc, target_sbc, ust, msc, sbc);
+}
+BOOL APIENTRY interceptedwglGetDigitalVideoParametersI3D(HDC hDC, int iAttribute, int * piValue)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetDigitalVideoParametersI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
+}
+BOOL APIENTRY interceptedwglSetDigitalVideoParametersI3D(HDC hDC, int iAttribute, const int * piValue)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglSetDigitalVideoParametersI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglSetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
+}
+BOOL APIENTRY interceptedwglGetGammaTableParametersI3D(HDC hDC, int iAttribute, int * piValue)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetGammaTableParametersI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetGammaTableParametersI3D(hDC, iAttribute, piValue);
+}
+BOOL APIENTRY interceptedwglSetGammaTableParametersI3D(HDC hDC, int iAttribute, const int * piValue)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglSetGammaTableParametersI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglSetGammaTableParametersI3D(hDC, iAttribute, piValue);
+}
+BOOL APIENTRY interceptedwglGetGammaTableI3D(HDC hDC, int iEntries, USHORT * puRed, USHORT * puGreen, USHORT * puBlue)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetGammaTableI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
+}
+BOOL APIENTRY interceptedwglSetGammaTableI3D(HDC hDC, int iEntries, const USHORT * puRed, const USHORT * puGreen, const USHORT * puBlue)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglSetGammaTableI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglSetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
+}
+BOOL APIENTRY interceptedwglEnableGenlockI3D(HDC hDC)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglEnableGenlockI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglEnableGenlockI3D(hDC);
+}
+BOOL APIENTRY interceptedwglDisableGenlockI3D(HDC hDC)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDisableGenlockI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDisableGenlockI3D(hDC);
+}
+BOOL APIENTRY interceptedwglIsEnabledGenlockI3D(HDC hDC, BOOL * pFlag)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglIsEnabledGenlockI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglIsEnabledGenlockI3D(hDC, pFlag);
+}
+BOOL APIENTRY interceptedwglGenlockSourceI3D(HDC hDC, UINT uSource)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGenlockSourceI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGenlockSourceI3D(hDC, uSource);
+}
+BOOL APIENTRY interceptedwglGetGenlockSourceI3D(HDC hDC, UINT * uSource)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetGenlockSourceI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetGenlockSourceI3D(hDC, uSource);
+}
+BOOL APIENTRY interceptedwglGenlockSourceEdgeI3D(HDC hDC, UINT uEdge)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGenlockSourceEdgeI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGenlockSourceEdgeI3D(hDC, uEdge);
+}
+BOOL APIENTRY interceptedwglGetGenlockSourceEdgeI3D(HDC hDC, UINT * uEdge)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetGenlockSourceEdgeI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetGenlockSourceEdgeI3D(hDC, uEdge);
+}
+BOOL APIENTRY interceptedwglGenlockSampleRateI3D(HDC hDC, UINT uRate)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGenlockSampleRateI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGenlockSampleRateI3D(hDC, uRate);
+}
+BOOL APIENTRY interceptedwglGetGenlockSampleRateI3D(HDC hDC, UINT * uRate)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetGenlockSampleRateI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetGenlockSampleRateI3D(hDC, uRate);
+}
+BOOL APIENTRY interceptedwglGenlockSourceDelayI3D(HDC hDC, UINT uDelay)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGenlockSourceDelayI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGenlockSourceDelayI3D(hDC, uDelay);
+}
+BOOL APIENTRY interceptedwglGetGenlockSourceDelayI3D(HDC hDC, UINT * uDelay)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetGenlockSourceDelayI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetGenlockSourceDelayI3D(hDC, uDelay);
+}
+BOOL APIENTRY interceptedwglQueryGenlockMaxSourceDelayI3D(HDC hDC, UINT * uMaxLineDelay, UINT * uMaxPixelDelay)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglQueryGenlockMaxSourceDelayI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglQueryGenlockMaxSourceDelayI3D(hDC, uMaxLineDelay, uMaxPixelDelay);
+}
+void * APIENTRY interceptedwglCreateImageBufferI3D(HDC hDC, DWORD dwSize, UINT uFlags)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglCreateImageBufferI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglCreateImageBufferI3D(hDC, dwSize, uFlags);
+}
+BOOL APIENTRY interceptedwglDestroyImageBufferI3D(HDC hDC, void * pAddress)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDestroyImageBufferI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDestroyImageBufferI3D(hDC, pAddress);
+}
+BOOL APIENTRY interceptedwglAssociateImageBufferEventsI3D(HDC hDC, const HANDLE * pEvent, void * const * pAddress, const DWORD * pSize, UINT count)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglAssociateImageBufferEventsI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglAssociateImageBufferEventsI3D(hDC, pEvent, pAddress, pSize, count);
+}
+BOOL APIENTRY interceptedwglReleaseImageBufferEventsI3D(HDC hDC, void * const * pAddress, UINT count)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglReleaseImageBufferEventsI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglReleaseImageBufferEventsI3D(hDC, pAddress, count);
+}
+BOOL APIENTRY interceptedwglEnableFrameLockI3D(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglEnableFrameLockI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglEnableFrameLockI3D();
+}
+BOOL APIENTRY interceptedwglDisableFrameLockI3D(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDisableFrameLockI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDisableFrameLockI3D();
+}
+BOOL APIENTRY interceptedwglIsEnabledFrameLockI3D(BOOL * pFlag)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglIsEnabledFrameLockI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglIsEnabledFrameLockI3D(pFlag);
+}
+BOOL APIENTRY interceptedwglQueryFrameLockMasterI3D(BOOL * pFlag)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglQueryFrameLockMasterI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglQueryFrameLockMasterI3D(pFlag);
+}
+BOOL APIENTRY interceptedwglGetFrameUsageI3D(float * pUsage)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetFrameUsageI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetFrameUsageI3D(pUsage);
+}
+BOOL APIENTRY interceptedwglBeginFrameTrackingI3D(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglBeginFrameTrackingI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglBeginFrameTrackingI3D();
+}
+BOOL APIENTRY interceptedwglEndFrameTrackingI3D(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglEndFrameTrackingI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglEndFrameTrackingI3D();
+}
+BOOL APIENTRY interceptedwglQueryFrameTrackingI3D(DWORD * pFrameCount, DWORD * pMissedFrames, float * pLastMissedUsage)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglQueryFrameTrackingI3D");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglQueryFrameTrackingI3D(pFrameCount, pMissedFrames, pLastMissedUsage);
+}
+BOOL APIENTRY interceptedwglSetStereoEmitterState3DL(HDC hDC, UINT uState)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglSetStereoEmitterState3DL");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglSetStereoEmitterState3DL(hDC, uState);
+}
+int APIENTRY interceptedwglEnumerateVideoDevicesNV(HDC hDC, HVIDEOOUTPUTDEVICENV * phDeviceList)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglEnumerateVideoDevicesNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglEnumerateVideoDevicesNV(hDC, phDeviceList);
+}
+BOOL APIENTRY interceptedwglBindVideoDeviceNV(HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int * piAttribList)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglBindVideoDeviceNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglBindVideoDeviceNV(hDC, uVideoSlot, hVideoDevice, piAttribList);
+}
+BOOL APIENTRY interceptedwglQueryCurrentContextNV(int iAttribute, int * piValue)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglQueryCurrentContextNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglQueryCurrentContextNV(iAttribute, piValue);
+}
+BOOL APIENTRY interceptedwglGetVideoDeviceNV(HDC hDC, int numDevices, HPVIDEODEV * hVideoDevice)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetVideoDeviceNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetVideoDeviceNV(hDC, numDevices, hVideoDevice);
+}
+BOOL APIENTRY interceptedwglReleaseVideoDeviceNV(HPVIDEODEV hVideoDevice)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglReleaseVideoDeviceNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglReleaseVideoDeviceNV(hVideoDevice);
+}
+BOOL APIENTRY interceptedwglBindVideoImageNV(HPVIDEODEV hVideoDevice, HPBUFFERARB hPbuffer, int iVideoBuffer)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglBindVideoImageNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglBindVideoImageNV(hVideoDevice, hPbuffer, iVideoBuffer);
+}
+BOOL APIENTRY interceptedwglReleaseVideoImageNV(HPBUFFERARB hPbuffer, int iVideoBuffer)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglReleaseVideoImageNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglReleaseVideoImageNV(hPbuffer, iVideoBuffer);
+}
+BOOL APIENTRY interceptedwglSendPbufferToVideoNV(HPBUFFERARB hPbuffer, int iBufferType, unsigned long * pulCounterPbuffer, BOOL bBlock)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglSendPbufferToVideoNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglSendPbufferToVideoNV(hPbuffer, iBufferType, pulCounterPbuffer, bBlock);
+}
+BOOL APIENTRY interceptedwglGetVideoInfoNV(HPVIDEODEV hpVideoDevice, unsigned long * pulCounterOutputPbuffer, unsigned long * pulCounterOutputVideo)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetVideoInfoNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetVideoInfoNV(hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo);
+}
+BOOL APIENTRY interceptedwglJoinSwapGroupNV(HDC hDC, GLuint group)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglJoinSwapGroupNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglJoinSwapGroupNV(hDC, group);
+}
+BOOL APIENTRY interceptedwglBindSwapBarrierNV(GLuint group, GLuint barrier)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglBindSwapBarrierNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglBindSwapBarrierNV(group, barrier);
+}
+BOOL APIENTRY interceptedwglQuerySwapGroupNV(HDC hDC, GLuint * group, GLuint * barrier)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglQuerySwapGroupNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglQuerySwapGroupNV(hDC, group, barrier);
+}
+BOOL APIENTRY interceptedwglQueryMaxSwapGroupsNV(HDC hDC, GLuint * maxGroups, GLuint * maxBarriers)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglQueryMaxSwapGroupsNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglQueryMaxSwapGroupsNV(hDC, maxGroups, maxBarriers);
+}
+BOOL APIENTRY interceptedwglQueryFrameCountNV(HDC hDC, GLuint * count)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglQueryFrameCountNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglQueryFrameCountNV(hDC, count);
+}
+BOOL APIENTRY interceptedwglResetFrameCountNV(HDC hDC)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglResetFrameCountNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglResetFrameCountNV(hDC);
+}
+BOOL APIENTRY interceptedwglEnumGpusNV(UINT iGpuIndex, HGPUNV * phGpu)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglEnumGpusNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglEnumGpusNV(iGpuIndex, phGpu);
+}
+BOOL APIENTRY interceptedwglEnumGpuDevicesNV(HGPUNV hGpu, UINT iDeviceIndex, _GPU_DEVICE * lpGpuDevice)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglEnumGpuDevicesNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglEnumGpuDevicesNV(hGpu, iDeviceIndex, lpGpuDevice);
+}
+HDC APIENTRY interceptedwglCreateAffinityDCNV(const HGPUNV * phGpuList)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglCreateAffinityDCNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglCreateAffinityDCNV(phGpuList);
+}
+BOOL APIENTRY interceptedwglEnumGpusFromAffinityDCNV(HDC hAffinityDC, UINT iGpuIndex, HGPUNV * hGpu)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglEnumGpusFromAffinityDCNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglEnumGpusFromAffinityDCNV(hAffinityDC, iGpuIndex, hGpu);
+}
+BOOL APIENTRY interceptedwglDeleteDCNV(HDC hdc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDeleteDCNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDeleteDCNV(hdc);
+}
+UINT APIENTRY interceptedwglGetGPUIDsAMD(UINT maxCount, UINT * ids)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetGPUIDsAMD");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetGPUIDsAMD(maxCount, ids);
+}
+INT APIENTRY interceptedwglGetGPUInfoAMD(UINT id, int property, GLenum dataType, UINT size, void * data)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetGPUInfoAMD");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetGPUInfoAMD(id, property, dataType, size, data);
+}
+UINT APIENTRY interceptedwglGetContextGPUIDAMD(HGLRC hglrc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetContextGPUIDAMD");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetContextGPUIDAMD(hglrc);
+}
+HGLRC APIENTRY interceptedwglCreateAssociatedContextAMD(UINT id)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglCreateAssociatedContextAMD");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglCreateAssociatedContextAMD(id);
+}
+HGLRC APIENTRY interceptedwglCreateAssociatedContextAttribsAMD(UINT id, HGLRC hShareContext, const int * attribList)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglCreateAssociatedContextAttribsAMD");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglCreateAssociatedContextAttribsAMD(id, hShareContext, attribList);
+}
+BOOL APIENTRY interceptedwglDeleteAssociatedContextAMD(HGLRC hglrc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDeleteAssociatedContextAMD");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDeleteAssociatedContextAMD(hglrc);
+}
+BOOL APIENTRY interceptedwglMakeAssociatedContextCurrentAMD(HGLRC hglrc)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglMakeAssociatedContextCurrentAMD");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglMakeAssociatedContextCurrentAMD(hglrc);
+}
+HGLRC APIENTRY interceptedwglGetCurrentAssociatedContextAMD(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglGetCurrentAssociatedContextAMD");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglGetCurrentAssociatedContextAMD();
+}
+void APIENTRY interceptedwglBlitContextFramebufferAMD(HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglBlitContextFramebufferAMD");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+}
+BOOL APIENTRY interceptedwglBindVideoCaptureDeviceNV(UINT uVideoSlot, HVIDEOINPUTDEVICENV hDevice)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglBindVideoCaptureDeviceNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglBindVideoCaptureDeviceNV(uVideoSlot, hDevice);
+}
+UINT APIENTRY interceptedwglEnumerateVideoCaptureDevicesNV(HDC hDc, HVIDEOINPUTDEVICENV * phDeviceList)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglEnumerateVideoCaptureDevicesNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglEnumerateVideoCaptureDevicesNV(hDc, phDeviceList);
+}
+BOOL APIENTRY interceptedwglLockVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglLockVideoCaptureDeviceNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglLockVideoCaptureDeviceNV(hDc, hDevice);
+}
+BOOL APIENTRY interceptedwglQueryVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice, int iAttribute, int * piValue)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglQueryVideoCaptureDeviceNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglQueryVideoCaptureDeviceNV(hDc, hDevice, iAttribute, piValue);
+}
+BOOL APIENTRY interceptedwglReleaseVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglReleaseVideoCaptureDeviceNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglReleaseVideoCaptureDeviceNV(hDc, hDevice);
+}
+BOOL APIENTRY interceptedwglCopyImageSubDataNV(HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglCopyImageSubDataNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglCopyImageSubDataNV(hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth);
+}
+BOOL APIENTRY interceptedwglDXSetResourceShareHandleNV(void * dxObject, HANDLE shareHandle)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDXSetResourceShareHandleNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDXSetResourceShareHandleNV(dxObject, shareHandle);
+}
+HANDLE APIENTRY interceptedwglDXOpenDeviceNV(void * dxDevice)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDXOpenDeviceNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDXOpenDeviceNV(dxDevice);
+}
+BOOL APIENTRY interceptedwglDXCloseDeviceNV(HANDLE hDevice)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDXCloseDeviceNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDXCloseDeviceNV(hDevice);
+}
+HANDLE APIENTRY interceptedwglDXRegisterObjectNV(HANDLE hDevice, void * dxObject, GLuint name, GLenum type, GLenum access)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDXRegisterObjectNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDXRegisterObjectNV(hDevice, dxObject, name, type, access);
+}
+BOOL APIENTRY interceptedwglDXUnregisterObjectNV(HANDLE hDevice, HANDLE hObject)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDXUnregisterObjectNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDXUnregisterObjectNV(hDevice, hObject);
+}
+BOOL APIENTRY interceptedwglDXObjectAccessNV(HANDLE hObject, GLenum access)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDXObjectAccessNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDXObjectAccessNV(hObject, access);
+}
+BOOL APIENTRY interceptedwglDXLockObjectsNV(HANDLE hDevice, GLint count, HANDLE * hObjects)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDXLockObjectsNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDXLockObjectsNV(hDevice, count, hObjects);
+}
+BOOL APIENTRY interceptedwglDXUnlockObjectsNV(HANDLE hDevice, GLint count, HANDLE * hObjects)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDXUnlockObjectsNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDXUnlockObjectsNV(hDevice, count, hObjects);
+}
+BOOL APIENTRY interceptedwglDelayBeforeSwapNV(HDC hDC, GLfloat seconds)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("wglDelayBeforeSwapNV");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_wglDelayBeforeSwapNV(hDC, seconds);
+}
+
+
+/************************************************************************************/
 void initialiseVariables()
 {
 	//m_framesGL = 0;

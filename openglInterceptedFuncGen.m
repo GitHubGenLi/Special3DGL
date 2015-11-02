@@ -90,17 +90,18 @@ for index = 1: totalFunction(1)
         listParams = funcDefined{1}(secondOpen + 1: secondClose - 1);
         
         %get the return value of the function
-        returnPart = funcDefined{1}(1 : firstOpen - 1);
-        realReturnPart = textscan(returnPart, 'typedef %s');
+        %returnPart = funcDefined{1}(1 : firstOpen - 1);
+        %realReturnPart = textscan(returnPart, 'typedef %s');
+        realReturnPart = char(funcDefined{1}(9 : firstOpen - 1)); %typedef has 8 characters
         
         %write full intercepted functions (including return value and
         %signature)
-        signatureInterceptedFunc = strcat(realReturnPart{1}, ' APIENTRY intercepted', realFunc, signature);
+        signatureInterceptedFunc = strcat(realReturnPart, ' APIENTRY intercepted', realFunc, signature);
         signatureInterceptedFunc = char(strcat(signatureInterceptedFunc, ';'));
         nameInterceptedFunc = strcat('intercepted', realFunc);
         
-        fullInterceptedFunction = strcat(realReturnPart{1}, ' APIENTRY intercepted', realFunc, signature);
-        fullInterceptedFunction = sprintf('%s\n{\n\t%s\n', fullInterceptedFunction{1}, 'currentConfig3DSettings.increaseFunctionCall();');
+        fullInterceptedFunction = strcat(realReturnPart, ' APIENTRY intercepted', realFunc, signature);
+        fullInterceptedFunction = sprintf('%s\n{\n\t%s\n', fullInterceptedFunction, 'currentConfig3DSettings.increaseFunctionCall();');
         fullInterceptedFunction = sprintf('%s\n\t%s', fullInterceptedFunction, 'if (currentConfig3DSettings.startInterception())');
         fullInterceptedFunction = sprintf('%s\n\t{', fullInterceptedFunction);
         fullInterceptedFunction = sprintf('%s\n\t\t%s', fullInterceptedFunction, 'currentConfig3DSettings.getDrawingBuffer("');
@@ -131,12 +132,16 @@ for index = 1: totalFunction(1)
             
            end
            
-           fullInterceptedFunction = strcat(fullInterceptedFunction, realparamName, ',');
+           if (strcmp(realparamName,'void') == 0) %not void
+            fullInterceptedFunction = strcat(fullInterceptedFunction, realparamName, ',');
+           end
            %disp(sprintf('%s: %s', params, paramName))
         end
         
-        %remove the last ,
-        fullInterceptedFunction = fullInterceptedFunction(1: length(fullInterceptedFunction)-1);
+        %remove the last , if has
+        if (fullInterceptedFunction(length(fullInterceptedFunction)) == ',') 
+            fullInterceptedFunction = fullInterceptedFunction(1: length(fullInterceptedFunction)-1);
+        end
         %add the last ;
         fullInterceptedFunction = strcat(fullInterceptedFunction, ');');
         %close function
