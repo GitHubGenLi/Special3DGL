@@ -598,6 +598,24 @@ extern PFN_WGLDXUNLOCKOBJECTSNV _wglDXUnlockObjectsNV;
 typedef BOOL(__stdcall * PFN_WGLDELAYBEFORESWAPNV)(HDC hDC, GLfloat seconds);
 extern PFN_WGLDELAYBEFORESWAPNV _wglDelayBeforeSwapNV;
 
+/*************************************************************/
+typedef void (APIENTRY * PFN_GLGETINTEGERV)(GLenum pname, GLint * params);
+extern PFN_GLGETINTEGERV _glGetIntegerv;
+
+typedef void (APIENTRY * PFN_GLGETBOOLEANV)(GLenum pname, GLboolean * params);
+extern PFN_GLGETBOOLEANV _glGetBooleanv;
+
+typedef void (APIENTRY * PFN_GLDISABLE)(GLenum cap);
+extern PFN_GLDISABLE _glDisable;
+
+typedef void (APIENTRY * PFN_GLVERTEX2D)(GLdouble x, GLdouble y);
+extern PFN_GLVERTEX2D _glVertex2d;
+
+typedef void (APIENTRY * PFN_GLCALLLIST)(GLuint list);
+extern PFN_GLCALLLIST _glCallList;
+
+typedef void (APIENTRY * PFN_GLMATERIALFV)(GLenum face, GLenum pname, const GLfloat * params);
+extern PFN_GLMATERIALFV _glMaterialfv;
 
 /*************************************************************/
 //void initialiseRealOpenGLFunctions();
@@ -761,8 +779,13 @@ BOOL APIENTRY interceptedwglDXObjectAccessNV(HANDLE hObject, GLenum access);
 BOOL APIENTRY interceptedwglDXLockObjectsNV(HANDLE hDevice, GLint count, HANDLE * hObjects);
 BOOL APIENTRY interceptedwglDXUnlockObjectsNV(HANDLE hDevice, GLint count, HANDLE * hObjects);
 BOOL APIENTRY interceptedwglDelayBeforeSwapNV(HDC hDC, GLfloat seconds);
-
-
+/*************************************************************/
+void APIENTRY interceptedglGetIntegerv(GLenum pname, GLint * params);
+void APIENTRY interceptedglGetBooleanv(GLenum pname, GLboolean * params);
+void APIENTRY interceptedglDisable(GLenum cap);
+void APIENTRY interceptedglVertex2d(GLdouble x, GLdouble y);
+void APIENTRY interceptedglCallList(GLuint list);
+void APIENTRY interceptedglMaterialfv(GLenum face, GLenum pname, const GLfloat * params);
 /*************************************************************/
 
 /// OpenGL rendering thread function

@@ -2940,6 +2940,113 @@ static BOOL __stdcall _get_wglDelayBeforeSwapNV(HDC hDC, GLfloat seconds) {
 
 PFN_WGLDELAYBEFORESWAPNV _wglDelayBeforeSwapNV = &_get_wglDelayBeforeSwapNV;
 
+static void APIENTRY _fail_glGetIntegerv(GLenum pname, GLint * params) {
+	const char *_name = "glGetIntegerv";
+	
+	return;
+}
+
+static void APIENTRY _get_glGetIntegerv(GLenum pname, GLint * params) {
+	PFN_GLGETINTEGERV _ptr;
+	_ptr = (PFN_GLGETINTEGERV)_getPublicProcAddress("glGetIntegerv");
+	if (!_ptr) {
+		_ptr = &_fail_glGetIntegerv;
+	}
+	_glGetIntegerv = _ptr;
+	_glGetIntegerv(pname, params);
+}
+
+PFN_GLGETINTEGERV _glGetIntegerv = &_get_glGetIntegerv;
+
+static void APIENTRY _fail_glGetBooleanv(GLenum pname, GLboolean * params) {
+	const char *_name = "glGetBooleanv";
+	
+	return;
+}
+
+static void APIENTRY _get_glGetBooleanv(GLenum pname, GLboolean * params) {
+	PFN_GLGETBOOLEANV _ptr;
+	_ptr = (PFN_GLGETBOOLEANV)_getPublicProcAddress("glGetBooleanv");
+	if (!_ptr) {
+		_ptr = &_fail_glGetBooleanv;
+	}
+	_glGetBooleanv = _ptr;
+	_glGetBooleanv(pname, params);
+}
+
+PFN_GLGETBOOLEANV _glGetBooleanv = &_get_glGetBooleanv;
+
+static void APIENTRY _fail_glDisable(GLenum cap) {
+	const char *_name = "glDisable";
+	
+	return;
+}
+
+static void APIENTRY _get_glDisable(GLenum cap) {
+	PFN_GLDISABLE _ptr;
+	_ptr = (PFN_GLDISABLE)_getPublicProcAddress("glDisable");
+	if (!_ptr) {
+		_ptr = &_fail_glDisable;
+	}
+	_glDisable = _ptr;
+	_glDisable(cap);
+}
+
+PFN_GLDISABLE _glDisable = &_get_glDisable;
+
+static void APIENTRY _fail_glVertex2d(GLdouble x, GLdouble y) {
+	const char *_name = "glVertex2d";
+	
+	return;
+}
+
+static void APIENTRY _get_glVertex2d(GLdouble x, GLdouble y) {
+	PFN_GLVERTEX2D _ptr;
+	_ptr = (PFN_GLVERTEX2D)_getPublicProcAddress("glVertex2d");
+	if (!_ptr) {
+		_ptr = &_fail_glVertex2d;
+	}
+	_glVertex2d = _ptr;
+	_glVertex2d(x, y);
+}
+
+PFN_GLVERTEX2D _glVertex2d = &_get_glVertex2d;
+
+static void APIENTRY _fail_glCallList(GLuint list) {
+	const char *_name = "glCallList";
+	
+	return;
+}
+
+static void APIENTRY _get_glCallList(GLuint list) {
+	PFN_GLCALLLIST _ptr;
+	_ptr = (PFN_GLCALLLIST)_getPublicProcAddress("glCallList");
+	if (!_ptr) {
+		_ptr = &_fail_glCallList;
+	}
+	_glCallList = _ptr;
+	_glCallList(list);
+}
+
+PFN_GLCALLLIST _glCallList = &_get_glCallList;
+
+static void APIENTRY _fail_glMaterialfv(GLenum face, GLenum pname, const GLfloat * params) {
+	const char *_name = "glMaterialfv";
+	
+	return;
+}
+
+static void APIENTRY _get_glMaterialfv(GLenum face, GLenum pname, const GLfloat * params) {
+	PFN_GLMATERIALFV _ptr;
+	_ptr = (PFN_GLMATERIALFV)_getPublicProcAddress("glMaterialfv");
+	if (!_ptr) {
+		_ptr = &_fail_glMaterialfv;
+	}
+	_glMaterialfv = _ptr;
+	_glMaterialfv(face, pname, params);
+}
+
+PFN_GLMATERIALFV _glMaterialfv = &_get_glMaterialfv;
 
 /************************************************************************************/
 int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd)
@@ -5411,8 +5518,73 @@ BOOL APIENTRY interceptedwglDelayBeforeSwapNV(HDC hDC, GLfloat seconds)
 	}
 	return _wglDelayBeforeSwapNV(hDC, seconds);
 }
+/************************************************************************************/
+void APIENTRY interceptedglGetIntegerv(GLenum pname, GLint * params)
+{
+	currentConfig3DSettings.increaseFunctionCall();
 
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glGetIntegerv");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glGetIntegerv(pname, params);
+}
+void APIENTRY interceptedglGetBooleanv(GLenum pname, GLboolean * params)
+{
+	currentConfig3DSettings.increaseFunctionCall();
 
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glGetBooleanv");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glGetBooleanv(pname, params);
+}
+void APIENTRY interceptedglDisable(GLenum cap)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glDisable");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glDisable(cap);
+}
+void APIENTRY interceptedglVertex2d(GLdouble x, GLdouble y)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glVertex2d");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glVertex2d(x, y);
+}
+void APIENTRY interceptedglCallList(GLuint list)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glCallList");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glCallList(list);
+}
+void APIENTRY interceptedglMaterialfv(GLenum face, GLenum pname, const GLfloat * params)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glMaterialfv");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glMaterialfv(face, pname, params);
+}
 /************************************************************************************/
 void initialiseVariables()
 {

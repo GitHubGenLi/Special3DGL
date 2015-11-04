@@ -207,6 +207,12 @@ void initialiseRealOpenGLFunctions()
 	_wglDXUnlockObjectsNV = (PFN_WGLDXUNLOCKOBJECTSNV)_getAnyGLFuncAddress("wglDXUnlockObjectsNV");
 	_wglDelayBeforeSwapNV = (PFN_WGLDELAYBEFORESWAPNV)_getAnyGLFuncAddress("wglDelayBeforeSwapNV");
 
+	_glGetIntegerv = (PFN_GLGETINTEGERV)_getAnyGLFuncAddress("glGetIntegerv");
+	_glGetBooleanv = (PFN_GLGETBOOLEANV)_getAnyGLFuncAddress("glGetBooleanv");
+	_glDisable = (PFN_GLDISABLE)_getAnyGLFuncAddress("glDisable");
+	_glVertex2d = (PFN_GLVERTEX2D)_getAnyGLFuncAddress("glVertex2d");
+	_glCallList = (PFN_GLCALLLIST)_getAnyGLFuncAddress("glCallList");
+	_glMaterialfv = (PFN_GLMATERIALFV)_getAnyGLFuncAddress("glMaterialfv");
 }
 
 void processAttach()
@@ -1625,7 +1631,60 @@ void processAttach()
 	{
 		printf("Hooked _wglDelayBeforeSwapNV\n");
 	}
-
+	if ((_glGetIntegerv == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glGetIntegerv), interceptedglGetIntegerv))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glGetIntegerv\n");
+	}
+	if ((_glGetBooleanv == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glGetBooleanv), interceptedglGetBooleanv))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glGetBooleanv\n");
+	}
+	if ((_glDisable == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glDisable), interceptedglDisable))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glDisable\n");
+	}
+	if ((_glVertex2d == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertex2d), interceptedglVertex2d))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glVertex2d\n");
+	}
+	if ((_glCallList == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glCallList), interceptedglCallList))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glCallList\n");
+	}
+	if ((_glMaterialfv == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glMaterialfv), interceptedglMaterialfv))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glMaterialfv\n");
+	}
 }
 void processDetach()
 {
@@ -1779,7 +1838,12 @@ void processDetach()
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglDXLockObjectsNV));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglDXUnlockObjectsNV));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglDelayBeforeSwapNV));
-
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glGetIntegerv));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glGetBooleanv));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glDisable));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glVertex2d));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glCallList));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glMaterialfv));
 }
 BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
 {
