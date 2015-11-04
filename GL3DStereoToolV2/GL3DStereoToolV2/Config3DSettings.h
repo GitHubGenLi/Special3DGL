@@ -64,6 +64,7 @@ public:
 	void increaseFrameGL()
 	{
 		currentFrameGL++;
+		std::cout << "Frame: " << currentFrameGL << endl;
 		currentFunctionCallIndexPerFrame = 0;
 	}
 	void increaseFunctionCall(string funcName = "")

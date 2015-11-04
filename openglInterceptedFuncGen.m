@@ -12,6 +12,7 @@ OPENGL_SIGNATURE_FILE = 'openglSign.txt';
 INTERCEPTED_FUNC_HEADER_FILE = 'interceptedOpenglFuncHeader.txt';
 INTERCEPTED_FUNC_BODY_FILE = 'interceptedOpenglFuncBody.txt';
 HOOKED_FUNC_FILE = 'hookedFunc.txt';
+UNHOOK_FUNC_FILE = 'unhookFunc.txt';
 
 if exist(PATH_SAVED, 'dir')
     %warning(....)
@@ -44,6 +45,10 @@ fileinterceptedOpenglFuncBodyID = fopen(interceptedOpenglFuncBodyFullpath,'w');
 %%
 hookedFuncFullpath = [PATH_LOAD HOOKED_FUNC_FILE];
 filehookedFuncID = fopen(hookedFuncFullpath,'w');
+
+%%
+unhookFuncFullpath = [PATH_LOAD UNHOOK_FUNC_FILE];
+fileunhookFuncID = fopen(unhookFuncFullpath,'w');
 
 %%
 for index = 1: totalFunction(1)
@@ -113,8 +118,7 @@ for index = 1: totalFunction(1)
         elseif (strcmp(realReturnPart, 'void') == 1)
             fullInterceptedFunction = sprintf('%s\n\t_%s(', fullInterceptedFunction, realFunc);    
         end
-        
-        
+                
         %fill parameters if has: get each paramter's name
         remain = listParams;
 
@@ -127,15 +131,14 @@ for index = 1: totalFunction(1)
            realparamName = paramName;
            
            while true
-            [dataType, paramName] = strtok(paramName, ' ');
-            
-            paramName = strtrim(paramName);
-             
-            if isempty(paramName),  break; 
-            else
-                realparamName = paramName;
-            end
-            
+               [dataType, paramName] = strtok(paramName, ' ');
+               
+               paramName = strtrim(paramName);
+               
+               if isempty(paramName),  break;
+               else
+                   realparamName = paramName;
+               end
            end
            
            if (strcmp(realparamName,'void') == 0) %not void
@@ -169,6 +172,10 @@ for index = 1: totalFunction(1)
         %write hooked function to the text file
         fprintf(filehookedFuncID, '%s\n', hookedFunc);
         
+        %unhook functions
+        unhookfunction = strcat('Mhook_Unhook(reinterpret_cast<PVOID*>(&_', realFunc, '));');
+        fprintf(fileunhookFuncID, '%s\n', unhookfunction);
+        
     else
         disp('No signature for ' + funcPointer);
     end
@@ -178,5 +185,6 @@ end
 fclose(fileinterceptedOpenglFuncHeaderID);
 fclose(fileinterceptedOpenglFuncBodyID);
 fclose(filehookedFuncID);
+fclose(fileunhookFuncID);
 
  disp('Finished!');

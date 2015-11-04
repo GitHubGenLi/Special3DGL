@@ -3728,7 +3728,7 @@ void APIENTRY interceptedglColor3f(GLfloat red, GLfloat green, GLfloat blue)
 {
 	//std::cout << "interceptedglColor3f ";
 	
-	currentConfig3DSettings.increaseFunctionCall("glColor3f");
+	currentConfig3DSettings.increaseFunctionCall();
 
 	if (currentConfig3DSettings.startInterception())
 	{
