@@ -3547,6 +3547,8 @@ BOOL WINAPI interceptedwglSetPixelFormat(HDC hdc, int iPixelFormat, const PIXELF
 	pfd.nVersion = 1;
 	if (DescribePixelFormat(hdc, currentStereoPixelFormat, sizeof(currentStereo_ppfd), &currentStereo_ppfd) == 0)
 		return 0;*/
+	
+	currentConfig3DSettings.increaseFunctionCall();
 
 	if (_wglSetPixelFormat(hdc, currentStereoPixelFormat, &currentStereo_ppfd) != TRUE)
 	{

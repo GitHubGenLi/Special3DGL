@@ -50,6 +50,9 @@ public:
 	int currentFrameGL;
 	ObjectBoundary currentBoundaryLoc;
 	ObjectType currentObjectType;
+
+	bool increasedFunCall = true;
+
 public:
 	Config3DSettings();
 	~Config3DSettings();
@@ -69,7 +72,10 @@ public:
 	}
 	void increaseFunctionCall(string funcName = "")
 	{
-		currentFunctionCallIndexPerFrame ++;
+		//if (increasedFunCall)
+		{
+			currentFunctionCallIndexPerFrame++;
+		}
 		
 		if (funcName.length() > 0)
 		{
@@ -88,9 +94,13 @@ public:
 			//std::cout << "Current buffer: " << currentDrawingBuffer << endl;
 			if (currentBoundaryLoc == ObjectBoundary::Start)
 			{
+				increasedFunCall = false;
+
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 				glClearColor(0, 0, 0, 1);
 				currentBoundaryLoc = ObjectBoundary::Middle;
+				
+				increasedFunCall = true;
 			}
 			else if (currentBoundaryLoc == ObjectBoundary::End)
 			{

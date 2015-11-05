@@ -1,5 +1,7 @@
 #include "Config3DSettings.h"
+#include "Log.h"
 
+using namespace hive;
 
 Config3DSettings::Config3DSettings()
 {
@@ -7,6 +9,7 @@ Config3DSettings::Config3DSettings()
 	currentFrameGL = 0;
 	currentBoundaryLoc = ObjectBoundary::Start;
 	currentObjectType = ObjectType::Background;
+	increasedFunCall = true;
 }
 
 
@@ -16,6 +19,8 @@ Config3DSettings::~Config3DSettings()
 }
 bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName)
 {
+	Log::print("OK: readConfig3DSettingsFromFile function \n");
+
 	// open the file
 	ifstream input(fileName.c_str());
 	if (!input) return false;
