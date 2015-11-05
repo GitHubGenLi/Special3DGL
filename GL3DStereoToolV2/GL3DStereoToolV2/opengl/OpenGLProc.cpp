@@ -67,7 +67,7 @@ bool firstForground = false;
 void * _getPublicProcAddress(const char *procName)
 {
 	//Log::open("intercept.log");
-	Log::print("_getPublicProcAddress\n");
+	//Log::print("_getPublicProcAddress\n");
 
 	if (!_libGlHandle) {
 		char szDll[MAX_PATH] = { 0 };
@@ -80,10 +80,10 @@ void * _getPublicProcAddress(const char *procName)
 		//Log::print(szDll);
 		
 		strcat_s(szDll, "\\opengl32.dll");
-		Log::print("System directory: ");
-		Log::print(szDll);
+		//Log::print("System directory: ");
+		//Log::print(szDll);
 		
-		Log::print("\n");
+		//Log::print("\n");
 		
 		_libGlHandle = LoadLibraryA(szDll);
 
@@ -92,12 +92,12 @@ void * _getPublicProcAddress(const char *procName)
 			return NULL;
 		}
 
-		Log::print("Can get opengl handle.");
+		//Log::print("Can get opengl handle.");
 
 	}
-	Log::print("Proc name: ");
-	Log::print(procName);
-	Log::print("\n");
+	//Log::print("Proc name: ");
+	//Log::print(procName);
+	//Log::print("\n");
 
 	return (void *)GetProcAddress(_libGlHandle, procName);
 }
@@ -131,7 +131,7 @@ PFN_WGLGETPROCADDRESS _wglGetProcAddress = &_get_wglGetProcAddress;
 void *_getAnyGLFuncAddress(const char *name)
 {
 	//Log::open("intercept.log");
-	Log::print("_getAnyGLFuncAddress\n");
+	//Log::print("_getAnyGLFuncAddress\n");
 
 	void *p = (void *)wglGetProcAddress(name);
 	if (p == 0 ||
@@ -3048,6 +3048,41 @@ static void APIENTRY _get_glMaterialfv(GLenum face, GLenum pname, const GLfloat 
 
 PFN_GLMATERIALFV _glMaterialfv = &_get_glMaterialfv;
 
+static void APIENTRY _fail_glEnable(GLenum cap) {
+	const char *_name = "glEnable";
+	
+	return;
+}
+
+static void APIENTRY _get_glEnable(GLenum cap) {
+	PFN_GLENABLE _ptr;
+	_ptr = (PFN_GLENABLE)_getPublicProcAddress("glEnable");
+	if (!_ptr) {
+		_ptr = &_fail_glEnable;
+	}
+	_glEnable = _ptr;
+	_glEnable(cap);
+}
+
+PFN_GLENABLE _glEnable = &_get_glEnable;
+
+static void APIENTRY _fail_glPopMatrix(void) {
+	const char *_name = "glPopMatrix";
+	
+	return;
+}
+
+static void APIENTRY _get_glPopMatrix(void) {
+	PFN_GLPOPMATRIX _ptr;
+	_ptr = (PFN_GLPOPMATRIX)_getPublicProcAddress("glPopMatrix");
+	if (!_ptr) {
+		_ptr = &_fail_glPopMatrix;
+	}
+	_glPopMatrix = _ptr;
+	_glPopMatrix();
+}
+
+PFN_GLPOPMATRIX _glPopMatrix = &_get_glPopMatrix;
 /************************************************************************************/
 int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd)
 {
@@ -3197,7 +3232,7 @@ int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR 
 void WINAPI interceptedglClear(GLbitfield mask)
 {
 	//Log::open("intercept.log");
-	Log::print("interceptedglClear\n");
+	//Log::print("interceptedglClear\n");
 
 	if (!_glClear)
 	{
@@ -3217,11 +3252,11 @@ void WINAPI interceptedglClear(GLbitfield mask)
 		Log::print("No: you don't have stereo enabled.\n");
 	}
 
-	Log::print("Start initialisation.\n");
+	//Log::print("Start initialisation.\n");
 
 	if (!m_initialised)
 	{
-		Log::print("Begin initialisation.\n");
+		//Log::print("Begin initialisation.\n");
 		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &textureSize);
 
 		bool success = false;
@@ -3394,7 +3429,7 @@ void WINAPI interceptedglClear(GLbitfield mask)
 		//glDrawBuffer(GL_COLOR_ATTACHMENT0);
 		//Log::print("Out initialisation.\n");
 		// default OpenGL settings
-		glEnable(GL_COLOR_MATERIAL);
+		//glEnable(GL_COLOR_MATERIAL);
 		//glDisable(GL_LIGHTING);
 		//glDisable(GL_DEPTH_TEST);
 
@@ -3409,11 +3444,16 @@ void WINAPI interceptedglClear(GLbitfield mask)
 		//for testing
 		//glDrawBuffer(GL_BACK_RIGHT);
 
+		inLeft = true;
+
 		glDrawBuffer(GL_BACK);
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		//glClear(GL_COLOR_BUFFER_BIT );
 		glClearColor(0, 0, 0, 1);
 		glClearDepth(1.0);
+
+		inLeft = false;
 	}
 	
 	//glEnable(GL_DEPTH_TEST);
@@ -3491,11 +3531,14 @@ void WINAPI interceptedglClear(GLbitfield mask)
 	//{
 	//	glDrawBuffer(GL_BACK_LEFT);
 	//}
-
-	currentConfig3DSettings.increaseFunctionCall();
-
+	if (inLeft){
+		currentConfig3DSettings.increaseFunctionCall();
+	}
+	
 	_glClear(mask);
 	
+	// save OpenGL state
+	//glPushAttrib(GL_ENABLE_BIT | GL_CURRENT_BIT);
 
 	// count the number of glClear calls
 	if (increaseClearCount)
@@ -3532,7 +3575,7 @@ void WINAPI interceptedglClear(GLbitfield mask)
 
 BOOL WINAPI interceptedwglSetPixelFormat(HDC hdc, int iPixelFormat, const PIXELFORMATDESCRIPTOR * ppfd)
 {
-	Log::print("OK: get interceptedwglSetPixelFormat function \n");
+	//Log::print("OK: get interceptedwglSetPixelFormat function \n");
 
 	if (!_wglSetPixelFormat)
 	{
@@ -3566,7 +3609,7 @@ BOOL WINAPI interceptedwglSetPixelFormat(HDC hdc, int iPixelFormat, const PIXELF
 BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 {
 	//Log::open("intercept.log");
-	Log::print("OK: get interceptedwglSwapBuffers function \n");
+	//Log::print("OK: get interceptedwglSwapBuffers function \n");
 
 	// was stereo detected previously?
 	bool wasStereo = g_stereoDetect;
@@ -5586,6 +5629,28 @@ void APIENTRY interceptedglMaterialfv(GLenum face, GLenum pname, const GLfloat *
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
 	_glMaterialfv(face, pname, params);
+}
+void APIENTRY interceptedglEnable(GLenum cap)
+{
+	currentConfig3DSettings.increaseFunctionCall("glEnable");
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glEnable");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glEnable(cap);
+}
+void APIENTRY interceptedglPopMatrix(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glPopMatrix");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glPopMatrix();
 }
 /************************************************************************************/
 void initialiseVariables()

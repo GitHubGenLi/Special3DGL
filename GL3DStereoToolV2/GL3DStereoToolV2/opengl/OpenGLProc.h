@@ -617,6 +617,11 @@ extern PFN_GLCALLLIST _glCallList;
 typedef void (APIENTRY * PFN_GLMATERIALFV)(GLenum face, GLenum pname, const GLfloat * params);
 extern PFN_GLMATERIALFV _glMaterialfv;
 
+typedef void (APIENTRY * PFN_GLENABLE)(GLenum cap);
+extern PFN_GLENABLE _glEnable;
+
+typedef void (APIENTRY * PFN_GLPOPMATRIX)(void);
+extern PFN_GLPOPMATRIX _glPopMatrix;
 /*************************************************************/
 //void initialiseRealOpenGLFunctions();
 void initialiseVariables();
@@ -786,6 +791,9 @@ void APIENTRY interceptedglDisable(GLenum cap);
 void APIENTRY interceptedglVertex2d(GLdouble x, GLdouble y);
 void APIENTRY interceptedglCallList(GLuint list);
 void APIENTRY interceptedglMaterialfv(GLenum face, GLenum pname, const GLfloat * params);
+void APIENTRY interceptedglEnable(GLenum cap);
+void APIENTRY interceptedglPopMatrix(void);
+
 /*************************************************************/
 
 /// OpenGL rendering thread function

@@ -412,4 +412,5 @@ void Config3DSettings::resetCurrentStatusOfEachFrame()
 	currentDrawingBuffer = GL_BACK;
 	currentBoundaryLoc = ObjectBoundary::Start;
 	currentObjectType = ObjectType::Background;
+	increasedFunCall = true;
 }

@@ -213,6 +213,8 @@ void initialiseRealOpenGLFunctions()
 	_glVertex2d = (PFN_GLVERTEX2D)_getAnyGLFuncAddress("glVertex2d");
 	_glCallList = (PFN_GLCALLLIST)_getAnyGLFuncAddress("glCallList");
 	_glMaterialfv = (PFN_GLMATERIALFV)_getAnyGLFuncAddress("glMaterialfv");
+	_glEnable = (PFN_GLENABLE)_getAnyGLFuncAddress("glEnable");
+	_glPopMatrix = (PFN_GLPOPMATRIX)_getPublicProcAddress("glPopMatrix");
 }
 
 void processAttach()
@@ -1685,6 +1687,24 @@ void processAttach()
 	{
 		printf("Hooked _glMaterialfv\n");
 	}
+	if ((_glEnable == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glEnable), interceptedglEnable))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glEnable\n");
+	}
+	if ((_glPopMatrix == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPopMatrix), interceptedglPopMatrix))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glPopMatrix\n");
+	}
 }
 void processDetach()
 {
@@ -1844,6 +1864,8 @@ void processDetach()
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glVertex2d));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glCallList));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glMaterialfv));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glEnable));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glPopMatrix));
 }
 BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
 {
@@ -1855,13 +1877,11 @@ BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
 	}
 
 	Config3DSettings config;
-	
+	config.readConfig3DSettingsFromFile();
 
 	switch (reason)
 	{
 	case DLL_PROCESS_ATTACH:
-		
-		config.readConfig3DSettingsFromFile();
 		DisableThreadLibraryCalls(instance);
 		processAttach();
 		break;
