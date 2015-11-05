@@ -3094,8 +3094,8 @@ int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR 
 	/************************/
 
 	//m_framesGL = 0;
+	
 	currentConfig3DSettings.readConfig3DSettingsFromFile();
-
 	/************************/
 
 	currentOpenGLContext = hdc; //store the current context
@@ -3256,6 +3256,8 @@ void WINAPI interceptedglClear(GLbitfield mask)
 
 	if (!m_initialised)
 	{
+		//currentConfig3DSettings.readConfig3DSettingsFromFile();
+
 		//Log::print("Begin initialisation.\n");
 		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &textureSize);
 
@@ -3880,7 +3882,7 @@ void APIENTRY interceptedglColor3f(GLfloat red, GLfloat green, GLfloat blue)
 {
 	//std::cout << "interceptedglColor3f ";
 	
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glColor3f");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5643,7 +5645,7 @@ void APIENTRY interceptedglEnable(GLenum cap)
 }
 void APIENTRY interceptedglPopMatrix(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glPopMatrix");
 
 	if (currentConfig3DSettings.startInterception())
 	{

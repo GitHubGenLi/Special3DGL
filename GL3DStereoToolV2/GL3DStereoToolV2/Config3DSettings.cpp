@@ -10,6 +10,7 @@ Config3DSettings::Config3DSettings()
 	currentBoundaryLoc = ObjectBoundary::Start;
 	currentObjectType = ObjectType::Background;
 	increasedFunCall = true;
+	currentFunctionCallIndexPerFrame = 0;
 }
 
 
