@@ -3083,6 +3083,187 @@ static void APIENTRY _get_glPopMatrix(void) {
 }
 
 PFN_GLPOPMATRIX _glPopMatrix = &_get_glPopMatrix;
+
+static void APIENTRY _fail_glTexEnvi(GLenum target, GLenum pname, GLint param) {
+	const char *_name = "glTexEnvi";
+	
+	return;
+}
+
+static void APIENTRY _get_glTexEnvi(GLenum target, GLenum pname, GLint param) {
+	PFN_GLTEXENVI _ptr;
+	_ptr = (PFN_GLTEXENVI)_getPublicProcAddress("glTexEnvi");
+	if (!_ptr) {
+		_ptr = &_fail_glTexEnvi;
+	}
+	_glTexEnvi = _ptr;
+	_glTexEnvi(target, pname, param);
+}
+
+PFN_GLTEXENVI _glTexEnvi = &_get_glTexEnvi;
+
+static void APIENTRY _fail_glBindTexture(GLenum target, GLuint texture) {
+	const char *_name = "glBindTexture";
+	
+	return;
+}
+
+static void APIENTRY _get_glBindTexture(GLenum target, GLuint texture) {
+	PFN_GLBINDTEXTURE _ptr;
+	_ptr = (PFN_GLBINDTEXTURE)_getPublicProcAddress("glBindTexture");
+	if (!_ptr) {
+		_ptr = &_fail_glBindTexture;
+	}
+	_glBindTexture = _ptr;
+	_glBindTexture(target, texture);
+}
+
+PFN_GLBINDTEXTURE _glBindTexture = &_get_glBindTexture;
+
+static void APIENTRY _fail_glVertex3d(GLdouble x, GLdouble y, GLdouble z) {
+	const char *_name = "glVertex3d";
+	
+	return;
+}
+
+static void APIENTRY _get_glVertex3d(GLdouble x, GLdouble y, GLdouble z) {
+	PFN_GLVERTEX3D _ptr;
+	_ptr = (PFN_GLVERTEX3D)_getPublicProcAddress("glVertex3d");
+	if (!_ptr) {
+		_ptr = &_fail_glVertex3d;
+	}
+	_glVertex3d = _ptr;
+	_glVertex3d(x, y, z);
+}
+
+PFN_GLVERTEX3D _glVertex3d = &_get_glVertex3d;
+
+static void APIENTRY _fail_glTexCoord2d(GLdouble s, GLdouble t) {
+	const char *_name = "glTexCoord2d";
+	
+	return;
+}
+
+static void APIENTRY _get_glTexCoord2d(GLdouble s, GLdouble t) {
+	PFN_GLTEXCOORD2D _ptr;
+	_ptr = (PFN_GLTEXCOORD2D)_getPublicProcAddress("glTexCoord2d");
+	if (!_ptr) {
+		_ptr = &_fail_glTexCoord2d;
+	}
+	_glTexCoord2d = _ptr;
+	_glTexCoord2d(s, t);
+}
+
+PFN_GLTEXCOORD2D _glTexCoord2d = &_get_glTexCoord2d;
+
+static void APIENTRY _fail_glRotated(GLdouble angle, GLdouble x, GLdouble y, GLdouble z) {
+	const char *_name = "glRotated";
+	
+	return;
+}
+
+static void APIENTRY _get_glRotated(GLdouble angle, GLdouble x, GLdouble y, GLdouble z) {
+	PFN_GLROTATED _ptr;
+	_ptr = (PFN_GLROTATED)_getPublicProcAddress("glRotated");
+	if (!_ptr) {
+		_ptr = &_fail_glRotated;
+	}
+	_glRotated = _ptr;
+	_glRotated(angle, x, y, z);
+}
+
+PFN_GLROTATED _glRotated = &_get_glRotated;
+
+static void APIENTRY _fail_glPushAttrib(GLbitfield mask) {
+	const char *_name = "glPushAttrib";
+	
+	return;
+}
+
+static void APIENTRY _get_glPushAttrib(GLbitfield mask) {
+	PFN_GLPUSHATTRIB _ptr;
+	_ptr = (PFN_GLPUSHATTRIB)_getPublicProcAddress("glPushAttrib");
+	if (!_ptr) {
+		_ptr = &_fail_glPushAttrib;
+	}
+	_glPushAttrib = _ptr;
+	_glPushAttrib(mask);
+}
+
+PFN_GLPUSHATTRIB _glPushAttrib = &_get_glPushAttrib;
+
+static void APIENTRY _fail_glPopAttrib(void) {
+	const char *_name = "glPopAttrib";
+	
+	return;
+}
+
+static void APIENTRY _get_glPopAttrib(void) {
+	PFN_GLPOPATTRIB _ptr;
+	_ptr = (PFN_GLPOPATTRIB)_getPublicProcAddress("glPopAttrib");
+	if (!_ptr) {
+		_ptr = &_fail_glPopAttrib;
+	}
+	_glPopAttrib = _ptr;
+	_glPopAttrib();
+}
+
+PFN_GLPOPATTRIB _glPopAttrib = &_get_glPopAttrib;
+
+static void APIENTRY _fail_glColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) {
+	const char *_name = "glColor4f";
+	
+	return;
+}
+
+static void APIENTRY _get_glColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) {
+	PFN_GLCOLOR4F _ptr;
+	_ptr = (PFN_GLCOLOR4F)_getPublicProcAddress("glColor4f");
+	if (!_ptr) {
+		_ptr = &_fail_glColor4f;
+	}
+	_glColor4f = _ptr;
+	_glColor4f(red, green, blue, alpha);
+}
+
+PFN_GLCOLOR4F _glColor4f = &_get_glColor4f;
+
+static void APIENTRY _fail_glVertex2f(GLfloat x, GLfloat y) {
+	const char *_name = "glVertex2f";
+	
+	return;
+}
+
+static void APIENTRY _get_glVertex2f(GLfloat x, GLfloat y) {
+	PFN_GLVERTEX2F _ptr;
+	_ptr = (PFN_GLVERTEX2F)_getPublicProcAddress("glVertex2f");
+	if (!_ptr) {
+		_ptr = &_fail_glVertex2f;
+	}
+	_glVertex2f = _ptr;
+	_glVertex2f(x, y);
+}
+
+PFN_GLVERTEX2F _glVertex2f = &_get_glVertex2f;
+
+static void APIENTRY _fail_glBlendFunc(GLenum sfactor, GLenum dfactor) {
+	const char *_name = "glBlendFunc";
+	
+	return;
+}
+
+static void APIENTRY _get_glBlendFunc(GLenum sfactor, GLenum dfactor) {
+	PFN_GLBLENDFUNC _ptr;
+	_ptr = (PFN_GLBLENDFUNC)_getPublicProcAddress("glBlendFunc");
+	if (!_ptr) {
+		_ptr = &_fail_glBlendFunc;
+	}
+	_glBlendFunc = _ptr;
+	_glBlendFunc(sfactor, dfactor);
+}
+
+PFN_GLBLENDFUNC _glBlendFunc = &_get_glBlendFunc;
+
 /************************************************************************************/
 int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd)
 {
@@ -3922,7 +4103,7 @@ void APIENTRY interceptedglColor3f(GLfloat red, GLfloat green, GLfloat blue)
 }
 void APIENTRY interceptedglLoadIdentity(void) {
 
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glLoadIdentity");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -3974,7 +4155,7 @@ void APIENTRY interceptedglTranslatef(GLfloat x, GLfloat y, GLfloat z) {
 	_glTranslatef(x, y, z);
 }
 void APIENTRY interceptedglBegin(GLenum mode) {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glBegin");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -3994,7 +4175,7 @@ void APIENTRY interceptedglVertex3f(GLfloat x, GLfloat y, GLfloat z) {
 	_glVertex3f(x, y, z);
 }
 void APIENTRY interceptedglEnd(void) {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glEnd");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5634,7 +5815,7 @@ void APIENTRY interceptedglMaterialfv(GLenum face, GLenum pname, const GLfloat *
 }
 void APIENTRY interceptedglEnable(GLenum cap)
 {
-	currentConfig3DSettings.increaseFunctionCall("glEnable");
+	currentConfig3DSettings.increaseFunctionCall();
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5645,7 +5826,7 @@ void APIENTRY interceptedglEnable(GLenum cap)
 }
 void APIENTRY interceptedglPopMatrix(void)
 {
-	currentConfig3DSettings.increaseFunctionCall("glPopMatrix");
+	currentConfig3DSettings.increaseFunctionCall();
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5653,6 +5834,116 @@ void APIENTRY interceptedglPopMatrix(void)
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
 	_glPopMatrix();
+}
+void APIENTRY interceptedglTexEnvi(GLenum target, GLenum pname, GLint param)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glTexEnvi");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glTexEnvi(target, pname, param);
+}
+void APIENTRY interceptedglVertex3d(GLdouble x, GLdouble y, GLdouble z)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glVertex3d");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glVertex3d(x, y, z);
+}
+void APIENTRY interceptedglTexCoord2d(GLdouble s, GLdouble t)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glTexCoord2d");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glTexCoord2d(s, t);
+}
+void APIENTRY interceptedglBindTexture(GLenum target, GLuint texture)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glBindTexture");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glBindTexture(target, texture);
+}
+void APIENTRY interceptedglRotated(GLdouble angle, GLdouble x, GLdouble y, GLdouble z)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glRotated");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glRotated(angle, x, y, z);
+}
+void APIENTRY interceptedglPushAttrib(GLbitfield mask)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glPushAttrib");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glPushAttrib(mask);
+}
+void APIENTRY interceptedglPopAttrib(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glPopAttrib");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glPopAttrib();
+}
+void APIENTRY interceptedglColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glColor4f");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glColor4f(red, green, blue, alpha);
+}
+void APIENTRY interceptedglVertex2f(GLfloat x, GLfloat y)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glVertex2f");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glVertex2f(x, y);
+}
+void APIENTRY interceptedglBlendFunc(GLenum sfactor, GLenum dfactor)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glBlendFunc");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glBlendFunc(sfactor, dfactor);
 }
 /************************************************************************************/
 void initialiseVariables()
