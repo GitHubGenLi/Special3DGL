@@ -5,6 +5,9 @@ using namespace hive;
 
 Config3DSettings::Config3DSettings()
 {
+	/* initialize random seed: */
+	srand(time(NULL));
+
 	currentDrawingBuffer = GL_BACK;
 	currentFrameGL = 0;
 	currentBoundaryLoc = ObjectBoundary::Start;

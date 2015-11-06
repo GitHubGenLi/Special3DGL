@@ -13,6 +13,9 @@
 #include <iostream>
 #include "Log.h"
 
+#include <stdlib.h>
+#include <time.h> 
+
 using namespace std;
 using namespace hive;
 
@@ -144,7 +147,13 @@ public:
 			return GL_BACK_LEFT;
 		case 1:
 			return GL_BACK_RIGHT;
+		case 3:
+		{
+			int buffer = rand() % 3;
+			return getBuffer(buffer);
+		}
 		default:
+			return GL_BACK;
 			break;
 		}
 	}
