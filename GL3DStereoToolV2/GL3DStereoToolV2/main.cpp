@@ -213,6 +213,18 @@ void initialiseRealOpenGLFunctions()
 	_glVertex2d = (PFN_GLVERTEX2D)_getAnyGLFuncAddress("glVertex2d");
 	_glCallList = (PFN_GLCALLLIST)_getAnyGLFuncAddress("glCallList");
 	_glMaterialfv = (PFN_GLMATERIALFV)_getAnyGLFuncAddress("glMaterialfv");
+	_glEnable = (PFN_GLENABLE)_getAnyGLFuncAddress("glEnable");
+	_glPopMatrix = (PFN_GLPOPMATRIX)_getAnyGLFuncAddress("glPopMatrix");
+	_glTexEnvi = (PFN_GLTEXENVI)_getAnyGLFuncAddress("glTexEnvi");
+	_glBindTexture = (PFN_GLBINDTEXTURE)_getAnyGLFuncAddress("glBindTexture");
+	_glVertex3d = (PFN_GLVERTEX3D)_getAnyGLFuncAddress("glVertex3d");
+	_glTexCoord2d = (PFN_GLTEXCOORD2D)_getAnyGLFuncAddress("glTexCoord2d");
+	_glRotated = (PFN_GLROTATED)_getAnyGLFuncAddress("glRotated");
+	_glPushAttrib = (PFN_GLPUSHATTRIB)_getAnyGLFuncAddress("glPushAttrib");
+	_glPopAttrib = (PFN_GLPOPATTRIB)_getAnyGLFuncAddress("glPopAttrib");
+	_glColor4f = (PFN_GLCOLOR4F)_getAnyGLFuncAddress("glColor4f");
+	_glVertex2f = (PFN_GLVERTEX2F)_getAnyGLFuncAddress("glVertex2f");
+	_glBlendFunc = (PFN_GLBLENDFUNC)_getAnyGLFuncAddress("glBlendFunc");
 }
 
 void processAttach()
@@ -1685,6 +1697,114 @@ void processAttach()
 	{
 		printf("Hooked _glMaterialfv\n");
 	}
+	if ((_glEnable == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glEnable), interceptedglEnable))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glEnable\n");
+	}
+	if ((_glPopMatrix == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPopMatrix), interceptedglPopMatrix))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glPopMatrix\n");
+	}
+	if ((_glTexEnvi == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTexEnvi), interceptedglTexEnvi))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glTexEnvi\n");
+	}
+	if ((_glVertex3d == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertex3d), interceptedglVertex3d))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glVertex3d\n");
+	}
+	if ((_glTexCoord2d == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTexCoord2d), interceptedglTexCoord2d))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glTexCoord2d\n");
+	}
+	if ((_glBindTexture == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glBindTexture), interceptedglBindTexture))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glBindTexture\n");
+	}
+	if ((_glRotated == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glRotated), interceptedglRotated))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glRotated\n");
+	}
+	if ((_glPushAttrib == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPushAttrib), interceptedglPushAttrib))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glPushAttrib\n");
+	}
+	if ((_glPopAttrib == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPopAttrib), interceptedglPopAttrib))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glPopAttrib\n");
+	}
+	if ((_glColor4f == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColor4f), interceptedglColor4f))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glColor4f\n");
+	}
+	if ((_glVertex2f == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertex2f), interceptedglVertex2f))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glVertex2f\n");
+	}
+	if ((_glBlendFunc == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glBlendFunc), interceptedglBlendFunc))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glBlendFunc\n");
+	}
 }
 void processDetach()
 {
@@ -1844,6 +1964,18 @@ void processDetach()
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glVertex2d));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glCallList));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glMaterialfv));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glEnable));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glPopMatrix));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glTexEnvi));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glVertex3d));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glTexCoord2d));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glBindTexture));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glRotated));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glPushAttrib));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glPopAttrib));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glColor4f));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glVertex2f));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glBlendFunc));
 }
 BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
 {
@@ -1855,13 +1987,11 @@ BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
 	}
 
 	Config3DSettings config;
-	
+	config.readConfig3DSettingsFromFile();
 
 	switch (reason)
 	{
 	case DLL_PROCESS_ATTACH:
-		
-		config.readConfig3DSettingsFromFile();
 		DisableThreadLibraryCalls(instance);
 		processAttach();
 		break;

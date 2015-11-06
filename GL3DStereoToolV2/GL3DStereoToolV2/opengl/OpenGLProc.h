@@ -617,6 +617,46 @@ extern PFN_GLCALLLIST _glCallList;
 typedef void (APIENTRY * PFN_GLMATERIALFV)(GLenum face, GLenum pname, const GLfloat * params);
 extern PFN_GLMATERIALFV _glMaterialfv;
 
+typedef void (APIENTRY * PFN_GLENABLE)(GLenum cap);
+extern PFN_GLENABLE _glEnable;
+
+typedef void (APIENTRY * PFN_GLPOPMATRIX)(void);
+extern PFN_GLPOPMATRIX _glPopMatrix;
+
+typedef void (APIENTRY * PFN_GLTEXENVI)(GLenum target, GLenum pname, GLint param);
+extern PFN_GLTEXENVI _glTexEnvi;
+
+typedef void (APIENTRY * PFN_GLBINDTEXTURE)(GLenum target, GLuint texture);
+extern PFN_GLBINDTEXTURE _glBindTexture;
+
+typedef void (APIENTRY * PFN_GLVERTEX3D)(GLdouble x, GLdouble y, GLdouble z);
+extern PFN_GLVERTEX3D _glVertex3d;
+
+typedef void (APIENTRY * PFN_GLTEXCOORD2D)(GLdouble s, GLdouble t);
+extern PFN_GLTEXCOORD2D _glTexCoord2d;
+
+typedef void (APIENTRY * PFN_GLBINDTEXTURE)(GLenum target, GLuint texture);
+extern PFN_GLBINDTEXTURE _glBindTexture;
+
+typedef void (APIENTRY * PFN_GLROTATED)(GLdouble angle, GLdouble x, GLdouble y, GLdouble z);
+extern PFN_GLROTATED _glRotated;
+
+typedef void (APIENTRY * PFN_GLPUSHATTRIB)(GLbitfield mask);
+extern PFN_GLPUSHATTRIB _glPushAttrib;
+
+typedef void (APIENTRY * PFN_GLPOPATTRIB)(void);
+extern PFN_GLPOPATTRIB _glPopAttrib;
+
+typedef void (APIENTRY * PFN_GLCOLOR4F)(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
+extern PFN_GLCOLOR4F _glColor4f;
+
+typedef void (APIENTRY * PFN_GLVERTEX2F)(GLfloat x, GLfloat y);
+extern PFN_GLVERTEX2F _glVertex2f;
+
+typedef void (APIENTRY * PFN_GLBLENDFUNC)(GLenum sfactor, GLenum dfactor);
+extern PFN_GLBLENDFUNC _glBlendFunc;
+
+
 /*************************************************************/
 //void initialiseRealOpenGLFunctions();
 void initialiseVariables();
@@ -786,6 +826,19 @@ void APIENTRY interceptedglDisable(GLenum cap);
 void APIENTRY interceptedglVertex2d(GLdouble x, GLdouble y);
 void APIENTRY interceptedglCallList(GLuint list);
 void APIENTRY interceptedglMaterialfv(GLenum face, GLenum pname, const GLfloat * params);
+void APIENTRY interceptedglEnable(GLenum cap);
+void APIENTRY interceptedglPopMatrix(void);
+void APIENTRY interceptedglTexEnvi(GLenum target, GLenum pname, GLint param);
+void APIENTRY interceptedglVertex3d(GLdouble x, GLdouble y, GLdouble z);
+void APIENTRY interceptedglTexCoord2d(GLdouble s, GLdouble t);
+void APIENTRY interceptedglBindTexture(GLenum target, GLuint texture);
+void APIENTRY interceptedglRotated(GLdouble angle, GLdouble x, GLdouble y, GLdouble z);
+void APIENTRY interceptedglPushAttrib(GLbitfield mask);
+void APIENTRY interceptedglPopAttrib(void);
+void APIENTRY interceptedglColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
+void APIENTRY interceptedglVertex2f(GLfloat x, GLfloat y);
+void APIENTRY interceptedglBlendFunc(GLenum sfactor, GLenum dfactor);
+
 /*************************************************************/
 
 /// OpenGL rendering thread function

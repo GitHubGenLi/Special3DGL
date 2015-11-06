@@ -67,7 +67,7 @@ bool firstForground = false;
 void * _getPublicProcAddress(const char *procName)
 {
 	//Log::open("intercept.log");
-	Log::print("_getPublicProcAddress\n");
+	//Log::print("_getPublicProcAddress\n");
 
 	if (!_libGlHandle) {
 		char szDll[MAX_PATH] = { 0 };
@@ -80,10 +80,10 @@ void * _getPublicProcAddress(const char *procName)
 		//Log::print(szDll);
 		
 		strcat_s(szDll, "\\opengl32.dll");
-		Log::print("System directory: ");
-		Log::print(szDll);
+		//Log::print("System directory: ");
+		//Log::print(szDll);
 		
-		Log::print("\n");
+		//Log::print("\n");
 		
 		_libGlHandle = LoadLibraryA(szDll);
 
@@ -92,12 +92,12 @@ void * _getPublicProcAddress(const char *procName)
 			return NULL;
 		}
 
-		Log::print("Can get opengl handle.");
+		//Log::print("Can get opengl handle.");
 
 	}
-	Log::print("Proc name: ");
-	Log::print(procName);
-	Log::print("\n");
+	//Log::print("Proc name: ");
+	//Log::print(procName);
+	//Log::print("\n");
 
 	return (void *)GetProcAddress(_libGlHandle, procName);
 }
@@ -131,7 +131,7 @@ PFN_WGLGETPROCADDRESS _wglGetProcAddress = &_get_wglGetProcAddress;
 void *_getAnyGLFuncAddress(const char *name)
 {
 	//Log::open("intercept.log");
-	Log::print("_getAnyGLFuncAddress\n");
+	//Log::print("_getAnyGLFuncAddress\n");
 
 	void *p = (void *)wglGetProcAddress(name);
 	if (p == 0 ||
@@ -3048,6 +3048,222 @@ static void APIENTRY _get_glMaterialfv(GLenum face, GLenum pname, const GLfloat 
 
 PFN_GLMATERIALFV _glMaterialfv = &_get_glMaterialfv;
 
+static void APIENTRY _fail_glEnable(GLenum cap) {
+	const char *_name = "glEnable";
+	
+	return;
+}
+
+static void APIENTRY _get_glEnable(GLenum cap) {
+	PFN_GLENABLE _ptr;
+	_ptr = (PFN_GLENABLE)_getPublicProcAddress("glEnable");
+	if (!_ptr) {
+		_ptr = &_fail_glEnable;
+	}
+	_glEnable = _ptr;
+	_glEnable(cap);
+}
+
+PFN_GLENABLE _glEnable = &_get_glEnable;
+
+static void APIENTRY _fail_glPopMatrix(void) {
+	const char *_name = "glPopMatrix";
+	
+	return;
+}
+
+static void APIENTRY _get_glPopMatrix(void) {
+	PFN_GLPOPMATRIX _ptr;
+	_ptr = (PFN_GLPOPMATRIX)_getPublicProcAddress("glPopMatrix");
+	if (!_ptr) {
+		_ptr = &_fail_glPopMatrix;
+	}
+	_glPopMatrix = _ptr;
+	_glPopMatrix();
+}
+
+PFN_GLPOPMATRIX _glPopMatrix = &_get_glPopMatrix;
+
+static void APIENTRY _fail_glTexEnvi(GLenum target, GLenum pname, GLint param) {
+	const char *_name = "glTexEnvi";
+	
+	return;
+}
+
+static void APIENTRY _get_glTexEnvi(GLenum target, GLenum pname, GLint param) {
+	PFN_GLTEXENVI _ptr;
+	_ptr = (PFN_GLTEXENVI)_getPublicProcAddress("glTexEnvi");
+	if (!_ptr) {
+		_ptr = &_fail_glTexEnvi;
+	}
+	_glTexEnvi = _ptr;
+	_glTexEnvi(target, pname, param);
+}
+
+PFN_GLTEXENVI _glTexEnvi = &_get_glTexEnvi;
+
+static void APIENTRY _fail_glBindTexture(GLenum target, GLuint texture) {
+	const char *_name = "glBindTexture";
+	
+	return;
+}
+
+static void APIENTRY _get_glBindTexture(GLenum target, GLuint texture) {
+	PFN_GLBINDTEXTURE _ptr;
+	_ptr = (PFN_GLBINDTEXTURE)_getPublicProcAddress("glBindTexture");
+	if (!_ptr) {
+		_ptr = &_fail_glBindTexture;
+	}
+	_glBindTexture = _ptr;
+	_glBindTexture(target, texture);
+}
+
+PFN_GLBINDTEXTURE _glBindTexture = &_get_glBindTexture;
+
+static void APIENTRY _fail_glVertex3d(GLdouble x, GLdouble y, GLdouble z) {
+	const char *_name = "glVertex3d";
+	
+	return;
+}
+
+static void APIENTRY _get_glVertex3d(GLdouble x, GLdouble y, GLdouble z) {
+	PFN_GLVERTEX3D _ptr;
+	_ptr = (PFN_GLVERTEX3D)_getPublicProcAddress("glVertex3d");
+	if (!_ptr) {
+		_ptr = &_fail_glVertex3d;
+	}
+	_glVertex3d = _ptr;
+	_glVertex3d(x, y, z);
+}
+
+PFN_GLVERTEX3D _glVertex3d = &_get_glVertex3d;
+
+static void APIENTRY _fail_glTexCoord2d(GLdouble s, GLdouble t) {
+	const char *_name = "glTexCoord2d";
+	
+	return;
+}
+
+static void APIENTRY _get_glTexCoord2d(GLdouble s, GLdouble t) {
+	PFN_GLTEXCOORD2D _ptr;
+	_ptr = (PFN_GLTEXCOORD2D)_getPublicProcAddress("glTexCoord2d");
+	if (!_ptr) {
+		_ptr = &_fail_glTexCoord2d;
+	}
+	_glTexCoord2d = _ptr;
+	_glTexCoord2d(s, t);
+}
+
+PFN_GLTEXCOORD2D _glTexCoord2d = &_get_glTexCoord2d;
+
+static void APIENTRY _fail_glRotated(GLdouble angle, GLdouble x, GLdouble y, GLdouble z) {
+	const char *_name = "glRotated";
+	
+	return;
+}
+
+static void APIENTRY _get_glRotated(GLdouble angle, GLdouble x, GLdouble y, GLdouble z) {
+	PFN_GLROTATED _ptr;
+	_ptr = (PFN_GLROTATED)_getPublicProcAddress("glRotated");
+	if (!_ptr) {
+		_ptr = &_fail_glRotated;
+	}
+	_glRotated = _ptr;
+	_glRotated(angle, x, y, z);
+}
+
+PFN_GLROTATED _glRotated = &_get_glRotated;
+
+static void APIENTRY _fail_glPushAttrib(GLbitfield mask) {
+	const char *_name = "glPushAttrib";
+	
+	return;
+}
+
+static void APIENTRY _get_glPushAttrib(GLbitfield mask) {
+	PFN_GLPUSHATTRIB _ptr;
+	_ptr = (PFN_GLPUSHATTRIB)_getPublicProcAddress("glPushAttrib");
+	if (!_ptr) {
+		_ptr = &_fail_glPushAttrib;
+	}
+	_glPushAttrib = _ptr;
+	_glPushAttrib(mask);
+}
+
+PFN_GLPUSHATTRIB _glPushAttrib = &_get_glPushAttrib;
+
+static void APIENTRY _fail_glPopAttrib(void) {
+	const char *_name = "glPopAttrib";
+	
+	return;
+}
+
+static void APIENTRY _get_glPopAttrib(void) {
+	PFN_GLPOPATTRIB _ptr;
+	_ptr = (PFN_GLPOPATTRIB)_getPublicProcAddress("glPopAttrib");
+	if (!_ptr) {
+		_ptr = &_fail_glPopAttrib;
+	}
+	_glPopAttrib = _ptr;
+	_glPopAttrib();
+}
+
+PFN_GLPOPATTRIB _glPopAttrib = &_get_glPopAttrib;
+
+static void APIENTRY _fail_glColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) {
+	const char *_name = "glColor4f";
+	
+	return;
+}
+
+static void APIENTRY _get_glColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) {
+	PFN_GLCOLOR4F _ptr;
+	_ptr = (PFN_GLCOLOR4F)_getPublicProcAddress("glColor4f");
+	if (!_ptr) {
+		_ptr = &_fail_glColor4f;
+	}
+	_glColor4f = _ptr;
+	_glColor4f(red, green, blue, alpha);
+}
+
+PFN_GLCOLOR4F _glColor4f = &_get_glColor4f;
+
+static void APIENTRY _fail_glVertex2f(GLfloat x, GLfloat y) {
+	const char *_name = "glVertex2f";
+	
+	return;
+}
+
+static void APIENTRY _get_glVertex2f(GLfloat x, GLfloat y) {
+	PFN_GLVERTEX2F _ptr;
+	_ptr = (PFN_GLVERTEX2F)_getPublicProcAddress("glVertex2f");
+	if (!_ptr) {
+		_ptr = &_fail_glVertex2f;
+	}
+	_glVertex2f = _ptr;
+	_glVertex2f(x, y);
+}
+
+PFN_GLVERTEX2F _glVertex2f = &_get_glVertex2f;
+
+static void APIENTRY _fail_glBlendFunc(GLenum sfactor, GLenum dfactor) {
+	const char *_name = "glBlendFunc";
+	
+	return;
+}
+
+static void APIENTRY _get_glBlendFunc(GLenum sfactor, GLenum dfactor) {
+	PFN_GLBLENDFUNC _ptr;
+	_ptr = (PFN_GLBLENDFUNC)_getPublicProcAddress("glBlendFunc");
+	if (!_ptr) {
+		_ptr = &_fail_glBlendFunc;
+	}
+	_glBlendFunc = _ptr;
+	_glBlendFunc(sfactor, dfactor);
+}
+
+PFN_GLBLENDFUNC _glBlendFunc = &_get_glBlendFunc;
+
 /************************************************************************************/
 int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd)
 {
@@ -3059,8 +3275,8 @@ int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR 
 	/************************/
 
 	//m_framesGL = 0;
+	
 	currentConfig3DSettings.readConfig3DSettingsFromFile();
-
 	/************************/
 
 	currentOpenGLContext = hdc; //store the current context
@@ -3197,7 +3413,7 @@ int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR 
 void WINAPI interceptedglClear(GLbitfield mask)
 {
 	//Log::open("intercept.log");
-	Log::print("interceptedglClear\n");
+	//Log::print("interceptedglClear\n");
 
 	if (!_glClear)
 	{
@@ -3217,11 +3433,13 @@ void WINAPI interceptedglClear(GLbitfield mask)
 		Log::print("No: you don't have stereo enabled.\n");
 	}
 
-	Log::print("Start initialisation.\n");
+	//Log::print("Start initialisation.\n");
 
 	if (!m_initialised)
 	{
-		Log::print("Begin initialisation.\n");
+		//currentConfig3DSettings.readConfig3DSettingsFromFile();
+
+		//Log::print("Begin initialisation.\n");
 		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &textureSize);
 
 		bool success = false;
@@ -3394,7 +3612,7 @@ void WINAPI interceptedglClear(GLbitfield mask)
 		//glDrawBuffer(GL_COLOR_ATTACHMENT0);
 		//Log::print("Out initialisation.\n");
 		// default OpenGL settings
-		glEnable(GL_COLOR_MATERIAL);
+		//glEnable(GL_COLOR_MATERIAL);
 		//glDisable(GL_LIGHTING);
 		//glDisable(GL_DEPTH_TEST);
 
@@ -3409,11 +3627,16 @@ void WINAPI interceptedglClear(GLbitfield mask)
 		//for testing
 		//glDrawBuffer(GL_BACK_RIGHT);
 
+		inLeft = true;
+
 		glDrawBuffer(GL_BACK);
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		//glClear(GL_COLOR_BUFFER_BIT );
 		glClearColor(0, 0, 0, 1);
 		glClearDepth(1.0);
+
+		inLeft = false;
 	}
 	
 	//glEnable(GL_DEPTH_TEST);
@@ -3491,11 +3714,14 @@ void WINAPI interceptedglClear(GLbitfield mask)
 	//{
 	//	glDrawBuffer(GL_BACK_LEFT);
 	//}
-
-	currentConfig3DSettings.increaseFunctionCall();
-
+	if (inLeft){
+		currentConfig3DSettings.increaseFunctionCall();
+	}
+	
 	_glClear(mask);
 	
+	// save OpenGL state
+	//glPushAttrib(GL_ENABLE_BIT | GL_CURRENT_BIT);
 
 	// count the number of glClear calls
 	if (increaseClearCount)
@@ -3532,7 +3758,7 @@ void WINAPI interceptedglClear(GLbitfield mask)
 
 BOOL WINAPI interceptedwglSetPixelFormat(HDC hdc, int iPixelFormat, const PIXELFORMATDESCRIPTOR * ppfd)
 {
-	Log::print("OK: get interceptedwglSetPixelFormat function \n");
+	//Log::print("OK: get interceptedwglSetPixelFormat function \n");
 
 	if (!_wglSetPixelFormat)
 	{
@@ -3566,7 +3792,7 @@ BOOL WINAPI interceptedwglSetPixelFormat(HDC hdc, int iPixelFormat, const PIXELF
 BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 {
 	//Log::open("intercept.log");
-	Log::print("OK: get interceptedwglSwapBuffers function \n");
+	//Log::print("OK: get interceptedwglSwapBuffers function \n");
 
 	// was stereo detected previously?
 	bool wasStereo = g_stereoDetect;
@@ -3837,7 +4063,7 @@ void APIENTRY interceptedglColor3f(GLfloat red, GLfloat green, GLfloat blue)
 {
 	//std::cout << "interceptedglColor3f ";
 	
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glColor3f");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -3877,7 +4103,7 @@ void APIENTRY interceptedglColor3f(GLfloat red, GLfloat green, GLfloat blue)
 }
 void APIENTRY interceptedglLoadIdentity(void) {
 
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glLoadIdentity");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -3929,7 +4155,7 @@ void APIENTRY interceptedglTranslatef(GLfloat x, GLfloat y, GLfloat z) {
 	_glTranslatef(x, y, z);
 }
 void APIENTRY interceptedglBegin(GLenum mode) {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glBegin");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -3949,7 +4175,7 @@ void APIENTRY interceptedglVertex3f(GLfloat x, GLfloat y, GLfloat z) {
 	_glVertex3f(x, y, z);
 }
 void APIENTRY interceptedglEnd(void) {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glEnd");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5586,6 +5812,138 @@ void APIENTRY interceptedglMaterialfv(GLenum face, GLenum pname, const GLfloat *
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
 	_glMaterialfv(face, pname, params);
+}
+void APIENTRY interceptedglEnable(GLenum cap)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glEnable");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glEnable(cap);
+}
+void APIENTRY interceptedglPopMatrix(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glPopMatrix");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glPopMatrix();
+}
+void APIENTRY interceptedglTexEnvi(GLenum target, GLenum pname, GLint param)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glTexEnvi");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glTexEnvi(target, pname, param);
+}
+void APIENTRY interceptedglVertex3d(GLdouble x, GLdouble y, GLdouble z)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glVertex3d");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glVertex3d(x, y, z);
+}
+void APIENTRY interceptedglTexCoord2d(GLdouble s, GLdouble t)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glTexCoord2d");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glTexCoord2d(s, t);
+}
+void APIENTRY interceptedglBindTexture(GLenum target, GLuint texture)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glBindTexture");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glBindTexture(target, texture);
+}
+void APIENTRY interceptedglRotated(GLdouble angle, GLdouble x, GLdouble y, GLdouble z)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glRotated");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glRotated(angle, x, y, z);
+}
+void APIENTRY interceptedglPushAttrib(GLbitfield mask)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glPushAttrib");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glPushAttrib(mask);
+}
+void APIENTRY interceptedglPopAttrib(void)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glPopAttrib");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glPopAttrib();
+}
+void APIENTRY interceptedglColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glColor4f");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glColor4f(red, green, blue, alpha);
+}
+void APIENTRY interceptedglVertex2f(GLfloat x, GLfloat y)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glVertex2f");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glVertex2f(x, y);
+}
+void APIENTRY interceptedglBlendFunc(GLenum sfactor, GLenum dfactor)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glBlendFunc");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glBlendFunc(sfactor, dfactor);
 }
 /************************************************************************************/
 void initialiseVariables()

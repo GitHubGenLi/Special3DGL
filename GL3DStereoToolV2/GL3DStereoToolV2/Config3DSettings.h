@@ -11,8 +11,10 @@
 
 #include <sstream>
 #include <iostream>
+#include "Log.h"
 
 using namespace std;
+using namespace hive;
 
 enum ObjectType
 {
@@ -60,7 +62,16 @@ public:
 
 	static int convertStringToInt(string s);
 	static long convertStringToLong(string s);
+	static string convertIntToString(int num)
+	{
+		string Result;          // string which will contain the result
+		ostringstream convert;   // stream used for the conversion
 
+		convert << num;      // insert the textual representation of 'Number' in the characters in the stream
+		Result = convert.str(); // set 'Result' to the contents of the stream
+
+		return Result;
+	}
 	bool checkFunctionCall(const string funcName, ObjectType objType, ObjectBoundary bound);
 	bool checkFunctionCallNumber(long indexCall, ObjectType objType, ObjectBoundary bound);
 
@@ -72,7 +83,7 @@ public:
 	}
 	void increaseFunctionCall(string funcName = "")
 	{
-		//if (increasedFunCall)
+		if (increasedFunCall)
 		{
 			currentFunctionCallIndexPerFrame++;
 		}
@@ -80,6 +91,7 @@ public:
 		if (funcName.length() > 0)
 		{
 			std::cout << "Current Func call: " << funcName << " Index :" << currentFunctionCallIndexPerFrame << endl;
+			Log::print("Frame: " + convertIntToString(currentFrameGL) + " Current Func call: " + funcName + " Index :" + convertIntToString(currentFunctionCallIndexPerFrame) + "\n");
 		}
 	}
 	static void switchBuffer(GLuint drawBuffer)
@@ -90,10 +102,14 @@ public:
 	{
 		if (currentBoundaryLoc != ObjectBoundary::End)
 		{
+			
 			glDrawBuffer(currentDrawingBuffer);
 			//std::cout << "Current buffer: " << currentDrawingBuffer << endl;
 			if (currentBoundaryLoc == ObjectBoundary::Start)
 			{
+				// save OpenGL state
+				//glPushAttrib(GL_ENABLE_BIT | GL_CURRENT_BIT);
+
 				increasedFunCall = false;
 
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -106,7 +122,11 @@ public:
 			{
 				currentDrawingBuffer = GL_BACK;
 				currentBoundaryLoc = ObjectBoundary::Start;
+
+				// restore OpenGL state
+				//glPopAttrib();
 			}
+		
 		}
 		
 	}
