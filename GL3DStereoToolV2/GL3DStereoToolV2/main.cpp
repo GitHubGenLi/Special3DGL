@@ -225,6 +225,42 @@ void initialiseRealOpenGLFunctions()
 	_glColor4f = (PFN_GLCOLOR4F)_getAnyGLFuncAddress("glColor4f");
 	_glVertex2f = (PFN_GLVERTEX2F)_getAnyGLFuncAddress("glVertex2f");
 	_glBlendFunc = (PFN_GLBLENDFUNC)_getAnyGLFuncAddress("glBlendFunc");
+
+	_glFrustum = (PFN_GLFRUSTUM)_getAnyGLFuncAddress("glFrustum");
+	_glViewport = (PFN_GLVIEWPORT)_getAnyGLFuncAddress("glViewport");
+	_glMatrixMode = (PFN_GLMATRIXMODE)_getAnyGLFuncAddress("glMatrixMode");
+	_glPolygonMode = (PFN_GLPOLYGONMODE)_getAnyGLFuncAddress("glPolygonMode");
+	_glClearColor = (PFN_GLCLEARCOLOR)_getAnyGLFuncAddress("glClearColor");
+	_glScalef = (PFN_GLSCALEF)_getAnyGLFuncAddress("glScalef");
+	_glHint = (PFN_GLHINT)_getAnyGLFuncAddress("glHint");
+	_glFogfv = (PFN_GLFOGFV)_getAnyGLFuncAddress("glFogfv");
+	_glFogf = (PFN_GLFOGF)_getAnyGLFuncAddress("glFogf");
+	_glColorMaterial = (PFN_GLCOLORMATERIAL)_getAnyGLFuncAddress("glColorMaterial");
+	_glLightModelfv = (PFN_GLLIGHTMODELFV)_getAnyGLFuncAddress("glLightModelfv");
+	_glLightfv = (PFN_GLLIGHTFV)_getAnyGLFuncAddress("glLightfv");
+	_glGetFloatv = (PFN_GLGETFLOATV)_getAnyGLFuncAddress("glGetFloatv");
+	_glBindBufferARB = (PFN_GLBINDBUFFERARB)_getAnyGLFuncAddress("glBindBufferARB");
+	_glInterleavedArrays = (PFN_GLINTERLEAVEDARRAYS)_getAnyGLFuncAddress("glInterleavedArrays");
+	_glDrawArrays = (PFN_GLDRAWARRAYS)_getAnyGLFuncAddress("glDrawArrays");
+	_glUseProgram = (PFN_GLUSEPROGRAM)_getAnyGLFuncAddress("glUseProgram");
+	_glGetUniformLocationARB = (PFN_GLGETUNIFORMLOCATIONARB)_getAnyGLFuncAddress("glGetUniformLocationARB");
+	_glUniform4f = (PFN_GLUNIFORM4F)_getAnyGLFuncAddress("glUniform4f");
+	_glUniform1f = (PFN_GLUNIFORM1F)_getAnyGLFuncAddress("glUniform1f");
+	_glUniform1i = (PFN_GLUNIFORM1I)_getAnyGLFuncAddress("glUniform1i");
+	_glActiveTextureARB = (PFN_GLACTIVETEXTUREARB)_getAnyGLFuncAddress("glActiveTextureARB");
+	_glMultiTexCoord2fARB = (PFN_GLMULTITEXCOORD2FARB)_getAnyGLFuncAddress("glMultiTexCoord2fARB");
+	_glDepthMask = (PFN_GLDEPTHMASK)_getAnyGLFuncAddress("glDepthMask");
+	_glEnableClientState = (PFN_GLENABLECLIENTSTATE)_getAnyGLFuncAddress("glEnableClientState");
+	_glPointParameterfvARB = (PFN_GLPOINTPARAMETERFVARB)_getAnyGLFuncAddress("glPointParameterfvARB");
+	_glPointParameterfARB = (PFN_GLPOINTPARAMETERFARB)_getAnyGLFuncAddress("glPointParameterfARB");
+	_glPointSize = (PFN_GLPOINTSIZE)_getAnyGLFuncAddress("glPointSize");
+	_glTexEnvf = (PFN_GLTEXENVF)_getAnyGLFuncAddress("glTexEnvf");
+	_glColorPointer = (PFN_GLCOLORPOINTER)_getAnyGLFuncAddress("glColorPointer");
+	_glVertexPointer = (PFN_GLVERTEXPOINTER)_getAnyGLFuncAddress("glVertexPointer");
+	_glColor4ub = (PFN_GLCOLOR4UB)_getAnyGLFuncAddress("glColor4ub");
+	_glTexCoord2f = (PFN_GLTEXCOORD2F)_getAnyGLFuncAddress("glTexCoord2f");
+	_glVertex2i = (PFN_GLVERTEX2I)_getAnyGLFuncAddress("glVertex2i");
+
 }
 
 void processAttach()
@@ -1805,6 +1841,312 @@ void processAttach()
 	{
 		printf("Hooked _glBlendFunc\n");
 	}
+	if ((_glFrustum == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glFrustum), interceptedglFrustum))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glFrustum\n");
+	}
+	if ((_glViewport == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glViewport), interceptedglViewport))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glViewport\n");
+	}
+	if ((_glMatrixMode == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glMatrixMode), interceptedglMatrixMode))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glMatrixMode\n");
+	}
+	if ((_glPolygonMode == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPolygonMode), interceptedglPolygonMode))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glPolygonMode\n");
+	}
+	if ((_glClearColor == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glClearColor), interceptedglClearColor))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glClearColor\n");
+	}
+	if ((_glScalef == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glScalef), interceptedglScalef))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glScalef\n");
+	}
+	if ((_glHint == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glHint), interceptedglHint))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glHint\n");
+	}
+	if ((_glFogfv == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glFogfv), interceptedglFogfv))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glFogfv\n");
+	}
+	if ((_glFogf == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glFogf), interceptedglFogf))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glFogf\n");
+	}
+	if ((_glColorMaterial == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColorMaterial), interceptedglColorMaterial))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glColorMaterial\n");
+	}
+	if ((_glLightModelfv == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glLightModelfv), interceptedglLightModelfv))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glLightModelfv\n");
+	}
+	if ((_glLightfv == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glLightfv), interceptedglLightfv))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glLightfv\n");
+	}
+	if ((_glGetFloatv == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glGetFloatv), interceptedglGetFloatv))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glGetFloatv\n");
+	}
+	if ((_glBindBufferARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glBindBufferARB), interceptedglBindBufferARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glBindBufferARB\n");
+	}
+	if ((_glInterleavedArrays == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glInterleavedArrays), interceptedglInterleavedArrays))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glInterleavedArrays\n");
+	}
+	if ((_glDrawArrays == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glDrawArrays), interceptedglDrawArrays))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glDrawArrays\n");
+	}
+	if ((_glUseProgram == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glUseProgram), interceptedglUseProgram))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glUseProgram\n");
+	}
+	if ((_glGetUniformLocationARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glGetUniformLocationARB), interceptedglGetUniformLocationARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glGetUniformLocationARB\n");
+	}
+	if ((_glUniform4f == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glUniform4f), interceptedglUniform4f))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glUniform4f\n");
+	}
+	if ((_glUniform1f == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glUniform1f), interceptedglUniform1f))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glUniform1f\n");
+	}
+	if ((_glUniform1i == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glUniform1i), interceptedglUniform1i))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glUniform1i\n");
+	}
+	if ((_glActiveTextureARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glActiveTextureARB), interceptedglActiveTextureARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glActiveTextureARB\n");
+	}
+	if ((_glMultiTexCoord2fARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glMultiTexCoord2fARB), interceptedglMultiTexCoord2fARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glMultiTexCoord2fARB\n");
+	}
+	if ((_glDepthMask == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glDepthMask), interceptedglDepthMask))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glDepthMask\n");
+	}
+	if ((_glEnableClientState == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glEnableClientState), interceptedglEnableClientState))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glEnableClientState\n");
+	}
+	if ((_glPointParameterfvARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPointParameterfvARB), interceptedglPointParameterfvARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glPointParameterfvARB\n");
+	}
+	if ((_glPointParameterfARB == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPointParameterfARB), interceptedglPointParameterfARB))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glPointParameterfARB\n");
+	}
+	if ((_glPointSize == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPointSize), interceptedglPointSize))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glPointSize\n");
+	}
+	if ((_glTexEnvf == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTexEnvf), interceptedglTexEnvf))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glTexEnvf\n");
+	}
+	if ((_glColorPointer == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColorPointer), interceptedglColorPointer))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glColorPointer\n");
+	}
+	if ((_glVertexPointer == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertexPointer), interceptedglVertexPointer))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glVertexPointer\n");
+	}
+	if ((_glColor4ub == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColor4ub), interceptedglColor4ub))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glColor4ub\n");
+	}
+	if ((_glTexCoord2f == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTexCoord2f), interceptedglTexCoord2f))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glTexCoord2f\n");
+	}
+	if ((_glVertex2i == 0) ||
+		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertex2i), interceptedglVertex2i))
+	{
+		cerr << "Failed to hook _glLoadIdentity" << endl;
+	}
+	else
+	{
+		printf("Hooked _glVertex2i\n");
+	}
 }
 void processDetach()
 {
@@ -1976,6 +2318,40 @@ void processDetach()
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glColor4f));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glVertex2f));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glBlendFunc));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glFrustum));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glViewport));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glMatrixMode));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glPolygonMode));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glClearColor));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glScalef));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glHint));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glFogfv));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glFogf));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glColorMaterial));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glLightModelfv));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glLightfv));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glGetFloatv));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glBindBufferARB));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glInterleavedArrays));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glDrawArrays));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glUseProgram));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glGetUniformLocationARB));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glUniform4f));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glUniform1f));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glUniform1i));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glActiveTextureARB));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glMultiTexCoord2fARB));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glDepthMask));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glEnableClientState));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glPointParameterfvARB));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glPointParameterfARB));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glPointSize));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glTexEnvf));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glColorPointer));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glVertexPointer));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glColor4ub));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glTexCoord2f));
+	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glVertex2i));
 }
 BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
 {

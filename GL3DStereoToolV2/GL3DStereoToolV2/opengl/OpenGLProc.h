@@ -656,6 +656,107 @@ extern PFN_GLVERTEX2F _glVertex2f;
 typedef void (APIENTRY * PFN_GLBLENDFUNC)(GLenum sfactor, GLenum dfactor);
 extern PFN_GLBLENDFUNC _glBlendFunc;
 
+typedef void (APIENTRY * PFN_GLFRUSTUM)(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar);
+extern PFN_GLFRUSTUM _glFrustum;
+
+typedef void (APIENTRY * PFN_GLVIEWPORT)(GLint x, GLint y, GLsizei width, GLsizei height);
+extern PFN_GLVIEWPORT _glViewport;
+
+typedef void (APIENTRY * PFN_GLMATRIXMODE)(GLenum mode);
+extern PFN_GLMATRIXMODE _glMatrixMode;
+
+typedef void (APIENTRY * PFN_GLCULLFACE)(GLenum mode);
+extern PFN_GLCULLFACE _glCullFace;
+
+typedef void (APIENTRY * PFN_GLPOLYGONMODE)(GLenum face, GLenum mode);
+extern PFN_GLPOLYGONMODE _glPolygonMode;
+
+typedef void (APIENTRY * PFN_GLSCALEF)(GLfloat x, GLfloat y, GLfloat z);
+extern PFN_GLSCALEF _glScalef;
+
+typedef void (APIENTRY * PFN_GLFOGI)(GLenum pname, GLint param);
+extern PFN_GLFOGI _glFogi;
+
+typedef void (APIENTRY * PFN_GLHINT)(GLenum target, GLenum mode);
+extern PFN_GLHINT _glHint;
+
+typedef void (APIENTRY * PFN_GLFOGFV)(GLenum pname, const GLfloat * params);
+extern PFN_GLFOGFV _glFogfv;
+
+typedef void (APIENTRY * PFN_GLFOGF)(GLenum pname, GLfloat param);
+extern PFN_GLFOGF _glFogf;
+
+typedef void (APIENTRY * PFN_GLCOLORMATERIAL)(GLenum face, GLenum mode);
+extern PFN_GLCOLORMATERIAL _glColorMaterial;
+
+typedef void (APIENTRY * PFN_GLLIGHTMODELFV)(GLenum pname, const GLfloat * params);
+extern PFN_GLLIGHTMODELFV _glLightModelfv;
+
+typedef void (APIENTRY * PFN_GLGETFLOATV)(GLenum pname, GLfloat * params);
+extern PFN_GLGETFLOATV _glGetFloatv;
+
+typedef void (APIENTRY * PFN_GLBINDBUFFERARB)(GLenum target, GLuint buffer);
+extern PFN_GLBINDBUFFERARB _glBindBufferARB;
+
+typedef void (APIENTRY * PFN_GLINTERLEAVEDARRAYS)(GLenum format, GLsizei stride, const GLvoid * pointer);
+extern PFN_GLINTERLEAVEDARRAYS _glInterleavedArrays;
+
+typedef void (APIENTRY * PFN_GLDRAWARRAYS)(GLenum mode, GLint first, GLsizei count);
+extern PFN_GLDRAWARRAYS _glDrawArrays;
+
+typedef void (APIENTRY * PFN_GLUSEPROGRAM)(GLuint program);
+extern PFN_GLUSEPROGRAM _glUseProgram;
+
+typedef GLint(APIENTRY * PFN_GLGETUNIFORMLOCATIONARB)(GLhandleARB programObj, const GLcharARB * name);
+extern PFN_GLGETUNIFORMLOCATIONARB _glGetUniformLocationARB;
+
+typedef void (APIENTRY * PFN_GLUNIFORM4F)(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
+extern PFN_GLUNIFORM4F _glUniform4f;
+
+typedef void (APIENTRY * PFN_GLUNIFORM1F)(GLint location, GLfloat v0);
+extern PFN_GLUNIFORM1F _glUniform1f;
+
+typedef void (APIENTRY * PFN_GLUNIFORM1I)(GLint location, GLint v0);
+extern PFN_GLUNIFORM1I _glUniform1i;
+
+typedef void (APIENTRY * PFN_GLACTIVETEXTUREARB)(GLenum texture);
+extern PFN_GLACTIVETEXTUREARB _glActiveTextureARB;
+
+typedef void (APIENTRY * PFN_GLMULTITEXCOORD2FARB)(GLenum target, GLfloat s, GLfloat t);
+extern PFN_GLMULTITEXCOORD2FARB _glMultiTexCoord2fARB;
+
+typedef void (APIENTRY * PFN_GLDEPTHMASK)(GLboolean flag);
+extern PFN_GLDEPTHMASK _glDepthMask;
+
+typedef void (APIENTRY * PFN_GLENABLECLIENTSTATE)(GLenum array);
+extern PFN_GLENABLECLIENTSTATE _glEnableClientState;
+
+typedef void (APIENTRY * PFN_GLPOINTPARAMETERFVARB)(GLenum pname, const GLfloat * params);
+extern PFN_GLPOINTPARAMETERFVARB _glPointParameterfvARB;
+
+typedef void (APIENTRY * PFN_GLPOINTPARAMETERFARB)(GLenum pname, GLfloat param);
+extern PFN_GLPOINTPARAMETERFARB _glPointParameterfARB;
+
+typedef void (APIENTRY * PFN_GLPOINTSIZE)(GLfloat size);
+extern PFN_GLPOINTSIZE _glPointSize;
+
+typedef void (APIENTRY * PFN_GLTEXENVF)(GLenum target, GLenum pname, GLfloat param);
+extern PFN_GLTEXENVF _glTexEnvf;
+
+typedef void (APIENTRY * PFN_GLCOLORPOINTER)(GLint size, GLenum type, GLsizei stride, const GLvoid * pointer);
+extern PFN_GLCOLORPOINTER _glColorPointer;
+
+typedef void (APIENTRY * PFN_GLVERTEXPOINTER)(GLint size, GLenum type, GLsizei stride, const GLvoid * pointer);
+extern PFN_GLVERTEXPOINTER _glVertexPointer;
+
+typedef void (APIENTRY * PFN_GLCOLOR4UB)(GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha);
+extern PFN_GLCOLOR4UB _glColor4ub;
+
+typedef void (APIENTRY * PFN_GLTEXCOORD2F)(GLfloat s, GLfloat t);
+extern PFN_GLTEXCOORD2F _glTexCoord2f;
+
+typedef void (APIENTRY * PFN_GLVERTEX2I)(GLint x, GLint y);
+extern PFN_GLVERTEX2I _glVertex2i;
 
 /*************************************************************/
 //void initialiseRealOpenGLFunctions();
@@ -838,7 +939,40 @@ void APIENTRY interceptedglPopAttrib(void);
 void APIENTRY interceptedglColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
 void APIENTRY interceptedglVertex2f(GLfloat x, GLfloat y);
 void APIENTRY interceptedglBlendFunc(GLenum sfactor, GLenum dfactor);
+void APIENTRY interceptedglFrustum(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar);
+void APIENTRY interceptedglViewport(GLint x, GLint y, GLsizei width, GLsizei height);
+void APIENTRY interceptedglMatrixMode(GLenum mode);
+void APIENTRY interceptedglPolygonMode(GLenum face, GLenum mode);
+void APIENTRY interceptedglClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
+void APIENTRY interceptedglScalef(GLfloat x, GLfloat y, GLfloat z);
+void APIENTRY interceptedglHint(GLenum target, GLenum mode);
+void APIENTRY interceptedglFogfv(GLenum pname, const GLfloat * params);
+void APIENTRY interceptedglFogf(GLenum pname, const GLfloat * params);
+void APIENTRY interceptedglColorMaterial(GLenum face, GLenum mode);
+void APIENTRY interceptedglLightModelfv(GLenum pname, const GLfloat * params);
 
+void APIENTRY interceptedglGetFloatv(GLenum pname, GLfloat * params);
+void APIENTRY interceptedglBindBufferARB(GLenum target, GLuint buffer);
+void APIENTRY interceptedglInterleavedArrays(GLenum format, GLsizei stride, const GLvoid * pointer);
+void APIENTRY interceptedglDrawArrays(GLenum mode, GLint first, GLsizei count);
+void APIENTRY interceptedglUseProgram(GLuint program);
+GLint APIENTRY interceptedglGetUniformLocationARB(GLhandleARB programObj, const GLcharARB * name);
+void APIENTRY interceptedglUniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
+void APIENTRY interceptedglUniform1f(GLint location, GLfloat v0);
+void APIENTRY interceptedglUniform1i(GLint location, GLint v0);
+void APIENTRY interceptedglActiveTextureARB(GLenum texture);
+void APIENTRY interceptedglMultiTexCoord2fARB(GLenum target, GLfloat s, GLfloat t);
+void APIENTRY interceptedglDepthMask(GLboolean flag);
+void APIENTRY interceptedglEnableClientState(GLenum array);
+void APIENTRY interceptedglPointParameterfvARB(GLenum pname, const GLfloat * params);
+void APIENTRY interceptedglPointParameterfARB(GLenum pname, GLfloat param);
+void APIENTRY interceptedglPointSize(GLfloat size);
+void APIENTRY interceptedglTexEnvf(GLenum target, GLenum pname, GLfloat param);
+void APIENTRY interceptedglColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid * pointer);
+void APIENTRY interceptedglVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid * pointer);
+void APIENTRY interceptedglColor4ub(GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha);
+void APIENTRY interceptedglTexCoord2f(GLfloat s, GLfloat t);
+void APIENTRY interceptedglVertex2i(GLint x, GLint y);
 /*************************************************************/
 
 /// OpenGL rendering thread function

@@ -3264,6 +3264,619 @@ static void APIENTRY _get_glBlendFunc(GLenum sfactor, GLenum dfactor) {
 
 PFN_GLBLENDFUNC _glBlendFunc = &_get_glBlendFunc;
 
+static void APIENTRY _fail_glFrustum(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar) {
+	const char *_name = "glFrustum";
+	
+	return;
+}
+
+static void APIENTRY _get_glFrustum(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar) {
+	PFN_GLFRUSTUM _ptr;
+	_ptr = (PFN_GLFRUSTUM)_getPublicProcAddress("glFrustum");
+	if (!_ptr) {
+		_ptr = &_fail_glFrustum;
+	}
+	_glFrustum = _ptr;
+	_glFrustum(left, right, bottom, top, zNear, zFar);
+}
+
+PFN_GLFRUSTUM _glFrustum = &_get_glFrustum;
+
+static void APIENTRY _fail_glViewport(GLint x, GLint y, GLsizei width, GLsizei height) {
+	const char *_name = "glViewport";
+	
+	return;
+}
+
+static void APIENTRY _get_glViewport(GLint x, GLint y, GLsizei width, GLsizei height) {
+	PFN_GLVIEWPORT _ptr;
+	_ptr = (PFN_GLVIEWPORT)_getPublicProcAddress("glViewport");
+	if (!_ptr) {
+		_ptr = &_fail_glViewport;
+	}
+	_glViewport = _ptr;
+	_glViewport(x, y, width, height);
+}
+
+PFN_GLVIEWPORT _glViewport = &_get_glViewport;
+
+static void APIENTRY _fail_glMatrixMode(GLenum mode) {
+	const char *_name = "glMatrixMode";
+	
+	return;
+}
+
+static void APIENTRY _get_glMatrixMode(GLenum mode) {
+	PFN_GLMATRIXMODE _ptr;
+	_ptr = (PFN_GLMATRIXMODE)_getPublicProcAddress("glMatrixMode");
+	if (!_ptr) {
+		_ptr = &_fail_glMatrixMode;
+	}
+	_glMatrixMode = _ptr;
+	_glMatrixMode(mode);
+}
+
+PFN_GLMATRIXMODE _glMatrixMode = &_get_glMatrixMode;
+
+static void APIENTRY _fail_glCullFace(GLenum mode) {
+	const char *_name = "glCullFace";
+	
+	return;
+}
+
+static void APIENTRY _get_glCullFace(GLenum mode) {
+	PFN_GLCULLFACE _ptr;
+	_ptr = (PFN_GLCULLFACE)_getPublicProcAddress("glCullFace");
+	if (!_ptr) {
+		_ptr = &_fail_glCullFace;
+	}
+	_glCullFace = _ptr;
+	_glCullFace(mode);
+}
+
+PFN_GLCULLFACE _glCullFace = &_get_glCullFace;
+
+static void APIENTRY _fail_glPolygonMode(GLenum face, GLenum mode) {
+	const char *_name = "glPolygonMode";
+	
+	return;
+}
+
+static void APIENTRY _get_glPolygonMode(GLenum face, GLenum mode) {
+	PFN_GLPOLYGONMODE _ptr;
+	_ptr = (PFN_GLPOLYGONMODE)_getPublicProcAddress("glPolygonMode");
+	if (!_ptr) {
+		_ptr = &_fail_glPolygonMode;
+	}
+	_glPolygonMode = _ptr;
+	_glPolygonMode(face, mode);
+}
+
+PFN_GLPOLYGONMODE _glPolygonMode = &_get_glPolygonMode;
+
+static void APIENTRY _fail_glScalef(GLfloat x, GLfloat y, GLfloat z) {
+	const char *_name = "glScalef";
+	
+	return;
+}
+
+static void APIENTRY _get_glScalef(GLfloat x, GLfloat y, GLfloat z) {
+	PFN_GLSCALEF _ptr;
+	_ptr = (PFN_GLSCALEF)_getPublicProcAddress("glScalef");
+	if (!_ptr) {
+		_ptr = &_fail_glScalef;
+	}
+	_glScalef = _ptr;
+	_glScalef(x, y, z);
+}
+
+PFN_GLSCALEF _glScalef = &_get_glScalef;
+
+static void APIENTRY _fail_glFogi(GLenum pname, GLint param) {
+	const char *_name = "glFogi";
+	
+	return;
+}
+
+static void APIENTRY _get_glFogi(GLenum pname, GLint param) {
+	PFN_GLFOGI _ptr;
+	_ptr = (PFN_GLFOGI)_getPublicProcAddress("glFogi");
+	if (!_ptr) {
+		_ptr = &_fail_glFogi;
+	}
+	_glFogi = _ptr;
+	_glFogi(pname, param);
+}
+
+PFN_GLFOGI _glFogi = &_get_glFogi;
+
+static void APIENTRY _fail_glHint(GLenum target, GLenum mode) {
+	const char *_name = "glHint";
+	
+	return;
+}
+
+static void APIENTRY _get_glHint(GLenum target, GLenum mode) {
+	PFN_GLHINT _ptr;
+	_ptr = (PFN_GLHINT)_getPublicProcAddress("glHint");
+	if (!_ptr) {
+		_ptr = &_fail_glHint;
+	}
+	_glHint = _ptr;
+	_glHint(target, mode);
+}
+
+PFN_GLHINT _glHint = &_get_glHint;
+
+static void APIENTRY _fail_glFogfv(GLenum pname, const GLfloat * params) {
+	const char *_name = "glFogfv";
+	
+	return;
+}
+
+static void APIENTRY _get_glFogfv(GLenum pname, const GLfloat * params) {
+	PFN_GLFOGFV _ptr;
+	_ptr = (PFN_GLFOGFV)_getPublicProcAddress("glFogfv");
+	if (!_ptr) {
+		_ptr = &_fail_glFogfv;
+	}
+	_glFogfv = _ptr;
+	_glFogfv(pname, params);
+}
+
+PFN_GLFOGFV _glFogfv = &_get_glFogfv;
+
+static void APIENTRY _fail_glFogf(GLenum pname, GLfloat param) {
+	const char *_name = "glFogf";
+	
+	return;
+}
+
+static void APIENTRY _get_glFogf(GLenum pname, GLfloat param) {
+	PFN_GLFOGF _ptr;
+	_ptr = (PFN_GLFOGF)_getPublicProcAddress("glFogf");
+	if (!_ptr) {
+		_ptr = &_fail_glFogf;
+	}
+	_glFogf = _ptr;
+	_glFogf(pname, param);
+}
+
+PFN_GLFOGF _glFogf = &_get_glFogf;
+
+static void APIENTRY _fail_glColorMaterial(GLenum face, GLenum mode) {
+	const char *_name = "glColorMaterial";
+	
+	return;
+}
+
+static void APIENTRY _get_glColorMaterial(GLenum face, GLenum mode) {
+	PFN_GLCOLORMATERIAL _ptr;
+	_ptr = (PFN_GLCOLORMATERIAL)_getPublicProcAddress("glColorMaterial");
+	if (!_ptr) {
+		_ptr = &_fail_glColorMaterial;
+	}
+	_glColorMaterial = _ptr;
+	_glColorMaterial(face, mode);
+}
+
+PFN_GLCOLORMATERIAL _glColorMaterial = &_get_glColorMaterial;
+
+static void APIENTRY _fail_glLightModelfv(GLenum pname, const GLfloat * params) {
+	const char *_name = "glLightModelfv";
+	
+	return;
+}
+
+static void APIENTRY _get_glLightModelfv(GLenum pname, const GLfloat * params) {
+	PFN_GLLIGHTMODELFV _ptr;
+	_ptr = (PFN_GLLIGHTMODELFV)_getPublicProcAddress("glLightModelfv");
+	if (!_ptr) {
+		_ptr = &_fail_glLightModelfv;
+	}
+	_glLightModelfv = _ptr;
+	_glLightModelfv(pname, params);
+}
+
+PFN_GLLIGHTMODELFV _glLightModelfv = &_get_glLightModelfv;
+
+static void APIENTRY _fail_glGetFloatv(GLenum pname, GLfloat * params) {
+	const char *_name = "glGetFloatv";
+
+	return;
+}
+
+static void APIENTRY _get_glGetFloatv(GLenum pname, GLfloat * params) {
+	PFN_GLGETFLOATV _ptr;
+	_ptr = (PFN_GLGETFLOATV)_getPublicProcAddress("glGetFloatv");
+	if (!_ptr) {
+		_ptr = &_fail_glGetFloatv;
+	}
+	_glGetFloatv = _ptr;
+	_glGetFloatv(pname, params);
+}
+
+PFN_GLGETFLOATV _glGetFloatv = &_get_glGetFloatv;
+
+static void APIENTRY _fail_glBindBufferARB(GLenum target, GLuint buffer) {
+	const char *_name = "glBindBufferARB";
+	
+	return;
+}
+
+static void APIENTRY _get_glBindBufferARB(GLenum target, GLuint buffer) {
+	PFN_GLBINDBUFFERARB _ptr;
+	_ptr = (PFN_GLBINDBUFFERARB)_getPrivateProcAddress("glBindBufferARB");
+	if (!_ptr) {
+		_ptr = &_fail_glBindBufferARB;
+	}
+	_glBindBufferARB = _ptr;
+	_glBindBufferARB(target, buffer);
+}
+
+PFN_GLBINDBUFFERARB _glBindBufferARB = &_get_glBindBufferARB;
+
+static void APIENTRY _fail_glInterleavedArrays(GLenum format, GLsizei stride, const GLvoid * pointer) {
+	const char *_name = "glInterleavedArrays";
+	
+	return;
+}
+
+static void APIENTRY _get_glInterleavedArrays(GLenum format, GLsizei stride, const GLvoid * pointer) {
+	PFN_GLINTERLEAVEDARRAYS _ptr;
+	_ptr = (PFN_GLINTERLEAVEDARRAYS)_getPublicProcAddress("glInterleavedArrays");
+	if (!_ptr) {
+		_ptr = &_fail_glInterleavedArrays;
+	}
+	_glInterleavedArrays = _ptr;
+	_glInterleavedArrays(format, stride, pointer);
+}
+
+PFN_GLINTERLEAVEDARRAYS _glInterleavedArrays = &_get_glInterleavedArrays;
+
+static void APIENTRY _fail_glDrawArrays(GLenum mode, GLint first, GLsizei count) {
+	const char *_name = "glDrawArrays";
+	
+	return;
+}
+
+static void APIENTRY _get_glDrawArrays(GLenum mode, GLint first, GLsizei count) {
+	PFN_GLDRAWARRAYS _ptr;
+	_ptr = (PFN_GLDRAWARRAYS)_getPublicProcAddress("glDrawArrays");
+	if (!_ptr) {
+		_ptr = &_fail_glDrawArrays;
+	}
+	_glDrawArrays = _ptr;
+	_glDrawArrays(mode, first, count);
+}
+
+PFN_GLDRAWARRAYS _glDrawArrays = &_get_glDrawArrays;
+
+static void APIENTRY _fail_glUseProgram(GLuint program) {
+	const char *_name = "glUseProgram";
+	
+	return;
+}
+
+static void APIENTRY _get_glUseProgram(GLuint program) {
+	PFN_GLUSEPROGRAM _ptr;
+	_ptr = (PFN_GLUSEPROGRAM)_getPrivateProcAddress("glUseProgram");
+	if (!_ptr) {
+		_ptr = &_fail_glUseProgram;
+	}
+	_glUseProgram = _ptr;
+	_glUseProgram(program);
+}
+
+PFN_GLUSEPROGRAM _glUseProgram = &_get_glUseProgram;
+
+static GLint APIENTRY _fail_glGetUniformLocationARB(GLhandleARB programObj, const GLcharARB * name) {
+	const char *_name = "glGetUniformLocationARB";
+	
+	return 0;
+}
+
+static GLint APIENTRY _get_glGetUniformLocationARB(GLhandleARB programObj, const GLcharARB * name) {
+	PFN_GLGETUNIFORMLOCATIONARB _ptr;
+	_ptr = (PFN_GLGETUNIFORMLOCATIONARB)_getPrivateProcAddress("glGetUniformLocationARB");
+	if (!_ptr) {
+		_ptr = &_fail_glGetUniformLocationARB;
+	}
+	_glGetUniformLocationARB = _ptr;
+	return _glGetUniformLocationARB(programObj, name);
+}
+
+PFN_GLGETUNIFORMLOCATIONARB _glGetUniformLocationARB = &_get_glGetUniformLocationARB;
+
+static void APIENTRY _fail_glUniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3) {
+	const char *_name = "glUniform4f";
+	
+	return;
+}
+
+static void APIENTRY _get_glUniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3) {
+	PFN_GLUNIFORM4F _ptr;
+	_ptr = (PFN_GLUNIFORM4F)_getPrivateProcAddress("glUniform4f");
+	if (!_ptr) {
+		_ptr = &_fail_glUniform4f;
+	}
+	_glUniform4f = _ptr;
+	_glUniform4f(location, v0, v1, v2, v3);
+}
+
+PFN_GLUNIFORM4F _glUniform4f = &_get_glUniform4f;
+
+static void APIENTRY _fail_glUniform1f(GLint location, GLfloat v0) {
+	const char *_name = "glUniform1f";
+	
+	return;
+}
+
+static void APIENTRY _get_glUniform1f(GLint location, GLfloat v0) {
+	PFN_GLUNIFORM1F _ptr;
+	_ptr = (PFN_GLUNIFORM1F)_getPrivateProcAddress("glUniform1f");
+	if (!_ptr) {
+		_ptr = &_fail_glUniform1f;
+	}
+	_glUniform1f = _ptr;
+	_glUniform1f(location, v0);
+}
+
+PFN_GLUNIFORM1F _glUniform1f = &_get_glUniform1f;
+
+static void APIENTRY _fail_glUniform1i(GLint location, GLint v0) {
+	const char *_name = "glUniform1i";
+	
+	return;
+}
+
+static void APIENTRY _get_glUniform1i(GLint location, GLint v0) {
+	PFN_GLUNIFORM1I _ptr;
+	_ptr = (PFN_GLUNIFORM1I)_getPrivateProcAddress("glUniform1i");
+	if (!_ptr) {
+		_ptr = &_fail_glUniform1i;
+	}
+	_glUniform1i = _ptr;
+	_glUniform1i(location, v0);
+}
+
+PFN_GLUNIFORM1I _glUniform1i = &_get_glUniform1i;
+
+static void APIENTRY _fail_glActiveTextureARB(GLenum texture) {
+	const char *_name = "glActiveTextureARB";
+	
+	return;
+}
+
+static void APIENTRY _get_glActiveTextureARB(GLenum texture) {
+	PFN_GLACTIVETEXTUREARB _ptr;
+	_ptr = (PFN_GLACTIVETEXTUREARB)_getPrivateProcAddress("glActiveTextureARB");
+	if (!_ptr) {
+		_ptr = &_fail_glActiveTextureARB;
+	}
+	_glActiveTextureARB = _ptr;
+	_glActiveTextureARB(texture);
+}
+
+PFN_GLACTIVETEXTUREARB _glActiveTextureARB = &_get_glActiveTextureARB;
+
+static void APIENTRY _fail_glMultiTexCoord2fARB(GLenum target, GLfloat s, GLfloat t) {
+	const char *_name = "glMultiTexCoord2fARB";
+	
+	return;
+}
+
+static void APIENTRY _get_glMultiTexCoord2fARB(GLenum target, GLfloat s, GLfloat t) {
+	PFN_GLMULTITEXCOORD2FARB _ptr;
+	_ptr = (PFN_GLMULTITEXCOORD2FARB)_getPrivateProcAddress("glMultiTexCoord2fARB");
+	if (!_ptr) {
+		_ptr = &_fail_glMultiTexCoord2fARB;
+	}
+	_glMultiTexCoord2fARB = _ptr;
+	_glMultiTexCoord2fARB(target, s, t);
+}
+
+PFN_GLMULTITEXCOORD2FARB _glMultiTexCoord2fARB = &_get_glMultiTexCoord2fARB;
+
+static void APIENTRY _fail_glDepthMask(GLboolean flag) {
+	const char *_name = "glDepthMask";
+	
+	return;
+}
+
+static void APIENTRY _get_glDepthMask(GLboolean flag) {
+	PFN_GLDEPTHMASK _ptr;
+	_ptr = (PFN_GLDEPTHMASK)_getPublicProcAddress("glDepthMask");
+	if (!_ptr) {
+		_ptr = &_fail_glDepthMask;
+	}
+	_glDepthMask = _ptr;
+	_glDepthMask(flag);
+}
+
+PFN_GLDEPTHMASK _glDepthMask = &_get_glDepthMask;
+
+static void APIENTRY _fail_glEnableClientState(GLenum array) {
+	const char *_name = "glEnableClientState";
+	
+	return;
+}
+
+static void APIENTRY _get_glEnableClientState(GLenum array) {
+	PFN_GLENABLECLIENTSTATE _ptr;
+	_ptr = (PFN_GLENABLECLIENTSTATE)_getPublicProcAddress("glEnableClientState");
+	if (!_ptr) {
+		_ptr = &_fail_glEnableClientState;
+	}
+	_glEnableClientState = _ptr;
+	_glEnableClientState(array);
+}
+
+PFN_GLENABLECLIENTSTATE _glEnableClientState = &_get_glEnableClientState;
+
+static void APIENTRY _fail_glPointParameterfvARB(GLenum pname, const GLfloat * params) {
+	const char *_name = "glPointParameterfvARB";
+	
+	return;
+}
+
+static void APIENTRY _get_glPointParameterfvARB(GLenum pname, const GLfloat * params) {
+	PFN_GLPOINTPARAMETERFVARB _ptr;
+	_ptr = (PFN_GLPOINTPARAMETERFVARB)_getPrivateProcAddress("glPointParameterfvARB");
+	if (!_ptr) {
+		_ptr = &_fail_glPointParameterfvARB;
+	}
+	_glPointParameterfvARB = _ptr;
+	_glPointParameterfvARB(pname, params);
+}
+
+PFN_GLPOINTPARAMETERFVARB _glPointParameterfvARB = &_get_glPointParameterfvARB;
+
+static void APIENTRY _fail_glPointParameterfARB(GLenum pname, GLfloat param) {
+	const char *_name = "glPointParameterfARB";
+
+	return;
+}
+
+static void APIENTRY _get_glPointParameterfARB(GLenum pname, GLfloat param) {
+	PFN_GLPOINTPARAMETERFARB _ptr;
+	_ptr = (PFN_GLPOINTPARAMETERFARB)_getPrivateProcAddress("glPointParameterfARB");
+	if (!_ptr) {
+		_ptr = &_fail_glPointParameterfARB;
+	}
+	_glPointParameterfARB = _ptr;
+	_glPointParameterfARB(pname, param);
+}
+
+PFN_GLPOINTPARAMETERFARB _glPointParameterfARB = &_get_glPointParameterfARB;
+
+static void APIENTRY _fail_glPointSize(GLfloat size) {
+	const char *_name = "glPointSize";
+	
+	return;
+}
+
+static void APIENTRY _get_glPointSize(GLfloat size) {
+	PFN_GLPOINTSIZE _ptr;
+	_ptr = (PFN_GLPOINTSIZE)_getPublicProcAddress("glPointSize");
+	if (!_ptr) {
+		_ptr = &_fail_glPointSize;
+	}
+	_glPointSize = _ptr;
+	_glPointSize(size);
+}
+
+PFN_GLPOINTSIZE _glPointSize = &_get_glPointSize;
+
+static void APIENTRY _fail_glTexEnvf(GLenum target, GLenum pname, GLfloat param) {
+	const char *_name = "glTexEnvf";
+
+	return;
+}
+
+static void APIENTRY _get_glTexEnvf(GLenum target, GLenum pname, GLfloat param) {
+	PFN_GLTEXENVF _ptr;
+	_ptr = (PFN_GLTEXENVF)_getPublicProcAddress("glTexEnvf");
+	if (!_ptr) {
+		_ptr = &_fail_glTexEnvf;
+	}
+	_glTexEnvf = _ptr;
+	_glTexEnvf(target, pname, param);
+}
+
+PFN_GLTEXENVF _glTexEnvf = &_get_glTexEnvf;
+
+static void APIENTRY _fail_glColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid * pointer) {
+	const char *_name = "glColorPointer";
+
+	return;
+}
+
+static void APIENTRY _get_glColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid * pointer) {
+	PFN_GLCOLORPOINTER _ptr;
+	_ptr = (PFN_GLCOLORPOINTER)_getPublicProcAddress("glColorPointer");
+	if (!_ptr) {
+		_ptr = &_fail_glColorPointer;
+	}
+	_glColorPointer = _ptr;
+	_glColorPointer(size, type, stride, pointer);
+}
+
+PFN_GLCOLORPOINTER _glColorPointer = &_get_glColorPointer;
+
+static void APIENTRY _fail_glVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid * pointer) {
+	const char *_name = "glVertexPointer";
+
+	return;
+}
+
+static void APIENTRY _get_glVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid * pointer) {
+	PFN_GLVERTEXPOINTER _ptr;
+	_ptr = (PFN_GLVERTEXPOINTER)_getPublicProcAddress("glVertexPointer");
+	if (!_ptr) {
+		_ptr = &_fail_glVertexPointer;
+	}
+	_glVertexPointer = _ptr;
+	_glVertexPointer(size, type, stride, pointer);
+}
+
+PFN_GLVERTEXPOINTER _glVertexPointer = &_get_glVertexPointer;
+
+static void APIENTRY _fail_glColor4ub(GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha) {
+	const char *_name = "glColor4ub";
+	
+	return;
+}
+
+static void APIENTRY _get_glColor4ub(GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha) {
+	PFN_GLCOLOR4UB _ptr;
+	_ptr = (PFN_GLCOLOR4UB)_getPublicProcAddress("glColor4ub");
+	if (!_ptr) {
+		_ptr = &_fail_glColor4ub;
+	}
+	_glColor4ub = _ptr;
+	_glColor4ub(red, green, blue, alpha);
+}
+
+PFN_GLCOLOR4UB _glColor4ub = &_get_glColor4ub;
+
+static void APIENTRY _fail_glTexCoord2f(GLfloat s, GLfloat t) {
+	const char *_name = "glTexCoord2f";
+	
+	return;
+}
+
+static void APIENTRY _get_glTexCoord2f(GLfloat s, GLfloat t) {
+	PFN_GLTEXCOORD2F _ptr;
+	_ptr = (PFN_GLTEXCOORD2F)_getPublicProcAddress("glTexCoord2f");
+	if (!_ptr) {
+		_ptr = &_fail_glTexCoord2f;
+	}
+	_glTexCoord2f = _ptr;
+	_glTexCoord2f(s, t);
+}
+
+PFN_GLTEXCOORD2F _glTexCoord2f = &_get_glTexCoord2f;
+
+static void APIENTRY _fail_glVertex2i(GLint x, GLint y) {
+	const char *_name = "glVertex2i";
+	
+	return;
+}
+
+static void APIENTRY _get_glVertex2i(GLint x, GLint y) {
+	PFN_GLVERTEX2I _ptr;
+	_ptr = (PFN_GLVERTEX2I)_getPublicProcAddress("glVertex2i");
+	if (!_ptr) {
+		_ptr = &_fail_glVertex2i;
+	}
+	_glVertex2i = _ptr;
+	_glVertex2i(x, y);
+}
+
+PFN_GLVERTEX2I _glVertex2i = &_get_glVertex2i;
+
+
 /************************************************************************************/
 int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR * ppfd)
 {
@@ -5944,6 +6557,369 @@ void APIENTRY interceptedglBlendFunc(GLenum sfactor, GLenum dfactor)
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
 	_glBlendFunc(sfactor, dfactor);
+}
+void APIENTRY interceptedglFrustum(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glFrustum");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glFrustum(left, right, bottom, top, zNear, zFar);
+}
+void APIENTRY interceptedglViewport(GLint x, GLint y, GLsizei width, GLsizei height)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glViewport");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glViewport(x, y, width, height);
+}
+void APIENTRY interceptedglMatrixMode(GLenum mode)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glMatrixMode");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glMatrixMode(mode);
+}
+void APIENTRY interceptedglPolygonMode(GLenum face, GLenum mode)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glPolygonMode");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glPolygonMode(face, mode);
+}
+void APIENTRY interceptedglClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glClearColor");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glClearColor(red, green, blue, alpha);
+}
+void APIENTRY interceptedglScalef(GLfloat x, GLfloat y, GLfloat z)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glScalef");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glScalef(x, y, z);
+}
+void APIENTRY interceptedglHint(GLenum target, GLenum mode)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glHint");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glHint(target, mode);
+}
+void APIENTRY interceptedglFogfv(GLenum pname, const GLfloat * params)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glFogfv");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glFogfv(pname, params);
+}
+void APIENTRY interceptedglFogf(GLenum pname, const GLfloat * params)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glFogf");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glFogfv(pname, params);
+}
+void APIENTRY interceptedglColorMaterial(GLenum face, GLenum mode)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glColorMaterial");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glColorMaterial(face, mode);
+}
+void APIENTRY interceptedglLightModelfv(GLenum pname, const GLfloat * params)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glLightModelfv");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glLightModelfv(pname, params);
+}
+void APIENTRY interceptedglGetFloatv(GLenum pname, GLfloat * params)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glGetFloatv");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glGetFloatv(pname, params);
+}
+void APIENTRY interceptedglBindBufferARB(GLenum target, GLuint buffer)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glBindBufferARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glBindBufferARB(target, buffer);
+}
+void APIENTRY interceptedglInterleavedArrays(GLenum format, GLsizei stride, const GLvoid * pointer)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glInterleavedArrays");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glInterleavedArrays(format, stride, pointer);
+}
+void APIENTRY interceptedglDrawArrays(GLenum mode, GLint first, GLsizei count)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glDrawArrays");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glDrawArrays(mode, first, count);
+}
+void APIENTRY interceptedglUseProgram(GLuint program)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glUseProgram");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glUseProgram(program);
+}
+GLint APIENTRY interceptedglGetUniformLocationARB(GLhandleARB programObj, const GLcharARB * name)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glGetUniformLocationARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	return _glGetUniformLocationARB(programObj, name);
+}
+void APIENTRY interceptedglUniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glUniform4f");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glUniform4f(location, v0, v1, v2, v3);
+}
+void APIENTRY interceptedglUniform1f(GLint location, GLfloat v0)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glUniform1f");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glUniform1f(location, v0);
+}
+void APIENTRY interceptedglUniform1i(GLint location, GLint v0)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glUniform1i");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glUniform1i(location, v0);
+}
+void APIENTRY interceptedglActiveTextureARB(GLenum texture)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glActiveTextureARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glActiveTextureARB(texture);
+}
+void APIENTRY interceptedglMultiTexCoord2fARB(GLenum target, GLfloat s, GLfloat t)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glMultiTexCoord2fARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glMultiTexCoord2fARB(target, s, t);
+}
+void APIENTRY interceptedglDepthMask(GLboolean flag)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glDepthMask");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glDepthMask(flag);
+}
+void APIENTRY interceptedglEnableClientState(GLenum array)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glEnableClientState");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glEnableClientState(array);
+}
+void APIENTRY interceptedglPointParameterfvARB(GLenum pname, const GLfloat * params)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glPointParameterfvARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glPointParameterfvARB(pname, params);
+}
+void APIENTRY interceptedglPointParameterfARB(GLenum pname, GLfloat param)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glPointParameterfARB");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glPointParameterfARB(pname, param);
+}
+void APIENTRY interceptedglPointSize(GLfloat size)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glPointSize");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glPointSize(size);
+}
+void APIENTRY interceptedglTexEnvf(GLenum target, GLenum pname, GLfloat param)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glTexEnvf");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glTexEnvf(target, pname, param);
+}
+void APIENTRY interceptedglColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid * pointer)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glColorPointer");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glColorPointer(size, type, stride, pointer);
+}
+void APIENTRY interceptedglVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid * pointer)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glVertexPointer");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glVertexPointer(size, type, stride, pointer);
+}
+void APIENTRY interceptedglColor4ub(GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glColor4ub");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glColor4ub(red, green, blue, alpha);
+}
+void APIENTRY interceptedglTexCoord2f(GLfloat s, GLfloat t)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glTexCoord2f");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glTexCoord2f(s, t);
+}
+void APIENTRY interceptedglVertex2i(GLint x, GLint y)
+{
+	currentConfig3DSettings.increaseFunctionCall();
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glVertex2i");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glVertex2i(x, y);
 }
 /************************************************************************************/
 void initialiseVariables()
