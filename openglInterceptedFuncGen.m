@@ -59,6 +59,10 @@ for index = 1: totalFunction(1)
     
     disp(['Processing function: ' realFunc]);
     
+%     if (strcmp(realFunc, 'glFogf') > 0)
+%         disp(['OK here it is the function: ' realFunc]);
+%     end
+    
     %get the function pointer using the first open/close bracket
     openBracket = strfind(opengl{1,1}(index), '(');
     closeBracket = strfind(opengl{1,1}(index), ')');
@@ -77,19 +81,33 @@ for index = 1: totalFunction(1)
     
     %get the 1st one, assume that it is the line which contains the
     %signature of the function
-    if (size( indB) > 0)
-        funcDefined = funcFiltered(indB(1));
-        
-        openBracket = strfind(funcDefined, '(');
-        closeBracket = strfind(funcDefined, ')');
-        
-        %use the 2nd open/close bracket to find the signature
-        firstOpen = openBracket{1,1}(1);
-        firstClose = closeBracket{1,1}(1);
-        
-        secondOpen = openBracket{1,1}(2);
-        secondClose = closeBracket{1,1}(2);
+    totalSign = size( indB);
     
+    if (totalSign > 0)
+        %funcDefined = funcFiltered(indB(1));
+        
+        for id = 1: totalSign
+            funcDefined = funcFiltered(indB(id));
+            
+            openBracket = strfind(funcDefined, '(');
+            closeBracket = strfind(funcDefined, ')');
+        
+            %use the 2nd open/close bracket to find the signature
+            firstOpen = openBracket{1,1}(1);
+            firstClose = closeBracket{1,1}(1);
+        
+            secondOpen = openBracket{1,1}(2);
+            secondClose = closeBracket{1,1}(2);
+        
+            % %verify correct signature
+            indexFuncPointer = strfind(funcDefined, funcPointer);
+            verifiedFunctionPointer = funcDefined{1}(indexFuncPointer{1}:firstClose-1);
+            
+            if (strcmp(verifiedFunctionPointer, funcPointer) > 0)
+                break;
+            end
+        end
+        
         %get the signature of the function
         signature = funcDefined{1}(secondOpen : secondClose);
         listParams = funcDefined{1}(secondOpen + 1: secondClose - 1);
