@@ -53,7 +53,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;GL3DSTEREOTOOLV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\txn\Documents\MyProject\workspace\Special3DGL_noFBList\Special3DGL\GL3DStereoToolV2\GL3DStereoToolV2\common;opengl;helpers;wrappers;extern\mhook-2.3;C:\Users\txn\Documents\MyProject\workspace\Special3DGL_noFBList\Special3DGL\GL3DStereoToolV2\system;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\txn\Documents\MyProject\workspace\Special3DGL_List\Special3DGL\GL3DStereoToolV2\GL3DStereoToolV2\common;opengl;helpers;wrappers;extern\mhook-2.3;C:\Users\txn\Documents\MyProject\workspace\Special3DGL_List\Special3DGL\GL3DStereoToolV2\system;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -71,7 +71,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;GL3DSTEREOTOOLV2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\txn\Documents\MyProject\workspace\Special3DGL_noFBList\Special3DGL\GL3DStereoToolV2\GL3DStereoToolV2\common;opengl;helpers;wrappers;extern\mhook-2.3;C:\Users\txn\Documents\MyProject\workspace\Special3DGL_noFBList\Special3DGL\GL3DStereoToolV2\system;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\txn\Documents\MyProject\workspace\Special3DGL_List\Special3DGL\GL3DStereoToolV2\GL3DStereoToolV2\common;opengl;helpers;wrappers;extern\mhook-2.3;C:\Users\txn\Documents\MyProject\workspace\Special3DGL_List\Special3DGL\GL3DStereoToolV2\system;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -94,6 +94,7 @@
     <ClCompile Include="extern\mhook-2.3\disasm-lib\disasm_x86.c" />
     <ClCompile Include="extern\mhook-2.3\disasm-lib\misc.c" />
     <ClCompile Include="extern\mhook-2.3\mhook-lib\mhook.cpp" />
+    <ClCompile Include="ForegroundObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="opengl\Extensions.cpp" />
     <ClCompile Include="opengl\OpenGLProc.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="extern\mhook-2.3\disasm-lib\disasm_x86_tables.h" />
     <ClInclude Include="extern\mhook-2.3\disasm-lib\misc.h" />
     <ClInclude Include="extern\mhook-2.3\mhook-lib\mhook.h" />
+    <ClInclude Include="ForegroundObject.h" />
     <ClInclude Include="opengl\Extensions.h" />
     <ClInclude Include="opengl\OpenGLProc.h" />
     <ClInclude Include="opengl\Target.h" />

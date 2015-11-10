@@ -246,6 +246,128 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 
 	return true;
 }
+bool Config3DSettings::readConfig3DSettingsFromFileV2(const std::string & fileName)
+{
+	Log::print("OK: readConfig3DSettingsFromFileV2 function \n");
+
+	// open the file
+	ifstream input(fileName.c_str());
+	if (!input) return false;
+
+	struct {
+		// convert string to boolean
+		bool readBool(std::string text) {
+			// convert to lower case
+			std::transform(text.begin(), text.end(), text.begin(), ::tolower);
+
+			// accept sensible values for true (anything else is false)
+			return (text == "yes") || (text == "true") || (text == "1");
+		}
+	} local;
+
+	// read key
+	do {
+		string line;
+		//input >> ws >> line;
+		input >> line;
+
+		if (!input) break;
+
+		// identify the key
+		if (line == "#Frame:")
+		{
+			input >> line;
+
+			//for each value, parse it into 3 parts: key, value and comment (if has). The comment is specified by the ; and key by the :
+			if (line.length() > 0)
+			{
+				size_t pos = 0;
+				std::string token;
+				pos = line.find(";"); //find comments
+
+				std::cout << "Line: " << line << endl;
+				std::cout << "Pos 1: " << pos << endl;
+				if (pos != std::string::npos)
+				{
+					line.erase(pos, line.length() - pos);
+				}
+
+				pos = line.find(":");
+
+				if (pos != std::string::npos)
+				{
+					string subKey = line.substr(0, pos);
+					string value = line.substr(pos + 1, line.length() - pos - 1);
+
+					std::cout << "subKey: " << subKey << endl;
+					std::cout << "value: " << value << endl;
+
+					if (subKey == "StartFrame")
+					{
+						this->StartInterceptedFrame = convertStringToLong(value);
+					}
+				}
+			}
+		}
+		else if (line == "#Foregound:")
+		{
+			int count = 0;
+			static int totalRows = 3;
+
+			while (count < totalRows) //total rows
+			{
+				input >> line;
+				count++;
+
+				size_t pos = 0;
+				std::string token;
+				pos = line.find(";"); //find comments
+
+				if (pos != std::string::npos)
+				{
+					line.erase(pos, line.length() - pos);
+				}
+
+				pos = line.find(":");
+
+				if (pos != std::string::npos)
+				{
+					string subKey = line.substr(0, pos);
+					string value = line.substr(pos + 1, line.length() - pos - 1);
+
+					std::cout << "subKey: " << subKey << endl;
+					std::cout << "value: " << value << endl;
+
+					if (subKey == "StartFunctionCallForegound")
+					{
+
+					}
+					else if (subKey == "EndFunctionCallForegound")
+					{
+
+					}
+					else if (subKey == "Buffer")
+					{
+
+					}
+				}
+			}
+			
+			
+		}
+		else {
+			// unrecognised keys are currently ignored
+		}
+
+		
+
+	} while (true);
+
+	// close the file
+	input.close();
+
+	return true;
+}
 int Config3DSettings::convertStringToInt(string s)
 {
 	int number;

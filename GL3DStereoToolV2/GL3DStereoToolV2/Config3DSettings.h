@@ -12,9 +12,11 @@
 #include <sstream>
 #include <iostream>
 #include "Log.h"
+#include "ForegroundObject.h"
 
 #include <stdlib.h>
 #include <time.h> 
+#include <vector>
 
 using namespace std;
 using namespace hive;
@@ -58,10 +60,13 @@ public:
 
 	bool increasedFunCall = true;
 
+	vector<ForegroundObject> ListForegroundObject;
+
 public:
 	Config3DSettings();
 	~Config3DSettings();
 	bool readConfig3DSettingsFromFile(const std::string & fileName = "config3D.dat");
+	bool readConfig3DSettingsFromFileV2(const std::string & fileName = "config3D.dat");
 
 	static int convertStringToInt(string s);
 	static long convertStringToLong(string s);
