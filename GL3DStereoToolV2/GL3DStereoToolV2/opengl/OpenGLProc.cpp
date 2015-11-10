@@ -6646,7 +6646,7 @@ void APIENTRY interceptedglFogfv(GLenum pname, const GLfloat * params)
 	}
 	_glFogfv(pname, params);
 }
-void APIENTRY interceptedglFogf(GLenum pname, const GLfloat * params)
+void APIENTRY interceptedglFogf(GLenum pname, const GLfloat params)
 {
 	currentConfig3DSettings.increaseFunctionCall();
 
@@ -6655,7 +6655,7 @@ void APIENTRY interceptedglFogf(GLenum pname, const GLfloat * params)
 		currentConfig3DSettings.getDrawingBuffer("glFogf");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_glFogfv(pname, params);
+	_glFogf(pname, params);
 }
 void APIENTRY interceptedglColorMaterial(GLenum face, GLenum mode)
 {

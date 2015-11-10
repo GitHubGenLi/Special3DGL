@@ -947,7 +947,7 @@ void APIENTRY interceptedglClearColor(GLfloat red, GLfloat green, GLfloat blue, 
 void APIENTRY interceptedglScalef(GLfloat x, GLfloat y, GLfloat z);
 void APIENTRY interceptedglHint(GLenum target, GLenum mode);
 void APIENTRY interceptedglFogfv(GLenum pname, const GLfloat * params);
-void APIENTRY interceptedglFogf(GLenum pname, const GLfloat * params);
+void APIENTRY interceptedglFogf(GLenum pname, const GLfloat params);
 void APIENTRY interceptedglColorMaterial(GLenum face, GLenum mode);
 void APIENTRY interceptedglLightModelfv(GLenum pname, const GLfloat * params);
 
