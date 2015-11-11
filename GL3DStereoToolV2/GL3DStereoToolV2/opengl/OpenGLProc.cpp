@@ -4050,174 +4050,174 @@ void WINAPI interceptedglClear(GLbitfield mask)
 
 	if (!m_initialised)
 	{
-		//currentConfig3DSettings.readConfig3DSettingsFromFile();
+	//	//currentConfig3DSettings.readConfig3DSettingsFromFile();
 
-		//Log::print("Begin initialisation.\n");
-		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &textureSize);
+	//	//Log::print("Begin initialisation.\n");
+	//	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &textureSize);
 
-		bool success = false;
-				
+	//	bool success = false;
+	//			
 
-		if (!glx.load())
-			Log::print("error: failed to load GL extensions\n");
-		else
-		{
-			//do {
-			//	Log::print("loaded GL extensions\n");
+	//	if (!glx.load())
+	//		Log::print("error: failed to load GL extensions\n");
+	//	else
+	//	{
+	//		//do {
+	//		//	Log::print("loaded GL extensions\n");
 
-			//	// select standard or multisampled GL texture mode
-			//	GLenum textureMode = (m_samplesGL > 1) ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D;
+	//		//	// select standard or multisampled GL texture mode
+	//		//	GLenum textureMode = (m_samplesGL > 1) ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D;
 
-			//	Log::print("generating render buffers\n");
-			//	unsigned i = 0;
-			//	for (i = 0; i<m_target.size(); ++i) {
-			//		// are we using textures or renderbuffers?
-			//		if (useTexture) {
-			//			// using GL_TEXTURE_2D
-			//			glGenTextures(1, &m_target[i].texture);
+	//		//	Log::print("generating render buffers\n");
+	//		//	unsigned i = 0;
+	//		//	for (i = 0; i<m_target.size(); ++i) {
+	//		//		// are we using textures or renderbuffers?
+	//		//		if (useTexture) {
+	//		//			// using GL_TEXTURE_2D
+	//		//			glGenTextures(1, &m_target[i].texture);
 
-			//			glBindTexture(GL_TEXTURE_2D, m_target[i].texture);
+	//		//			glBindTexture(GL_TEXTURE_2D, m_target[i].texture);
 
-			//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//		//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//		//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-			//			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	//		//			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
-			//			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-			//			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-			//			glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE); // automatic mipmap generation included in OpenGL v1.4
+	//		//			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	//		//			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	//		//			glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE); // automatic mipmap generation included in OpenGL v1.4
 
-			//			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthScreen, heightScreen, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-			//			glBindTexture(GL_TEXTURE_2D, 0);
+	//		//			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthScreen, heightScreen, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	//		//			glBindTexture(GL_TEXTURE_2D, 0);
 
-			//			if (m_target[i].texture == 0) {
-			//				Log::print("error: failed to generate texture ID\n");
-			//				break;
-			//			}
-
-
-			//			/*glGenTextures(1, &m_target[i].depthTexture);
-			//			glBindTexture(GL_TEXTURE_2D, m_target[i].depthTexture);
-			//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-			//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-			//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			//			glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY);
-			//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
-			//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
-			//			//NULL means reserve texture memory, but texels are undefined
-			//			glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, widthScreen, heightScreen, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	//		//			if (m_target[i].texture == 0) {
+	//		//				Log::print("error: failed to generate texture ID\n");
+	//		//				break;
+	//		//			}
 
 
-			//			glBindTexture(GL_TEXTURE_2D, 0);
-			//			*/
-			//		}
-			//		else {
-			//			// using GL_RENDERBUFFER
-			//			glx.glGenRenderbuffers(1, &m_target[i].renderBuffer);
-			//			glx.glBindRenderbuffer(GL_RENDERBUFFER, m_target[i].renderBuffer);
-
-			//			glx.glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, widthScreen, heightScreen);
-
-			//			if (m_target[i].renderBuffer == 0) {
-			//				Log::print("error: failed to generate render buffer ID\n");
-			//				break;
-			//			}
-			//		}
-
-			//		/*
-			//		if (m_target[i].object == 0) {
-			//		DWORD error = GetLastError();
-			//		Log::print("error: wglDXRegisterObjectNV failed for render target: ");
-
-			//		break;
-			//		}
-			//		*/
-			//		glx.glGenFramebuffers(1, &m_target[i].frameBuffer);
-
-			//		if (m_target[i].frameBuffer == 0) {
-			//			Log::print("error: glGenFramebuffers failed\n");
-			//			break;
-			//		}
-
-			//		glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[i].frameBuffer);
+	//		//			/*glGenTextures(1, &m_target[i].depthTexture);
+	//		//			glBindTexture(GL_TEXTURE_2D, m_target[i].depthTexture);
+	//		//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//		//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//		//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	//		//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	//		//			glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY);
+	//		//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+	//		//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+	//		//			//NULL means reserve texture memory, but texels are undefined
+	//		//			glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, widthScreen, heightScreen, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 
 
-			//		if (useTexture) {
-			//			// using GL_TEXTURE_2D
+	//		//			glBindTexture(GL_TEXTURE_2D, 0);
+	//		//			*/
+	//		//		}
+	//		//		else {
+	//		//			// using GL_RENDERBUFFER
+	//		//			glx.glGenRenderbuffers(1, &m_target[i].renderBuffer);
+	//		//			glx.glBindRenderbuffer(GL_RENDERBUFFER, m_target[i].renderBuffer);
 
-			//			// important to lock before using glFramebufferTexture2D
+	//		//			glx.glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA, widthScreen, heightScreen);
 
-			//			// attach colour buffer texture
-			//			glx.glFramebufferTexture2D(
-			//				GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-			//				textureMode, m_target[i].texture, 0
-			//				);
+	//		//			if (m_target[i].renderBuffer == 0) {
+	//		//				Log::print("error: failed to generate render buffer ID\n");
+	//		//				break;
+	//		//			}
+	//		//		}
 
-			//			//glx.glFramebufferTexture2D(
-			//			//	GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, textureMode, m_target[i].depthTexture, 0);
+	//		//		/*
+	//		//		if (m_target[i].object == 0) {
+	//		//		DWORD error = GetLastError();
+	//		//		Log::print("error: wglDXRegisterObjectNV failed for render target: ");
 
+	//		//		break;
+	//		//		}
+	//		//		*/
+	//		//		glx.glGenFramebuffers(1, &m_target[i].frameBuffer);
 
-			//		}
-			//		else {
-			//			// using GL_RENDERBUFFER
+	//		//		if (m_target[i].frameBuffer == 0) {
+	//		//			Log::print("error: glGenFramebuffers failed\n");
+	//		//			break;
+	//		//		}
 
-			//			// important to lock before using glFramebufferRenderbuffer
-
-
-			//			// attach colour renderbuffer
-
-
-			//			glx.glFramebufferRenderbuffer(
-			//				GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-			//				GL_RENDERBUFFER, m_target[i].renderBuffer
-			//				);
-
-
-			//			// this table defines the renderbuffer parameters to be listed
-			//			struct {
-			//				GLenum name;
-			//				const char *text;
-			//			} table[] = {
-			//					{ GL_RENDERBUFFER_WIDTH, "width" },
-			//					{ GL_RENDERBUFFER_HEIGHT, "height" },
-			//					{ GL_RENDERBUFFER_INTERNAL_FORMAT, "format" },
-			//					{ GL_RENDERBUFFER_RED_SIZE, "red" },
-			//					{ GL_RENDERBUFFER_GREEN_SIZE, "green" },
-			//					{ GL_RENDERBUFFER_BLUE_SIZE, "blue" },
-			//					{ GL_RENDERBUFFER_ALPHA_SIZE, "alpha" },
-			//					{ GL_RENDERBUFFER_DEPTH_SIZE, "depth" },
-			//					{ GL_RENDERBUFFER_STENCIL_SIZE, "stencil" },
-			//					{ 0, 0 }
-			//			};
+	//		//		glx.glBindFramebuffer(GL_FRAMEBUFFER, m_target[i].frameBuffer);
 
 
+	//		//		if (useTexture) {
+	//		//			// using GL_TEXTURE_2D
 
-			//			// query and log all the renderbuffer parameters
-			//			for (int p = 0; table[p].name != 0; ++p) {
-			//				GLint value = 0;
-			//				glx.glGetRenderbufferParameteriv(GL_RENDERBUFFER, table[p].name, &value);
-			//				Log::print("renderBuffer.") << table[p].text << " = " << value << endl;
-			//			}
+	//		//			// important to lock before using glFramebufferTexture2D
 
-			//			glx.glBindRenderbuffer(GL_RENDERBUFFER, 0);
-			//		}
+	//		//			// attach colour buffer texture
+	//		//			glx.glFramebufferTexture2D(
+	//		//				GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+	//		//				textureMode, m_target[i].texture, 0
+	//		//				);
 
-			//		// log the framebuffer status (should be GL_FRAMEBUFFER_COMPLETE)
-			//		GLenum status = glx.glCheckFramebufferStatus(GL_FRAMEBUFFER);
-			//		Log::print() << "glCheckFramebufferStatus = " << GLFRAMEBUFFERSTATUStoString(status) << endl;
+	//		//			//glx.glFramebufferTexture2D(
+	//		//			//	GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, textureMode, m_target[i].depthTexture, 0);
 
-			//		status = glx.glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
-			//		Log::print() << "DRAWING glCheckFramebufferStatus = " << GLFRAMEBUFFERSTATUStoString(status) << endl;
 
-			//		glx.glBindFramebuffer(GL_FRAMEBUFFER, 0);
-			//	}
+	//		//		}
+	//		//		else {
+	//		//			// using GL_RENDERBUFFER
 
-			//	// successful only if all render buffers were created and initialised
-			//	success = (i == m_target.size());
-			//	Log::print("Eng initialisation.\n");
-			//} while (0);
-		}
+	//		//			// important to lock before using glFramebufferRenderbuffer
+
+
+	//		//			// attach colour renderbuffer
+
+
+	//		//			glx.glFramebufferRenderbuffer(
+	//		//				GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+	//		//				GL_RENDERBUFFER, m_target[i].renderBuffer
+	//		//				);
+
+
+	//		//			// this table defines the renderbuffer parameters to be listed
+	//		//			struct {
+	//		//				GLenum name;
+	//		//				const char *text;
+	//		//			} table[] = {
+	//		//					{ GL_RENDERBUFFER_WIDTH, "width" },
+	//		//					{ GL_RENDERBUFFER_HEIGHT, "height" },
+	//		//					{ GL_RENDERBUFFER_INTERNAL_FORMAT, "format" },
+	//		//					{ GL_RENDERBUFFER_RED_SIZE, "red" },
+	//		//					{ GL_RENDERBUFFER_GREEN_SIZE, "green" },
+	//		//					{ GL_RENDERBUFFER_BLUE_SIZE, "blue" },
+	//		//					{ GL_RENDERBUFFER_ALPHA_SIZE, "alpha" },
+	//		//					{ GL_RENDERBUFFER_DEPTH_SIZE, "depth" },
+	//		//					{ GL_RENDERBUFFER_STENCIL_SIZE, "stencil" },
+	//		//					{ 0, 0 }
+	//		//			};
+
+
+
+	//		//			// query and log all the renderbuffer parameters
+	//		//			for (int p = 0; table[p].name != 0; ++p) {
+	//		//				GLint value = 0;
+	//		//				glx.glGetRenderbufferParameteriv(GL_RENDERBUFFER, table[p].name, &value);
+	//		//				Log::print("renderBuffer.") << table[p].text << " = " << value << endl;
+	//		//			}
+
+	//		//			glx.glBindRenderbuffer(GL_RENDERBUFFER, 0);
+	//		//		}
+
+	//		//		// log the framebuffer status (should be GL_FRAMEBUFFER_COMPLETE)
+	//		//		GLenum status = glx.glCheckFramebufferStatus(GL_FRAMEBUFFER);
+	//		//		Log::print() << "glCheckFramebufferStatus = " << GLFRAMEBUFFERSTATUStoString(status) << endl;
+
+	//		//		status = glx.glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
+	//		//		Log::print() << "DRAWING glCheckFramebufferStatus = " << GLFRAMEBUFFERSTATUStoString(status) << endl;
+
+	//		//		glx.glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	//		//	}
+
+	//		//	// successful only if all render buffers were created and initialised
+	//		//	success = (i == m_target.size());
+	//		//	Log::print("Eng initialisation.\n");
+	//		//} while (0);
+	//	}
 			
 		//for testing
 		//glx.glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_target[0].frameBuffer);
@@ -4676,7 +4676,7 @@ void APIENTRY interceptedglColor3f(GLfloat red, GLfloat green, GLfloat blue)
 {
 	//std::cout << "interceptedglColor3f ";
 	
-	currentConfig3DSettings.increaseFunctionCall("glColor3f");
+	currentConfig3DSettings.increaseFunctionCall();
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4716,7 +4716,7 @@ void APIENTRY interceptedglColor3f(GLfloat red, GLfloat green, GLfloat blue)
 }
 void APIENTRY interceptedglLoadIdentity(void) {
 
-	currentConfig3DSettings.increaseFunctionCall("glLoadIdentity");
+	currentConfig3DSettings.increaseFunctionCall();
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4768,7 +4768,7 @@ void APIENTRY interceptedglTranslatef(GLfloat x, GLfloat y, GLfloat z) {
 	_glTranslatef(x, y, z);
 }
 void APIENTRY interceptedglBegin(GLenum mode) {
-	currentConfig3DSettings.increaseFunctionCall("glBegin");
+	currentConfig3DSettings.increaseFunctionCall();
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4788,7 +4788,7 @@ void APIENTRY interceptedglVertex3f(GLfloat x, GLfloat y, GLfloat z) {
 	_glVertex3f(x, y, z);
 }
 void APIENTRY interceptedglEnd(void) {
-	currentConfig3DSettings.increaseFunctionCall("glEnd");
+	currentConfig3DSettings.increaseFunctionCall();
 
 	if (currentConfig3DSettings.startInterception())
 	{

@@ -106,7 +106,7 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 					
 					if (subKey == "Buffer")
 					{
-						this->BufferIndex = convertStringToInt(value);
+						this->BufferIndex = Utility::convertStringToInt(value);
 					}
 				}
 			}
@@ -141,7 +141,7 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 
 					if (subKey == "StartFrame")
 					{
-						this->StartInterceptedFrame = convertStringToLong(value);
+						this->StartInterceptedFrame = Utility::convertStringToLong(value);
 					}
 				}
 			}
@@ -179,7 +179,7 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 					}
 					else if (subKey == "StartFunctionCallBackgroundNumber")
 					{
-						this->StartFunctionCallBackgroundNumber = convertStringToLong(value);
+						this->StartFunctionCallBackgroundNumber = Utility::convertStringToLong(value);
 					}
 					else if (subKey == "EndFunctionCallBackground")
 					{
@@ -187,7 +187,7 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 					}
 					else if (subKey == "EndFunctionCallBackgroundNumber")
 					{
-						this->EndFunctionCallBackgroundNumber = convertStringToLong(value);
+						this->EndFunctionCallBackgroundNumber = Utility::convertStringToLong(value);
 					}
 				}
 			}
@@ -225,7 +225,7 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 					}
 					else if (subKey == "StartFunctionCallForegoundNumber")
 					{
-						this->StartFunctionCallForegoundNumber = convertStringToLong(value);
+						this->StartFunctionCallForegoundNumber = Utility::convertStringToLong(value);
 					}
 					else if (subKey == "EndFunctionCallForegound")
 					{
@@ -233,7 +233,7 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 					}
 					else if (subKey == "EndFunctionCallForegoundNumber")
 					{
-						this->EndFunctionCallForegoundNumber = convertStringToLong(value);
+						this->EndFunctionCallForegoundNumber = Utility::convertStringToLong(value);
 					}
 				}
 			}
@@ -273,6 +273,8 @@ bool Config3DSettings::readConfig3DSettingsFromFileV2(const std::string & fileNa
 
 		if (!input) break;
 
+		Utility::trimString(line);
+
 		// identify the key
 		if (line == "#Frame:")
 		{
@@ -304,7 +306,7 @@ bool Config3DSettings::readConfig3DSettingsFromFileV2(const std::string & fileNa
 
 					if (subKey == "StartFrame")
 					{
-						this->StartInterceptedFrame = convertStringToLong(value);
+						this->StartInterceptedFrame = Utility::convertStringToLong(value);
 					}
 				}
 			}
@@ -313,6 +315,8 @@ bool Config3DSettings::readConfig3DSettingsFromFileV2(const std::string & fileNa
 		{
 			int count = 0;
 			static int totalRows = 3;
+
+			ForegroundObject foreground;
 
 			while (count < totalRows) //total rows
 			{
@@ -340,20 +344,20 @@ bool Config3DSettings::readConfig3DSettingsFromFileV2(const std::string & fileNa
 
 					if (subKey == "StartFunctionCallForegound")
 					{
-
+						foreground.addFunctions(value);
 					}
 					else if (subKey == "EndFunctionCallForegound")
 					{
-
+						foreground.addFunctions(value, false);
 					}
 					else if (subKey == "Buffer")
 					{
-
+						foreground.BufferIndex = Utility::convertStringToInt(value);
 					}
 				}
-			}
+			} //end while
 			
-			
+			ListForegroundObject.push_back(foreground);
 		}
 		else {
 			// unrecognised keys are currently ignored
@@ -368,22 +372,7 @@ bool Config3DSettings::readConfig3DSettingsFromFileV2(const std::string & fileNa
 
 	return true;
 }
-int Config3DSettings::convertStringToInt(string s)
-{
-	int number;
-	istringstream buffer(s);
-	buffer >> number;
 
-	return number;
-}
-long Config3DSettings::convertStringToLong(string s)
-{
-	long number;
-	istringstream buffer(s);
-	buffer >> number;
-
-	return number;
-}
 bool Config3DSettings::checkFunctionCall(const string funcName, ObjectType objType, ObjectBoundary bound)
 {
 	switch (objType)

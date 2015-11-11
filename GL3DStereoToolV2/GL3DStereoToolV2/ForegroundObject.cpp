@@ -32,10 +32,14 @@ void ForegroundObject::addFunctions(string funcs, bool begin)
 
 	while ((pos = funcs.find(",")) != std::string::npos) {
 		token = funcs.substr(0, pos);
+		
+		Utility::trimString(token);
+
 		list.push_back(token);
 		std::cout << token << std::endl;
 		funcs.erase(0, pos + 1);
 	}
+	Utility::trimString(funcs);
 	list.push_back(funcs);
 	std::cout << funcs << std::endl;
 

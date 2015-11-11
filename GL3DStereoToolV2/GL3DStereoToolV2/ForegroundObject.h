@@ -1,3 +1,6 @@
+#ifndef FOREGROUNDOBJECT_H
+#define FOREGROUNDOBJECT_H
+
 #pragma once
 
 #include <string>
@@ -6,6 +9,8 @@
 #include <iostream>
 
 using namespace std;
+
+#include "Utility.h"
 
 class ForegroundObject
 {
@@ -23,3 +28,4 @@ public:
 	
 };
 
+#endif

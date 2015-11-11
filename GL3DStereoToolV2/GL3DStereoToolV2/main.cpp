@@ -38,9 +38,24 @@ using namespace std;
 //    distribution.
 //
 //-----------------------------------------------------------------------------
+#include "GLWindow.h"
 
 void initialiseRealOpenGLFunctions()
 {
+
+	// attributes for an OpenGL stereo window
+	GLWindow::Attributes attributes;
+	attributes[WGL_STEREO_ARB] = GL_TRUE;
+
+	// create and destroy a small stereo window: this is here to work around
+	// an issue with windows failing to switch to quad-buffer mode (although
+	// the window is successfully created and reports a stereo pixel format)
+	// note: the window is invisible (not shown) but typically causes the
+	// windows desktop to flash briefly (first run only) as stereo activates
+	GLWindow window;
+	window.create(0, "", 0, 0, 0, 8, 8, 0, 0, DefWindowProc, 0, attributes);
+	
+
 	_wglChoosePixelFormat = (PFN_WGLCHOOSEPIXELFORMAT)_getAnyGLFuncAddress("wglChoosePixelFormat");
 	_glClear = (PFN_GLCLEAR)_getAnyGLFuncAddress("glClear");
 	_wglSwapBuffers = (PFN_WGLSWAPBUFFERS)_getAnyGLFuncAddress("wglSwapBuffers");
@@ -106,7 +121,7 @@ void initialiseRealOpenGLFunctions()
 	_wglReleaseTexImageARB = (PFN_WGLRELEASETEXIMAGEARB)_getAnyGLFuncAddress("wglReleaseTexImageARB");
 	_wglSetPbufferAttribARB = (PFN_WGLSETPBUFFERATTRIBARB)_getAnyGLFuncAddress("wglSetPbufferAttribARB");
 	_wglCreateContextAttribsARB = (PFN_WGLCREATECONTEXTATTRIBSARB)_getAnyGLFuncAddress("wglCreateContextAttribsARB");
-	_wglCreateDisplayColorTableEXT = (PFN_WGLCREATEDISPLAYCOLORTABLEEXT)_getAnyGLFuncAddress("wglCreateDisplayColorTableEXT");
+	/*_wglCreateDisplayColorTableEXT = (PFN_WGLCREATEDISPLAYCOLORTABLEEXT)_getAnyGLFuncAddress("wglCreateDisplayColorTableEXT");
 	_wglLoadDisplayColorTableEXT = (PFN_WGLLOADDISPLAYCOLORTABLEEXT)_getAnyGLFuncAddress("wglLoadDisplayColorTableEXT");
 	_wglBindDisplayColorTableEXT = (PFN_WGLBINDDISPLAYCOLORTABLEEXT)_getAnyGLFuncAddress("wglBindDisplayColorTableEXT");
 	_wglDestroyDisplayColorTableEXT = (PFN_WGLDESTROYDISPLAYCOLORTABLEEXT)_getAnyGLFuncAddress("wglDestroyDisplayColorTableEXT");
@@ -123,9 +138,11 @@ void initialiseRealOpenGLFunctions()
 	_wglChoosePixelFormatEXT = (PFN_WGLCHOOSEPIXELFORMATEXT)_getAnyGLFuncAddress("wglChoosePixelFormatEXT");
 	_wglSwapIntervalEXT = (PFN_WGLSWAPINTERVALEXT)_getAnyGLFuncAddress("wglSwapIntervalEXT");
 	_wglGetSwapIntervalEXT = (PFN_WGLGETSWAPINTERVALEXT)_getAnyGLFuncAddress("wglGetSwapIntervalEXT");
-	_wglAllocateMemoryNV = (PFN_WGLALLOCATEMEMORYNV)_getAnyGLFuncAddress("wglAllocateMemoryNV");
+	*/
+	/*_wglAllocateMemoryNV = (PFN_WGLALLOCATEMEMORYNV)_getAnyGLFuncAddress("wglAllocateMemoryNV");
 	_wglFreeMemoryNV = (PFN_WGLFREEMEMORYNV)_getAnyGLFuncAddress("wglFreeMemoryNV");
-	_wglGetSyncValuesOML = (PFN_WGLGETSYNCVALUESOML)_getAnyGLFuncAddress("wglGetSyncValuesOML");
+	*/
+	/*_wglGetSyncValuesOML = (PFN_WGLGETSYNCVALUESOML)_getAnyGLFuncAddress("wglGetSyncValuesOML");
 	_wglGetMscRateOML = (PFN_WGLGETMSCRATEOML)_getAnyGLFuncAddress("wglGetMscRateOML");
 	_wglSwapBuffersMscOML = (PFN_WGLSWAPBUFFERSMSCOML)_getAnyGLFuncAddress("wglSwapBuffersMscOML");
 	_wglSwapLayerBuffersMscOML = (PFN_WGLSWAPLAYERBUFFERSMSCOML)_getAnyGLFuncAddress("wglSwapLayerBuffersMscOML");
@@ -162,7 +179,8 @@ void initialiseRealOpenGLFunctions()
 	_wglEndFrameTrackingI3D = (PFN_WGLENDFRAMETRACKINGI3D)_getAnyGLFuncAddress("wglEndFrameTrackingI3D");
 	_wglQueryFrameTrackingI3D = (PFN_WGLQUERYFRAMETRACKINGI3D)_getAnyGLFuncAddress("wglQueryFrameTrackingI3D");
 	_wglSetStereoEmitterState3DL = (PFN_WGLSETSTEREOEMITTERSTATE3DL)_getAnyGLFuncAddress("wglSetStereoEmitterState3DL");
-	_wglEnumerateVideoDevicesNV = (PFN_WGLENUMERATEVIDEODEVICESNV)_getAnyGLFuncAddress("wglEnumerateVideoDevicesNV");
+	*/
+	/*_wglEnumerateVideoDevicesNV = (PFN_WGLENUMERATEVIDEODEVICESNV)_getAnyGLFuncAddress("wglEnumerateVideoDevicesNV");
 	_wglBindVideoDeviceNV = (PFN_WGLBINDVIDEODEVICENV)_getAnyGLFuncAddress("wglBindVideoDeviceNV");
 	_wglQueryCurrentContextNV = (PFN_WGLQUERYCURRENTCONTEXTNV)_getAnyGLFuncAddress("wglQueryCurrentContextNV");
 	_wglGetVideoDeviceNV = (PFN_WGLGETVIDEODEVICENV)_getAnyGLFuncAddress("wglGetVideoDeviceNV");
@@ -182,7 +200,8 @@ void initialiseRealOpenGLFunctions()
 	_wglCreateAffinityDCNV = (PFN_WGLCREATEAFFINITYDCNV)_getAnyGLFuncAddress("wglCreateAffinityDCNV");
 	_wglEnumGpusFromAffinityDCNV = (PFN_WGLENUMGPUSFROMAFFINITYDCNV)_getAnyGLFuncAddress("wglEnumGpusFromAffinityDCNV");
 	_wglDeleteDCNV = (PFN_WGLDELETEDCNV)_getAnyGLFuncAddress("wglDeleteDCNV");
-	_wglGetGPUIDsAMD = (PFN_WGLGETGPUIDSAMD)_getAnyGLFuncAddress("wglGetGPUIDsAMD");
+	*/
+	/*_wglGetGPUIDsAMD = (PFN_WGLGETGPUIDSAMD)_getAnyGLFuncAddress("wglGetGPUIDsAMD");
 	_wglGetGPUInfoAMD = (PFN_WGLGETGPUINFOAMD)_getAnyGLFuncAddress("wglGetGPUInfoAMD");
 	_wglGetContextGPUIDAMD = (PFN_WGLGETCONTEXTGPUIDAMD)_getAnyGLFuncAddress("wglGetContextGPUIDAMD");
 	_wglCreateAssociatedContextAMD = (PFN_WGLCREATEASSOCIATEDCONTEXTAMD)_getAnyGLFuncAddress("wglCreateAssociatedContextAMD");
@@ -191,7 +210,8 @@ void initialiseRealOpenGLFunctions()
 	_wglMakeAssociatedContextCurrentAMD = (PFN_WGLMAKEASSOCIATEDCONTEXTCURRENTAMD)_getAnyGLFuncAddress("wglMakeAssociatedContextCurrentAMD");
 	_wglGetCurrentAssociatedContextAMD = (PFN_WGLGETCURRENTASSOCIATEDCONTEXTAMD)_getAnyGLFuncAddress("wglGetCurrentAssociatedContextAMD");
 	_wglBlitContextFramebufferAMD = (PFN_WGLBLITCONTEXTFRAMEBUFFERAMD)_getAnyGLFuncAddress("wglBlitContextFramebufferAMD");
-	_wglBindVideoCaptureDeviceNV = (PFN_WGLBINDVIDEOCAPTUREDEVICENV)_getAnyGLFuncAddress("wglBindVideoCaptureDeviceNV");
+	*/
+	/*_wglBindVideoCaptureDeviceNV = (PFN_WGLBINDVIDEOCAPTUREDEVICENV)_getAnyGLFuncAddress("wglBindVideoCaptureDeviceNV");
 	_wglEnumerateVideoCaptureDevicesNV = (PFN_WGLENUMERATEVIDEOCAPTUREDEVICESNV)_getAnyGLFuncAddress("wglEnumerateVideoCaptureDevicesNV");
 	_wglLockVideoCaptureDeviceNV = (PFN_WGLLOCKVIDEOCAPTUREDEVICENV)_getAnyGLFuncAddress("wglLockVideoCaptureDeviceNV");
 	_wglQueryVideoCaptureDeviceNV = (PFN_WGLQUERYVIDEOCAPTUREDEVICENV)_getAnyGLFuncAddress("wglQueryVideoCaptureDeviceNV");
@@ -206,6 +226,7 @@ void initialiseRealOpenGLFunctions()
 	_wglDXLockObjectsNV = (PFN_WGLDXLOCKOBJECTSNV)_getAnyGLFuncAddress("wglDXLockObjectsNV");
 	_wglDXUnlockObjectsNV = (PFN_WGLDXUNLOCKOBJECTSNV)_getAnyGLFuncAddress("wglDXUnlockObjectsNV");
 	_wglDelayBeforeSwapNV = (PFN_WGLDELAYBEFORESWAPNV)_getAnyGLFuncAddress("wglDelayBeforeSwapNV");
+	*/
 
 	_glGetIntegerv = (PFN_GLGETINTEGERV)_getAnyGLFuncAddress("glGetIntegerv");
 	_glGetBooleanv = (PFN_GLGETBOOLEANV)_getAnyGLFuncAddress("glGetBooleanv");
@@ -235,6 +256,7 @@ void initialiseRealOpenGLFunctions()
 	_glHint = (PFN_GLHINT)_getAnyGLFuncAddress("glHint");
 	_glFogfv = (PFN_GLFOGFV)_getAnyGLFuncAddress("glFogfv");
 	_glFogf = (PFN_GLFOGF)_getAnyGLFuncAddress("glFogf");
+	
 	_glColorMaterial = (PFN_GLCOLORMATERIAL)_getAnyGLFuncAddress("glColorMaterial");
 	_glLightModelfv = (PFN_GLLIGHTMODELFV)_getAnyGLFuncAddress("glLightModelfv");
 	_glLightfv = (PFN_GLLIGHTFV)_getAnyGLFuncAddress("glLightfv");
@@ -260,7 +282,11 @@ void initialiseRealOpenGLFunctions()
 	_glColor4ub = (PFN_GLCOLOR4UB)_getAnyGLFuncAddress("glColor4ub");
 	_glTexCoord2f = (PFN_GLTEXCOORD2F)_getAnyGLFuncAddress("glTexCoord2f");
 	_glVertex2i = (PFN_GLVERTEX2I)_getAnyGLFuncAddress("glVertex2i");
+	_glLoadIdentity = (PFN_GLLOADIDENTITY)_getAnyGLFuncAddress("glLoadIdentity");
 
+
+
+	window.destroy();
 }
 
 void processAttach()
@@ -413,7 +439,7 @@ void processAttach()
 	if ((_wglMakeCurrent == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglMakeCurrent), interceptedwglMakeCurrent))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglMakeCurrent" << endl;
 	}
 	else
 	{
@@ -422,7 +448,7 @@ void processAttach()
 	if ((_glScaled == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glScaled), interceptedglScaled))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glScaled" << endl;
 	}
 	else
 	{
@@ -431,7 +457,7 @@ void processAttach()
 	if ((_glColor3d == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColor3d), interceptedglColor3d))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glColor3d" << endl;
 	}
 	else
 	{
@@ -440,7 +466,7 @@ void processAttach()
 	if ((_glPushMatrix == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPushMatrix), interceptedglPushMatrix))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glPushMatrix" << endl;
 	}
 	else
 	{
@@ -449,7 +475,7 @@ void processAttach()
 	if ((_glMultMatrixd == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glMultMatrixd), interceptedglMultMatrixd))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glMultMatrixd" << endl;
 	}
 	else
 	{
@@ -458,7 +484,7 @@ void processAttach()
 	if ((_wglCreateContext == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateContext), interceptedwglCreateContext))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglCreateContext" << endl;
 	}
 	else
 	{
@@ -467,7 +493,7 @@ void processAttach()
 	if ((_wglDeleteContext == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDeleteContext), interceptedwglDeleteContext))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDeleteContext" << endl;
 	}
 	else
 	{
@@ -494,7 +520,7 @@ void processAttach()
 	if ((_wglGetCurrentDC == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetCurrentDC), interceptedwglGetCurrentDC))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetCurrentDC" << endl;
 	}
 	else
 	{
@@ -503,7 +529,7 @@ void processAttach()
 	if ((_wglGetDefaultProcAddress == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetDefaultProcAddress), interceptedwglGetDefaultProcAddress))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetDefaultProcAddress" << endl;
 	}
 	else
 	{
@@ -512,7 +538,7 @@ void processAttach()
 	if ((_wglShareLists == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglShareLists), interceptedwglShareLists))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglShareLists" << endl;
 	}
 	else
 	{
@@ -521,7 +547,7 @@ void processAttach()
 	if ((_wglCreateLayerContext == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateLayerContext), interceptedwglCreateLayerContext))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglCreateLayerContext" << endl;
 	}
 	else
 	{
@@ -530,7 +556,7 @@ void processAttach()
 	if ((_wglDescribeLayerPlane == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDescribeLayerPlane), interceptedwglDescribeLayerPlane))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDescribeLayerPlane" << endl;
 	}
 	else
 	{
@@ -539,7 +565,7 @@ void processAttach()
 	if ((_wglSetLayerPaletteEntries == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetLayerPaletteEntries), interceptedwglSetLayerPaletteEntries))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglSetLayerPaletteEntries" << endl;
 	}
 	else
 	{
@@ -548,7 +574,7 @@ void processAttach()
 	if ((_wglGetLayerPaletteEntries == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetLayerPaletteEntries), interceptedwglGetLayerPaletteEntries))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetLayerPaletteEntries" << endl;
 	}
 	else
 	{
@@ -557,7 +583,7 @@ void processAttach()
 	if ((_wglRealizeLayerPalette == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglRealizeLayerPalette), interceptedwglRealizeLayerPalette))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglRealizeLayerPalette" << endl;
 	}
 	else
 	{
@@ -566,7 +592,7 @@ void processAttach()
 	if ((_wglSwapLayerBuffers == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSwapLayerBuffers), interceptedwglSwapLayerBuffers))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglSwapLayerBuffers" << endl;
 	}
 	else
 	{
@@ -575,7 +601,7 @@ void processAttach()
 	if ((_wglUseFontBitmapsA == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglUseFontBitmapsA), interceptedwglUseFontBitmapsA))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglUseFontBitmapsA" << endl;
 	}
 	else
 	{
@@ -584,7 +610,7 @@ void processAttach()
 	if ((_wglUseFontBitmapsW == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglUseFontBitmapsW), interceptedwglUseFontBitmapsW))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglUseFontBitmapsW" << endl;
 	}
 	else
 	{
@@ -593,7 +619,7 @@ void processAttach()
 	if ((_wglSwapMultipleBuffers == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSwapMultipleBuffers), interceptedwglSwapMultipleBuffers))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglSwapMultipleBuffers" << endl;
 	}
 	else
 	{
@@ -602,7 +628,7 @@ void processAttach()
 	if ((_wglUseFontOutlinesA == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglUseFontOutlinesA), interceptedwglUseFontOutlinesA))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglUseFontOutlinesA" << endl;
 	}
 	else
 	{
@@ -611,7 +637,7 @@ void processAttach()
 	if ((_wglUseFontOutlinesW == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglUseFontOutlinesW), interceptedwglUseFontOutlinesW))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglUseFontOutlinesW" << endl;
 	}
 	else
 	{
@@ -620,7 +646,7 @@ void processAttach()
 	if ((_wglCreateBufferRegionARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateBufferRegionARB), interceptedwglCreateBufferRegionARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglCreateBufferRegionARB" << endl;
 	}
 	else
 	{
@@ -629,7 +655,7 @@ void processAttach()
 	if ((_wglDeleteBufferRegionARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDeleteBufferRegionARB), interceptedwglDeleteBufferRegionARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDeleteBufferRegionARB" << endl;
 	}
 	else
 	{
@@ -638,7 +664,7 @@ void processAttach()
 	if ((_wglSaveBufferRegionARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSaveBufferRegionARB), interceptedwglSaveBufferRegionARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglSaveBufferRegionARB" << endl;
 	}
 	else
 	{
@@ -647,7 +673,7 @@ void processAttach()
 	if ((_wglRestoreBufferRegionARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglRestoreBufferRegionARB), interceptedwglRestoreBufferRegionARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglRestoreBufferRegionARB" << endl;
 	}
 	else
 	{
@@ -656,7 +682,7 @@ void processAttach()
 	if ((_wglGetExtensionsStringARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetExtensionsStringARB), interceptedwglGetExtensionsStringARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetExtensionsStringARB" << endl;
 	}
 	else
 	{
@@ -665,7 +691,7 @@ void processAttach()
 	if ((_wglGetPixelFormatAttribivARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPixelFormatAttribivARB), interceptedwglGetPixelFormatAttribivARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetPixelFormatAttribivARB" << endl;
 	}
 	else
 	{
@@ -674,7 +700,7 @@ void processAttach()
 	if ((_wglGetPixelFormatAttribfvARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPixelFormatAttribfvARB), interceptedwglGetPixelFormatAttribfvARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetPixelFormatAttribfvARB" << endl;
 	}
 	else
 	{
@@ -683,7 +709,7 @@ void processAttach()
 	if ((_wglMakeContextCurrentARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglMakeContextCurrentARB), interceptedwglMakeContextCurrentARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglMakeContextCurrentARB" << endl;
 	}
 	else
 	{
@@ -692,7 +718,7 @@ void processAttach()
 	if ((_wglGetCurrentReadDCARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetCurrentReadDCARB), interceptedwglGetCurrentReadDCARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetCurrentReadDCARB" << endl;
 	}
 	else
 	{
@@ -701,7 +727,7 @@ void processAttach()
 	if ((_wglCreatePbufferARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreatePbufferARB), interceptedwglCreatePbufferARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglCreatePbufferARB" << endl;
 	}
 	else
 	{
@@ -710,7 +736,7 @@ void processAttach()
 	if ((_wglGetPbufferDCARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPbufferDCARB), interceptedwglGetPbufferDCARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetPbufferDCARB" << endl;
 	}
 	else
 	{
@@ -719,7 +745,7 @@ void processAttach()
 	if ((_wglReleasePbufferDCARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleasePbufferDCARB), interceptedwglReleasePbufferDCARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglReleasePbufferDCARB" << endl;
 	}
 	else
 	{
@@ -728,7 +754,7 @@ void processAttach()
 	if ((_wglDestroyPbufferARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDestroyPbufferARB), interceptedwglDestroyPbufferARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDestroyPbufferARB" << endl;
 	}
 	else
 	{
@@ -737,7 +763,7 @@ void processAttach()
 	if ((_wglQueryPbufferARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryPbufferARB), interceptedwglQueryPbufferARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglQueryPbufferARB" << endl;
 	}
 	else
 	{
@@ -746,7 +772,7 @@ void processAttach()
 	if ((_wglBindTexImageARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBindTexImageARB), interceptedwglBindTexImageARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglBindTexImageARB" << endl;
 	}
 	else
 	{
@@ -755,7 +781,7 @@ void processAttach()
 	if ((_wglReleaseTexImageARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleaseTexImageARB), interceptedwglReleaseTexImageARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglReleaseTexImageARB" << endl;
 	}
 	else
 	{
@@ -764,7 +790,7 @@ void processAttach()
 	if ((_wglSetPbufferAttribARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetPbufferAttribARB), interceptedwglSetPbufferAttribARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglSetPbufferAttribARB" << endl;
 	}
 	else
 	{
@@ -773,16 +799,16 @@ void processAttach()
 	if ((_wglCreateContextAttribsARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateContextAttribsARB), interceptedwglCreateContextAttribsARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglCreateContextAttribsARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglCreateContextAttribsARB\n");
 	}
-	if ((_wglCreateDisplayColorTableEXT == 0) ||
+	/*if ((_wglCreateDisplayColorTableEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateDisplayColorTableEXT), interceptedwglCreateDisplayColorTableEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglCreateDisplayColorTableEXT" << endl;
 	}
 	else
 	{
@@ -791,7 +817,7 @@ void processAttach()
 	if ((_wglLoadDisplayColorTableEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglLoadDisplayColorTableEXT), interceptedwglLoadDisplayColorTableEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglLoadDisplayColorTableEXT" << endl;
 	}
 	else
 	{
@@ -800,7 +826,7 @@ void processAttach()
 	if ((_wglBindDisplayColorTableEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBindDisplayColorTableEXT), interceptedwglBindDisplayColorTableEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglBindDisplayColorTableEXT" << endl;
 	}
 	else
 	{
@@ -809,7 +835,7 @@ void processAttach()
 	if ((_wglDestroyDisplayColorTableEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDestroyDisplayColorTableEXT), interceptedwglDestroyDisplayColorTableEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDestroyDisplayColorTableEXT" << endl;
 	}
 	else
 	{
@@ -818,7 +844,7 @@ void processAttach()
 	if ((_wglGetExtensionsStringEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetExtensionsStringEXT), interceptedwglGetExtensionsStringEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetExtensionsStringEXT" << endl;
 	}
 	else
 	{
@@ -827,7 +853,7 @@ void processAttach()
 	if ((_wglMakeContextCurrentEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglMakeContextCurrentEXT), interceptedwglMakeContextCurrentEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglMakeContextCurrentEXT" << endl;
 	}
 	else
 	{
@@ -836,7 +862,7 @@ void processAttach()
 	if ((_wglGetCurrentReadDCEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetCurrentReadDCEXT), interceptedwglGetCurrentReadDCEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetCurrentReadDCEXT" << endl;
 	}
 	else
 	{
@@ -845,7 +871,7 @@ void processAttach()
 	if ((_wglCreatePbufferEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreatePbufferEXT), interceptedwglCreatePbufferEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglCreatePbufferEXT" << endl;
 	}
 	else
 	{
@@ -854,7 +880,7 @@ void processAttach()
 	if ((_wglGetPbufferDCEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPbufferDCEXT), interceptedwglGetPbufferDCEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetPbufferDCEXT" << endl;
 	}
 	else
 	{
@@ -863,7 +889,7 @@ void processAttach()
 	if ((_wglReleasePbufferDCEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleasePbufferDCEXT), interceptedwglReleasePbufferDCEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglReleasePbufferDCEXT" << endl;
 	}
 	else
 	{
@@ -872,7 +898,7 @@ void processAttach()
 	if ((_wglDestroyPbufferEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDestroyPbufferEXT), interceptedwglDestroyPbufferEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDestroyPbufferEXT" << endl;
 	}
 	else
 	{
@@ -881,7 +907,7 @@ void processAttach()
 	if ((_wglQueryPbufferEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryPbufferEXT), interceptedwglQueryPbufferEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglQueryPbufferEXT" << endl;
 	}
 	else
 	{
@@ -890,7 +916,7 @@ void processAttach()
 	if ((_wglGetPixelFormatAttribivEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPixelFormatAttribivEXT), interceptedwglGetPixelFormatAttribivEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetPixelFormatAttribivEXT" << endl;
 	}
 	else
 	{
@@ -899,7 +925,7 @@ void processAttach()
 	if ((_wglGetPixelFormatAttribfvEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPixelFormatAttribfvEXT), interceptedwglGetPixelFormatAttribfvEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetPixelFormatAttribfvEXT" << endl;
 	}
 	else
 	{
@@ -908,7 +934,7 @@ void processAttach()
 	if ((_wglChoosePixelFormatEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglChoosePixelFormatEXT), interceptedwglChoosePixelFormatEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglChoosePixelFormatEXT" << endl;
 	}
 	else
 	{
@@ -917,7 +943,7 @@ void processAttach()
 	if ((_wglSwapIntervalEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSwapIntervalEXT), interceptedwglSwapIntervalEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglSwapIntervalEXT" << endl;
 	}
 	else
 	{
@@ -926,16 +952,17 @@ void processAttach()
 	if ((_wglGetSwapIntervalEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetSwapIntervalEXT), interceptedwglGetSwapIntervalEXT))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetSwapIntervalEXT" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglGetSwapIntervalEXT\n");
 	}
-	if ((_wglAllocateMemoryNV == 0) ||
+	*/
+	/*if ((_wglAllocateMemoryNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglAllocateMemoryNV), interceptedwglAllocateMemoryNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglAllocateMemoryNV" << endl;
 	}
 	else
 	{
@@ -944,16 +971,18 @@ void processAttach()
 	if ((_wglFreeMemoryNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglFreeMemoryNV), interceptedwglFreeMemoryNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglFreeMemoryNV" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglFreeMemoryNV\n");
 	}
+	*/
+	/*
 	if ((_wglGetSyncValuesOML == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetSyncValuesOML), interceptedwglGetSyncValuesOML))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetSyncValuesOML" << endl;
 	}
 	else
 	{
@@ -962,7 +991,7 @@ void processAttach()
 	if ((_wglGetMscRateOML == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetMscRateOML), interceptedwglGetMscRateOML))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetMscRateOML" << endl;
 	}
 	else
 	{
@@ -971,7 +1000,7 @@ void processAttach()
 	if ((_wglSwapBuffersMscOML == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSwapBuffersMscOML), interceptedwglSwapBuffersMscOML))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglSwapBuffersMscOML" << endl;
 	}
 	else
 	{
@@ -980,7 +1009,7 @@ void processAttach()
 	if ((_wglSwapLayerBuffersMscOML == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSwapLayerBuffersMscOML), interceptedwglSwapLayerBuffersMscOML))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglSwapLayerBuffersMscOML" << endl;
 	}
 	else
 	{
@@ -989,7 +1018,7 @@ void processAttach()
 	if ((_wglWaitForMscOML == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglWaitForMscOML), interceptedwglWaitForMscOML))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglWaitForMscOML" << endl;
 	}
 	else
 	{
@@ -998,7 +1027,7 @@ void processAttach()
 	if ((_wglWaitForSbcOML == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglWaitForSbcOML), interceptedwglWaitForSbcOML))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglWaitForSbcOML" << endl;
 	}
 	else
 	{
@@ -1007,7 +1036,7 @@ void processAttach()
 	if ((_wglGetDigitalVideoParametersI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetDigitalVideoParametersI3D), interceptedwglGetDigitalVideoParametersI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetDigitalVideoParametersI3D" << endl;
 	}
 	else
 	{
@@ -1016,7 +1045,7 @@ void processAttach()
 	if ((_wglSetDigitalVideoParametersI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetDigitalVideoParametersI3D), interceptedwglSetDigitalVideoParametersI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglSetDigitalVideoParametersI3D" << endl;
 	}
 	else
 	{
@@ -1025,7 +1054,7 @@ void processAttach()
 	if ((_wglGetGammaTableParametersI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGammaTableParametersI3D), interceptedwglGetGammaTableParametersI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetGammaTableParametersI3D" << endl;
 	}
 	else
 	{
@@ -1034,7 +1063,7 @@ void processAttach()
 	if ((_wglSetGammaTableParametersI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetGammaTableParametersI3D), interceptedwglSetGammaTableParametersI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglSetGammaTableParametersI3D" << endl;
 	}
 	else
 	{
@@ -1043,7 +1072,7 @@ void processAttach()
 	if ((_wglGetGammaTableI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGammaTableI3D), interceptedwglGetGammaTableI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetGammaTableI3D" << endl;
 	}
 	else
 	{
@@ -1052,7 +1081,7 @@ void processAttach()
 	if ((_wglSetGammaTableI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetGammaTableI3D), interceptedwglSetGammaTableI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglSetGammaTableI3D" << endl;
 	}
 	else
 	{
@@ -1061,7 +1090,7 @@ void processAttach()
 	if ((_wglEnableGenlockI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEnableGenlockI3D), interceptedwglEnableGenlockI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglEnableGenlockI3D" << endl;
 	}
 	else
 	{
@@ -1070,7 +1099,7 @@ void processAttach()
 	if ((_wglDisableGenlockI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDisableGenlockI3D), interceptedwglDisableGenlockI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDisableGenlockI3D" << endl;
 	}
 	else
 	{
@@ -1079,7 +1108,7 @@ void processAttach()
 	if ((_wglIsEnabledGenlockI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglIsEnabledGenlockI3D), interceptedwglIsEnabledGenlockI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglIsEnabledGenlockI3D" << endl;
 	}
 	else
 	{
@@ -1088,7 +1117,7 @@ void processAttach()
 	if ((_wglGenlockSourceI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGenlockSourceI3D), interceptedwglGenlockSourceI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGenlockSourceI3D" << endl;
 	}
 	else
 	{
@@ -1097,7 +1126,7 @@ void processAttach()
 	if ((_wglGetGenlockSourceI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGenlockSourceI3D), interceptedwglGetGenlockSourceI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetGenlockSourceI3D" << endl;
 	}
 	else
 	{
@@ -1106,7 +1135,7 @@ void processAttach()
 	if ((_wglGenlockSourceEdgeI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGenlockSourceEdgeI3D), interceptedwglGenlockSourceEdgeI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGenlockSourceEdgeI3D" << endl;
 	}
 	else
 	{
@@ -1115,7 +1144,7 @@ void processAttach()
 	if ((_wglGetGenlockSourceEdgeI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGenlockSourceEdgeI3D), interceptedwglGetGenlockSourceEdgeI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetGenlockSourceEdgeI3D" << endl;
 	}
 	else
 	{
@@ -1124,7 +1153,7 @@ void processAttach()
 	if ((_wglGenlockSampleRateI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGenlockSampleRateI3D), interceptedwglGenlockSampleRateI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGenlockSampleRateI3D" << endl;
 	}
 	else
 	{
@@ -1133,7 +1162,7 @@ void processAttach()
 	if ((_wglGetGenlockSampleRateI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGenlockSampleRateI3D), interceptedwglGetGenlockSampleRateI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetGenlockSampleRateI3D" << endl;
 	}
 	else
 	{
@@ -1142,7 +1171,7 @@ void processAttach()
 	if ((_wglGenlockSourceDelayI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGenlockSourceDelayI3D), interceptedwglGenlockSourceDelayI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGenlockSourceDelayI3D" << endl;
 	}
 	else
 	{
@@ -1151,7 +1180,7 @@ void processAttach()
 	if ((_wglGetGenlockSourceDelayI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGenlockSourceDelayI3D), interceptedwglGetGenlockSourceDelayI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetGenlockSourceDelayI3D" << endl;
 	}
 	else
 	{
@@ -1160,7 +1189,7 @@ void processAttach()
 	if ((_wglQueryGenlockMaxSourceDelayI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryGenlockMaxSourceDelayI3D), interceptedwglQueryGenlockMaxSourceDelayI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglQueryGenlockMaxSourceDelayI3D" << endl;
 	}
 	else
 	{
@@ -1169,7 +1198,7 @@ void processAttach()
 	if ((_wglCreateImageBufferI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateImageBufferI3D), interceptedwglCreateImageBufferI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglCreateImageBufferI3D" << endl;
 	}
 	else
 	{
@@ -1178,7 +1207,7 @@ void processAttach()
 	if ((_wglDestroyImageBufferI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDestroyImageBufferI3D), interceptedwglDestroyImageBufferI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDestroyImageBufferI3D" << endl;
 	}
 	else
 	{
@@ -1187,7 +1216,7 @@ void processAttach()
 	if ((_wglAssociateImageBufferEventsI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglAssociateImageBufferEventsI3D), interceptedwglAssociateImageBufferEventsI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglAssociateImageBufferEventsI3D" << endl;
 	}
 	else
 	{
@@ -1196,7 +1225,7 @@ void processAttach()
 	if ((_wglReleaseImageBufferEventsI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleaseImageBufferEventsI3D), interceptedwglReleaseImageBufferEventsI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglReleaseImageBufferEventsI3D" << endl;
 	}
 	else
 	{
@@ -1205,7 +1234,7 @@ void processAttach()
 	if ((_wglEnableFrameLockI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEnableFrameLockI3D), interceptedwglEnableFrameLockI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglEnableFrameLockI3D" << endl;
 	}
 	else
 	{
@@ -1214,7 +1243,7 @@ void processAttach()
 	if ((_wglDisableFrameLockI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDisableFrameLockI3D), interceptedwglDisableFrameLockI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDisableFrameLockI3D" << endl;
 	}
 	else
 	{
@@ -1223,7 +1252,7 @@ void processAttach()
 	if ((_wglIsEnabledFrameLockI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglIsEnabledFrameLockI3D), interceptedwglIsEnabledFrameLockI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglIsEnabledFrameLockI3D" << endl;
 	}
 	else
 	{
@@ -1232,7 +1261,7 @@ void processAttach()
 	if ((_wglQueryFrameLockMasterI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryFrameLockMasterI3D), interceptedwglQueryFrameLockMasterI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglQueryFrameLockMasterI3D" << endl;
 	}
 	else
 	{
@@ -1241,7 +1270,7 @@ void processAttach()
 	if ((_wglGetFrameUsageI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetFrameUsageI3D), interceptedwglGetFrameUsageI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetFrameUsageI3D" << endl;
 	}
 	else
 	{
@@ -1250,7 +1279,7 @@ void processAttach()
 	if ((_wglBeginFrameTrackingI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBeginFrameTrackingI3D), interceptedwglBeginFrameTrackingI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglBeginFrameTrackingI3D" << endl;
 	}
 	else
 	{
@@ -1259,7 +1288,7 @@ void processAttach()
 	if ((_wglEndFrameTrackingI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEndFrameTrackingI3D), interceptedwglEndFrameTrackingI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglEndFrameTrackingI3D" << endl;
 	}
 	else
 	{
@@ -1268,7 +1297,7 @@ void processAttach()
 	if ((_wglQueryFrameTrackingI3D == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryFrameTrackingI3D), interceptedwglQueryFrameTrackingI3D))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglQueryFrameTrackingI3D" << endl;
 	}
 	else
 	{
@@ -1277,16 +1306,17 @@ void processAttach()
 	if ((_wglSetStereoEmitterState3DL == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetStereoEmitterState3DL), interceptedwglSetStereoEmitterState3DL))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglSetStereoEmitterState3DL" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglSetStereoEmitterState3DL\n");
 	}
-	if ((_wglEnumerateVideoDevicesNV == 0) ||
+	*/
+	/*if ((_wglEnumerateVideoDevicesNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEnumerateVideoDevicesNV), interceptedwglEnumerateVideoDevicesNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglEnumerateVideoDevicesNV" << endl;
 	}
 	else
 	{
@@ -1295,7 +1325,7 @@ void processAttach()
 	if ((_wglBindVideoDeviceNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBindVideoDeviceNV), interceptedwglBindVideoDeviceNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglBindVideoDeviceNV" << endl;
 	}
 	else
 	{
@@ -1304,7 +1334,7 @@ void processAttach()
 	if ((_wglQueryCurrentContextNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryCurrentContextNV), interceptedwglQueryCurrentContextNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglQueryCurrentContextNV" << endl;
 	}
 	else
 	{
@@ -1313,7 +1343,7 @@ void processAttach()
 	if ((_wglGetVideoDeviceNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetVideoDeviceNV), interceptedwglGetVideoDeviceNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetVideoDeviceNV" << endl;
 	}
 	else
 	{
@@ -1322,7 +1352,7 @@ void processAttach()
 	if ((_wglReleaseVideoDeviceNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleaseVideoDeviceNV), interceptedwglReleaseVideoDeviceNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglReleaseVideoDeviceNV" << endl;
 	}
 	else
 	{
@@ -1331,7 +1361,7 @@ void processAttach()
 	if ((_wglBindVideoImageNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBindVideoImageNV), interceptedwglBindVideoImageNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglBindVideoImageNV" << endl;
 	}
 	else
 	{
@@ -1340,7 +1370,7 @@ void processAttach()
 	if ((_wglReleaseVideoImageNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleaseVideoImageNV), interceptedwglReleaseVideoImageNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglReleaseVideoImageNV" << endl;
 	}
 	else
 	{
@@ -1349,7 +1379,7 @@ void processAttach()
 	if ((_wglSendPbufferToVideoNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSendPbufferToVideoNV), interceptedwglSendPbufferToVideoNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglSendPbufferToVideoNV" << endl;
 	}
 	else
 	{
@@ -1358,7 +1388,7 @@ void processAttach()
 	if ((_wglGetVideoInfoNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetVideoInfoNV), interceptedwglGetVideoInfoNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetVideoInfoNV" << endl;
 	}
 	else
 	{
@@ -1367,7 +1397,7 @@ void processAttach()
 	if ((_wglJoinSwapGroupNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglJoinSwapGroupNV), interceptedwglJoinSwapGroupNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglJoinSwapGroupNV" << endl;
 	}
 	else
 	{
@@ -1376,7 +1406,7 @@ void processAttach()
 	if ((_wglBindSwapBarrierNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBindSwapBarrierNV), interceptedwglBindSwapBarrierNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglBindSwapBarrierNV" << endl;
 	}
 	else
 	{
@@ -1385,7 +1415,7 @@ void processAttach()
 	if ((_wglQuerySwapGroupNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQuerySwapGroupNV), interceptedwglQuerySwapGroupNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglQuerySwapGroupNV" << endl;
 	}
 	else
 	{
@@ -1394,7 +1424,7 @@ void processAttach()
 	if ((_wglQueryMaxSwapGroupsNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryMaxSwapGroupsNV), interceptedwglQueryMaxSwapGroupsNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglQueryMaxSwapGroupsNV" << endl;
 	}
 	else
 	{
@@ -1403,7 +1433,7 @@ void processAttach()
 	if ((_wglQueryFrameCountNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryFrameCountNV), interceptedwglQueryFrameCountNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglQueryFrameCountNV" << endl;
 	}
 	else
 	{
@@ -1412,7 +1442,7 @@ void processAttach()
 	if ((_wglResetFrameCountNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglResetFrameCountNV), interceptedwglResetFrameCountNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglResetFrameCountNV" << endl;
 	}
 	else
 	{
@@ -1421,7 +1451,7 @@ void processAttach()
 	if ((_wglEnumGpusNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEnumGpusNV), interceptedwglEnumGpusNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglEnumGpusNV" << endl;
 	}
 	else
 	{
@@ -1430,7 +1460,7 @@ void processAttach()
 	if ((_wglEnumGpuDevicesNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEnumGpuDevicesNV), interceptedwglEnumGpuDevicesNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglEnumGpuDevicesNV" << endl;
 	}
 	else
 	{
@@ -1439,7 +1469,7 @@ void processAttach()
 	if ((_wglCreateAffinityDCNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateAffinityDCNV), interceptedwglCreateAffinityDCNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglCreateAffinityDCNV" << endl;
 	}
 	else
 	{
@@ -1448,7 +1478,7 @@ void processAttach()
 	if ((_wglEnumGpusFromAffinityDCNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEnumGpusFromAffinityDCNV), interceptedwglEnumGpusFromAffinityDCNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglEnumGpusFromAffinityDCNV" << endl;
 	}
 	else
 	{
@@ -1457,16 +1487,17 @@ void processAttach()
 	if ((_wglDeleteDCNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDeleteDCNV), interceptedwglDeleteDCNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDeleteDCNV" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglDeleteDCNV\n");
 	}
-	if ((_wglGetGPUIDsAMD == 0) ||
+	*/
+	/*if ((_wglGetGPUIDsAMD == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGPUIDsAMD), interceptedwglGetGPUIDsAMD))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetGPUIDsAMD" << endl;
 	}
 	else
 	{
@@ -1475,7 +1506,7 @@ void processAttach()
 	if ((_wglGetGPUInfoAMD == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetGPUInfoAMD), interceptedwglGetGPUInfoAMD))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetGPUInfoAMD" << endl;
 	}
 	else
 	{
@@ -1484,7 +1515,7 @@ void processAttach()
 	if ((_wglGetContextGPUIDAMD == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetContextGPUIDAMD), interceptedwglGetContextGPUIDAMD))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetContextGPUIDAMD" << endl;
 	}
 	else
 	{
@@ -1493,7 +1524,7 @@ void processAttach()
 	if ((_wglCreateAssociatedContextAMD == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateAssociatedContextAMD), interceptedwglCreateAssociatedContextAMD))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglCreateAssociatedContextAMD" << endl;
 	}
 	else
 	{
@@ -1502,7 +1533,7 @@ void processAttach()
 	if ((_wglCreateAssociatedContextAttribsAMD == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateAssociatedContextAttribsAMD), interceptedwglCreateAssociatedContextAttribsAMD))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglCreateAssociatedContextAttribsAMD" << endl;
 	}
 	else
 	{
@@ -1511,7 +1542,7 @@ void processAttach()
 	if ((_wglDeleteAssociatedContextAMD == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDeleteAssociatedContextAMD), interceptedwglDeleteAssociatedContextAMD))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDeleteAssociatedContextAMD" << endl;
 	}
 	else
 	{
@@ -1520,7 +1551,7 @@ void processAttach()
 	if ((_wglMakeAssociatedContextCurrentAMD == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglMakeAssociatedContextCurrentAMD), interceptedwglMakeAssociatedContextCurrentAMD))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglMakeAssociatedContextCurrentAMD" << endl;
 	}
 	else
 	{
@@ -1529,7 +1560,7 @@ void processAttach()
 	if ((_wglGetCurrentAssociatedContextAMD == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetCurrentAssociatedContextAMD), interceptedwglGetCurrentAssociatedContextAMD))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetCurrentAssociatedContextAMD" << endl;
 	}
 	else
 	{
@@ -1538,16 +1569,17 @@ void processAttach()
 	if ((_wglBlitContextFramebufferAMD == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBlitContextFramebufferAMD), interceptedwglBlitContextFramebufferAMD))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglBlitContextFramebufferAMD" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglBlitContextFramebufferAMD\n");
 	}
-	if ((_wglBindVideoCaptureDeviceNV == 0) ||
+	*/
+	/*if ((_wglBindVideoCaptureDeviceNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBindVideoCaptureDeviceNV), interceptedwglBindVideoCaptureDeviceNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglBindVideoCaptureDeviceNV" << endl;
 	}
 	else
 	{
@@ -1556,7 +1588,7 @@ void processAttach()
 	if ((_wglEnumerateVideoCaptureDevicesNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglEnumerateVideoCaptureDevicesNV), interceptedwglEnumerateVideoCaptureDevicesNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglEnumerateVideoCaptureDevicesNV" << endl;
 	}
 	else
 	{
@@ -1565,7 +1597,7 @@ void processAttach()
 	if ((_wglLockVideoCaptureDeviceNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglLockVideoCaptureDeviceNV), interceptedwglLockVideoCaptureDeviceNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglLockVideoCaptureDeviceNV" << endl;
 	}
 	else
 	{
@@ -1574,7 +1606,7 @@ void processAttach()
 	if ((_wglQueryVideoCaptureDeviceNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryVideoCaptureDeviceNV), interceptedwglQueryVideoCaptureDeviceNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglQueryVideoCaptureDeviceNV" << endl;
 	}
 	else
 	{
@@ -1583,7 +1615,7 @@ void processAttach()
 	if ((_wglReleaseVideoCaptureDeviceNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleaseVideoCaptureDeviceNV), interceptedwglReleaseVideoCaptureDeviceNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglReleaseVideoCaptureDeviceNV" << endl;
 	}
 	else
 	{
@@ -1592,7 +1624,7 @@ void processAttach()
 	if ((_wglCopyImageSubDataNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCopyImageSubDataNV), interceptedwglCopyImageSubDataNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglCopyImageSubDataNV" << endl;
 	}
 	else
 	{
@@ -1601,7 +1633,7 @@ void processAttach()
 	if ((_wglDXSetResourceShareHandleNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXSetResourceShareHandleNV), interceptedwglDXSetResourceShareHandleNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDXSetResourceShareHandleNV" << endl;
 	}
 	else
 	{
@@ -1610,7 +1642,7 @@ void processAttach()
 	if ((_wglDXOpenDeviceNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXOpenDeviceNV), interceptedwglDXOpenDeviceNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDXOpenDeviceNV" << endl;
 	}
 	else
 	{
@@ -1619,7 +1651,7 @@ void processAttach()
 	if ((_wglDXCloseDeviceNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXCloseDeviceNV), interceptedwglDXCloseDeviceNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDXCloseDeviceNV" << endl;
 	}
 	else
 	{
@@ -1628,7 +1660,7 @@ void processAttach()
 	if ((_wglDXRegisterObjectNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXRegisterObjectNV), interceptedwglDXRegisterObjectNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDXRegisterObjectNV" << endl;
 	}
 	else
 	{
@@ -1637,7 +1669,7 @@ void processAttach()
 	if ((_wglDXUnregisterObjectNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXUnregisterObjectNV), interceptedwglDXUnregisterObjectNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDXUnregisterObjectNV" << endl;
 	}
 	else
 	{
@@ -1646,7 +1678,7 @@ void processAttach()
 	if ((_wglDXObjectAccessNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXObjectAccessNV), interceptedwglDXObjectAccessNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDXObjectAccessNV" << endl;
 	}
 	else
 	{
@@ -1655,7 +1687,7 @@ void processAttach()
 	if ((_wglDXLockObjectsNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXLockObjectsNV), interceptedwglDXLockObjectsNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDXLockObjectsNV" << endl;
 	}
 	else
 	{
@@ -1664,7 +1696,7 @@ void processAttach()
 	if ((_wglDXUnlockObjectsNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDXUnlockObjectsNV), interceptedwglDXUnlockObjectsNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDXUnlockObjectsNV" << endl;
 	}
 	else
 	{
@@ -1673,16 +1705,17 @@ void processAttach()
 	if ((_wglDelayBeforeSwapNV == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDelayBeforeSwapNV), interceptedwglDelayBeforeSwapNV))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglDelayBeforeSwapNV" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglDelayBeforeSwapNV\n");
 	}
+	*/
 	if ((_glGetIntegerv == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glGetIntegerv), interceptedglGetIntegerv))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glGetIntegerv" << endl;
 	}
 	else
 	{
@@ -1691,7 +1724,7 @@ void processAttach()
 	if ((_glGetBooleanv == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glGetBooleanv), interceptedglGetBooleanv))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glGetBooleanv" << endl;
 	}
 	else
 	{
@@ -1700,7 +1733,7 @@ void processAttach()
 	if ((_glDisable == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glDisable), interceptedglDisable))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glDisable" << endl;
 	}
 	else
 	{
@@ -1709,7 +1742,7 @@ void processAttach()
 	if ((_glVertex2d == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertex2d), interceptedglVertex2d))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glVertex2d" << endl;
 	}
 	else
 	{
@@ -1718,7 +1751,7 @@ void processAttach()
 	if ((_glCallList == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glCallList), interceptedglCallList))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glCallList" << endl;
 	}
 	else
 	{
@@ -1727,7 +1760,7 @@ void processAttach()
 	if ((_glMaterialfv == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glMaterialfv), interceptedglMaterialfv))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glMaterialfv" << endl;
 	}
 	else
 	{
@@ -1736,7 +1769,7 @@ void processAttach()
 	if ((_glEnable == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glEnable), interceptedglEnable))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glEnable" << endl;
 	}
 	else
 	{
@@ -1745,7 +1778,7 @@ void processAttach()
 	if ((_glPopMatrix == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPopMatrix), interceptedglPopMatrix))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glPopMatrix" << endl;
 	}
 	else
 	{
@@ -1754,7 +1787,7 @@ void processAttach()
 	if ((_glTexEnvi == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTexEnvi), interceptedglTexEnvi))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glTexEnvi" << endl;
 	}
 	else
 	{
@@ -1763,7 +1796,7 @@ void processAttach()
 	if ((_glVertex3d == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertex3d), interceptedglVertex3d))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glVertex3d" << endl;
 	}
 	else
 	{
@@ -1772,7 +1805,7 @@ void processAttach()
 	if ((_glTexCoord2d == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTexCoord2d), interceptedglTexCoord2d))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glTexCoord2d" << endl;
 	}
 	else
 	{
@@ -1781,7 +1814,7 @@ void processAttach()
 	if ((_glBindTexture == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glBindTexture), interceptedglBindTexture))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glBindTexture" << endl;
 	}
 	else
 	{
@@ -1790,7 +1823,7 @@ void processAttach()
 	if ((_glRotated == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glRotated), interceptedglRotated))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glRotated" << endl;
 	}
 	else
 	{
@@ -1799,7 +1832,7 @@ void processAttach()
 	if ((_glPushAttrib == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPushAttrib), interceptedglPushAttrib))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glPushAttrib" << endl;
 	}
 	else
 	{
@@ -1808,7 +1841,7 @@ void processAttach()
 	if ((_glPopAttrib == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPopAttrib), interceptedglPopAttrib))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glPopAttrib" << endl;
 	}
 	else
 	{
@@ -1817,7 +1850,7 @@ void processAttach()
 	if ((_glColor4f == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColor4f), interceptedglColor4f))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glColor4f" << endl;
 	}
 	else
 	{
@@ -1826,7 +1859,7 @@ void processAttach()
 	if ((_glVertex2f == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertex2f), interceptedglVertex2f))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glVertex2f" << endl;
 	}
 	else
 	{
@@ -1835,7 +1868,7 @@ void processAttach()
 	if ((_glBlendFunc == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glBlendFunc), interceptedglBlendFunc))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glBlendFunc" << endl;
 	}
 	else
 	{
@@ -1844,7 +1877,7 @@ void processAttach()
 	if ((_glFrustum == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glFrustum), interceptedglFrustum))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glFrustum" << endl;
 	}
 	else
 	{
@@ -1853,7 +1886,7 @@ void processAttach()
 	if ((_glViewport == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glViewport), interceptedglViewport))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glViewport" << endl;
 	}
 	else
 	{
@@ -1862,7 +1895,7 @@ void processAttach()
 	if ((_glMatrixMode == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glMatrixMode), interceptedglMatrixMode))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glMatrixMode" << endl;
 	}
 	else
 	{
@@ -1871,7 +1904,7 @@ void processAttach()
 	if ((_glPolygonMode == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPolygonMode), interceptedglPolygonMode))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glPolygonMode" << endl;
 	}
 	else
 	{
@@ -1880,7 +1913,7 @@ void processAttach()
 	if ((_glClearColor == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glClearColor), interceptedglClearColor))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glClearColor" << endl;
 	}
 	else
 	{
@@ -1889,7 +1922,7 @@ void processAttach()
 	if ((_glScalef == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glScalef), interceptedglScalef))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glScalef" << endl;
 	}
 	else
 	{
@@ -1898,7 +1931,7 @@ void processAttach()
 	if ((_glHint == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glHint), interceptedglHint))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glHint" << endl;
 	}
 	else
 	{
@@ -1907,7 +1940,7 @@ void processAttach()
 	if ((_glFogfv == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glFogfv), interceptedglFogfv))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glFogfv" << endl;
 	}
 	else
 	{
@@ -1916,7 +1949,7 @@ void processAttach()
 	if ((_glFogf == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glFogf), interceptedglFogf))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glFogf" << endl;
 	}
 	else
 	{
@@ -1925,7 +1958,7 @@ void processAttach()
 	if ((_glColorMaterial == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColorMaterial), interceptedglColorMaterial))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glColorMaterial" << endl;
 	}
 	else
 	{
@@ -1934,7 +1967,7 @@ void processAttach()
 	if ((_glLightModelfv == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glLightModelfv), interceptedglLightModelfv))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glLightModelfv" << endl;
 	}
 	else
 	{
@@ -1943,7 +1976,7 @@ void processAttach()
 	if ((_glLightfv == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glLightfv), interceptedglLightfv))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glLightfv" << endl;
 	}
 	else
 	{
@@ -1952,7 +1985,7 @@ void processAttach()
 	if ((_glGetFloatv == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glGetFloatv), interceptedglGetFloatv))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glGetFloatv" << endl;
 	}
 	else
 	{
@@ -1961,7 +1994,7 @@ void processAttach()
 	if ((_glBindBufferARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glBindBufferARB), interceptedglBindBufferARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glBindBufferARB" << endl;
 	}
 	else
 	{
@@ -1970,7 +2003,7 @@ void processAttach()
 	if ((_glInterleavedArrays == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glInterleavedArrays), interceptedglInterleavedArrays))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glInterleavedArrays" << endl;
 	}
 	else
 	{
@@ -1979,7 +2012,7 @@ void processAttach()
 	if ((_glDrawArrays == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glDrawArrays), interceptedglDrawArrays))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glDrawArrays" << endl;
 	}
 	else
 	{
@@ -1988,7 +2021,7 @@ void processAttach()
 	if ((_glUseProgram == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glUseProgram), interceptedglUseProgram))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glUseProgram" << endl;
 	}
 	else
 	{
@@ -1997,7 +2030,7 @@ void processAttach()
 	if ((_glGetUniformLocationARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glGetUniformLocationARB), interceptedglGetUniformLocationARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glGetUniformLocationARB" << endl;
 	}
 	else
 	{
@@ -2006,7 +2039,7 @@ void processAttach()
 	if ((_glUniform4f == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glUniform4f), interceptedglUniform4f))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glUniform4f" << endl;
 	}
 	else
 	{
@@ -2015,7 +2048,7 @@ void processAttach()
 	if ((_glUniform1f == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glUniform1f), interceptedglUniform1f))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glUniform1f" << endl;
 	}
 	else
 	{
@@ -2024,7 +2057,7 @@ void processAttach()
 	if ((_glUniform1i == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glUniform1i), interceptedglUniform1i))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glUniform1i" << endl;
 	}
 	else
 	{
@@ -2033,7 +2066,7 @@ void processAttach()
 	if ((_glActiveTextureARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glActiveTextureARB), interceptedglActiveTextureARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glActiveTextureARB" << endl;
 	}
 	else
 	{
@@ -2042,7 +2075,7 @@ void processAttach()
 	if ((_glMultiTexCoord2fARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glMultiTexCoord2fARB), interceptedglMultiTexCoord2fARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glMultiTexCoord2fARB" << endl;
 	}
 	else
 	{
@@ -2051,7 +2084,7 @@ void processAttach()
 	if ((_glDepthMask == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glDepthMask), interceptedglDepthMask))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glDepthMask" << endl;
 	}
 	else
 	{
@@ -2060,7 +2093,7 @@ void processAttach()
 	if ((_glEnableClientState == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glEnableClientState), interceptedglEnableClientState))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glEnableClientState" << endl;
 	}
 	else
 	{
@@ -2069,7 +2102,7 @@ void processAttach()
 	if ((_glPointParameterfvARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPointParameterfvARB), interceptedglPointParameterfvARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glPointParameterfvARB" << endl;
 	}
 	else
 	{
@@ -2078,7 +2111,7 @@ void processAttach()
 	if ((_glPointParameterfARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPointParameterfARB), interceptedglPointParameterfARB))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glPointParameterfARB" << endl;
 	}
 	else
 	{
@@ -2087,7 +2120,7 @@ void processAttach()
 	if ((_glPointSize == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPointSize), interceptedglPointSize))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glPointSize" << endl;
 	}
 	else
 	{
@@ -2096,7 +2129,7 @@ void processAttach()
 	if ((_glTexEnvf == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTexEnvf), interceptedglTexEnvf))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glTexEnvf" << endl;
 	}
 	else
 	{
@@ -2105,7 +2138,7 @@ void processAttach()
 	if ((_glColorPointer == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColorPointer), interceptedglColorPointer))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glColorPointer" << endl;
 	}
 	else
 	{
@@ -2114,7 +2147,7 @@ void processAttach()
 	if ((_glVertexPointer == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertexPointer), interceptedglVertexPointer))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glVertexPointer" << endl;
 	}
 	else
 	{
@@ -2123,7 +2156,7 @@ void processAttach()
 	if ((_glColor4ub == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColor4ub), interceptedglColor4ub))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glColor4ub" << endl;
 	}
 	else
 	{
@@ -2132,7 +2165,7 @@ void processAttach()
 	if ((_glTexCoord2f == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTexCoord2f), interceptedglTexCoord2f))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glTexCoord2f" << endl;
 	}
 	else
 	{
@@ -2141,7 +2174,7 @@ void processAttach()
 	if ((_glVertex2i == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertex2i), interceptedglVertex2i))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _glVertex2i" << endl;
 	}
 	else
 	{
@@ -2200,6 +2233,7 @@ void processDetach()
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglReleaseTexImageARB));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglSetPbufferAttribARB));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglCreateContextAttribsARB));
+	/*
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglCreateDisplayColorTableEXT));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglLoadDisplayColorTableEXT));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglBindDisplayColorTableEXT));
@@ -2217,9 +2251,11 @@ void processDetach()
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglChoosePixelFormatEXT));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglSwapIntervalEXT));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglGetSwapIntervalEXT));
-	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglAllocateMemoryNV));
+	*/
+	/*Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglAllocateMemoryNV));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglFreeMemoryNV));
-	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglGetSyncValuesOML));
+	*/
+	/*Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglGetSyncValuesOML));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglGetMscRateOML));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglSwapBuffersMscOML));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglSwapLayerBuffersMscOML));
@@ -2256,7 +2292,8 @@ void processDetach()
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglEndFrameTrackingI3D));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglQueryFrameTrackingI3D));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglSetStereoEmitterState3DL));
-	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglEnumerateVideoDevicesNV));
+	*/
+	/*Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglEnumerateVideoDevicesNV));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglBindVideoDeviceNV));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglQueryCurrentContextNV));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglGetVideoDeviceNV));
@@ -2276,6 +2313,8 @@ void processDetach()
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglCreateAffinityDCNV));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglEnumGpusFromAffinityDCNV));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglDeleteDCNV));
+	*/
+	/*
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglGetGPUIDsAMD));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglGetGPUInfoAMD));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglGetContextGPUIDAMD));
@@ -2285,7 +2324,8 @@ void processDetach()
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglMakeAssociatedContextCurrentAMD));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglGetCurrentAssociatedContextAMD));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglBlitContextFramebufferAMD));
-	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglBindVideoCaptureDeviceNV));
+	*/
+	/*Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglBindVideoCaptureDeviceNV));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglEnumerateVideoCaptureDevicesNV));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglLockVideoCaptureDeviceNV));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglQueryVideoCaptureDeviceNV));
@@ -2300,6 +2340,7 @@ void processDetach()
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglDXLockObjectsNV));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglDXUnlockObjectsNV));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglDelayBeforeSwapNV));
+	*/
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glGetIntegerv));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glGetBooleanv));
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_glDisable));
@@ -2363,7 +2404,7 @@ BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
 	}
 
 	Config3DSettings config;
-	config.readConfig3DSettingsFromFile();
+	config.readConfig3DSettingsFromFileV2();
 
 	switch (reason)
 	{

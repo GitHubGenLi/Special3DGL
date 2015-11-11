@@ -59,6 +59,8 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LargeAddressAware>
+      </LargeAddressAware>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -98,6 +100,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="opengl\Extensions.cpp" />
     <ClCompile Include="opengl\OpenGLProc.cpp" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\system\Event.h" />
@@ -118,6 +121,7 @@
     <ClInclude Include="opengl\Extensions.h" />
     <ClInclude Include="opengl\OpenGLProc.h" />
     <ClInclude Include="opengl\Target.h" />
+    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,6 +18,8 @@
 #include <time.h> 
 #include <vector>
 
+#include "Utility.h"
+
 using namespace std;
 using namespace hive;
 
@@ -68,18 +70,7 @@ public:
 	bool readConfig3DSettingsFromFile(const std::string & fileName = "config3D.dat");
 	bool readConfig3DSettingsFromFileV2(const std::string & fileName = "config3D.dat");
 
-	static int convertStringToInt(string s);
-	static long convertStringToLong(string s);
-	static string convertIntToString(int num)
-	{
-		string Result;          // string which will contain the result
-		ostringstream convert;   // stream used for the conversion
-
-		convert << num;      // insert the textual representation of 'Number' in the characters in the stream
-		Result = convert.str(); // set 'Result' to the contents of the stream
-
-		return Result;
-	}
+	
 	bool checkFunctionCall(const string funcName, ObjectType objType, ObjectBoundary bound);
 	bool checkFunctionCallNumber(long indexCall, ObjectType objType, ObjectBoundary bound);
 
@@ -99,7 +90,7 @@ public:
 		if (funcName.length() > 0)
 		{
 			std::cout << "Current Func call: " << funcName << " Index :" << currentFunctionCallIndexPerFrame << endl;
-			Log::print("Frame: " + convertIntToString(currentFrameGL) + " Current Func call: " + funcName + " Index :" + convertIntToString(currentFunctionCallIndexPerFrame) + "\n");
+			Log::print("Frame: " + Utility::convertIntToString(currentFrameGL) + " Current Func call: " + funcName + " Index :" + Utility::convertIntToString(currentFunctionCallIndexPerFrame) + "\n");
 		}
 	}
 	static void switchBuffer(GLuint drawBuffer)
