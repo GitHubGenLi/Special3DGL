@@ -14,14 +14,33 @@ Config3DSettings::Config3DSettings()
 	currentObjectType = ObjectType::Background;
 	increasedFunCall = true;
 	currentFunctionCallIndexPerFrame = 0;
+	totalClear = 0;
+	/*HMODULE module = LoadLibraryA("opengl32.dll");
+	_glClear = (PFN_GLCLEAR )GetProcAddress(module, "glClear");*/
+	//_glClear = (PFN_GLCLEAR)wglGetProcAddress("glClear");
+	
+	saveAllInterceptedFuncs = true;
+
+	if (saveAllInterceptedFuncs)
+	{
+		interceptedWriter.open("interceptedFunc.dat");
+	}
 }
 
 
 Config3DSettings::~Config3DSettings()
 {
-
+	if (saveAllInterceptedFuncs)
+	{
+		
+		for each (string funcName in ListInteceptedFunc)
+		{
+			this->interceptedWriter << funcName << endl;
+		}
+		interceptedWriter.close();
+	}
 }
-bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName)
+bool Config3DSettings::readConfig3DSettingsFromFileV2(const std::string & fileName)
 {
 	Log::print("OK: readConfig3DSettingsFromFile function \n");
 
@@ -246,7 +265,7 @@ bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName
 
 	return true;
 }
-bool Config3DSettings::readConfig3DSettingsFromFileV2(const std::string & fileName)
+bool Config3DSettings::readConfig3DSettingsFromFile(const std::string & fileName)
 {
 	Log::print("OK: readConfig3DSettingsFromFileV2 function \n");
 
@@ -370,6 +389,11 @@ bool Config3DSettings::readConfig3DSettingsFromFileV2(const std::string & fileNa
 	// close the file
 	input.close();
 
+	//
+	TotalRecentNumberFunc = ListForegroundObject[0].MaxNumberFunction;
+
+	//ListRecentFunctionCalled = vector<string>(TotalRecentNumberFunc, "");
+
 	return true;
 }
 
@@ -458,7 +482,7 @@ bool Config3DSettings::checkFunctionCallNumber(long indexCall, ObjectType objTyp
 
 	return false;
 }
-void Config3DSettings::getDrawingBuffer(const string funcName, GLuint &buffer, ObjectType &objType, ObjectBoundary &bound, bool updated)
+void Config3DSettings::getDrawingBufferV2(const string funcName, GLuint &buffer, ObjectType &objType, ObjectBoundary &bound, bool updated)
 {
 	buffer = GL_BACK;
 	objType = ObjectType::Background;
@@ -512,6 +536,70 @@ void Config3DSettings::getDrawingBuffer(const string funcName, GLuint &buffer, O
 		
 	}
 }
+void Config3DSettings::getDrawingBuffer(const string funcName, GLuint &buffer, ObjectType &objType, ObjectBoundary &bound, bool updated)
+{
+	/*buffer = GL_BACK;
+	objType = ObjectType::Background;
+	bound = ObjectBoundary::Middle;
+	*/
+	bool insideObject = false; //inside any object 
+	
+	//std::cout << "getDrawingBuffer with the list! " << endl;
+
+	for each (ForegroundObject obj in ListForegroundObject)
+	{
+		int bufferIndexObj;
+		ObjectBoundary boundObj;
+
+		insideObject = obj.checkBoundaryObject(this->ListRecentFunctionCalled, bufferIndexObj, boundObj);
+
+		//std::cout << "after checking: " << insideObject << endl;
+
+		if (insideObject)
+		{
+			//std::cout << "In side foreground! " << endl;
+
+			buffer = getBuffer(bufferIndexObj);
+			objType = ObjectType::Foreground;
+			bound = boundObj;
+
+			break; //if inside any object, then break immediately
+		}
+
+	}
+
+	//std::cout << "decision inside foreground " << endl;
+
+	if (insideObject)
+	{
+		currentDrawingBuffer = buffer;
+		currentBoundaryLoc = bound;
+		currentObjectType = objType;
+	}
+	else
+	{
+		if (currentObjectType == ObjectType::Foreground && currentBoundaryLoc != ObjectBoundary::End)
+		{
+
+		}
+
+		buffer = currentDrawingBuffer;
+		bound = currentBoundaryLoc;
+		objType = currentObjectType;
+	}
+
+	//if (updated)
+	//{
+	//	//only update if the current drawing buffer is not BACK and in the middle of the drawing of the foreground
+	//	if (!(currentDrawingBuffer != GL_BACK && currentBoundaryLoc == ObjectBoundary::Middle))
+	//	{
+	//		currentDrawingBuffer = buffer;
+	//		currentBoundaryLoc = bound;
+	//		currentObjectType = objType;
+	//	}
+
+	//}
+}
 void Config3DSettings::getDrawingBuffer(const string funcName)
 {
 	GLuint buffer; 
@@ -528,4 +616,5 @@ void Config3DSettings::resetCurrentStatusOfEachFrame()
 	currentBoundaryLoc = ObjectBoundary::Start;
 	currentObjectType = ObjectType::Background;
 	increasedFunCall = true;
+	totalClear = 0;
 }

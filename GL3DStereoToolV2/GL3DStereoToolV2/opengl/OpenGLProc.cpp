@@ -4247,7 +4247,8 @@ void WINAPI interceptedglClear(GLbitfield mask)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		//glClear(GL_COLOR_BUFFER_BIT );
 		glClearColor(0, 0, 0, 1);
-		glClearDepth(1.0);
+		//glClearColor(0, 0, 0, 0);
+		//glClearDepth(1.0);
 
 		inLeft = false;
 	}
@@ -4327,9 +4328,9 @@ void WINAPI interceptedglClear(GLbitfield mask)
 	//{
 	//	glDrawBuffer(GL_BACK_LEFT);
 	//}
-	if (inLeft){
-		currentConfig3DSettings.increaseFunctionCall();
-	}
+	//if (inLeft){
+		currentConfig3DSettings.increaseFunctionCall("glClear");
+	//}
 	
 	_glClear(mask);
 	
@@ -4387,7 +4388,7 @@ BOOL WINAPI interceptedwglSetPixelFormat(HDC hdc, int iPixelFormat, const PIXELF
 	if (DescribePixelFormat(hdc, currentStereoPixelFormat, sizeof(currentStereo_ppfd), &currentStereo_ppfd) == 0)
 		return 0;*/
 	
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSetPixelFormat");
 
 	if (_wglSetPixelFormat(hdc, currentStereoPixelFormat, &currentStereo_ppfd) != TRUE)
 	{
@@ -4416,7 +4417,7 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 		return false;
 	}
 
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSwapBuffers");
 
 	//m_framesGL++;
 
@@ -4627,13 +4628,17 @@ BOOL WINAPI interceptedwglSwapBuffers(HDC hdc)
 	currentConfig3DSettings.resetCurrentStatusOfEachFrame();
 	currentConfig3DSettings.switchCurrentBuffer();
 
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glClearColor(0, 0, 0, 1);
+	//glClearDepth(1);
+
 	return 1;
 }
 
 void APIENTRY interceptedglRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z)
 {
 	
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glRotatef");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4676,7 +4681,7 @@ void APIENTRY interceptedglColor3f(GLfloat red, GLfloat green, GLfloat blue)
 {
 	//std::cout << "interceptedglColor3f ";
 	
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glColor3f");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4716,7 +4721,7 @@ void APIENTRY interceptedglColor3f(GLfloat red, GLfloat green, GLfloat blue)
 }
 void APIENTRY interceptedglLoadIdentity(void) {
 
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glLoadIdentity");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4727,7 +4732,7 @@ void APIENTRY interceptedglLoadIdentity(void) {
 }
 void APIENTRY interceptedglMultMatrixf(const GLfloat * m)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glMultMatrixf");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4738,7 +4743,7 @@ void APIENTRY interceptedglMultMatrixf(const GLfloat * m)
 }
 void APIENTRY interceptedglTranslated(GLdouble x, GLdouble y, GLdouble z) {
 
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glTranslated");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4747,18 +4752,8 @@ void APIENTRY interceptedglTranslated(GLdouble x, GLdouble y, GLdouble z) {
 	}
 	_glTranslated(x, y, z);
 }
-void APIENTRY interceptedglLightfv(GLenum light, GLenum pname, const GLfloat * params) {
-	currentConfig3DSettings.increaseFunctionCall();
-
-	if (currentConfig3DSettings.startInterception())
-	{
-		currentConfig3DSettings.getDrawingBuffer("glLightfv");
-		currentConfig3DSettings.switchCurrentBuffer();
-	}
-	_glLightfv(light, pname, params);
-}
 void APIENTRY interceptedglTranslatef(GLfloat x, GLfloat y, GLfloat z) {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glTranslatef");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4768,7 +4763,7 @@ void APIENTRY interceptedglTranslatef(GLfloat x, GLfloat y, GLfloat z) {
 	_glTranslatef(x, y, z);
 }
 void APIENTRY interceptedglBegin(GLenum mode) {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glBegin");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4778,7 +4773,7 @@ void APIENTRY interceptedglBegin(GLenum mode) {
 	_glBegin(mode);
 }
 void APIENTRY interceptedglVertex3f(GLfloat x, GLfloat y, GLfloat z) {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glVertex3f");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4788,7 +4783,7 @@ void APIENTRY interceptedglVertex3f(GLfloat x, GLfloat y, GLfloat z) {
 	_glVertex3f(x, y, z);
 }
 void APIENTRY interceptedglEnd(void) {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glEnd");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4798,7 +4793,7 @@ void APIENTRY interceptedglEnd(void) {
 	_glEnd();
 }
 void APIENTRY interceptedglFlush(void) {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glFlush");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4810,7 +4805,7 @@ void APIENTRY interceptedglFlush(void) {
 /************************************************************************************/
 BOOL APIENTRY interceptedwglMakeCurrent(HDC hdc, HGLRC hglrc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglMakeCurrent");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4821,7 +4816,7 @@ BOOL APIENTRY interceptedwglMakeCurrent(HDC hdc, HGLRC hglrc)
 }
 void APIENTRY interceptedglScaled(GLdouble x, GLdouble y, GLdouble z)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glScaled");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4832,7 +4827,7 @@ void APIENTRY interceptedglScaled(GLdouble x, GLdouble y, GLdouble z)
 }
 void APIENTRY interceptedglColor3d(GLdouble red, GLdouble green, GLdouble blue)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glColor3d");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4843,7 +4838,7 @@ void APIENTRY interceptedglColor3d(GLdouble red, GLdouble green, GLdouble blue)
 }
 void APIENTRY interceptedglPushMatrix(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glPushMatrix");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4854,7 +4849,7 @@ void APIENTRY interceptedglPushMatrix(void)
 }
 void APIENTRY interceptedglMultMatrixd(const GLdouble * m)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glMultMatrixd");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4865,7 +4860,7 @@ void APIENTRY interceptedglMultMatrixd(const GLdouble * m)
 }
 HGLRC APIENTRY interceptedwglCreateContext(HDC hdc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglCreateContext");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4876,18 +4871,18 @@ HGLRC APIENTRY interceptedwglCreateContext(HDC hdc)
 }
 BOOL APIENTRY interceptedwglDeleteContext(HGLRC hglrc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	/*currentConfig3DSettings.increaseFunctionCall("wglDeleteContext");
 
 	if (currentConfig3DSettings.startInterception())
 	{
 		currentConfig3DSettings.getDrawingBuffer("wglDeleteContext");
 		currentConfig3DSettings.switchCurrentBuffer();
-	}
+	}*/
 	return _wglDeleteContext(hglrc);
 }
 HGLRC APIENTRY interceptedwglGetCurrentContext(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetCurrentContext");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4898,7 +4893,7 @@ HGLRC APIENTRY interceptedwglGetCurrentContext(void)
 }
 BOOL APIENTRY interceptedwglCopyContext(HGLRC hglrcSrc, HGLRC hglrcDst, UINT mask)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglCopyContext");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4909,7 +4904,7 @@ BOOL APIENTRY interceptedwglCopyContext(HGLRC hglrcSrc, HGLRC hglrcDst, UINT mas
 }
 HDC APIENTRY interceptedwglGetCurrentDC(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetCurrentDC");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4920,7 +4915,7 @@ HDC APIENTRY interceptedwglGetCurrentDC(void)
 }
 PROC APIENTRY interceptedwglGetDefaultProcAddress(const char * lpszProc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetDefaultProcAddress");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4931,7 +4926,7 @@ PROC APIENTRY interceptedwglGetDefaultProcAddress(const char * lpszProc)
 }
 BOOL APIENTRY interceptedwglShareLists(HGLRC hglrc1, HGLRC hglrc2)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglShareLists");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4942,7 +4937,7 @@ BOOL APIENTRY interceptedwglShareLists(HGLRC hglrc1, HGLRC hglrc2)
 }
 HGLRC APIENTRY interceptedwglCreateLayerContext(HDC hdc, int iLayerPlane)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglCreateLayerContext");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4953,7 +4948,7 @@ HGLRC APIENTRY interceptedwglCreateLayerContext(HDC hdc, int iLayerPlane)
 }
 BOOL APIENTRY interceptedwglDescribeLayerPlane(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nBytes, LAYERPLANEDESCRIPTOR * plpd)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDescribeLayerPlane");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4964,7 +4959,7 @@ BOOL APIENTRY interceptedwglDescribeLayerPlane(HDC hdc, int iPixelFormat, int iL
 }
 int APIENTRY interceptedwglSetLayerPaletteEntries(HDC hdc, int iLayerPlane, int iStart, int cEntries, const COLORREF * pcr)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSetLayerPaletteEntries");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4975,7 +4970,7 @@ int APIENTRY interceptedwglSetLayerPaletteEntries(HDC hdc, int iLayerPlane, int 
 }
 int APIENTRY interceptedwglGetLayerPaletteEntries(HDC hdc, int iLayerPlane, int iStart, int cEntries, COLORREF * pcr)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetLayerPaletteEntries");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4986,7 +4981,7 @@ int APIENTRY interceptedwglGetLayerPaletteEntries(HDC hdc, int iLayerPlane, int 
 }
 BOOL APIENTRY interceptedwglRealizeLayerPalette(HDC hdc, int iLayerPlane, BOOL bRealize)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglRealizeLayerPalette");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -4997,7 +4992,7 @@ BOOL APIENTRY interceptedwglRealizeLayerPalette(HDC hdc, int iLayerPlane, BOOL b
 }
 BOOL APIENTRY interceptedwglSwapLayerBuffers(HDC hdc, UINT fuPlanes)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSwapLayerBuffers");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5008,7 +5003,7 @@ BOOL APIENTRY interceptedwglSwapLayerBuffers(HDC hdc, UINT fuPlanes)
 }
 BOOL APIENTRY interceptedwglUseFontBitmapsA(HDC hdc, DWORD first, DWORD count, DWORD listBase)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglUseFontBitmapsA");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5019,7 +5014,7 @@ BOOL APIENTRY interceptedwglUseFontBitmapsA(HDC hdc, DWORD first, DWORD count, D
 }
 BOOL APIENTRY interceptedwglUseFontBitmapsW(HDC hdc, DWORD first, DWORD count, DWORD listBase)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglUseFontBitmapsW");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5030,7 +5025,7 @@ BOOL APIENTRY interceptedwglUseFontBitmapsW(HDC hdc, DWORD first, DWORD count, D
 }
 DWORD APIENTRY interceptedwglSwapMultipleBuffers(UINT n, const WGLSWAP * ps)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSwapMultipleBuffers");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5041,7 +5036,7 @@ DWORD APIENTRY interceptedwglSwapMultipleBuffers(UINT n, const WGLSWAP * ps)
 }
 BOOL APIENTRY interceptedwglUseFontOutlinesA(HDC hdc, DWORD first, DWORD count, DWORD listBase, FLOAT deviation, FLOAT extrusion, int format, GLYPHMETRICSFLOAT * lpgmf)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglUseFontOutlinesA");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5052,7 +5047,7 @@ BOOL APIENTRY interceptedwglUseFontOutlinesA(HDC hdc, DWORD first, DWORD count, 
 }
 BOOL APIENTRY interceptedwglUseFontOutlinesW(HDC hdc, DWORD first, DWORD count, DWORD listBase, FLOAT deviation, FLOAT extrusion, int format, GLYPHMETRICSFLOAT * lpgmf)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglUseFontOutlinesW");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5063,7 +5058,7 @@ BOOL APIENTRY interceptedwglUseFontOutlinesW(HDC hdc, DWORD first, DWORD count, 
 }
 HANDLE APIENTRY interceptedwglCreateBufferRegionARB(HDC hDC, int iLayerPlane, UINT uType)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglCreateBufferRegionARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5074,7 +5069,7 @@ HANDLE APIENTRY interceptedwglCreateBufferRegionARB(HDC hDC, int iLayerPlane, UI
 }
 void APIENTRY interceptedwglDeleteBufferRegionARB(HANDLE hRegion)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDeleteBufferRegionARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5085,7 +5080,7 @@ void APIENTRY interceptedwglDeleteBufferRegionARB(HANDLE hRegion)
 }
 BOOL APIENTRY interceptedwglSaveBufferRegionARB(HANDLE hRegion, int x, int y, int width, int height)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSaveBufferRegionARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5096,7 +5091,7 @@ BOOL APIENTRY interceptedwglSaveBufferRegionARB(HANDLE hRegion, int x, int y, in
 }
 BOOL APIENTRY interceptedwglRestoreBufferRegionARB(HANDLE hRegion, int x, int y, int width, int height, int xSrc, int ySrc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglRestoreBufferRegionARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5107,7 +5102,7 @@ BOOL APIENTRY interceptedwglRestoreBufferRegionARB(HANDLE hRegion, int x, int y,
 }
 const char * APIENTRY interceptedwglGetExtensionsStringARB(HDC hdc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetExtensionsStringARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5118,7 +5113,7 @@ const char * APIENTRY interceptedwglGetExtensionsStringARB(HDC hdc)
 }
 BOOL APIENTRY interceptedwglGetPixelFormatAttribivARB(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, int * piValues)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetPixelFormatAttribivARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5129,7 +5124,7 @@ BOOL APIENTRY interceptedwglGetPixelFormatAttribivARB(HDC hdc, int iPixelFormat,
 }
 BOOL APIENTRY interceptedwglGetPixelFormatAttribfvARB(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, FLOAT * pfValues)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetPixelFormatAttribfvARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5140,7 +5135,7 @@ BOOL APIENTRY interceptedwglGetPixelFormatAttribfvARB(HDC hdc, int iPixelFormat,
 }
 BOOL APIENTRY interceptedwglMakeContextCurrentARB(HDC hDrawDC, HDC hReadDC, HGLRC hglrc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglMakeContextCurrentARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5151,7 +5146,7 @@ BOOL APIENTRY interceptedwglMakeContextCurrentARB(HDC hDrawDC, HDC hReadDC, HGLR
 }
 HDC APIENTRY interceptedwglGetCurrentReadDCARB(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetCurrentReadDCARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5162,7 +5157,7 @@ HDC APIENTRY interceptedwglGetCurrentReadDCARB(void)
 }
 HPBUFFERARB APIENTRY interceptedwglCreatePbufferARB(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int * piAttribList)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglCreatePbufferARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5173,7 +5168,7 @@ HPBUFFERARB APIENTRY interceptedwglCreatePbufferARB(HDC hDC, int iPixelFormat, i
 }
 HDC APIENTRY interceptedwglGetPbufferDCARB(HPBUFFERARB hPbuffer)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetPbufferDCARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5184,7 +5179,7 @@ HDC APIENTRY interceptedwglGetPbufferDCARB(HPBUFFERARB hPbuffer)
 }
 int APIENTRY interceptedwglReleasePbufferDCARB(HPBUFFERARB hPbuffer, HDC hDC)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglReleasePbufferDCARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5195,7 +5190,7 @@ int APIENTRY interceptedwglReleasePbufferDCARB(HPBUFFERARB hPbuffer, HDC hDC)
 }
 BOOL APIENTRY interceptedwglDestroyPbufferARB(HPBUFFERARB hPbuffer)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDestroyPbufferARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5206,7 +5201,7 @@ BOOL APIENTRY interceptedwglDestroyPbufferARB(HPBUFFERARB hPbuffer)
 }
 BOOL APIENTRY interceptedwglQueryPbufferARB(HPBUFFERARB hPbuffer, int iAttribute, int * piValue)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglQueryPbufferARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5217,7 +5212,7 @@ BOOL APIENTRY interceptedwglQueryPbufferARB(HPBUFFERARB hPbuffer, int iAttribute
 }
 BOOL APIENTRY interceptedwglBindTexImageARB(HPBUFFERARB hPbuffer, int iBuffer)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglBindTexImageARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5228,7 +5223,7 @@ BOOL APIENTRY interceptedwglBindTexImageARB(HPBUFFERARB hPbuffer, int iBuffer)
 }
 BOOL APIENTRY interceptedwglReleaseTexImageARB(HPBUFFERARB hPbuffer, int iBuffer)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglReleaseTexImageARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5239,7 +5234,7 @@ BOOL APIENTRY interceptedwglReleaseTexImageARB(HPBUFFERARB hPbuffer, int iBuffer
 }
 BOOL APIENTRY interceptedwglSetPbufferAttribARB(HPBUFFERARB hPbuffer, const int * piAttribList)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSetPbufferAttribARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5250,7 +5245,7 @@ BOOL APIENTRY interceptedwglSetPbufferAttribARB(HPBUFFERARB hPbuffer, const int 
 }
 HGLRC APIENTRY interceptedwglCreateContextAttribsARB(HDC hDC, HGLRC hShareContext, const int * attribList)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglCreateContextAttribsARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5261,7 +5256,7 @@ HGLRC APIENTRY interceptedwglCreateContextAttribsARB(HDC hDC, HGLRC hShareContex
 }
 GLboolean APIENTRY interceptedwglCreateDisplayColorTableEXT(GLushort id)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglCreateDisplayColorTableEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5272,7 +5267,7 @@ GLboolean APIENTRY interceptedwglCreateDisplayColorTableEXT(GLushort id)
 }
 GLboolean APIENTRY interceptedwglLoadDisplayColorTableEXT(const GLushort * table, GLuint length)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglLoadDisplayColorTableEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5283,7 +5278,7 @@ GLboolean APIENTRY interceptedwglLoadDisplayColorTableEXT(const GLushort * table
 }
 GLboolean APIENTRY interceptedwglBindDisplayColorTableEXT(GLushort id)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglBindDisplayColorTableEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5294,7 +5289,7 @@ GLboolean APIENTRY interceptedwglBindDisplayColorTableEXT(GLushort id)
 }
 void APIENTRY interceptedwglDestroyDisplayColorTableEXT(GLushort id)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDestroyDisplayColorTableEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5305,7 +5300,7 @@ void APIENTRY interceptedwglDestroyDisplayColorTableEXT(GLushort id)
 }
 const char * APIENTRY interceptedwglGetExtensionsStringEXT(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetExtensionsStringEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5316,7 +5311,7 @@ const char * APIENTRY interceptedwglGetExtensionsStringEXT(void)
 }
 BOOL APIENTRY interceptedwglMakeContextCurrentEXT(HDC hDrawDC, HDC hReadDC, HGLRC hglrc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglMakeContextCurrentEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5327,7 +5322,7 @@ BOOL APIENTRY interceptedwglMakeContextCurrentEXT(HDC hDrawDC, HDC hReadDC, HGLR
 }
 HDC APIENTRY interceptedwglGetCurrentReadDCEXT(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetCurrentReadDCEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5338,7 +5333,7 @@ HDC APIENTRY interceptedwglGetCurrentReadDCEXT(void)
 }
 HPBUFFEREXT APIENTRY interceptedwglCreatePbufferEXT(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int * piAttribList)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglCreatePbufferEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5349,7 +5344,7 @@ HPBUFFEREXT APIENTRY interceptedwglCreatePbufferEXT(HDC hDC, int iPixelFormat, i
 }
 HDC APIENTRY interceptedwglGetPbufferDCEXT(HPBUFFEREXT hPbuffer)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetPbufferDCEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5360,7 +5355,7 @@ HDC APIENTRY interceptedwglGetPbufferDCEXT(HPBUFFEREXT hPbuffer)
 }
 int APIENTRY interceptedwglReleasePbufferDCEXT(HPBUFFEREXT hPbuffer, HDC hDC)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglReleasePbufferDCEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5371,7 +5366,7 @@ int APIENTRY interceptedwglReleasePbufferDCEXT(HPBUFFEREXT hPbuffer, HDC hDC)
 }
 BOOL APIENTRY interceptedwglDestroyPbufferEXT(HPBUFFEREXT hPbuffer)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDestroyPbufferEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5382,7 +5377,7 @@ BOOL APIENTRY interceptedwglDestroyPbufferEXT(HPBUFFEREXT hPbuffer)
 }
 BOOL APIENTRY interceptedwglQueryPbufferEXT(HPBUFFEREXT hPbuffer, int iAttribute, int * piValue)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglQueryPbufferEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5393,7 +5388,7 @@ BOOL APIENTRY interceptedwglQueryPbufferEXT(HPBUFFEREXT hPbuffer, int iAttribute
 }
 BOOL APIENTRY interceptedwglGetPixelFormatAttribivEXT(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, int * piValues)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetPixelFormatAttribivEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5404,7 +5399,7 @@ BOOL APIENTRY interceptedwglGetPixelFormatAttribivEXT(HDC hdc, int iPixelFormat,
 }
 BOOL APIENTRY interceptedwglGetPixelFormatAttribfvEXT(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, int * piAttributes, FLOAT * pfValues)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetPixelFormatAttribfvEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5415,7 +5410,7 @@ BOOL APIENTRY interceptedwglGetPixelFormatAttribfvEXT(HDC hdc, int iPixelFormat,
 }
 BOOL APIENTRY interceptedwglChoosePixelFormatEXT(HDC hdc, const int * piAttribIList, const FLOAT * pfAttribFList, UINT nMaxFormats, int * piFormats, UINT * nNumFormats)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglChoosePixelFormatEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5426,7 +5421,7 @@ BOOL APIENTRY interceptedwglChoosePixelFormatEXT(HDC hdc, const int * piAttribIL
 }
 BOOL APIENTRY interceptedwglSwapIntervalEXT(int interval)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSwapIntervalEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5437,7 +5432,7 @@ BOOL APIENTRY interceptedwglSwapIntervalEXT(int interval)
 }
 int APIENTRY interceptedwglGetSwapIntervalEXT(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetSwapIntervalEXT");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5448,7 +5443,7 @@ int APIENTRY interceptedwglGetSwapIntervalEXT(void)
 }
 void * APIENTRY interceptedwglAllocateMemoryNV(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglAllocateMemoryNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5459,7 +5454,7 @@ void * APIENTRY interceptedwglAllocateMemoryNV(GLsizei size, GLfloat readfreq, G
 }
 void APIENTRY interceptedwglFreeMemoryNV(void * pointer)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglFreeMemoryNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5470,7 +5465,7 @@ void APIENTRY interceptedwglFreeMemoryNV(void * pointer)
 }
 BOOL APIENTRY interceptedwglGetSyncValuesOML(HDC hdc, INT64 * ust, INT64 * msc, INT64 * sbc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetSyncValuesOML");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5481,7 +5476,7 @@ BOOL APIENTRY interceptedwglGetSyncValuesOML(HDC hdc, INT64 * ust, INT64 * msc, 
 }
 BOOL APIENTRY interceptedwglGetMscRateOML(HDC hdc, INT32 * numerator, INT32 * denominator)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetMscRateOML");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5492,7 +5487,7 @@ BOOL APIENTRY interceptedwglGetMscRateOML(HDC hdc, INT32 * numerator, INT32 * de
 }
 INT64 APIENTRY interceptedwglSwapBuffersMscOML(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSwapBuffersMscOML");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5503,7 +5498,7 @@ INT64 APIENTRY interceptedwglSwapBuffersMscOML(HDC hdc, INT64 target_msc, INT64 
 }
 INT64 APIENTRY interceptedwglSwapLayerBuffersMscOML(HDC hdc, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSwapLayerBuffersMscOML");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5514,7 +5509,7 @@ INT64 APIENTRY interceptedwglSwapLayerBuffersMscOML(HDC hdc, int fuPlanes, INT64
 }
 BOOL APIENTRY interceptedwglWaitForMscOML(HDC hdc, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 * ust, INT64 * msc, INT64 * sbc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglWaitForMscOML");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5525,7 +5520,7 @@ BOOL APIENTRY interceptedwglWaitForMscOML(HDC hdc, INT64 target_msc, INT64 divis
 }
 BOOL APIENTRY interceptedwglWaitForSbcOML(HDC hdc, INT64 target_sbc, INT64 * ust, INT64 * msc, INT64 * sbc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglWaitForSbcOML");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5536,7 +5531,7 @@ BOOL APIENTRY interceptedwglWaitForSbcOML(HDC hdc, INT64 target_sbc, INT64 * ust
 }
 BOOL APIENTRY interceptedwglGetDigitalVideoParametersI3D(HDC hDC, int iAttribute, int * piValue)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetDigitalVideoParametersI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5547,7 +5542,7 @@ BOOL APIENTRY interceptedwglGetDigitalVideoParametersI3D(HDC hDC, int iAttribute
 }
 BOOL APIENTRY interceptedwglSetDigitalVideoParametersI3D(HDC hDC, int iAttribute, const int * piValue)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSetDigitalVideoParametersI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5558,7 +5553,7 @@ BOOL APIENTRY interceptedwglSetDigitalVideoParametersI3D(HDC hDC, int iAttribute
 }
 BOOL APIENTRY interceptedwglGetGammaTableParametersI3D(HDC hDC, int iAttribute, int * piValue)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetGammaTableParametersI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5569,7 +5564,7 @@ BOOL APIENTRY interceptedwglGetGammaTableParametersI3D(HDC hDC, int iAttribute, 
 }
 BOOL APIENTRY interceptedwglSetGammaTableParametersI3D(HDC hDC, int iAttribute, const int * piValue)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSetGammaTableParametersI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5580,7 +5575,7 @@ BOOL APIENTRY interceptedwglSetGammaTableParametersI3D(HDC hDC, int iAttribute, 
 }
 BOOL APIENTRY interceptedwglGetGammaTableI3D(HDC hDC, int iEntries, USHORT * puRed, USHORT * puGreen, USHORT * puBlue)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetGammaTableI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5591,7 +5586,7 @@ BOOL APIENTRY interceptedwglGetGammaTableI3D(HDC hDC, int iEntries, USHORT * puR
 }
 BOOL APIENTRY interceptedwglSetGammaTableI3D(HDC hDC, int iEntries, const USHORT * puRed, const USHORT * puGreen, const USHORT * puBlue)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSetGammaTableI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5602,7 +5597,7 @@ BOOL APIENTRY interceptedwglSetGammaTableI3D(HDC hDC, int iEntries, const USHORT
 }
 BOOL APIENTRY interceptedwglEnableGenlockI3D(HDC hDC)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglEnableGenlockI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5613,7 +5608,7 @@ BOOL APIENTRY interceptedwglEnableGenlockI3D(HDC hDC)
 }
 BOOL APIENTRY interceptedwglDisableGenlockI3D(HDC hDC)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDisableGenlockI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5624,7 +5619,7 @@ BOOL APIENTRY interceptedwglDisableGenlockI3D(HDC hDC)
 }
 BOOL APIENTRY interceptedwglIsEnabledGenlockI3D(HDC hDC, BOOL * pFlag)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglIsEnabledGenlockI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5635,7 +5630,7 @@ BOOL APIENTRY interceptedwglIsEnabledGenlockI3D(HDC hDC, BOOL * pFlag)
 }
 BOOL APIENTRY interceptedwglGenlockSourceI3D(HDC hDC, UINT uSource)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGenlockSourceI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5646,7 +5641,7 @@ BOOL APIENTRY interceptedwglGenlockSourceI3D(HDC hDC, UINT uSource)
 }
 BOOL APIENTRY interceptedwglGetGenlockSourceI3D(HDC hDC, UINT * uSource)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetGenlockSourceI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5657,7 +5652,7 @@ BOOL APIENTRY interceptedwglGetGenlockSourceI3D(HDC hDC, UINT * uSource)
 }
 BOOL APIENTRY interceptedwglGenlockSourceEdgeI3D(HDC hDC, UINT uEdge)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGenlockSourceEdgeI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5668,7 +5663,7 @@ BOOL APIENTRY interceptedwglGenlockSourceEdgeI3D(HDC hDC, UINT uEdge)
 }
 BOOL APIENTRY interceptedwglGetGenlockSourceEdgeI3D(HDC hDC, UINT * uEdge)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetGenlockSourceEdgeI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5679,7 +5674,7 @@ BOOL APIENTRY interceptedwglGetGenlockSourceEdgeI3D(HDC hDC, UINT * uEdge)
 }
 BOOL APIENTRY interceptedwglGenlockSampleRateI3D(HDC hDC, UINT uRate)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGenlockSampleRateI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5690,7 +5685,7 @@ BOOL APIENTRY interceptedwglGenlockSampleRateI3D(HDC hDC, UINT uRate)
 }
 BOOL APIENTRY interceptedwglGetGenlockSampleRateI3D(HDC hDC, UINT * uRate)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetGenlockSampleRateI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5701,7 +5696,7 @@ BOOL APIENTRY interceptedwglGetGenlockSampleRateI3D(HDC hDC, UINT * uRate)
 }
 BOOL APIENTRY interceptedwglGenlockSourceDelayI3D(HDC hDC, UINT uDelay)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGenlockSourceDelayI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5712,7 +5707,7 @@ BOOL APIENTRY interceptedwglGenlockSourceDelayI3D(HDC hDC, UINT uDelay)
 }
 BOOL APIENTRY interceptedwglGetGenlockSourceDelayI3D(HDC hDC, UINT * uDelay)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetGenlockSourceDelayI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5723,7 +5718,7 @@ BOOL APIENTRY interceptedwglGetGenlockSourceDelayI3D(HDC hDC, UINT * uDelay)
 }
 BOOL APIENTRY interceptedwglQueryGenlockMaxSourceDelayI3D(HDC hDC, UINT * uMaxLineDelay, UINT * uMaxPixelDelay)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglQueryGenlockMaxSourceDelayI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5734,7 +5729,7 @@ BOOL APIENTRY interceptedwglQueryGenlockMaxSourceDelayI3D(HDC hDC, UINT * uMaxLi
 }
 void * APIENTRY interceptedwglCreateImageBufferI3D(HDC hDC, DWORD dwSize, UINT uFlags)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglCreateImageBufferI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5745,7 +5740,7 @@ void * APIENTRY interceptedwglCreateImageBufferI3D(HDC hDC, DWORD dwSize, UINT u
 }
 BOOL APIENTRY interceptedwglDestroyImageBufferI3D(HDC hDC, void * pAddress)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDestroyImageBufferI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5756,7 +5751,7 @@ BOOL APIENTRY interceptedwglDestroyImageBufferI3D(HDC hDC, void * pAddress)
 }
 BOOL APIENTRY interceptedwglAssociateImageBufferEventsI3D(HDC hDC, const HANDLE * pEvent, void * const * pAddress, const DWORD * pSize, UINT count)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglAssociateImageBufferEventsI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5767,7 +5762,7 @@ BOOL APIENTRY interceptedwglAssociateImageBufferEventsI3D(HDC hDC, const HANDLE 
 }
 BOOL APIENTRY interceptedwglReleaseImageBufferEventsI3D(HDC hDC, void * const * pAddress, UINT count)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglReleaseImageBufferEventsI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5778,7 +5773,7 @@ BOOL APIENTRY interceptedwglReleaseImageBufferEventsI3D(HDC hDC, void * const * 
 }
 BOOL APIENTRY interceptedwglEnableFrameLockI3D(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglEnableFrameLockI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5789,7 +5784,7 @@ BOOL APIENTRY interceptedwglEnableFrameLockI3D(void)
 }
 BOOL APIENTRY interceptedwglDisableFrameLockI3D(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDisableFrameLockI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5800,7 +5795,7 @@ BOOL APIENTRY interceptedwglDisableFrameLockI3D(void)
 }
 BOOL APIENTRY interceptedwglIsEnabledFrameLockI3D(BOOL * pFlag)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglIsEnabledFrameLockI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5811,7 +5806,7 @@ BOOL APIENTRY interceptedwglIsEnabledFrameLockI3D(BOOL * pFlag)
 }
 BOOL APIENTRY interceptedwglQueryFrameLockMasterI3D(BOOL * pFlag)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglQueryFrameLockMasterI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5822,7 +5817,7 @@ BOOL APIENTRY interceptedwglQueryFrameLockMasterI3D(BOOL * pFlag)
 }
 BOOL APIENTRY interceptedwglGetFrameUsageI3D(float * pUsage)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetFrameUsageI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5833,7 +5828,7 @@ BOOL APIENTRY interceptedwglGetFrameUsageI3D(float * pUsage)
 }
 BOOL APIENTRY interceptedwglBeginFrameTrackingI3D(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglBeginFrameTrackingI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5844,7 +5839,7 @@ BOOL APIENTRY interceptedwglBeginFrameTrackingI3D(void)
 }
 BOOL APIENTRY interceptedwglEndFrameTrackingI3D(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglEndFrameTrackingI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5855,7 +5850,7 @@ BOOL APIENTRY interceptedwglEndFrameTrackingI3D(void)
 }
 BOOL APIENTRY interceptedwglQueryFrameTrackingI3D(DWORD * pFrameCount, DWORD * pMissedFrames, float * pLastMissedUsage)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglQueryFrameTrackingI3D");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5866,7 +5861,7 @@ BOOL APIENTRY interceptedwglQueryFrameTrackingI3D(DWORD * pFrameCount, DWORD * p
 }
 BOOL APIENTRY interceptedwglSetStereoEmitterState3DL(HDC hDC, UINT uState)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSetStereoEmitterState3DL");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5877,7 +5872,7 @@ BOOL APIENTRY interceptedwglSetStereoEmitterState3DL(HDC hDC, UINT uState)
 }
 int APIENTRY interceptedwglEnumerateVideoDevicesNV(HDC hDC, HVIDEOOUTPUTDEVICENV * phDeviceList)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglEnumerateVideoDevicesNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5888,7 +5883,7 @@ int APIENTRY interceptedwglEnumerateVideoDevicesNV(HDC hDC, HVIDEOOUTPUTDEVICENV
 }
 BOOL APIENTRY interceptedwglBindVideoDeviceNV(HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int * piAttribList)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglBindVideoDeviceNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5899,7 +5894,7 @@ BOOL APIENTRY interceptedwglBindVideoDeviceNV(HDC hDC, unsigned int uVideoSlot, 
 }
 BOOL APIENTRY interceptedwglQueryCurrentContextNV(int iAttribute, int * piValue)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglQueryCurrentContextNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5910,7 +5905,7 @@ BOOL APIENTRY interceptedwglQueryCurrentContextNV(int iAttribute, int * piValue)
 }
 BOOL APIENTRY interceptedwglGetVideoDeviceNV(HDC hDC, int numDevices, HPVIDEODEV * hVideoDevice)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetVideoDeviceNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5921,7 +5916,7 @@ BOOL APIENTRY interceptedwglGetVideoDeviceNV(HDC hDC, int numDevices, HPVIDEODEV
 }
 BOOL APIENTRY interceptedwglReleaseVideoDeviceNV(HPVIDEODEV hVideoDevice)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglReleaseVideoDeviceNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5932,7 +5927,7 @@ BOOL APIENTRY interceptedwglReleaseVideoDeviceNV(HPVIDEODEV hVideoDevice)
 }
 BOOL APIENTRY interceptedwglBindVideoImageNV(HPVIDEODEV hVideoDevice, HPBUFFERARB hPbuffer, int iVideoBuffer)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglBindVideoImageNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5943,7 +5938,7 @@ BOOL APIENTRY interceptedwglBindVideoImageNV(HPVIDEODEV hVideoDevice, HPBUFFERAR
 }
 BOOL APIENTRY interceptedwglReleaseVideoImageNV(HPBUFFERARB hPbuffer, int iVideoBuffer)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglReleaseVideoImageNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5954,7 +5949,7 @@ BOOL APIENTRY interceptedwglReleaseVideoImageNV(HPBUFFERARB hPbuffer, int iVideo
 }
 BOOL APIENTRY interceptedwglSendPbufferToVideoNV(HPBUFFERARB hPbuffer, int iBufferType, unsigned long * pulCounterPbuffer, BOOL bBlock)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglSendPbufferToVideoNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5965,7 +5960,7 @@ BOOL APIENTRY interceptedwglSendPbufferToVideoNV(HPBUFFERARB hPbuffer, int iBuff
 }
 BOOL APIENTRY interceptedwglGetVideoInfoNV(HPVIDEODEV hpVideoDevice, unsigned long * pulCounterOutputPbuffer, unsigned long * pulCounterOutputVideo)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetVideoInfoNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5976,7 +5971,7 @@ BOOL APIENTRY interceptedwglGetVideoInfoNV(HPVIDEODEV hpVideoDevice, unsigned lo
 }
 BOOL APIENTRY interceptedwglJoinSwapGroupNV(HDC hDC, GLuint group)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglJoinSwapGroupNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5987,7 +5982,7 @@ BOOL APIENTRY interceptedwglJoinSwapGroupNV(HDC hDC, GLuint group)
 }
 BOOL APIENTRY interceptedwglBindSwapBarrierNV(GLuint group, GLuint barrier)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglBindSwapBarrierNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -5998,7 +5993,7 @@ BOOL APIENTRY interceptedwglBindSwapBarrierNV(GLuint group, GLuint barrier)
 }
 BOOL APIENTRY interceptedwglQuerySwapGroupNV(HDC hDC, GLuint * group, GLuint * barrier)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglQuerySwapGroupNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6009,7 +6004,7 @@ BOOL APIENTRY interceptedwglQuerySwapGroupNV(HDC hDC, GLuint * group, GLuint * b
 }
 BOOL APIENTRY interceptedwglQueryMaxSwapGroupsNV(HDC hDC, GLuint * maxGroups, GLuint * maxBarriers)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglQueryMaxSwapGroupsNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6020,7 +6015,7 @@ BOOL APIENTRY interceptedwglQueryMaxSwapGroupsNV(HDC hDC, GLuint * maxGroups, GL
 }
 BOOL APIENTRY interceptedwglQueryFrameCountNV(HDC hDC, GLuint * count)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglQueryFrameCountNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6031,7 +6026,7 @@ BOOL APIENTRY interceptedwglQueryFrameCountNV(HDC hDC, GLuint * count)
 }
 BOOL APIENTRY interceptedwglResetFrameCountNV(HDC hDC)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglResetFrameCountNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6042,7 +6037,7 @@ BOOL APIENTRY interceptedwglResetFrameCountNV(HDC hDC)
 }
 BOOL APIENTRY interceptedwglEnumGpusNV(UINT iGpuIndex, HGPUNV * phGpu)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglEnumGpusNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6053,7 +6048,7 @@ BOOL APIENTRY interceptedwglEnumGpusNV(UINT iGpuIndex, HGPUNV * phGpu)
 }
 BOOL APIENTRY interceptedwglEnumGpuDevicesNV(HGPUNV hGpu, UINT iDeviceIndex, _GPU_DEVICE * lpGpuDevice)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglEnumGpuDevicesNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6064,7 +6059,7 @@ BOOL APIENTRY interceptedwglEnumGpuDevicesNV(HGPUNV hGpu, UINT iDeviceIndex, _GP
 }
 HDC APIENTRY interceptedwglCreateAffinityDCNV(const HGPUNV * phGpuList)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglCreateAffinityDCNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6075,7 +6070,7 @@ HDC APIENTRY interceptedwglCreateAffinityDCNV(const HGPUNV * phGpuList)
 }
 BOOL APIENTRY interceptedwglEnumGpusFromAffinityDCNV(HDC hAffinityDC, UINT iGpuIndex, HGPUNV * hGpu)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglEnumGpusFromAffinityDCNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6086,7 +6081,7 @@ BOOL APIENTRY interceptedwglEnumGpusFromAffinityDCNV(HDC hAffinityDC, UINT iGpuI
 }
 BOOL APIENTRY interceptedwglDeleteDCNV(HDC hdc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDeleteDCNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6097,7 +6092,7 @@ BOOL APIENTRY interceptedwglDeleteDCNV(HDC hdc)
 }
 UINT APIENTRY interceptedwglGetGPUIDsAMD(UINT maxCount, UINT * ids)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetGPUIDsAMD");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6108,7 +6103,7 @@ UINT APIENTRY interceptedwglGetGPUIDsAMD(UINT maxCount, UINT * ids)
 }
 INT APIENTRY interceptedwglGetGPUInfoAMD(UINT id, int property, GLenum dataType, UINT size, void * data)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetGPUInfoAMD");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6119,7 +6114,7 @@ INT APIENTRY interceptedwglGetGPUInfoAMD(UINT id, int property, GLenum dataType,
 }
 UINT APIENTRY interceptedwglGetContextGPUIDAMD(HGLRC hglrc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetContextGPUIDAMD");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6130,7 +6125,7 @@ UINT APIENTRY interceptedwglGetContextGPUIDAMD(HGLRC hglrc)
 }
 HGLRC APIENTRY interceptedwglCreateAssociatedContextAMD(UINT id)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglCreateAssociatedContextAMD");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6141,7 +6136,7 @@ HGLRC APIENTRY interceptedwglCreateAssociatedContextAMD(UINT id)
 }
 HGLRC APIENTRY interceptedwglCreateAssociatedContextAttribsAMD(UINT id, HGLRC hShareContext, const int * attribList)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglCreateAssociatedContextAttribsAMD");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6152,7 +6147,7 @@ HGLRC APIENTRY interceptedwglCreateAssociatedContextAttribsAMD(UINT id, HGLRC hS
 }
 BOOL APIENTRY interceptedwglDeleteAssociatedContextAMD(HGLRC hglrc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDeleteAssociatedContextAMD");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6163,7 +6158,7 @@ BOOL APIENTRY interceptedwglDeleteAssociatedContextAMD(HGLRC hglrc)
 }
 BOOL APIENTRY interceptedwglMakeAssociatedContextCurrentAMD(HGLRC hglrc)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglMakeAssociatedContextCurrentAMD");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6174,7 +6169,7 @@ BOOL APIENTRY interceptedwglMakeAssociatedContextCurrentAMD(HGLRC hglrc)
 }
 HGLRC APIENTRY interceptedwglGetCurrentAssociatedContextAMD(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglGetCurrentAssociatedContextAMD");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6185,7 +6180,7 @@ HGLRC APIENTRY interceptedwglGetCurrentAssociatedContextAMD(void)
 }
 void APIENTRY interceptedwglBlitContextFramebufferAMD(HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglBlitContextFramebufferAMD");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6196,7 +6191,7 @@ void APIENTRY interceptedwglBlitContextFramebufferAMD(HGLRC dstCtx, GLint srcX0,
 }
 BOOL APIENTRY interceptedwglBindVideoCaptureDeviceNV(UINT uVideoSlot, HVIDEOINPUTDEVICENV hDevice)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglBindVideoCaptureDeviceNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6207,7 +6202,7 @@ BOOL APIENTRY interceptedwglBindVideoCaptureDeviceNV(UINT uVideoSlot, HVIDEOINPU
 }
 UINT APIENTRY interceptedwglEnumerateVideoCaptureDevicesNV(HDC hDc, HVIDEOINPUTDEVICENV * phDeviceList)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglEnumerateVideoCaptureDevicesNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6218,7 +6213,7 @@ UINT APIENTRY interceptedwglEnumerateVideoCaptureDevicesNV(HDC hDc, HVIDEOINPUTD
 }
 BOOL APIENTRY interceptedwglLockVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglLockVideoCaptureDeviceNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6229,7 +6224,7 @@ BOOL APIENTRY interceptedwglLockVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICEN
 }
 BOOL APIENTRY interceptedwglQueryVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice, int iAttribute, int * piValue)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglQueryVideoCaptureDeviceNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6240,7 +6235,7 @@ BOOL APIENTRY interceptedwglQueryVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICE
 }
 BOOL APIENTRY interceptedwglReleaseVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVICENV hDevice)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglReleaseVideoCaptureDeviceNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6251,7 +6246,7 @@ BOOL APIENTRY interceptedwglReleaseVideoCaptureDeviceNV(HDC hDc, HVIDEOINPUTDEVI
 }
 BOOL APIENTRY interceptedwglCopyImageSubDataNV(HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglCopyImageSubDataNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6262,7 +6257,7 @@ BOOL APIENTRY interceptedwglCopyImageSubDataNV(HGLRC hSrcRC, GLuint srcName, GLe
 }
 BOOL APIENTRY interceptedwglDXSetResourceShareHandleNV(void * dxObject, HANDLE shareHandle)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDXSetResourceShareHandleNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6273,7 +6268,7 @@ BOOL APIENTRY interceptedwglDXSetResourceShareHandleNV(void * dxObject, HANDLE s
 }
 HANDLE APIENTRY interceptedwglDXOpenDeviceNV(void * dxDevice)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDXOpenDeviceNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6284,7 +6279,7 @@ HANDLE APIENTRY interceptedwglDXOpenDeviceNV(void * dxDevice)
 }
 BOOL APIENTRY interceptedwglDXCloseDeviceNV(HANDLE hDevice)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDXCloseDeviceNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6295,7 +6290,7 @@ BOOL APIENTRY interceptedwglDXCloseDeviceNV(HANDLE hDevice)
 }
 HANDLE APIENTRY interceptedwglDXRegisterObjectNV(HANDLE hDevice, void * dxObject, GLuint name, GLenum type, GLenum access)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDXRegisterObjectNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6306,7 +6301,7 @@ HANDLE APIENTRY interceptedwglDXRegisterObjectNV(HANDLE hDevice, void * dxObject
 }
 BOOL APIENTRY interceptedwglDXUnregisterObjectNV(HANDLE hDevice, HANDLE hObject)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDXUnregisterObjectNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6317,7 +6312,7 @@ BOOL APIENTRY interceptedwglDXUnregisterObjectNV(HANDLE hDevice, HANDLE hObject)
 }
 BOOL APIENTRY interceptedwglDXObjectAccessNV(HANDLE hObject, GLenum access)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDXObjectAccessNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6328,7 +6323,7 @@ BOOL APIENTRY interceptedwglDXObjectAccessNV(HANDLE hObject, GLenum access)
 }
 BOOL APIENTRY interceptedwglDXLockObjectsNV(HANDLE hDevice, GLint count, HANDLE * hObjects)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDXLockObjectsNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6339,7 +6334,7 @@ BOOL APIENTRY interceptedwglDXLockObjectsNV(HANDLE hDevice, GLint count, HANDLE 
 }
 BOOL APIENTRY interceptedwglDXUnlockObjectsNV(HANDLE hDevice, GLint count, HANDLE * hObjects)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDXUnlockObjectsNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6350,7 +6345,7 @@ BOOL APIENTRY interceptedwglDXUnlockObjectsNV(HANDLE hDevice, GLint count, HANDL
 }
 BOOL APIENTRY interceptedwglDelayBeforeSwapNV(HDC hDC, GLfloat seconds)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("wglDelayBeforeSwapNV");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6362,7 +6357,7 @@ BOOL APIENTRY interceptedwglDelayBeforeSwapNV(HDC hDC, GLfloat seconds)
 /************************************************************************************/
 void APIENTRY interceptedglGetIntegerv(GLenum pname, GLint * params)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glGetIntegerv");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6373,7 +6368,7 @@ void APIENTRY interceptedglGetIntegerv(GLenum pname, GLint * params)
 }
 void APIENTRY interceptedglGetBooleanv(GLenum pname, GLboolean * params)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glGetBooleanv");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6384,7 +6379,7 @@ void APIENTRY interceptedglGetBooleanv(GLenum pname, GLboolean * params)
 }
 void APIENTRY interceptedglDisable(GLenum cap)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glDisable");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6395,7 +6390,7 @@ void APIENTRY interceptedglDisable(GLenum cap)
 }
 void APIENTRY interceptedglVertex2d(GLdouble x, GLdouble y)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glVertex2d");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6406,7 +6401,7 @@ void APIENTRY interceptedglVertex2d(GLdouble x, GLdouble y)
 }
 void APIENTRY interceptedglCallList(GLuint list)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glCallList");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6417,7 +6412,7 @@ void APIENTRY interceptedglCallList(GLuint list)
 }
 void APIENTRY interceptedglMaterialfv(GLenum face, GLenum pname, const GLfloat * params)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glMaterialfv");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6428,7 +6423,7 @@ void APIENTRY interceptedglMaterialfv(GLenum face, GLenum pname, const GLfloat *
 }
 void APIENTRY interceptedglEnable(GLenum cap)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glEnable");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6439,7 +6434,7 @@ void APIENTRY interceptedglEnable(GLenum cap)
 }
 void APIENTRY interceptedglPopMatrix(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glPopMatrix");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6450,7 +6445,7 @@ void APIENTRY interceptedglPopMatrix(void)
 }
 void APIENTRY interceptedglTexEnvi(GLenum target, GLenum pname, GLint param)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glTexEnvi");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6461,7 +6456,7 @@ void APIENTRY interceptedglTexEnvi(GLenum target, GLenum pname, GLint param)
 }
 void APIENTRY interceptedglVertex3d(GLdouble x, GLdouble y, GLdouble z)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glVertex3d");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6472,7 +6467,7 @@ void APIENTRY interceptedglVertex3d(GLdouble x, GLdouble y, GLdouble z)
 }
 void APIENTRY interceptedglTexCoord2d(GLdouble s, GLdouble t)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glTexCoord2d");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6483,7 +6478,7 @@ void APIENTRY interceptedglTexCoord2d(GLdouble s, GLdouble t)
 }
 void APIENTRY interceptedglBindTexture(GLenum target, GLuint texture)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glBindTexture");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6494,7 +6489,7 @@ void APIENTRY interceptedglBindTexture(GLenum target, GLuint texture)
 }
 void APIENTRY interceptedglRotated(GLdouble angle, GLdouble x, GLdouble y, GLdouble z)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glRotated");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6505,7 +6500,7 @@ void APIENTRY interceptedglRotated(GLdouble angle, GLdouble x, GLdouble y, GLdou
 }
 void APIENTRY interceptedglPushAttrib(GLbitfield mask)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glPushAttrib");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6516,7 +6511,7 @@ void APIENTRY interceptedglPushAttrib(GLbitfield mask)
 }
 void APIENTRY interceptedglPopAttrib(void)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glPopAttrib");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6527,7 +6522,7 @@ void APIENTRY interceptedglPopAttrib(void)
 }
 void APIENTRY interceptedglColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glColor4f");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6538,7 +6533,7 @@ void APIENTRY interceptedglColor4f(GLfloat red, GLfloat green, GLfloat blue, GLf
 }
 void APIENTRY interceptedglVertex2f(GLfloat x, GLfloat y)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glVertex2f");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6549,7 +6544,7 @@ void APIENTRY interceptedglVertex2f(GLfloat x, GLfloat y)
 }
 void APIENTRY interceptedglBlendFunc(GLenum sfactor, GLenum dfactor)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glBlendFunc");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6560,7 +6555,7 @@ void APIENTRY interceptedglBlendFunc(GLenum sfactor, GLenum dfactor)
 }
 void APIENTRY interceptedglFrustum(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glFrustum");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6571,7 +6566,7 @@ void APIENTRY interceptedglFrustum(GLdouble left, GLdouble right, GLdouble botto
 }
 void APIENTRY interceptedglViewport(GLint x, GLint y, GLsizei width, GLsizei height)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glViewport");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6582,7 +6577,7 @@ void APIENTRY interceptedglViewport(GLint x, GLint y, GLsizei width, GLsizei hei
 }
 void APIENTRY interceptedglMatrixMode(GLenum mode)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glMatrixMode");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6593,7 +6588,7 @@ void APIENTRY interceptedglMatrixMode(GLenum mode)
 }
 void APIENTRY interceptedglPolygonMode(GLenum face, GLenum mode)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glPolygonMode");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6604,7 +6599,7 @@ void APIENTRY interceptedglPolygonMode(GLenum face, GLenum mode)
 }
 void APIENTRY interceptedglClearColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glClearColor");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6615,7 +6610,7 @@ void APIENTRY interceptedglClearColor(GLfloat red, GLfloat green, GLfloat blue, 
 }
 void APIENTRY interceptedglScalef(GLfloat x, GLfloat y, GLfloat z)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glScalef");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6626,7 +6621,7 @@ void APIENTRY interceptedglScalef(GLfloat x, GLfloat y, GLfloat z)
 }
 void APIENTRY interceptedglHint(GLenum target, GLenum mode)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glHint");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6637,7 +6632,7 @@ void APIENTRY interceptedglHint(GLenum target, GLenum mode)
 }
 void APIENTRY interceptedglFogfv(GLenum pname, const GLfloat * params)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glFogfv");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6646,20 +6641,20 @@ void APIENTRY interceptedglFogfv(GLenum pname, const GLfloat * params)
 	}
 	_glFogfv(pname, params);
 }
-void APIENTRY interceptedglFogf(GLenum pname, const GLfloat params)
+void APIENTRY interceptedglFogf(GLenum pname, GLfloat param)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glFogf");
 
 	if (currentConfig3DSettings.startInterception())
 	{
 		currentConfig3DSettings.getDrawingBuffer("glFogf");
 		currentConfig3DSettings.switchCurrentBuffer();
 	}
-	_glFogf(pname, params);
+	_glFogf(pname, param);
 }
 void APIENTRY interceptedglColorMaterial(GLenum face, GLenum mode)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glColorMaterial");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6670,7 +6665,7 @@ void APIENTRY interceptedglColorMaterial(GLenum face, GLenum mode)
 }
 void APIENTRY interceptedglLightModelfv(GLenum pname, const GLfloat * params)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glLightModelfv");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6679,9 +6674,20 @@ void APIENTRY interceptedglLightModelfv(GLenum pname, const GLfloat * params)
 	}
 	_glLightModelfv(pname, params);
 }
+void APIENTRY interceptedglLightfv(GLenum light, GLenum pname, const GLfloat * params)
+{
+	currentConfig3DSettings.increaseFunctionCall("glLightfv");
+
+	if (currentConfig3DSettings.startInterception())
+	{
+		currentConfig3DSettings.getDrawingBuffer("glLightfv");
+		currentConfig3DSettings.switchCurrentBuffer();
+	}
+	_glLightfv(light, pname, params);
+}
 void APIENTRY interceptedglGetFloatv(GLenum pname, GLfloat * params)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glGetFloatv");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6692,7 +6698,7 @@ void APIENTRY interceptedglGetFloatv(GLenum pname, GLfloat * params)
 }
 void APIENTRY interceptedglBindBufferARB(GLenum target, GLuint buffer)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glBindBufferARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6703,7 +6709,7 @@ void APIENTRY interceptedglBindBufferARB(GLenum target, GLuint buffer)
 }
 void APIENTRY interceptedglInterleavedArrays(GLenum format, GLsizei stride, const GLvoid * pointer)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glInterleavedArrays");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6714,7 +6720,7 @@ void APIENTRY interceptedglInterleavedArrays(GLenum format, GLsizei stride, cons
 }
 void APIENTRY interceptedglDrawArrays(GLenum mode, GLint first, GLsizei count)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glDrawArrays");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6725,7 +6731,7 @@ void APIENTRY interceptedglDrawArrays(GLenum mode, GLint first, GLsizei count)
 }
 void APIENTRY interceptedglUseProgram(GLuint program)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glUseProgram");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6736,7 +6742,7 @@ void APIENTRY interceptedglUseProgram(GLuint program)
 }
 GLint APIENTRY interceptedglGetUniformLocationARB(GLhandleARB programObj, const GLcharARB * name)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glGetUniformLocationARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6747,7 +6753,7 @@ GLint APIENTRY interceptedglGetUniformLocationARB(GLhandleARB programObj, const 
 }
 void APIENTRY interceptedglUniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glUniform4f");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6758,7 +6764,7 @@ void APIENTRY interceptedglUniform4f(GLint location, GLfloat v0, GLfloat v1, GLf
 }
 void APIENTRY interceptedglUniform1f(GLint location, GLfloat v0)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glUniform1f");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6769,7 +6775,7 @@ void APIENTRY interceptedglUniform1f(GLint location, GLfloat v0)
 }
 void APIENTRY interceptedglUniform1i(GLint location, GLint v0)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glUniform1i");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6780,7 +6786,7 @@ void APIENTRY interceptedglUniform1i(GLint location, GLint v0)
 }
 void APIENTRY interceptedglActiveTextureARB(GLenum texture)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glActiveTextureARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6791,7 +6797,7 @@ void APIENTRY interceptedglActiveTextureARB(GLenum texture)
 }
 void APIENTRY interceptedglMultiTexCoord2fARB(GLenum target, GLfloat s, GLfloat t)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glMultiTexCoord2fARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6802,7 +6808,7 @@ void APIENTRY interceptedglMultiTexCoord2fARB(GLenum target, GLfloat s, GLfloat 
 }
 void APIENTRY interceptedglDepthMask(GLboolean flag)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glDepthMask");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6813,7 +6819,7 @@ void APIENTRY interceptedglDepthMask(GLboolean flag)
 }
 void APIENTRY interceptedglEnableClientState(GLenum array)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glEnableClientState");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6824,7 +6830,7 @@ void APIENTRY interceptedglEnableClientState(GLenum array)
 }
 void APIENTRY interceptedglPointParameterfvARB(GLenum pname, const GLfloat * params)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glPointParameterfvARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6835,7 +6841,7 @@ void APIENTRY interceptedglPointParameterfvARB(GLenum pname, const GLfloat * par
 }
 void APIENTRY interceptedglPointParameterfARB(GLenum pname, GLfloat param)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glPointParameterfARB");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6846,7 +6852,7 @@ void APIENTRY interceptedglPointParameterfARB(GLenum pname, GLfloat param)
 }
 void APIENTRY interceptedglPointSize(GLfloat size)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glPointSize");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6857,7 +6863,7 @@ void APIENTRY interceptedglPointSize(GLfloat size)
 }
 void APIENTRY interceptedglTexEnvf(GLenum target, GLenum pname, GLfloat param)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glTexEnvf");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6868,7 +6874,7 @@ void APIENTRY interceptedglTexEnvf(GLenum target, GLenum pname, GLfloat param)
 }
 void APIENTRY interceptedglColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid * pointer)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glColorPointer");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6879,7 +6885,7 @@ void APIENTRY interceptedglColorPointer(GLint size, GLenum type, GLsizei stride,
 }
 void APIENTRY interceptedglVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid * pointer)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glVertexPointer");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6890,7 +6896,7 @@ void APIENTRY interceptedglVertexPointer(GLint size, GLenum type, GLsizei stride
 }
 void APIENTRY interceptedglColor4ub(GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glColor4ub");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6901,7 +6907,7 @@ void APIENTRY interceptedglColor4ub(GLubyte red, GLubyte green, GLubyte blue, GL
 }
 void APIENTRY interceptedglTexCoord2f(GLfloat s, GLfloat t)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glTexCoord2f");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6912,7 +6918,7 @@ void APIENTRY interceptedglTexCoord2f(GLfloat s, GLfloat t)
 }
 void APIENTRY interceptedglVertex2i(GLint x, GLint y)
 {
-	currentConfig3DSettings.increaseFunctionCall();
+	currentConfig3DSettings.increaseFunctionCall("glVertex2i");
 
 	if (currentConfig3DSettings.startInterception())
 	{
@@ -6921,6 +6927,7 @@ void APIENTRY interceptedglVertex2i(GLint x, GLint y)
 	}
 	_glVertex2i(x, y);
 }
+
 /************************************************************************************/
 void initialiseVariables()
 {

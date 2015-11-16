@@ -2403,8 +2403,8 @@ BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
 		printf("Opened\n");
 	}
 
-	Config3DSettings config;
-	config.readConfig3DSettingsFromFileV2();
+	//Config3DSettings config;
+	//config.readConfig3DSettingsFromFileV2();
 
 	switch (reason)
 	{

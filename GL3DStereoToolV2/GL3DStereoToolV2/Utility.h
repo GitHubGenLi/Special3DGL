@@ -8,6 +8,18 @@
 
 using namespace std;
 
+enum ObjectType
+{
+	Background,
+	Foreground
+};
+enum ObjectBoundary
+{
+	Start,
+	Middle,
+	End
+};
+
 class Utility
 {
 public:

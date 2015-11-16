@@ -51,4 +51,7 @@ void ForegroundObject::addFunctions(string funcs, bool begin)
 	{
 		EndForeground.insert(EndForeground.end(), list.begin(), list.end());
 	}
+
+	MaxNumberFunction = std::max(BeginForeground.size(), EndForeground.size());
+	std::cout << "Max numbers: " << MaxNumberFunction  << std::endl;
 }
