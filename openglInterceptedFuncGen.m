@@ -124,12 +124,18 @@ for index = 1: totalFunction(1)
         nameInterceptedFunc = strcat('intercepted', realFunc);
         
         fullInterceptedFunction = strcat(realReturnPart, ' APIENTRY intercepted', realFunc, signature);
-        fullInterceptedFunction = sprintf('%s\n{\n\t%s\n', fullInterceptedFunction, 'currentConfig3DSettings.increaseFunctionCall();');
-        fullInterceptedFunction = sprintf('%s\n\t%s', fullInterceptedFunction, 'if (currentConfig3DSettings.startInterception())');
-        fullInterceptedFunction = sprintf('%s\n\t{', fullInterceptedFunction);
-        fullInterceptedFunction = sprintf('%s\n\t\t%s', fullInterceptedFunction, 'currentConfig3DSettings.getDrawingBuffer("');
-        fullInterceptedFunction = strcat(fullInterceptedFunction, realFunc, '");');
-        fullInterceptedFunction = sprintf('%s\n\t\t%s\n\t}', fullInterceptedFunction,'currentConfig3DSettings.switchCurrentBuffer();');
+        
+        if (strcmp(realFunc, 'wglDeleteContext') == 0)
+            fullInterceptedFunction = sprintf('%s\n{\n\t%s\n', fullInterceptedFunction, ['currentConfig3DSettings.increaseFunctionCall("' realFunc '");']);
+            fullInterceptedFunction = sprintf('%s\n\t%s', fullInterceptedFunction, 'if (currentConfig3DSettings.startInterception())');
+            fullInterceptedFunction = sprintf('%s\n\t{', fullInterceptedFunction);
+            fullInterceptedFunction = sprintf('%s\n\t\t%s', fullInterceptedFunction, 'currentConfig3DSettings.getDrawingBuffer("');
+            fullInterceptedFunction = strcat(fullInterceptedFunction, realFunc, '");');
+            fullInterceptedFunction = sprintf('%s\n\t\t%s\n\t}', fullInterceptedFunction,'currentConfig3DSettings.switchCurrentBuffer();');
+        else
+            fullInterceptedFunction = sprintf('%s\n{\n\t ', fullInterceptedFunction);
+        end
+       
         
         if (strcmp(realReturnPart, 'void') == 0) %not void
             fullInterceptedFunction = sprintf('%s\n\treturn _%s(', fullInterceptedFunction, realFunc);    
@@ -182,9 +188,11 @@ for index = 1: totalFunction(1)
         %create hooked function
         hookedFunc = strcat('if ((_', realFunc, ' == 0) || ');
         hookedFunc = sprintf('%s\n\t!Mhook_SetHook(reinterpret_cast<PVOID*>(&_%s),%s))', hookedFunc, realFunc, nameInterceptedFunc);
-        hookedFunc = sprintf('%s\n{\n\t%s', hookedFunc, 'cerr << "Failed to hook _glLoadIdentity" << endl;');
+        hookedFunc = sprintf('%s\n{\n\t%s', hookedFunc, ['cerr << "Failed to hook _' realFunc '" << endl;']);
+        hookedFunc = sprintf('%s\n\t%s', hookedFunc, ['Log::out() << "Failed to hook _' realFunc '" << endl;']);
         hookedFunc = sprintf('%s\n}\nelse\n{', hookedFunc);
         hookedFunc = sprintf('%s\n\tprintf("Hooked _%s\\n");\n', hookedFunc, realFunc);
+        hookedFunc = sprintf('%s\tLog::out() << "Hooked _%s\\n";\n', hookedFunc, realFunc);
         hookedFunc = sprintf('%s}', hookedFunc);
         
         %write hooked function to the text file
