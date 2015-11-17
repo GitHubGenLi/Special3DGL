@@ -86,7 +86,7 @@ public:
 	void increaseFrameGL()
 	{
 		currentFrameGL++;
-		std::cout << "Frame: " << currentFrameGL << endl;
+		//std::cout << "Frame: " << currentFrameGL << endl;
 		currentFunctionCallIndexPerFrame = 0;
 	}
 	void increaseFunctionCall_old(string funcName = "")
@@ -113,7 +113,7 @@ public:
 			if (funcName == "glClear")
 			{
 				totalClear++;
-				std::cout << "Increase glClear count: " << totalClear << endl;
+				//std::cout << "Increase glClear count: " << totalClear << endl;
 			}
 			//std::cout << "Current Func call: " << funcName << endl;
 			//make sure contain exactly the right numbers of functions
@@ -280,6 +280,7 @@ public:
 
 		if (ListInteceptedFunc.size() > 0)
 		{
+			addDefaultInterceptedFunc();
 			filterInterceptedFuncs = true;
 		}
 		else
@@ -291,13 +292,21 @@ public:
 	bool checkNeedInterception(const std::string & funcName)
 	{
 		bool need = true;
-
+		std::cout << "Total Func call: " << ListInteceptedFunc.size() << endl;
 		if (!filterInterceptedFuncs)
 		{
 			need = true;
 			return need;
 		}
 		return (ListInteceptedFunc.find(funcName) != ListInteceptedFunc.end());
+	}
+	void addDefaultInterceptedFunc()
+	{
+		ListInteceptedFunc.insert("wglChoosePixelFormat");
+		ListInteceptedFunc.insert("wglSetPixelFormat");
+		ListInteceptedFunc.insert("wglChoosePixelFormatARB");
+		ListInteceptedFunc.insert("glClear");
+		ListInteceptedFunc.insert("wglSwapBuffers");
 	}
 };
 

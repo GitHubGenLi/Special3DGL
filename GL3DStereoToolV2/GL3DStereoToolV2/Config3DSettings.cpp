@@ -19,12 +19,12 @@ Config3DSettings::Config3DSettings()
 	_glClear = (PFN_GLCLEAR )GetProcAddress(module, "glClear");*/
 	//_glClear = (PFN_GLCLEAR)wglGetProcAddress("glClear");
 	
-	saveAllInterceptedFuncs = true;
+	saveAllInterceptedFuncs = false;
 
-	if (saveAllInterceptedFuncs)
-	{
-		interceptedWriter.open("interceptedFunc.dat");
-	}
+	//if (saveAllInterceptedFuncs)
+	//{
+	//	interceptedWriter.open("interceptedFunc.dat");
+	//}
 }
 
 
@@ -32,7 +32,8 @@ Config3DSettings::~Config3DSettings()
 {
 	if (saveAllInterceptedFuncs)
 	{
-		
+		interceptedWriter.open("interceptedFunc.dat");
+
 		for each (string funcName in ListInteceptedFunc)
 		{
 			this->interceptedWriter << funcName << endl;

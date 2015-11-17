@@ -35,11 +35,19 @@ Log & Log::get()
     return instance;
 }
 
+//Log & Log::get(const std::string & fileName)
+//{
+//	static Log instance;
+//	
+//	return instance;
+//}
 //-----------------------------------------------------------------------------
 
 Log::~Log()
 {
-    close();
+    //close();
+
+	if (get().m_stream.is_open()) get().m_stream.close();
 }
 
 //-----------------------------------------------------------------------------
@@ -56,8 +64,8 @@ bool Log::open( const std::string & fileName )
     close();
 
     // open stream for writing
-	//get().m_stream.open(fileName.c_str());
-	get().m_stream.open(fileName.c_str(), std::ofstream::out | std::ofstream::app);
+	get().m_stream.open(fileName.c_str(), std::ofstream::out);
+	//get().m_stream.open(fileName.c_str(), std::ofstream::out | std::ofstream::app);
     if ( !get().m_stream ) return false;
 
     return true;
@@ -67,7 +75,7 @@ bool Log::open( const std::string & fileName )
 
 void Log::close()
 {
-    if ( get().m_stream.is_open() ) get().m_stream.close();
+    //if ( get().m_stream.is_open() ) get().m_stream.close();
 }
 
 //-----------------------------------------------------------------------------

@@ -40,8 +40,13 @@ using namespace std;
 //-----------------------------------------------------------------------------
 #include "GLWindow.h"
 
+
 void initialiseRealOpenGLFunctions()
 {
+	Log::out() << "initialiseRealOpenGLFunctions" << endl;
+
+	currentConfig3DSettings.readConfig3DSettingsFromFile();
+	currentConfig3DSettings.loadInterceptedFuncs();
 
 	// attributes for an OpenGL stereo window
 	GLWindow::Attributes attributes;
@@ -52,10 +57,10 @@ void initialiseRealOpenGLFunctions()
 	// the window is successfully created and reports a stereo pixel format)
 	// note: the window is invisible (not shown) but typically causes the
 	// windows desktop to flash briefly (first run only) as stereo activates
-	GLWindow window;
-	window.create(0, "", 0, 0, 0, 8, 8, 0, 0, DefWindowProc, 0, attributes);
+	/*GLWindow window;
+	window.create(0, "", 0, 0, 0, 8, 8, 0, 0, DefWindowProc, 0, attributes);*/
 	
-
+	/*********Intercept these functions by default*********************/
 	_wglChoosePixelFormat = (PFN_WGLCHOOSEPIXELFORMAT)_getAnyGLFuncAddress("wglChoosePixelFormat");
 	_glClear = (PFN_GLCLEAR)_getAnyGLFuncAddress("glClear");
 	_wglSwapBuffers = (PFN_WGLSWAPBUFFERS)_getAnyGLFuncAddress("wglSwapBuffers");
@@ -66,6 +71,8 @@ void initialiseRealOpenGLFunctions()
 
 	_wglSetPixelFormat = (PFN_WGLSETPIXELFORMAT)_getPublicProcAddress("wglSetPixelFormat");
 	_wglChoosePixelFormatARB = (PFN_WGLCHOOSEPIXELFORMATARB)_getAnyGLFuncAddress("wglChoosePixelFormatARB");
+
+	/******************************/
 
 	//part 1
 	_glColor3f = (PFN_GLCOLOR3F)_getAnyGLFuncAddress("glColor3f");
@@ -286,22 +293,22 @@ void initialiseRealOpenGLFunctions()
 
 
 
-	window.destroy();
+	//window.destroy();
 }
 
 void processAttach()
 {
-	//bool isOpened = Log::open("intercept.log");
+	bool debug = true;
+
 	Log::print("DLL_PROCESS_ATTACH\n");
 
-	printf("processAttach\n");
+	//printf("processAttach\n");
 	
 	initialiseRealOpenGLFunctions(); 
 
 	if ((_wglChoosePixelFormat == 0) || !Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglChoosePixelFormat), interceptedwglChoosePixelFormat))
 	{
 		cerr << "Failed to hook _wglChoosePixelFormat" << endl;
-		MessageBox(0, "Failed to hook _wglChoosePixelFormat", "Error", MB_OK);
 	}
 	else
 	{
@@ -310,7 +317,6 @@ void processAttach()
 	if ((_wglSetPixelFormat == 0) || !Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetPixelFormat), interceptedwglSetPixelFormat))
 	{
 		cerr << "Failed to hook _wglSetPixelFormat" << endl;
-		MessageBox(0, "Failed to hook _wglSetPixelFormat", "Error", MB_OK);
 	}
 	else
 	{
@@ -320,7 +326,6 @@ void processAttach()
 	if ((_glClear == 0) || !Mhook_SetHook(reinterpret_cast<PVOID*>(&_glClear), interceptedglClear))
 	{
 		cerr << "Failed to hook _glClear" << endl;
-		MessageBox(0, "Failed to hook _glClear", "Error", MB_OK);
 	}
 	else
 	{
@@ -330,7 +335,6 @@ void processAttach()
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSwapBuffers), interceptedwglSwapBuffers))
 	{
 		cerr << "Failed to hook _wglSwapBuffers" << endl;
-		MessageBox(0, "Failed to hook _wglSwapBuffers", "Error", MB_OK);
 	}
 	else
 	{
@@ -340,7 +344,6 @@ void processAttach()
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColor3f), interceptedglColor3f))
 	{
 		cerr << "Failed to hook _glColor3f" << endl;
-		MessageBox(0, "Failed to hook _glColor3f", "Error", MB_OK);
 	}
 	else
 	{
@@ -350,7 +353,6 @@ void processAttach()
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glRotatef), interceptedglRotatef))
 	{
 		cerr << "Failed to hook _glRotatef" << endl;
-		MessageBox(0, "Failed to hook _glRotatef", "Error", MB_OK);
 	}
 	else
 	{
@@ -360,7 +362,6 @@ void processAttach()
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glLoadIdentity), interceptedglLoadIdentity))
 	{
 		cerr << "Failed to hook _glLoadIdentity" << endl;
-		MessageBox(0, "Failed to hook _glLoadIdentity", "Error", MB_OK);
 	}
 	else
 	{
@@ -370,7 +371,6 @@ void processAttach()
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glMultMatrixf), interceptedglMultMatrixf))
 	{
 		cerr << "Failed to hook _glMultMatrixf" << endl;
-		MessageBox(0, "Failed to hook _glMultMatrixf", "Error", MB_OK);
 	}
 	else
 	{
@@ -380,7 +380,6 @@ void processAttach()
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTranslated), interceptedglTranslated))
 	{
 		cerr << "Failed to hook _glTranslated" << endl;
-		MessageBox(0, "Failed to hook _glTranslated", "Error", MB_OK);
 	}
 	else
 	{
@@ -390,7 +389,6 @@ void processAttach()
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTranslatef), interceptedglTranslatef))
 	{
 		cerr << "Failed to hook _glTranslatef" << endl;
-		MessageBox(0, "Failed to hook _glTranslatef", "Error", MB_OK);
 	}
 	else
 	{
@@ -400,7 +398,6 @@ void processAttach()
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glBegin), interceptedglBegin))
 	{
 		cerr << "Failed to hook _glBegin" << endl;
-		MessageBox(0, "Failed to hook _glBegin", "Error", MB_OK);
 	}
 	else
 	{
@@ -410,7 +407,6 @@ void processAttach()
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertex3f), interceptedglVertex3f))
 	{
 		cerr << "Failed to hook _glVertex3f" << endl;
-		MessageBox(0, "Failed to hook _glVertex3f", "Error", MB_OK);
 	}
 	else
 	{
@@ -420,7 +416,6 @@ void processAttach()
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glEnd), interceptedglEnd))
 	{
 		cerr << "Failed to hook _glEnd" << endl;
-		MessageBox(0, "Failed to hook _glEnd", "Error", MB_OK);
 	}
 	else
 	{
@@ -430,7 +425,6 @@ void processAttach()
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glFlush), interceptedglFlush))
 	{
 		cerr << "Failed to hook _glFlush" << endl;
-		MessageBox(0, "Failed to hook _glFlush", "Error", MB_OK);
 	}
 	else
 	{
@@ -440,370 +434,452 @@ void processAttach()
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglMakeCurrent), interceptedwglMakeCurrent))
 	{
 		cerr << "Failed to hook _wglMakeCurrent" << endl;
+		Log::out() << "Failed to hook _wglMakeCurrent" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglMakeCurrent\n");
+		Log::out() << "Hooked _wglMakeCurrent\n";
 	}
 	if ((_glScaled == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glScaled), interceptedglScaled))
 	{
 		cerr << "Failed to hook _glScaled" << endl;
+		Log::out() << "Failed to hook _glScaled" << endl;
 	}
 	else
 	{
 		printf("Hooked _glScaled\n");
+		Log::out() << "Hooked _glScaled\n";
 	}
 	if ((_glColor3d == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColor3d), interceptedglColor3d))
 	{
 		cerr << "Failed to hook _glColor3d" << endl;
+		Log::out() << "Failed to hook _glColor3d" << endl;
 	}
 	else
 	{
 		printf("Hooked _glColor3d\n");
+		Log::out() << "Hooked _glColor3d\n";
 	}
 	if ((_glPushMatrix == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPushMatrix), interceptedglPushMatrix))
 	{
 		cerr << "Failed to hook _glPushMatrix" << endl;
+		Log::out() << "Failed to hook _glPushMatrix" << endl;
 	}
 	else
 	{
 		printf("Hooked _glPushMatrix\n");
+		Log::out() << "Hooked _glPushMatrix\n";
 	}
 	if ((_glMultMatrixd == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glMultMatrixd), interceptedglMultMatrixd))
 	{
 		cerr << "Failed to hook _glMultMatrixd" << endl;
+		Log::out() << "Failed to hook _glMultMatrixd" << endl;
 	}
 	else
 	{
 		printf("Hooked _glMultMatrixd\n");
+		Log::out() << "Hooked _glMultMatrixd\n";
 	}
 	if ((_wglCreateContext == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateContext), interceptedwglCreateContext))
 	{
 		cerr << "Failed to hook _wglCreateContext" << endl;
+		Log::out() << "Failed to hook _wglCreateContext" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglCreateContext\n");
+		Log::out() << "Hooked _wglCreateContext\n";
 	}
 	if ((_wglDeleteContext == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDeleteContext), interceptedwglDeleteContext))
 	{
 		cerr << "Failed to hook _wglDeleteContext" << endl;
+		Log::out() << "Failed to hook _wglDeleteContext" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglDeleteContext\n");
+		Log::out() << "Hooked _wglDeleteContext\n";
 	}
 	if ((_wglGetCurrentContext == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetCurrentContext), interceptedwglGetCurrentContext))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglGetCurrentContext" << endl;
+		Log::out() << "Failed to hook _wglGetCurrentContext" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglGetCurrentContext\n");
+		Log::out() << "Hooked _wglGetCurrentContext\n";
 	}
 	if ((_wglCopyContext == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCopyContext), interceptedwglCopyContext))
 	{
-		cerr << "Failed to hook _glLoadIdentity" << endl;
+		cerr << "Failed to hook _wglCopyContext" << endl;
+		Log::out() << "Failed to hook _wglCopyContext" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglCopyContext\n");
+		Log::out() << "Hooked _wglCopyContext\n";
 	}
 	if ((_wglGetCurrentDC == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetCurrentDC), interceptedwglGetCurrentDC))
 	{
 		cerr << "Failed to hook _wglGetCurrentDC" << endl;
+		Log::out() << "Failed to hook _wglGetCurrentDC" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglGetCurrentDC\n");
+		Log::out() << "Hooked _wglGetCurrentDC\n";
 	}
 	if ((_wglGetDefaultProcAddress == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetDefaultProcAddress), interceptedwglGetDefaultProcAddress))
 	{
 		cerr << "Failed to hook _wglGetDefaultProcAddress" << endl;
+		Log::out() << "Failed to hook _wglGetDefaultProcAddress" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglGetDefaultProcAddress\n");
+		Log::out() << "Hooked _wglGetDefaultProcAddress\n";
 	}
 	if ((_wglShareLists == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglShareLists), interceptedwglShareLists))
 	{
 		cerr << "Failed to hook _wglShareLists" << endl;
+		Log::out() << "Failed to hook _wglShareLists" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglShareLists\n");
+		Log::out() << "Hooked _wglShareLists\n";
 	}
 	if ((_wglCreateLayerContext == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateLayerContext), interceptedwglCreateLayerContext))
 	{
 		cerr << "Failed to hook _wglCreateLayerContext" << endl;
+		Log::out() << "Failed to hook _wglCreateLayerContext" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglCreateLayerContext\n");
+		Log::out() << "Hooked _wglCreateLayerContext\n";
 	}
 	if ((_wglDescribeLayerPlane == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDescribeLayerPlane), interceptedwglDescribeLayerPlane))
 	{
 		cerr << "Failed to hook _wglDescribeLayerPlane" << endl;
+		Log::out() << "Failed to hook _wglDescribeLayerPlane" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglDescribeLayerPlane\n");
+		Log::out() << "Hooked _wglDescribeLayerPlane\n";
 	}
 	if ((_wglSetLayerPaletteEntries == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetLayerPaletteEntries), interceptedwglSetLayerPaletteEntries))
 	{
 		cerr << "Failed to hook _wglSetLayerPaletteEntries" << endl;
+		Log::out() << "Failed to hook _wglSetLayerPaletteEntries" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglSetLayerPaletteEntries\n");
+		Log::out() << "Hooked _wglSetLayerPaletteEntries\n";
 	}
 	if ((_wglGetLayerPaletteEntries == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetLayerPaletteEntries), interceptedwglGetLayerPaletteEntries))
 	{
 		cerr << "Failed to hook _wglGetLayerPaletteEntries" << endl;
+		Log::out() << "Failed to hook _wglGetLayerPaletteEntries" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglGetLayerPaletteEntries\n");
+		Log::out() << "Hooked _wglGetLayerPaletteEntries\n";
 	}
 	if ((_wglRealizeLayerPalette == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglRealizeLayerPalette), interceptedwglRealizeLayerPalette))
 	{
 		cerr << "Failed to hook _wglRealizeLayerPalette" << endl;
+		Log::out() << "Failed to hook _wglRealizeLayerPalette" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglRealizeLayerPalette\n");
+		Log::out() << "Hooked _wglRealizeLayerPalette\n";
 	}
 	if ((_wglSwapLayerBuffers == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSwapLayerBuffers), interceptedwglSwapLayerBuffers))
 	{
 		cerr << "Failed to hook _wglSwapLayerBuffers" << endl;
+		Log::out() << "Failed to hook _wglSwapLayerBuffers" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglSwapLayerBuffers\n");
+		Log::out() << "Hooked _wglSwapLayerBuffers\n";
 	}
 	if ((_wglUseFontBitmapsA == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglUseFontBitmapsA), interceptedwglUseFontBitmapsA))
 	{
 		cerr << "Failed to hook _wglUseFontBitmapsA" << endl;
+		Log::out() << "Failed to hook _wglUseFontBitmapsA" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglUseFontBitmapsA\n");
+		Log::out() << "Hooked _wglUseFontBitmapsA\n";
 	}
 	if ((_wglUseFontBitmapsW == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglUseFontBitmapsW), interceptedwglUseFontBitmapsW))
 	{
 		cerr << "Failed to hook _wglUseFontBitmapsW" << endl;
+		Log::out() << "Failed to hook _wglUseFontBitmapsW" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglUseFontBitmapsW\n");
+		Log::out() << "Hooked _wglUseFontBitmapsW\n";
 	}
 	if ((_wglSwapMultipleBuffers == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSwapMultipleBuffers), interceptedwglSwapMultipleBuffers))
 	{
 		cerr << "Failed to hook _wglSwapMultipleBuffers" << endl;
+		Log::out() << "Failed to hook _wglSwapMultipleBuffers" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglSwapMultipleBuffers\n");
+		Log::out() << "Hooked _wglSwapMultipleBuffers\n";
 	}
 	if ((_wglUseFontOutlinesA == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglUseFontOutlinesA), interceptedwglUseFontOutlinesA))
 	{
 		cerr << "Failed to hook _wglUseFontOutlinesA" << endl;
+		Log::out() << "Failed to hook _wglUseFontOutlinesA" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglUseFontOutlinesA\n");
+		Log::out() << "Hooked _wglUseFontOutlinesA\n";
 	}
 	if ((_wglUseFontOutlinesW == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglUseFontOutlinesW), interceptedwglUseFontOutlinesW))
 	{
 		cerr << "Failed to hook _wglUseFontOutlinesW" << endl;
+		Log::out() << "Failed to hook _wglUseFontOutlinesW" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglUseFontOutlinesW\n");
+		Log::out() << "Hooked _wglUseFontOutlinesW\n";
 	}
 	if ((_wglCreateBufferRegionARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateBufferRegionARB), interceptedwglCreateBufferRegionARB))
 	{
 		cerr << "Failed to hook _wglCreateBufferRegionARB" << endl;
+		Log::out() << "Failed to hook _wglCreateBufferRegionARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglCreateBufferRegionARB\n");
+		Log::out() << "Hooked _wglCreateBufferRegionARB\n";
 	}
 	if ((_wglDeleteBufferRegionARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDeleteBufferRegionARB), interceptedwglDeleteBufferRegionARB))
 	{
 		cerr << "Failed to hook _wglDeleteBufferRegionARB" << endl;
+		Log::out() << "Failed to hook _wglDeleteBufferRegionARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglDeleteBufferRegionARB\n");
+		Log::out() << "Hooked _wglDeleteBufferRegionARB\n";
 	}
 	if ((_wglSaveBufferRegionARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSaveBufferRegionARB), interceptedwglSaveBufferRegionARB))
 	{
 		cerr << "Failed to hook _wglSaveBufferRegionARB" << endl;
+		Log::out() << "Failed to hook _wglSaveBufferRegionARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglSaveBufferRegionARB\n");
+		Log::out() << "Hooked _wglSaveBufferRegionARB\n";
 	}
 	if ((_wglRestoreBufferRegionARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglRestoreBufferRegionARB), interceptedwglRestoreBufferRegionARB))
 	{
 		cerr << "Failed to hook _wglRestoreBufferRegionARB" << endl;
+		Log::out() << "Failed to hook _wglRestoreBufferRegionARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglRestoreBufferRegionARB\n");
+		Log::out() << "Hooked _wglRestoreBufferRegionARB\n";
 	}
 	if ((_wglGetExtensionsStringARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetExtensionsStringARB), interceptedwglGetExtensionsStringARB))
 	{
 		cerr << "Failed to hook _wglGetExtensionsStringARB" << endl;
+		Log::out() << "Failed to hook _wglGetExtensionsStringARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglGetExtensionsStringARB\n");
+		Log::out() << "Hooked _wglGetExtensionsStringARB\n";
 	}
 	if ((_wglGetPixelFormatAttribivARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPixelFormatAttribivARB), interceptedwglGetPixelFormatAttribivARB))
 	{
 		cerr << "Failed to hook _wglGetPixelFormatAttribivARB" << endl;
+		Log::out() << "Failed to hook _wglGetPixelFormatAttribivARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglGetPixelFormatAttribivARB\n");
+		Log::out() << "Hooked _wglGetPixelFormatAttribivARB\n";
 	}
 	if ((_wglGetPixelFormatAttribfvARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPixelFormatAttribfvARB), interceptedwglGetPixelFormatAttribfvARB))
 	{
 		cerr << "Failed to hook _wglGetPixelFormatAttribfvARB" << endl;
+		Log::out() << "Failed to hook _wglGetPixelFormatAttribfvARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglGetPixelFormatAttribfvARB\n");
+		Log::out() << "Hooked _wglGetPixelFormatAttribfvARB\n";
 	}
 	if ((_wglMakeContextCurrentARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglMakeContextCurrentARB), interceptedwglMakeContextCurrentARB))
 	{
 		cerr << "Failed to hook _wglMakeContextCurrentARB" << endl;
+		Log::out() << "Failed to hook _wglMakeContextCurrentARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglMakeContextCurrentARB\n");
+		Log::out() << "Hooked _wglMakeContextCurrentARB\n";
 	}
 	if ((_wglGetCurrentReadDCARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetCurrentReadDCARB), interceptedwglGetCurrentReadDCARB))
 	{
 		cerr << "Failed to hook _wglGetCurrentReadDCARB" << endl;
+		Log::out() << "Failed to hook _wglGetCurrentReadDCARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglGetCurrentReadDCARB\n");
+		Log::out() << "Hooked _wglGetCurrentReadDCARB\n";
 	}
 	if ((_wglCreatePbufferARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreatePbufferARB), interceptedwglCreatePbufferARB))
 	{
 		cerr << "Failed to hook _wglCreatePbufferARB" << endl;
+		Log::out() << "Failed to hook _wglCreatePbufferARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglCreatePbufferARB\n");
+		Log::out() << "Hooked _wglCreatePbufferARB\n";
 	}
 	if ((_wglGetPbufferDCARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglGetPbufferDCARB), interceptedwglGetPbufferDCARB))
 	{
 		cerr << "Failed to hook _wglGetPbufferDCARB" << endl;
+		Log::out() << "Failed to hook _wglGetPbufferDCARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglGetPbufferDCARB\n");
+		Log::out() << "Hooked _wglGetPbufferDCARB\n";
 	}
 	if ((_wglReleasePbufferDCARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleasePbufferDCARB), interceptedwglReleasePbufferDCARB))
 	{
 		cerr << "Failed to hook _wglReleasePbufferDCARB" << endl;
+		Log::out() << "Failed to hook _wglReleasePbufferDCARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglReleasePbufferDCARB\n");
+		Log::out() << "Hooked _wglReleasePbufferDCARB\n";
 	}
 	if ((_wglDestroyPbufferARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglDestroyPbufferARB), interceptedwglDestroyPbufferARB))
 	{
 		cerr << "Failed to hook _wglDestroyPbufferARB" << endl;
+		Log::out() << "Failed to hook _wglDestroyPbufferARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglDestroyPbufferARB\n");
+		Log::out() << "Hooked _wglDestroyPbufferARB\n";
 	}
 	if ((_wglQueryPbufferARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglQueryPbufferARB), interceptedwglQueryPbufferARB))
 	{
 		cerr << "Failed to hook _wglQueryPbufferARB" << endl;
+		Log::out() << "Failed to hook _wglQueryPbufferARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglQueryPbufferARB\n");
+		Log::out() << "Hooked _wglQueryPbufferARB\n";
 	}
 	if ((_wglBindTexImageARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglBindTexImageARB), interceptedwglBindTexImageARB))
 	{
 		cerr << "Failed to hook _wglBindTexImageARB" << endl;
+		Log::out() << "Failed to hook _wglBindTexImageARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglBindTexImageARB\n");
+		Log::out() << "Hooked _wglBindTexImageARB\n";
 	}
 	if ((_wglReleaseTexImageARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglReleaseTexImageARB), interceptedwglReleaseTexImageARB))
 	{
 		cerr << "Failed to hook _wglReleaseTexImageARB" << endl;
+		Log::out() << "Failed to hook _wglReleaseTexImageARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglReleaseTexImageARB\n");
+		Log::out() << "Hooked _wglReleaseTexImageARB\n";
 	}
 	if ((_wglSetPbufferAttribARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglSetPbufferAttribARB), interceptedwglSetPbufferAttribARB))
 	{
 		cerr << "Failed to hook _wglSetPbufferAttribARB" << endl;
+		Log::out() << "Failed to hook _wglSetPbufferAttribARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglSetPbufferAttribARB\n");
+		Log::out() << "Hooked _wglSetPbufferAttribARB\n";
 	}
 	if ((_wglCreateContextAttribsARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateContextAttribsARB), interceptedwglCreateContextAttribsARB))
 	{
 		cerr << "Failed to hook _wglCreateContextAttribsARB" << endl;
+		Log::out() << "Failed to hook _wglCreateContextAttribsARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _wglCreateContextAttribsARB\n");
+		Log::out() << "Hooked _wglCreateContextAttribsARB\n";
 	}
 	/*if ((_wglCreateDisplayColorTableEXT == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_wglCreateDisplayColorTableEXT), interceptedwglCreateDisplayColorTableEXT))
@@ -1716,473 +1792,580 @@ void processAttach()
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glGetIntegerv), interceptedglGetIntegerv))
 	{
 		cerr << "Failed to hook _glGetIntegerv" << endl;
+		Log::out() << "Failed to hook _glGetIntegerv" << endl;
 	}
 	else
 	{
 		printf("Hooked _glGetIntegerv\n");
+		Log::out() << "Hooked _glGetIntegerv\n";
 	}
 	if ((_glGetBooleanv == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glGetBooleanv), interceptedglGetBooleanv))
 	{
 		cerr << "Failed to hook _glGetBooleanv" << endl;
+		Log::out() << "Failed to hook _glGetBooleanv" << endl;
 	}
 	else
 	{
 		printf("Hooked _glGetBooleanv\n");
+		Log::out() << "Hooked _glGetBooleanv\n";
 	}
 	if ((_glDisable == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glDisable), interceptedglDisable))
 	{
 		cerr << "Failed to hook _glDisable" << endl;
+		Log::out() << "Failed to hook _glDisable" << endl;
 	}
 	else
 	{
 		printf("Hooked _glDisable\n");
+		Log::out() << "Hooked _glDisable\n";
 	}
 	if ((_glVertex2d == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertex2d), interceptedglVertex2d))
 	{
 		cerr << "Failed to hook _glVertex2d" << endl;
+		Log::out() << "Failed to hook _glVertex2d" << endl;
 	}
 	else
 	{
 		printf("Hooked _glVertex2d\n");
+		Log::out() << "Hooked _glVertex2d\n";
 	}
 	if ((_glCallList == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glCallList), interceptedglCallList))
 	{
 		cerr << "Failed to hook _glCallList" << endl;
+		Log::out() << "Failed to hook _glCallList" << endl;
 	}
 	else
 	{
 		printf("Hooked _glCallList\n");
+		Log::out() << "Hooked _glCallList\n";
 	}
 	if ((_glMaterialfv == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glMaterialfv), interceptedglMaterialfv))
 	{
 		cerr << "Failed to hook _glMaterialfv" << endl;
+		Log::out() << "Failed to hook _glMaterialfv" << endl;
 	}
 	else
 	{
 		printf("Hooked _glMaterialfv\n");
+		Log::out() << "Hooked _glMaterialfv\n";
 	}
 	if ((_glEnable == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glEnable), interceptedglEnable))
 	{
 		cerr << "Failed to hook _glEnable" << endl;
+		Log::out() << "Failed to hook _glEnable" << endl;
 	}
 	else
 	{
 		printf("Hooked _glEnable\n");
+		Log::out() << "Hooked _glEnable\n";
 	}
 	if ((_glPopMatrix == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPopMatrix), interceptedglPopMatrix))
 	{
 		cerr << "Failed to hook _glPopMatrix" << endl;
+		Log::out() << "Failed to hook _glPopMatrix" << endl;
 	}
 	else
 	{
 		printf("Hooked _glPopMatrix\n");
+		Log::out() << "Hooked _glPopMatrix\n";
 	}
 	if ((_glTexEnvi == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTexEnvi), interceptedglTexEnvi))
 	{
 		cerr << "Failed to hook _glTexEnvi" << endl;
+		Log::out() << "Failed to hook _glTexEnvi" << endl;
 	}
 	else
 	{
 		printf("Hooked _glTexEnvi\n");
+		Log::out() << "Hooked _glTexEnvi\n";
 	}
 	if ((_glVertex3d == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertex3d), interceptedglVertex3d))
 	{
 		cerr << "Failed to hook _glVertex3d" << endl;
+		Log::out() << "Failed to hook _glVertex3d" << endl;
 	}
 	else
 	{
 		printf("Hooked _glVertex3d\n");
+		Log::out() << "Hooked _glVertex3d\n";
 	}
 	if ((_glTexCoord2d == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTexCoord2d), interceptedglTexCoord2d))
 	{
 		cerr << "Failed to hook _glTexCoord2d" << endl;
+		Log::out() << "Failed to hook _glTexCoord2d" << endl;
 	}
 	else
 	{
 		printf("Hooked _glTexCoord2d\n");
+		Log::out() << "Hooked _glTexCoord2d\n";
 	}
 	if ((_glBindTexture == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glBindTexture), interceptedglBindTexture))
 	{
 		cerr << "Failed to hook _glBindTexture" << endl;
+		Log::out() << "Failed to hook _glBindTexture" << endl;
 	}
 	else
 	{
 		printf("Hooked _glBindTexture\n");
+		Log::out() << "Hooked _glBindTexture\n";
 	}
 	if ((_glRotated == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glRotated), interceptedglRotated))
 	{
 		cerr << "Failed to hook _glRotated" << endl;
+		Log::out() << "Failed to hook _glRotated" << endl;
 	}
 	else
 	{
 		printf("Hooked _glRotated\n");
+		Log::out() << "Hooked _glRotated\n";
 	}
 	if ((_glPushAttrib == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPushAttrib), interceptedglPushAttrib))
 	{
 		cerr << "Failed to hook _glPushAttrib" << endl;
+		Log::out() << "Failed to hook _glPushAttrib" << endl;
 	}
 	else
 	{
 		printf("Hooked _glPushAttrib\n");
+		Log::out() << "Hooked _glPushAttrib\n";
 	}
 	if ((_glPopAttrib == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPopAttrib), interceptedglPopAttrib))
 	{
 		cerr << "Failed to hook _glPopAttrib" << endl;
+		Log::out() << "Failed to hook _glPopAttrib" << endl;
 	}
 	else
 	{
 		printf("Hooked _glPopAttrib\n");
+		Log::out() << "Hooked _glPopAttrib\n";
 	}
 	if ((_glColor4f == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColor4f), interceptedglColor4f))
 	{
 		cerr << "Failed to hook _glColor4f" << endl;
+		Log::out() << "Failed to hook _glColor4f" << endl;
 	}
 	else
 	{
 		printf("Hooked _glColor4f\n");
+		Log::out() << "Hooked _glColor4f\n";
 	}
 	if ((_glVertex2f == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertex2f), interceptedglVertex2f))
 	{
 		cerr << "Failed to hook _glVertex2f" << endl;
+		Log::out() << "Failed to hook _glVertex2f" << endl;
 	}
 	else
 	{
 		printf("Hooked _glVertex2f\n");
+		Log::out() << "Hooked _glVertex2f\n";
 	}
 	if ((_glBlendFunc == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glBlendFunc), interceptedglBlendFunc))
 	{
 		cerr << "Failed to hook _glBlendFunc" << endl;
+		Log::out() << "Failed to hook _glBlendFunc" << endl;
 	}
 	else
 	{
 		printf("Hooked _glBlendFunc\n");
+		Log::out() << "Hooked _glBlendFunc\n";
 	}
 	if ((_glFrustum == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glFrustum), interceptedglFrustum))
 	{
 		cerr << "Failed to hook _glFrustum" << endl;
+		Log::out() << "Failed to hook _glFrustum" << endl;
 	}
 	else
 	{
 		printf("Hooked _glFrustum\n");
+		Log::out() << "Hooked _glFrustum\n";
 	}
 	if ((_glViewport == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glViewport), interceptedglViewport))
 	{
 		cerr << "Failed to hook _glViewport" << endl;
+		Log::out() << "Failed to hook _glViewport" << endl;
 	}
 	else
 	{
 		printf("Hooked _glViewport\n");
+		Log::out() << "Hooked _glViewport\n";
 	}
 	if ((_glMatrixMode == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glMatrixMode), interceptedglMatrixMode))
 	{
 		cerr << "Failed to hook _glMatrixMode" << endl;
+		Log::out() << "Failed to hook _glMatrixMode" << endl;
 	}
 	else
 	{
 		printf("Hooked _glMatrixMode\n");
+		Log::out() << "Hooked _glMatrixMode\n";
 	}
 	if ((_glPolygonMode == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPolygonMode), interceptedglPolygonMode))
 	{
 		cerr << "Failed to hook _glPolygonMode" << endl;
+		Log::out() << "Failed to hook _glPolygonMode" << endl;
 	}
 	else
 	{
 		printf("Hooked _glPolygonMode\n");
+		Log::out() << "Hooked _glPolygonMode\n";
 	}
 	if ((_glClearColor == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glClearColor), interceptedglClearColor))
 	{
 		cerr << "Failed to hook _glClearColor" << endl;
+		Log::out() << "Failed to hook _glClearColor" << endl;
 	}
 	else
 	{
 		printf("Hooked _glClearColor\n");
+		Log::out() << "Hooked _glClearColor\n";
 	}
 	if ((_glScalef == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glScalef), interceptedglScalef))
 	{
 		cerr << "Failed to hook _glScalef" << endl;
+		Log::out() << "Failed to hook _glScalef" << endl;
 	}
 	else
 	{
 		printf("Hooked _glScalef\n");
+		Log::out() << "Hooked _glScalef\n";
 	}
 	if ((_glHint == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glHint), interceptedglHint))
 	{
 		cerr << "Failed to hook _glHint" << endl;
+		Log::out() << "Failed to hook _glHint" << endl;
 	}
 	else
 	{
 		printf("Hooked _glHint\n");
+		Log::out() << "Hooked _glHint\n";
 	}
 	if ((_glFogfv == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glFogfv), interceptedglFogfv))
 	{
 		cerr << "Failed to hook _glFogfv" << endl;
+		Log::out() << "Failed to hook _glFogfv" << endl;
 	}
 	else
 	{
 		printf("Hooked _glFogfv\n");
+		Log::out() << "Hooked _glFogfv\n";
 	}
 	if ((_glFogf == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glFogf), interceptedglFogf))
 	{
 		cerr << "Failed to hook _glFogf" << endl;
+		Log::out() << "Failed to hook _glFogf" << endl;
 	}
 	else
 	{
 		printf("Hooked _glFogf\n");
+		Log::out() << "Hooked _glFogf\n";
 	}
 	if ((_glColorMaterial == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColorMaterial), interceptedglColorMaterial))
 	{
 		cerr << "Failed to hook _glColorMaterial" << endl;
+		Log::out() << "Failed to hook _glColorMaterial" << endl;
 	}
 	else
 	{
 		printf("Hooked _glColorMaterial\n");
+		Log::out() << "Hooked _glColorMaterial\n";
 	}
 	if ((_glLightModelfv == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glLightModelfv), interceptedglLightModelfv))
 	{
 		cerr << "Failed to hook _glLightModelfv" << endl;
+		Log::out() << "Failed to hook _glLightModelfv" << endl;
 	}
 	else
 	{
 		printf("Hooked _glLightModelfv\n");
+		Log::out() << "Hooked _glLightModelfv\n";
 	}
 	if ((_glLightfv == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glLightfv), interceptedglLightfv))
 	{
 		cerr << "Failed to hook _glLightfv" << endl;
+		Log::out() << "Failed to hook _glLightfv" << endl;
 	}
 	else
 	{
 		printf("Hooked _glLightfv\n");
+		Log::out() << "Hooked _glLightfv\n";
 	}
 	if ((_glGetFloatv == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glGetFloatv), interceptedglGetFloatv))
 	{
 		cerr << "Failed to hook _glGetFloatv" << endl;
+		Log::out() << "Failed to hook _glGetFloatv" << endl;
 	}
 	else
 	{
 		printf("Hooked _glGetFloatv\n");
+		Log::out() << "Hooked _glGetFloatv\n";
 	}
 	if ((_glBindBufferARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glBindBufferARB), interceptedglBindBufferARB))
 	{
 		cerr << "Failed to hook _glBindBufferARB" << endl;
+		Log::out() << "Failed to hook _glBindBufferARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _glBindBufferARB\n");
+		Log::out() << "Hooked _glBindBufferARB\n";
 	}
 	if ((_glInterleavedArrays == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glInterleavedArrays), interceptedglInterleavedArrays))
 	{
 		cerr << "Failed to hook _glInterleavedArrays" << endl;
+		Log::out() << "Failed to hook _glInterleavedArrays" << endl;
 	}
 	else
 	{
 		printf("Hooked _glInterleavedArrays\n");
+		Log::out() << "Hooked _glInterleavedArrays\n";
 	}
 	if ((_glDrawArrays == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glDrawArrays), interceptedglDrawArrays))
 	{
 		cerr << "Failed to hook _glDrawArrays" << endl;
+		Log::out() << "Failed to hook _glDrawArrays" << endl;
 	}
 	else
 	{
 		printf("Hooked _glDrawArrays\n");
+		Log::out() << "Hooked _glDrawArrays\n";
 	}
 	if ((_glUseProgram == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glUseProgram), interceptedglUseProgram))
 	{
 		cerr << "Failed to hook _glUseProgram" << endl;
+		Log::out() << "Failed to hook _glUseProgram" << endl;
 	}
 	else
 	{
 		printf("Hooked _glUseProgram\n");
+		Log::out() << "Hooked _glUseProgram\n";
 	}
 	if ((_glGetUniformLocationARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glGetUniformLocationARB), interceptedglGetUniformLocationARB))
 	{
 		cerr << "Failed to hook _glGetUniformLocationARB" << endl;
+		Log::out() << "Failed to hook _glGetUniformLocationARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _glGetUniformLocationARB\n");
+		Log::out() << "Hooked _glGetUniformLocationARB\n";
 	}
 	if ((_glUniform4f == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glUniform4f), interceptedglUniform4f))
 	{
 		cerr << "Failed to hook _glUniform4f" << endl;
+		Log::out() << "Failed to hook _glUniform4f" << endl;
 	}
 	else
 	{
 		printf("Hooked _glUniform4f\n");
+		Log::out() << "Hooked _glUniform4f\n";
 	}
 	if ((_glUniform1f == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glUniform1f), interceptedglUniform1f))
 	{
 		cerr << "Failed to hook _glUniform1f" << endl;
+		Log::out() << "Failed to hook _glUniform1f" << endl;
 	}
 	else
 	{
 		printf("Hooked _glUniform1f\n");
+		Log::out() << "Hooked _glUniform1f\n";
 	}
 	if ((_glUniform1i == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glUniform1i), interceptedglUniform1i))
 	{
 		cerr << "Failed to hook _glUniform1i" << endl;
+		Log::out() << "Failed to hook _glUniform1i" << endl;
 	}
 	else
 	{
 		printf("Hooked _glUniform1i\n");
+		Log::out() << "Hooked _glUniform1i\n";
 	}
 	if ((_glActiveTextureARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glActiveTextureARB), interceptedglActiveTextureARB))
 	{
 		cerr << "Failed to hook _glActiveTextureARB" << endl;
+		Log::out() << "Failed to hook _glActiveTextureARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _glActiveTextureARB\n");
+		Log::out() << "Hooked _glActiveTextureARB\n";
 	}
 	if ((_glMultiTexCoord2fARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glMultiTexCoord2fARB), interceptedglMultiTexCoord2fARB))
 	{
 		cerr << "Failed to hook _glMultiTexCoord2fARB" << endl;
+		Log::out() << "Failed to hook _glMultiTexCoord2fARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _glMultiTexCoord2fARB\n");
+		Log::out() << "Hooked _glMultiTexCoord2fARB\n";
 	}
 	if ((_glDepthMask == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glDepthMask), interceptedglDepthMask))
 	{
 		cerr << "Failed to hook _glDepthMask" << endl;
+		Log::out() << "Failed to hook _glDepthMask" << endl;
 	}
 	else
 	{
 		printf("Hooked _glDepthMask\n");
+		Log::out() << "Hooked _glDepthMask\n";
 	}
 	if ((_glEnableClientState == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glEnableClientState), interceptedglEnableClientState))
 	{
 		cerr << "Failed to hook _glEnableClientState" << endl;
+		Log::out() << "Failed to hook _glEnableClientState" << endl;
 	}
 	else
 	{
 		printf("Hooked _glEnableClientState\n");
+		Log::out() << "Hooked _glEnableClientState\n";
 	}
 	if ((_glPointParameterfvARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPointParameterfvARB), interceptedglPointParameterfvARB))
 	{
 		cerr << "Failed to hook _glPointParameterfvARB" << endl;
+		Log::out() << "Failed to hook _glPointParameterfvARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _glPointParameterfvARB\n");
+		Log::out() << "Hooked _glPointParameterfvARB\n";
 	}
 	if ((_glPointParameterfARB == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPointParameterfARB), interceptedglPointParameterfARB))
 	{
 		cerr << "Failed to hook _glPointParameterfARB" << endl;
+		Log::out() << "Failed to hook _glPointParameterfARB" << endl;
 	}
 	else
 	{
 		printf("Hooked _glPointParameterfARB\n");
+		Log::out() << "Hooked _glPointParameterfARB\n";
 	}
 	if ((_glPointSize == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glPointSize), interceptedglPointSize))
 	{
 		cerr << "Failed to hook _glPointSize" << endl;
+		Log::out() << "Failed to hook _glPointSize" << endl;
 	}
 	else
 	{
 		printf("Hooked _glPointSize\n");
+		Log::out() << "Hooked _glPointSize\n";
 	}
 	if ((_glTexEnvf == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTexEnvf), interceptedglTexEnvf))
 	{
 		cerr << "Failed to hook _glTexEnvf" << endl;
+		Log::out() << "Failed to hook _glTexEnvf" << endl;
 	}
 	else
 	{
 		printf("Hooked _glTexEnvf\n");
+		Log::out() << "Hooked _glTexEnvf\n";
 	}
 	if ((_glColorPointer == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColorPointer), interceptedglColorPointer))
 	{
 		cerr << "Failed to hook _glColorPointer" << endl;
+		Log::out() << "Failed to hook _glColorPointer" << endl;
 	}
 	else
 	{
 		printf("Hooked _glColorPointer\n");
+		Log::out() << "Hooked _glColorPointer\n";
 	}
 	if ((_glVertexPointer == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertexPointer), interceptedglVertexPointer))
 	{
 		cerr << "Failed to hook _glVertexPointer" << endl;
+		Log::out() << "Failed to hook _glVertexPointer" << endl;
 	}
 	else
 	{
 		printf("Hooked _glVertexPointer\n");
+		Log::out() << "Hooked _glVertexPointer\n";
 	}
 	if ((_glColor4ub == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glColor4ub), interceptedglColor4ub))
 	{
 		cerr << "Failed to hook _glColor4ub" << endl;
+		Log::out() << "Failed to hook _glColor4ub" << endl;
 	}
 	else
 	{
 		printf("Hooked _glColor4ub\n");
+		Log::out() << "Hooked _glColor4ub\n";
 	}
 	if ((_glTexCoord2f == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glTexCoord2f), interceptedglTexCoord2f))
 	{
 		cerr << "Failed to hook _glTexCoord2f" << endl;
+		Log::out() << "Failed to hook _glTexCoord2f" << endl;
 	}
 	else
 	{
 		printf("Hooked _glTexCoord2f\n");
+		Log::out() << "Hooked _glTexCoord2f\n";
 	}
 	if ((_glVertex2i == 0) ||
 		!Mhook_SetHook(reinterpret_cast<PVOID*>(&_glVertex2i), interceptedglVertex2i))
 	{
 		cerr << "Failed to hook _glVertex2i" << endl;
+		Log::out() << "Failed to hook _glVertex2i" << endl;
 	}
 	else
 	{
 		printf("Hooked _glVertex2i\n");
+		Log::out() << "Hooked _glVertex2i\n";
 	}
 }
 void processDetach()
 {
+	Log::out() << "Done!";
+	//Log::close();
+
 	printf("processDetach\n");
 
 	Mhook_Unhook(reinterpret_cast<PVOID*>(&_wglChoosePixelFormat));

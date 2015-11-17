@@ -45,6 +45,9 @@ public:
     /// Provides access to the single instance
     static Log & get();
 
+	/// Provides access to the single instance
+	//static Log & get(const std::string & fileName = "log.txt");
+
     /// Open the specified log file for output
     static bool open( const std::string & fileName = "log.txt" );
 
@@ -62,6 +65,11 @@ private:
     Log();
 
     std::ofstream m_stream; ///< the log output stream
+
+	//static Log instance;
+
+	/// Open the specified log file for output
+	//static bool open(const std::string & fileName = "log.txt");
 };
 
 } // namespace hive

@@ -133,16 +133,26 @@ void *_getAnyGLFuncAddress(const char *name)
 	//Log::open("intercept.log");
 	//Log::print("_getAnyGLFuncAddress\n");
 
-	void *p = (void *)wglGetProcAddress(name);
-	if (p == 0 ||
-		(p == (void*)0x1) || (p == (void*)0x2) || (p == (void*)0x3) ||
-		(p == (void*)-1))
+	if (currentConfig3DSettings.checkNeedInterception(std::string(name)))
 	{
-		HMODULE module = LoadLibraryA("opengl32.dll");
-		p = (void *)GetProcAddress(module, name);
+		void *p = (void *)wglGetProcAddress(name);
+		if (p == 0 ||
+			(p == (void*)0x1) || (p == (void*)0x2) || (p == (void*)0x3) ||
+			(p == (void*)-1))
+		{
+			if (!_libGlHandle) {
+
+				//HMODULE module = LoadLibraryA("opengl32.dll");
+				_libGlHandle = LoadLibraryA("opengl32.dll");
+			}
+			//p = (void *)GetProcAddress(module, name);
+			p = (void *)GetProcAddress(_libGlHandle, name);
+		}
+
+		return p;
 	}
 
-	return p;
+	return NULL;
 }
 /************************************************************************************/
 BOOL __stdcall _fail_wglChoosePixelFormatARB(HDC hdc, const int * piAttribIList, const FLOAT * pfAttribFList, UINT nMaxFormats, int * piFormats, UINT * nNumFormats) {
@@ -3889,7 +3899,9 @@ int WINAPI interceptedwglChoosePixelFormat(HDC hdc, const PIXELFORMATDESCRIPTOR 
 
 	//m_framesGL = 0;
 	
-	currentConfig3DSettings.readConfig3DSettingsFromFile();
+	//currentConfig3DSettings.readConfig3DSettingsFromFile();
+	//currentConfig3DSettings.loadInterceptedFuncs();
+
 	/************************/
 
 	currentOpenGLContext = hdc; //store the current context
