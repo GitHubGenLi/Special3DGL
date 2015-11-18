@@ -131,7 +131,8 @@ public:
 				//this->interceptedWriter << funcName << endl;
 			}
 
-
+			//debug
+			outputRecentListCall();
 		}
 
 		/*if (funcName.length() > 0)
@@ -194,7 +195,7 @@ public:
 					increasedFunCall = false;
 					//std::cout << "1st glClear In boundary " << endl;
 
-					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+					//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 					//glClear(GL_COLOR_BUFFER_BIT);
 					//_glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -307,6 +308,16 @@ public:
 		ListInteceptedFunc.insert("wglChoosePixelFormatARB");
 		ListInteceptedFunc.insert("glClear");
 		ListInteceptedFunc.insert("wglSwapBuffers");
+	}
+	void outputRecentListCall()
+	{
+		Log::out() << "Current Frame: " << currentFrameGL << " with list of functions: ";
+
+		std::stringstream result;
+		std::copy(ListRecentFunctionCalled.begin(), ListRecentFunctionCalled.end(), std::ostream_iterator<string>(result, ","));
+
+		Log::out() << result.str() << endl;
+		
 	}
 };
 
