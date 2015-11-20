@@ -58,11 +58,11 @@ public:
 				bound = ObjectBoundary::Start;
 				buffer = BufferIndex;
 
-				Log::out() << "checkBoundaryObject: Start of the object." << endl;
+				//Log::out() << "checkBoundaryObject: Start of the object." << endl;
 			}
 		}
-		Log::out() << "checkBoundaryObject: checking end of the object." << endl;
-		outputBoundaryObject();
+		//Log::out() << "checkBoundaryObject: checking end of the object." << endl;
+		//outputBoundaryObject();
 		//check the end of the object
 		if (!inSide)
 		{
@@ -88,7 +88,7 @@ public:
 				bound = ObjectBoundary::End;
 				buffer = BufferIndex; //Note: not used if end of boundary, just return for info
 
-				Log::out() << "checkBoundaryObject: End of the object." << endl;
+				//Log::out() << "checkBoundaryObject: End of the object." << endl;
 			}
 		}
 

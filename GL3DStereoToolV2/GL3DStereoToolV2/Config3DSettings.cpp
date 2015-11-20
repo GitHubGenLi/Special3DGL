@@ -564,14 +564,14 @@ void Config3DSettings::getDrawingBuffer(const string funcName, GLuint &buffer, O
 			objType = ObjectType::Foreground;
 			bound = boundObj;
 
-			if (bound == ObjectBoundary::Start)
+			/*if (bound == ObjectBoundary::Start)
 			{
 				Log::out() << "Start of the object." << endl;
 			}
 			else if (bound == ObjectBoundary::End)
 			{
 				Log::out() << "End of the object." << endl;
-			}
+			}*/
 
 			break; //if inside any object, then break immediately
 		}
